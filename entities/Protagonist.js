@@ -20,14 +20,14 @@ function Protagonist(descr) {
 Protagonist.prototype = new Entity();
 
 // HACKED-IN AUDIO (no preloading)
-Protagonist.prototype.exampleSound = new Audio("sounds/exampleSound.ogg");
+// Protagonist.prototype.exampleSound = new Audio("sounds/exampleSound.ogg");
 
 // Initial, inheritable, default values
 Protagonist.prototype.rotation = 0;
 Protagonist.prototype.cx = 200;
 Protagonist.prototype.cy = 200;
-Protagonist.prototype.velX = 0;
-Protagonist.prototype.velY = 0;
+Protagonist.prototype.velX = 5;
+Protagonist.prototype.velY = 5;
 
 Protagonist.prototype.update = function (du) {
 
@@ -51,7 +51,7 @@ Protagonist.prototype.getRadius = function () {
 
 Protagonist.prototype.render = function (ctx) {
 
-    g_sprites.protagonist.drawWrappedCentredAt(
+    g_sprites.protagonist.drawCentredAt(
         ctx, this.cx, this.cy, this.rotation
     );
 };
