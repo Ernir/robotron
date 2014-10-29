@@ -27,7 +27,7 @@ var entityManager = {
 
 // "PRIVATE" DATA
 
-    _entityList1: [], // TODO: Make more lists.
+    _protagonists: [],
 
 // "PRIVATE" METHODS
 
@@ -52,11 +52,15 @@ var entityManager = {
 // i.e. thing which need `this` to be defined.
 //
     deferredSetup: function () {
-        this._categories = [this._entityList1];
+        this._categories = [this._protagonists];
     },
 
     init: function () {
         this._generateThings();
+    },
+
+    createProtagonist: function (descr) {
+        this._protagonists.push(new Protagonist(descr));
     },
 
     update: function (du) {
@@ -89,10 +93,6 @@ var entityManager = {
         for (var c = 0; c < this._categories.length; ++c) {
 
             var aCategory = this._categories[c];
-
-            if (!this._bShowRocks &&
-                aCategory == this._rocks)
-                continue;
 
             for (var i = 0; i < aCategory.length; ++i) {
 

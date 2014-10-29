@@ -25,7 +25,10 @@ var g_ctx = g_canvas.getContext("2d");
 // ====================
 
 function initializeEntities() {
-    // TODO add entities
+    entityManager.createProtagonist({
+        cx : 200,
+        cy : 200
+    })
 }
 
 // =============
@@ -102,7 +105,7 @@ var g_images = {};
 function requestPreloads() {
 
     var requiredImages = {
-        image1Name: "https://full.url/image.png" // TODO Add real URLs.
+        protagonist: "https://notendur.hi.is/~eth31/cgp/staticdata/protagonist.png"
     };
 
     imagesPreload(requiredImages, g_images, preloadDone);
@@ -112,7 +115,7 @@ var g_sprites = {};
 
 function preloadDone() {
 
-    g_sprites.sprite1Name = new Sprite(g_images.image1Name); //TODO add real sprites
+    g_sprites.protagonist = new Sprite(g_images.protagonist);
 
     entityManager.init();
     initializeEntities();
