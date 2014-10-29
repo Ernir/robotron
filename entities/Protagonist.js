@@ -39,10 +39,9 @@ Protagonist.prototype.update = function (du) {
 
     this.cx += this.velX * du;
     this.cy += this.velY * du;
-    util.capPositions(this);
+    this.capPositions();
 
     spatialManager.register(this);
-
 };
 
 Protagonist.prototype.getRadius = function () {
