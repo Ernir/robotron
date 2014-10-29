@@ -1,29 +1,11 @@
 // =========
-// ASTEROIDS
+// ROBOTRON
 // =========
 /*
 
  A sort-of-playable version of the classic arcade game.
 
-
- HOMEWORK INSTRUCTIONS:
-
- You have some "TODO"s to fill in again, particularly in:
-
- spatialManager.js
-
- But also, to a lesser extent, in:
-
- Rock.js
- EntityExample.js
- Ship.js
-
-
- ...Basically, you need to implement the core of the spatialManager,
- and modify the Rock/EntityExample/Ship to register (and unregister)
- with it correctly, so that they can participate in collisions.
-
- */
+*/
 
 "use strict";
 
