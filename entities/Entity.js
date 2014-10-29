@@ -80,7 +80,6 @@ Entity.prototype.isColliding = function () {
     return entity !== null;
 };
 
-Entity.prototype.wrapPosition = function () {
-    this.cx = util.wrapRange(this.cx, 0, g_canvas.width);
-    this.cy = util.wrapRange(this.cy, 0, g_canvas.height);
+Entity.prototype.capPosition = function () {
+    util.capPositions(this);
 };
