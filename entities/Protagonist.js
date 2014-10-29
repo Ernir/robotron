@@ -1,5 +1,5 @@
 // ======
-// BULLET
+// PROTAGONIST
 // ======
 
 "use strict";
