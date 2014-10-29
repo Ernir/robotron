@@ -79,15 +79,13 @@ function updateSimulation(du) {
 
 // GAME-SPECIFIC DIAGNOSTICS
 
-var g_someGlobalToggle = true; // TODO: Add real booleans here
+var g_renderSpatialDebug = false;
 
-var KEY_1 = keyCode('1');  //TODO: Add real keycodes here
+var KEY_SPATIAL = keyCode('X');
 
 function processDiagnostics() {
 
-    if (eatKey(KEY_1)) {
-        // TODO do stuff on the toggle
-    }
+    if (eatKey(KEY_SPATIAL)) g_renderSpatialDebug = !g_renderSpatialDebug;
 }
 
 

@@ -33,8 +33,6 @@ var spatialManager = {
 
     getNewSpatialID: function () {
         // Use it, then increment.
-        // Leads to unfortunate bloat in the size of the largest index of the _entities
-        // array, but it did not seem to cause problems with a few thousand spawns.
         return this._nextSpatialID++;
     },
 
@@ -49,8 +47,34 @@ var spatialManager = {
         // Unregistering means "deletion" from the _entities array.
         // This fills the array with "undefined"s, but the for-in loops (see below)
         // seem to not care.
-        // Splicing completely messes up the indexes.
         delete this._entities[spatialID];
+    },
+
+    findEntityInRange: function (posX, posY, radius) {
+
+        // for-in loop used due to sparseness of the _entities array.
+        for (var i in this._entities) {
+            var entity = this._entities[i];
+            // Circle-based distance checking
+            var distSq = util.distSq(posX, posY, entity.cx, entity.cy);
+            var limSq = util.square(radius + entity.getRadius());
+            if (distSq < limSq) {
+                return entity;
+            }
+        }
+        return null;
+
+    },
+
+    render: function (ctx) {
+        var oldStyle = ctx.strokeStyle;
+        ctx.strokeStyle = "red";
+
+        for (var ID in this._entities) {
+            var e = this._entities[ID];
+            util.strokeCircle(ctx, e.cx, e.cy, e.getRadius());
+        }
+        ctx.strokeStyle = oldStyle;
     }
 
 };
