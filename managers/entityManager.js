@@ -28,7 +28,7 @@ var entityManager = {
 // "PRIVATE" DATA
 
     _protagonists: [],
-	_family: [],
+	_families: [],
 	_enemies: [],
 	_bullets: [],
 
@@ -122,7 +122,7 @@ var entityManager = {
     },
 
     createFamily: function (descr) {
-        this._family.push(new Family(descr));
+        this._families.push(new Family(descr));
     },
 
     update: function (du) {
