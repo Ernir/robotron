@@ -67,14 +67,8 @@ Family.prototype.randomWalk = function () {
     }
 }
 
-Family.prototype.takeGruntHit = function () {
-    this.kill();
-    //update score!
-};
-
 Family.prototype.takeProtagonistHit = function () {
-    this.kill();
-    //update score!
+    // I'm Saved!!!
 };
 
 Family.prototype.takeBulletHit = function () {

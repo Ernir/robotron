@@ -54,9 +54,12 @@ Protagonist.prototype.update = function (du) {
     // Handle collisions
     var hitEntity = this.findHitEntity();
     if (hitEntity) {
-        var canTakeHit = hitEntity.takeProtagonistHit;
-        if (canTakeHit) canTakeHit.call(hitEntity); 
-        //return entityManager.KILL_ME_NOW;
+		var canSave = hitEntity.takeProtagonistHit;
+		if (canSave) canSave.call(hitEntity);
+		else {
+			var canKillMe = hitEntity.killProtagonist;
+			if (canKillMe) return entityManager.KILL_ME_NOW;
+		}
     }
 
     spatialManager.register(this);

@@ -82,7 +82,7 @@ var entityManager = {
             var pos = this._protagonists[i].getPos();
             var dirn = util.angleTo(pos.posX, pos.posY, aimX, aimY);
             
-            var launchdist = this._protagonists[i].getRadius() * 1.2;
+            var launchdist = this._protagonists[i].getRadius() * 1.5;
             
             var dirnX = Math.cos(dirn);
             var dirnY = Math.sin(dirn);
