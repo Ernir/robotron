@@ -49,7 +49,7 @@ Protagonist.prototype.update = function (du) {
 
     this.cx += this.velX * du;
     this.cy += this.velY * du;
-    this.capPosition();
+    this.capPositions();
 
     spatialManager.register(this);
 };
