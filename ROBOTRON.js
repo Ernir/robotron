@@ -20,9 +20,9 @@ var g_ctx = g_canvas.getContext("2d");
  */
 
 
-// ====================
-// CREATE INITIAL SHIPS
-// ====================
+// =======================
+// CREATE INITIAL ENTITIES
+// =======================
 
 function initializeEntities() {
     entityManager.createProtagonist({
@@ -31,7 +31,15 @@ function initializeEntities() {
     });
     entityManager.createFamily({
         cx : 100,
+        cy : 200
+    });
+    entityManager.createFamily({
+        cx : 300,
         cy : 100
+    });
+    entityManager.createGrunt({
+        cx : 0,
+        cy : 0
     });
 }
 

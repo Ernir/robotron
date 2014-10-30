@@ -26,8 +26,8 @@ Family.prototype.exampleSound = new Audio("sounds/exampleSound.ogg");
 Family.prototype.rotation = 0;
 Family.prototype.cx = 100;
 Family.prototype.cy = 100;
-Family.prototype.velX = 2;
-Family.prototype.velY = 1;
+Family.prototype.velX = 0;
+Family.prototype.velY = 0;
 
 Family.prototype.update = function (du) {
 
@@ -37,12 +37,35 @@ Family.prototype.update = function (du) {
         return entityManager.KILL_ME_NOW;
     }
 
+    this.randomWalk();
+
     this.cx += this.velX * du;
     this.cy += this.velY * du;
     this.capPositions();
 
     spatialManager.register(this);
 };
+
+Family.prototype.randomWalk = function () {
+    if (Math.random()<0.02) {
+        //2% chance to change direction
+        
+        var n = Math.floor(Math.random()*4);
+        switch(n){
+            case 0:
+                this.velX = -1;
+                break;
+            case 1:
+                this.velY = -1;
+                break;
+            case 2:
+                this.velX = 1;
+                break;
+            case 3:
+                this.velY = 1;
+        }
+    }
+}
 
 Family.prototype.getRadius = function () {
     return (this.sprite.width / 2) * 0.9;
