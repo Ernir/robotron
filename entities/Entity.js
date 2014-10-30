@@ -74,12 +74,6 @@ Entity.prototype.findHitEntity = function () {
     );
 };
 
-// This is just little "convenience wrapper"
-Entity.prototype.isColliding = function () {
-    var entity = this.findHitEntity();
-    return entity !== null;
-};
-
 Entity.prototype.capPositions = function () {
     util.capPositions(this);
 };

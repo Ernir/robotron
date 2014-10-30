@@ -19,6 +19,7 @@ function Grunt(descr) {
 Grunt.prototype = new Entity();
 
 // Initial, inheritable, default values
+Grunt.prototype.killProtagonist = true;
 Grunt.prototype.rotation = 0;
 Grunt.prototype.cx = 100;
 Grunt.prototype.cy = 100;
@@ -37,13 +38,6 @@ Grunt.prototype.update = function (du) {
     this.cx += this.velX * du;
     this.cy += this.velY * du;
     this.capPositions();
-
-    var hitEntity = this.findHitEntity();
-    if (hitEntity) {
-        var canTakeHit = hitEntity.takeGruntHit;
-        if (canTakeHit) canTakeHit.call(hitEntity); 
-        //return entityManager.KILL_ME_NOW;
-    }
 
     spatialManager.register(this);
 };
@@ -73,6 +67,7 @@ Grunt.prototype.seekTarget = function () {
 
 Grunt.prototype.takeBulletHit = function () {
     this.kill();
+	// Add score
 };
 
 Grunt.prototype.getRadius = function () {
