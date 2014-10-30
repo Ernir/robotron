@@ -111,7 +111,7 @@ var entityManager = {
         }
     }
 
-}
+};
 
 // Some deferred setup which needs the object to have been created first
 entityManager.deferredSetup();

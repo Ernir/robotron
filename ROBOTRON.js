@@ -28,11 +28,11 @@ function initializeEntities() {
     entityManager.createProtagonist({
         cx : 200,
         cy : 200
-    }),
+    });
     entityManager.createFamily({
         cx : 100,
         cy : 100
-    })
+    });
 }
 
 // =============
