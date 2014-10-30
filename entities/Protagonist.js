@@ -59,6 +59,14 @@ Protagonist.prototype.update = function (du) {
 
     this.fire();
 
+    // Handle collisions
+    var hitEntity = this.findHitEntity();
+    if (hitEntity) {
+        var canTakeHit = hitEntity.takeProtagonistHit;
+        if (canTakeHit) canTakeHit.call(hitEntity); 
+        //return entityManager.KILL_ME_NOW;
+    }
+
     spatialManager.register(this);
 };
 
@@ -102,6 +110,11 @@ Protagonist.prototype.fire = function () {
         entityManager.fireBullet(this.cx, this.cy, 1, 0);
     }
 }
+
+Protagonist.prototype.takeGruntHit = function () {
+    this.kill();
+    //update lives!
+};
 
 Protagonist.prototype.getRadius = function () {
     return (this.sprite.width / 2) * 0.9;

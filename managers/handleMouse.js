@@ -12,7 +12,8 @@
 */
 
 var g_mouseX = 0,
-    g_mouseY = 0;
+    g_mouseY = 0,
+	g_isMouseDown = false;
 
 function handleMouse(evt) {
     
@@ -21,10 +22,13 @@ function handleMouse(evt) {
     
     // If no button is being pressed, aim crosshairs
     var button = evt.buttons === undefined ? evt.which : evt.buttons;
-    if (!button) return;
+    if (!button) {
+		g_isMouseDown = false;
+		return;
+	}
     
-    // Fire a bullet when mouse pressed
-	entityManager.fire(g_mouseX, g_mouseY);
+    // Set mouseDown
+	g_isMouseDown = true;
 }
 
 // Handle "down" and "move" events the same way.

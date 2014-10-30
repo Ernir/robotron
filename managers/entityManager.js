@@ -113,7 +113,7 @@ var entityManager = {
 
     createGrunt: function () {
         var locationFound = false;
-        var playerSafeRadius = 50;
+        var playerSafeRadius = 150;
 		var descr;
         while (!locationFound) {
             var x = util.randRange(0, g_canvas.width);

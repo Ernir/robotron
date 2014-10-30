@@ -74,7 +74,7 @@ Bullet.prototype.update = function (du) {
         if (canTakeHit) canTakeHit.call(hitEntity); 
         return entityManager.KILL_ME_NOW;
     }
-    
+    this.capPositions();
     spatialManager.register(this);
 
 };
