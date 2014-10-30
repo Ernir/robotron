@@ -53,16 +53,16 @@ Family.prototype.randomWalk = function () {
         var n = Math.floor(Math.random()*4);
         switch(n){
             case 0:
-                this.velX = -1;
+                this.velX = -0.3;
                 break;
             case 1:
-                this.velY = -1;
+                this.velY = -0.3;
                 break;
             case 2:
-                this.velX = 1;
+                this.velX = 0.3;
                 break;
             case 3:
-                this.velY = 1;
+                this.velY = 0.3;
         }
     }
 }

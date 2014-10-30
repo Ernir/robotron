@@ -29,18 +29,6 @@ function initializeEntities() {
         cx : 200,
         cy : 200
     });
-    entityManager.createFamily({
-        cx : 100,
-        cy : 200
-    });
-    entityManager.createFamily({
-        cx : 300,
-        cy : 100
-    });
-    entityManager.createGrunt({
-        cx : 0,
-        cy : 0
-    });
 }
 
 // =============

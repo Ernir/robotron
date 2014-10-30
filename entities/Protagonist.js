@@ -99,7 +99,7 @@ Protagonist.prototype.fire = function (aimX, aimY) {
 }
 
 Protagonist.prototype.getRadius = function () {
-    return (this.sprite.width / 2) * 1.5;
+    return (this.sprite.width / 2) * 0.9;
 };
 
 Protagonist.prototype.render = function (ctx) {
