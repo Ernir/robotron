@@ -51,6 +51,14 @@ Protagonist.prototype.update = function (du) {
     this.cy += this.velY * du;
     this.capPositions();
 
+    // Handle collisions
+    var hitEntity = this.findHitEntity();
+    if (hitEntity) {
+        var canTakeHit = hitEntity.takeProtagonistHit;
+        if (canTakeHit) canTakeHit.call(hitEntity); 
+        //return entityManager.KILL_ME_NOW;
+    }
+
     spatialManager.register(this);
 };
 
@@ -78,6 +86,11 @@ Protagonist.prototype.computeMovement = function () {
     
     return {x: velX, y: velY};
 }
+
+Protagonist.prototype.takeGruntHit = function () {
+    this.kill();
+    //update lives!
+};
 
 Protagonist.prototype.getRadius = function () {
     return (this.sprite.width / 2) * 0.9;

@@ -38,6 +38,13 @@ Grunt.prototype.update = function (du) {
     this.cy += this.velY * du;
     this.capPositions();
 
+    var hitEntity = this.findHitEntity();
+    if (hitEntity) {
+        var canTakeHit = hitEntity.takeGruntHit;
+        if (canTakeHit) canTakeHit.call(hitEntity); 
+        //return entityManager.KILL_ME_NOW;
+    }
+
     spatialManager.register(this);
 };
 
