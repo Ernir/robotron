@@ -134,7 +134,7 @@ var entityManager = {
 			cx: x,
 			cy: y
 		};
-        this._families.push(new Family(descr));
+        this._family.push(new Family(descr));
     },
 
     update: function (du) {
