@@ -82,7 +82,7 @@ Protagonist.prototype.computeMovement = function () {
 
 Protagonist.prototype.fire = function (aimX, aimY) {
 	
-	var direction = Math.atan2(aimY - this.cy, aimX - this.cx);
+	var direction = utils.angleTo(this.cx, this.cy, aimX, aimY);
 	var dX = +Math.sin(direction);
 	var dY = -Math.cos(direction);
 	var launchDist = this.getRadius() * 1.2;

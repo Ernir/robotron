@@ -83,6 +83,10 @@ var util = {
     square: function (x) {
         return x * x;
     },
+	
+	angleTo: function (cx, cy, posX, posY) {
+		return Math.atan2(posY - cy, posX - cx);
+	},
 
 
 // DISTANCES
