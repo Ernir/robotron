@@ -105,7 +105,8 @@ var g_images = {};
 function requestPreloads() {
 
     var requiredImages = {
-        protagonist: "https://notendur.hi.is/~eth31/cgp/staticdata/protagonist.png"
+        protagonist: "https://notendur.hi.is/~eth31/cgp/staticdata/protagonist.png",
+        grunt : "https://notendur.hi.is/~eth31/cgp/staticdata/sprites/Grunt.png"
     };
 
     imagesPreload(requiredImages, g_images, preloadDone);
@@ -116,6 +117,7 @@ var g_sprites = {};
 function preloadDone() {
 
     g_sprites.protagonist = new Sprite(g_images.protagonist);
+    g_sprites.grunt = new Sprite(g_images.grunt, 0, 30);
 
     entityManager.init();
     initializeEntities();
