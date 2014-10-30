@@ -71,6 +71,8 @@ var KEY_SPATIAL = keyCode('X');
 function processDiagnostics() {
 
     if (eatKey(KEY_SPATIAL)) g_renderSpatialDebug = !g_renderSpatialDebug;
+	
+	if (g_isMouseDown) entityManager.fire(g_mouseX, g_mouseY);
 }
 
 
