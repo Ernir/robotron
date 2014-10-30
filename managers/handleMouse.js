@@ -24,7 +24,7 @@ function handleMouse(evt) {
     if (!button) return;
     
     // Fire a bullet when mouse pressed
-	entityManager.fireBullet(g_mouseX, g_mouseY);
+	entityManager.fire(g_mouseX, g_mouseY);
 }
 
 // Handle "down" and "move" events the same way.

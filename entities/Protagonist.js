@@ -33,7 +33,6 @@ Protagonist.prototype.cx = 200;
 Protagonist.prototype.cy = 200;
 Protagonist.prototype.velX = 0;
 Protagonist.prototype.velY = 0;
-Protagonist.prototype.bulletVel = 10;
 
 Protagonist.prototype.update = function (du) {
 
@@ -80,7 +79,7 @@ Protagonist.prototype.computeMovement = function () {
     return {x: velX, y: velY};
 }
 
-Protagonist.prototype.fire = function (aimX, aimY) {
+/*Protagonist.prototype.fire = function (aimX, aimY) {
 	
 	var direction = Math.atan2(aimY - this.cy, aimX - this.cx);
 	var dX = +Math.sin(direction);
@@ -96,7 +95,14 @@ Protagonist.prototype.fire = function (aimX, aimY) {
 	   bulletVelX, bulletVelY,
 	   0
 	);   
-}
+}*/
+
+Protagonist.prototype.getPos = function () {
+    return {
+        x : this.cx,
+        y : this.cy
+    };
+};
 
 Protagonist.prototype.getRadius = function () {
     return (this.sprite.width / 2) * 1.5;

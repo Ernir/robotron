@@ -74,19 +74,25 @@ var entityManager = {
 	
 	fire: function (aimX, aimY) {
 		for (var i in this._protagonists) {
-			this._protagonists[i].fire (aimX, aimY);
+			var pos = this._protagonists[i].getPos();
+            var dirn = util.getAngleToEntity(pos.x, pos.y, aimX, aimY);
+            var launchdist = this._protagonists[i].getRadius() * 1.2;
+            var dirnX = Math.cos(dirn);
+            var dirnY = Math.sin(dirn);
+            this.fireBullet(pos.x + launchdist * dirnX, 
+                            pos.y + launchdist * dirnY, 
+                            dirnX, 
+                            dirnY);
 		}
 	},
 	
-	fireBullet: function(cx, cy, velX, velY, rotation) {
-		/*this._bullets.push(new Bullet({
+	fireBullet: function(cx, cy, dirnX, dirnY) {
+		this._bullets.push(new Bullet({
 			cx   : cx,
 			cy   : cy,
-			velX : velX,
-			velY : velY,
-
-			rotation : rotation
-		}));*/
+			dirnX : dirnX,
+			dirnY : dirnY
+		}));
 	},
 	
 	findProtagonist: function () {
