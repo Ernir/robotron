@@ -33,6 +33,7 @@ Protagonist.prototype.cx = 200;
 Protagonist.prototype.cy = 200;
 Protagonist.prototype.velX = 0;
 Protagonist.prototype.velY = 0;
+Protagonist.prototype.bulletVel = 10;
 
 Protagonist.prototype.update = function (du) {
 
@@ -79,8 +80,22 @@ Protagonist.prototype.computeMovement = function () {
     return {x: velX, y: velY};
 }
 
-Protagonist.prototype.fireBullet = function (aimX, aimY) {
+Protagonist.prototype.fire = function (aimX, aimY) {
+	
+	var direction = Math.atan2(aimY - this.cy, aimX - this.cx);
+	var dX = +Math.sin(direction);
+	var dY = -Math.cos(direction);
+	var launchDist = this.getRadius() * 1.2;
+	
+	var bulletVel = this.bulletVel;
+	var bulletVelX = dX * bulletVel;
+	var bulletVelY = dY * bulletVel;
 
+	entityManager.fireBullet(
+	   this.cx + dX * launchDist, this.cy + dY * launchDist,
+	   bulletVelX, bulletVelY,
+	   0
+	);   
 }
 
 Protagonist.prototype.getRadius = function () {

@@ -23,7 +23,7 @@ function handleMouse(evt) {
     var button = evt.buttons === undefined ? evt.which : evt.buttons;
     if (!button) return;
     
-    // TODO: Add mouse-specific logic here
+    // Fire a bullet when mouse pressed
 	entityManager.fireBullet(g_mouseX, g_mouseY);
 }
 
