@@ -64,6 +64,10 @@ Grunt.prototype.seekTarget = function () {
 	}
 };
 
+Grunt.prototype.takeBulletHit = function () {
+    this.kill();
+};
+
 Grunt.prototype.getRadius = function () {
     return (this.sprite.width / 2) * 0.9;
 };

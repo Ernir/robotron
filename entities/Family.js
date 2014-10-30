@@ -67,6 +67,10 @@ Family.prototype.randomWalk = function () {
     }
 }
 
+Family.prototype.takeBulletHit = function () {
+    this.kill();
+};
+
 Family.prototype.getRadius = function () {
     return (this.sprite.width / 2) * 0.9;
 };
