@@ -72,10 +72,21 @@ var entityManager = {
         this._protagonists.push(new Protagonist(descr));
     },
 	
-	fireBullet: function (aimX, aimY) {
+	fire: function (aimX, aimY) {
 		for (var i in this._protagonists) {
-			this._protagonists[i].fireBullet (aimX, aimY);
+			this._protagonists[i].fire (aimX, aimY);
 		}
+	},
+	
+	fireBullet: function(cx, cy, velX, velY, rotation) {
+		/*this._bullets.push(new Bullet({
+			cx   : cx,
+			cy   : cy,
+			velX : velX,
+			velY : velY,
+
+			rotation : rotation
+		}));*/
 	},
 	
 	findProtagonist: function () {
