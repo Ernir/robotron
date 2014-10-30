@@ -20,7 +20,7 @@ function Protagonist(descr) {
 Protagonist.prototype = new Entity();
 
 // HACKED-IN AUDIO (no preloading)
-// Protagonist.prototype.exampleSound = new Audio("sounds/exampleSound.ogg");
+Protagonist.prototype.exampleSound = new Audio("sounds/exampleSound.ogg");
 
 // Initial, inheritable, default values
 Protagonist.prototype.rotation = 0;
@@ -39,7 +39,7 @@ Protagonist.prototype.update = function (du) {
 
     this.cx += this.velX * du;
     this.cy += this.velY * du;
-    this.capPositions();
+    this.capPosition();
 
     spatialManager.register(this);
 };
