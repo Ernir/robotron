@@ -22,15 +22,21 @@ Protagonist.prototype = new Entity();
 // HACKED-IN AUDIO (no preloading)
 Protagonist.prototype.exampleSound = new Audio("sounds/exampleSound.ogg");
 
-Protagonist.prototype.KEY_UP 	  = 'W'.charCodeAt(0);
+Protagonist.prototype.KEY_UP      = 'W'.charCodeAt(0);
 Protagonist.prototype.KEY_DOWN   = 'S'.charCodeAt(0);
 Protagonist.prototype.KEY_LEFT   = 'A'.charCodeAt(0);
 Protagonist.prototype.KEY_RIGHT  = 'D'.charCodeAt(0);
 
+Protagonist.prototype.KEY_SHOOTUP      = 38;
+Protagonist.prototype.KEY_SHOOTDOWN   = 40;
+Protagonist.prototype.KEY_SHOOTLEFT   = 37;
+Protagonist.prototype.KEY_SHOOTRIGHT  = 39;
+
+
 // Initial, inheritable, default values
 Protagonist.prototype.rotation = 0;
-Protagonist.prototype.cx = 200;
-Protagonist.prototype.cy = 200;
+Protagonist.prototype.cx = g_canvas.width/2;;
+Protagonist.prototype.cy = g_canvas.height/2;;
 Protagonist.prototype.velX = 0;
 Protagonist.prototype.velY = 0;
 
@@ -50,6 +56,8 @@ Protagonist.prototype.update = function (du) {
     this.cx += this.velX * du;
     this.cy += this.velY * du;
     this.capPositions();
+
+    this.fire();
 
     spatialManager.register(this);
 };
@@ -77,6 +85,22 @@ Protagonist.prototype.computeMovement = function () {
 	}
     
     return {x: velX, y: velY};
+}
+
+Protagonist.prototype.fire = function () {
+    //Only up, down, left, right
+    if (keys[this.KEY_SHOOTUP]) {
+        entityManager.fireBullet(this.cx, this.cy, 0, 1);
+    }
+    if (keys[this.KEY_SHOOTDOWN]) {
+        entityManager.fireBullet(this.cx, this.cy, 0, -1);
+    }
+    if (keys[this.KEY_SHOOTLEFT]) {
+        entityManager.fireBullet(this.cx, this.cy, -1, 0);
+    }
+    if (keys[this.KEY_SHOOTRIGHT]) {
+        entityManager.fireBullet(this.cx, this.cy, 1, 0);
+    }
 }
 
 Protagonist.prototype.getRadius = function () {
