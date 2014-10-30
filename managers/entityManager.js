@@ -28,7 +28,9 @@ var entityManager = {
 // "PRIVATE" DATA
 
     _protagonists: [],
-    _enemies: [],
+	_families: [],
+	_enemies: [],
+	_bullets: [],
 
 // "PRIVATE" METHODS
 
@@ -53,10 +55,7 @@ var entityManager = {
 // i.e. thing which need `this` to be defined.
 //
     deferredSetup: function () {
-        this._categories = [
-            this._protagonists,
-            this._enemies
-        ];
+        this._categories = [this._protagonists, this._bullets, this._families, this._enemies];
     },
 
     init: function () {
