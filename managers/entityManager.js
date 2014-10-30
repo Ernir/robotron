@@ -78,13 +78,17 @@ var entityManager = {
 	
 	fire: function (aimX, aimY) {
 		for (var i in this._protagonists) {
-			var pos = this._protagonists[i].getPos();
-            var dirn = util.getAngle(pos.x, pos.y, aimX, aimY);
+			
+            var pos = this._protagonists[i].getPos();
+            var dirn = util.angleTo(pos.posX, pos.posY, aimX, aimY);
+            
             var launchdist = this._protagonists[i].getRadius() * 1.2;
+            
             var dirnX = Math.cos(dirn);
             var dirnY = Math.sin(dirn);
-            this.fireBullet(pos.x + launchdist * dirnX, 
-                            pos.y + launchdist * dirnY, 
+            
+            this.fireBullet(pos.posX + launchdist * dirnX, 
+                            pos.posY + launchdist * dirnY, 
                             dirnX, 
                             dirnY);
 		}

@@ -42,15 +42,16 @@ Bullet.prototype.rotation = 0;
 Bullet.prototype.cx = 200;
 Bullet.prototype.cy = 200;
 Bullet.prototype.bulletVel = 10;
-Bullet.prototype.velX = this.bulletVel * this.dirnX;
-Bullet.prototype.velY = this.bulletVel * this.dirnY;
+Bullet.prototype.velX = 1;//this.bulletVel * this.dirnX;
+Bullet.prototype.velY = 1;//this.bulletVel * this.dirnY;
 // Convert times from milliseconds to "nominal" time units.
 Bullet.prototype.lifeSpan = 3000 / NOMINAL_UPDATE_INTERVAL;
 
 
 
-
 Bullet.prototype.update = function (du) {
+    this.velX = this.bulletVel * this.dirnX;
+    this.velY = this.bulletVel * this.dirnY;
 
     spatialManager.unregister(this);
     if(this._isDeadNow) return entityManager.KILL_ME_NOW;
@@ -96,9 +97,10 @@ Bullet.prototype.render = function (ctx) {
     if (this.lifeSpan < fadeThresh) {
         ctx.globalAlpha = this.lifeSpan / fadeThresh;
     }
-    console.log("Fire!");
     ctx.fillStyle = "yellow";
     util.fillCircle(ctx, this.cx, this.cy, this.getRadius());
+    //console.log("You should see a bullet now, the radius is:",this.getRadius());
+    //console.log("location:", this.cx, this.cy);
     /*g_sprites.bullet.drawWrappedCentredAt(
         ctx, this.cx, this.cy, this.rotation
     );*/
