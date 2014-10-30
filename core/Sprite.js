@@ -14,17 +14,38 @@
 
 // Construct a "sprite" from the given `image`,
 //
-function Sprite(image) {
+function Sprite(image,leftLim,rightLim) {
+
+    if(leftLim === undefined) {
+        this.leftLim = 0;
+    } else {
+        this.leftLim = leftLim;
+    }
+    if(rightLim === undefined) {
+        this.rightLim = image.width;
+    } else {
+        this.rightLim = rightLim;
+    }
+
     this.image = image;
 
-    this.width = image.width;
+    this.width = this.rightLim - this.leftLim;
     this.height = image.height;
     this.scale = 1;
 }
 
 Sprite.prototype.drawAt = function (ctx, x, y) {
-    ctx.drawImage(this.image, 
-                  x, y);
+    ctx.drawImage(
+        this.image, // Image
+        this.leftLim, // x coordinate to start clipping
+        0, // y coordinate to start clipping
+        this.width, // the width of the clipped image
+        this.height, // the height of the clipped image
+        x,
+        y,
+        this.width, // final scaled width (scale = 1 here)
+        this.height // final scaled height (scale = 1 here)
+    );
 };
 
 Sprite.prototype.drawCentredAt = function (ctx, cx, cy, rotation) {
@@ -40,8 +61,7 @@ Sprite.prototype.drawCentredAt = function (ctx, cx, cy, rotation) {
     
     // drawImage expects "top-left" coords, so we offset our destination
     // coords accordingly, to draw our sprite centred at the origin
-    ctx.drawImage(this.image, 
-                  -w/2, -h/2);
+    this.drawAt(ctx,-w/2, -h/2);
     
     ctx.restore();
 };  

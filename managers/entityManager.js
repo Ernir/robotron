@@ -28,7 +28,9 @@ var entityManager = {
 // "PRIVATE" DATA
 
     _protagonists: [],
-    _family: [],
+	_family: [],
+	_enemies: [],
+	_bullets: [],
 
 // "PRIVATE" METHODS
 
@@ -53,8 +55,11 @@ var entityManager = {
 // i.e. thing which need `this` to be defined.
 //
     deferredSetup: function () {
+
         this._categories = [
                             this._protagonists,
+                            this._bullets,
+                            this._enemies,
                             this._family
                             ];
     },
@@ -65,6 +70,31 @@ var entityManager = {
 
     createProtagonist: function (descr) {
         this._protagonists.push(new Protagonist(descr));
+    },
+	
+	fireBullet: function (aimX, aimY) {
+		for (var p in this._protagonists) {
+			p.fireBullet (aimX, aimY);
+		}
+	},
+
+    createGrunt: function () {
+        var locationFound = false;
+        var playerSafeRadius = 50;
+        while (!locationFound) {
+            var x = util.randRange(0, g_canvas.width);
+            var y = util.randRange(0, g_canvas.height);
+
+            // TODO: Implement check
+
+            locationFound = true;
+
+            var descr = {
+                cx: x,
+                cy: y
+            };
+        }
+        this._enemies.push(new Grunt(descr));
     },
 
     createFamily: function (descr) {

@@ -80,6 +80,6 @@ Entity.prototype.isColliding = function () {
     return entity !== null;
 };
 
-Entity.prototype.capPosition = function () {
+Entity.prototype.capPositions = function () {
     util.capPositions(this);
 };

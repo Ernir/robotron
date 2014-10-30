@@ -95,6 +95,8 @@ function processDiagnostics() {
 function renderSimulation(ctx) {
 
     entityManager.render(ctx);
+	
+	renderCrosshair(ctx);
 
     if (g_renderSpatialDebug) spatialManager.render(ctx);
 }
@@ -109,7 +111,8 @@ var g_images = {};
 function requestPreloads() {
 
     var requiredImages = {
-        protagonist: "https://notendur.hi.is/~eth31/cgp/staticdata/protagonist.png",
+        protagonist: "https://notendur.hi.is/~eth31/cgp/staticdata/sprites/Player.png",
+        grunt : "https://notendur.hi.is/~eth31/cgp/staticdata/sprites/Grunt.png",
         family: "https://notendur.hi.is/~eth31/cgp/staticdata/Shapes/extralife.png"
     };
 
@@ -120,7 +123,8 @@ var g_sprites = {};
 
 function preloadDone() {
 
-    g_sprites.protagonist = new Sprite(g_images.protagonist);
+    g_sprites.protagonist = new Sprite(g_images.protagonist,0,26);
+    g_sprites.grunt = new Sprite(g_images.grunt, 0, 30);
     g_sprites.family = new Sprite(g_images.family);
 
     entityManager.init();
