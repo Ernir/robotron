@@ -94,7 +94,7 @@ Protagonist.prototype.fire = function (aimX, aimY) {
 	entityManager.fireBullet(
 	   this.cx + dX * launchDist, this.cy + dY * launchDist,
 	   bulletVelX, bulletVelY,
-	   0
+	   direction
 	);   
 }
 
