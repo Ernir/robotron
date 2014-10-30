@@ -36,7 +36,11 @@ var entityManager = {
 
     _generateThings: function () {
         //TODO: Generate some
-		this.createGrunt();
+		for (var i = 0; i < 5; i++)
+			this.createGrunt();
+		this.createFamily();
+		this.createFamily();
+		this.createFamily();
     },
 
     _forEachOf: function (aCategory, fn) {
@@ -127,7 +131,15 @@ var entityManager = {
         this._enemies.push(new Grunt(descr));
     },
 
-    createFamily: function (descr) {
+    createFamily: function () {
+
+		var x = util.randRange(0, g_canvas.width);
+        var y = util.randRange(0, g_canvas.height);
+
+        var descr = {
+			cx: x,
+			cy: y
+		};
         this._family.push(new Family(descr));
     },
 
