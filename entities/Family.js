@@ -17,19 +17,19 @@ function Family(descr) {
     //this.exampleSound.play();
 }
 
-Protagonist.prototype = new Entity();
+Family.prototype = new Entity();
 
 // HACKED-IN AUDIO (no preloading)
-Protagonist.prototype.exampleSound = new Audio("sounds/exampleSound.ogg");
+Family.prototype.exampleSound = new Audio("sounds/exampleSound.ogg");
 
 // Initial, inheritable, default values
-Protagonist.prototype.rotation = 0;
-Protagonist.prototype.cx = 100;
-Protagonist.prototype.cy = 100;
-Protagonist.prototype.velX = 2;
-Protagonist.prototype.velY = 1;
+Family.prototype.rotation = 0;
+Family.prototype.cx = 100;
+Family.prototype.cy = 100;
+Family.prototype.velX = 2;
+Family.prototype.velY = 1;
 
-Protagonist.prototype.update = function (du) {
+Family.prototype.update = function (du) {
 
     spatialManager.unregister(this);
     // Handle death
@@ -39,16 +39,16 @@ Protagonist.prototype.update = function (du) {
 
     this.cx += this.velX * du;
     this.cy += this.velY * du;
-    this.capPosition();
+    this.capPositions();
 
     spatialManager.register(this);
 };
 
-Protagonist.prototype.getRadius = function () {
+Family.prototype.getRadius = function () {
     return (this.sprite.width / 2) * 0.9;
 };
 
-Protagonist.prototype.render = function (ctx) {
+Family.prototype.render = function (ctx) {
 
     g_sprites.family.drawCentredAt(
         ctx, this.cx, this.cy, this.rotation
