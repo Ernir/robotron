@@ -28,7 +28,7 @@ var entityManager = {
 // "PRIVATE" DATA
 
     _protagonists: [],
-	_families: [],
+	_family: [],
 	_enemies: [],
 	_bullets: [],
 
@@ -63,7 +63,7 @@ var entityManager = {
         this._categories = [
 			this._protagonists, 
 			this._bullets, 
-			this._families, 
+			this._family, 
 			this._enemies
 		];
     },
