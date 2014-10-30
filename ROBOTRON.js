@@ -91,6 +91,8 @@ function processDiagnostics() {
 function renderSimulation(ctx) {
 
     entityManager.render(ctx);
+	
+	renderCrosshair(ctx);
 
     if (g_renderSpatialDebug) spatialManager.render(ctx);
 }

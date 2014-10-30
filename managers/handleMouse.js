@@ -19,13 +19,29 @@ function handleMouse(evt) {
     g_mouseX = evt.clientX - g_canvas.offsetLeft;
     g_mouseY = evt.clientY - g_canvas.offsetTop;
     
-    // If no button is being pressed, then bail
+    // If no button is being pressed, aim crosshairs
     var button = evt.buttons === undefined ? evt.which : evt.buttons;
     if (!button) return;
     
     // TODO: Add mouse-specific logic here
+	entityManager.fireBullet(g_mouseX, g_mouseY);
 }
 
 // Handle "down" and "move" events the same way.
 window.addEventListener("mousedown", handleMouse);
 window.addEventListener("mousemove", handleMouse);
+
+function renderCrosshair(ctx) {
+	
+	ctx.save();
+	ctx.beginPath();
+	ctx.lineWidth = 3;
+	ctx.moveTo(g_mouseX - 10, g_mouseY);
+	ctx.lineTo(g_mouseX + 10, g_mouseY);
+	ctx.moveTo(g_mouseX, g_mouseY - 10);
+	ctx.lineTo(g_mouseX, g_mouseY + 10);
+	ctx.closePath();
+	ctx.strokeStyle = 'white';
+	ctx.stroke();
+	ctx.restore();
+}
