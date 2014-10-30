@@ -105,10 +105,12 @@ var util = {
         return this.square(dx) + this.square(dy);
     },
     capPositions: function(entity) {
-        entity.cx = Math.max(entity.cx,0);
-        entity.cx = Math.min(entity.cx,g_canvas.width);
-        entity.cy = Math.max(entity.cy,0);
-        entity.cy = Math.min(entity.cy,g_canvas.height);
+		var halfWidth = entity.sprite.width / 2;
+		var halfHeight = entity.sprite.height / 2;
+        entity.cx = Math.max(entity.cx,halfWidth);
+        entity.cx = Math.min(entity.cx,g_canvas.width - halfWidth);
+        entity.cy = Math.max(entity.cy,halfHeight);
+        entity.cy = Math.min(entity.cy,g_canvas.height - halfHeight);
     },
 
 

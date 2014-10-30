@@ -65,6 +65,12 @@ var entityManager = {
     createProtagonist: function (descr) {
         this._protagonists.push(new Protagonist(descr));
     },
+	
+	fireBullet: function (aimX, aimY) {
+		for (var p in this._protagonists) {
+			p.fireBullet (aimX, aimY);
+		}
+	},
 
     createGrunt: function () {
         var locationFound = false;

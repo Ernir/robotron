@@ -70,8 +70,17 @@ Protagonist.prototype.computeMovement = function () {
     if (keys[this.KEY_RIGHT]) {
         velX += 5;
     }
+	// Clamp vel to 5 pixel moving radius
+	if (velX !== 0 && velY !== 0) {
+		velX *= Math.cos(Math.PI / 4);
+		velY *= Math.sin(Math.PI / 4);
+	}
     
     return {x: velX, y: velY};
+}
+
+Protagonist.prototype.fireBullet = function (aimX, aimY) {
+
 }
 
 Protagonist.prototype.getRadius = function () {
