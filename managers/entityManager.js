@@ -36,6 +36,7 @@ var entityManager = {
 
     _generateThings: function () {
         //TODO: Generate some
+		this.createGrunt();
     },
 
     _forEachOf: function (aCategory, fn) {
@@ -55,7 +56,12 @@ var entityManager = {
 // i.e. thing which need `this` to be defined.
 //
     deferredSetup: function () {
-        this._categories = [this._protagonists, this._bullets, this._families, this._enemies];
+        this._categories = [
+			this._protagonists, 
+			this._bullets, 
+			this._families, 
+			this._enemies
+		];
     },
 
     init: function () {
@@ -67,23 +73,36 @@ var entityManager = {
     },
 	
 	fireBullet: function (aimX, aimY) {
-		for (var p in this._protagonists) {
-			p.fireBullet (aimX, aimY);
+		for (var i in this._protagonists) {
+			this._protagonists[i].fireBullet (aimX, aimY);
 		}
+	},
+	
+	findProtagonist: function () {
+		var p = Math.floor(util.randRange(
+					0, 
+					this._protagonists.length)
+		);
+		return this._protagonists[p];
 	},
 
     createGrunt: function () {
         var locationFound = false;
         var playerSafeRadius = 50;
+		var descr;
         while (!locationFound) {
             var x = util.randRange(0, g_canvas.width);
             var y = util.randRange(0, g_canvas.height);
 
-            // TODO: Implement check
+            var danger = spatialManager.findEntityInRange(
+												x, 
+												y, 
+												playerSafeRadius
+			);
 
-            locationFound = true;
+            if (!danger) locationFound = true;
 
-            var descr = {
+            descr = {
                 cx: x,
                 cy: y
             };

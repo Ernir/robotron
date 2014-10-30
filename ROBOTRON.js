@@ -121,8 +121,8 @@ function preloadDone() {
     g_sprites.protagonist = new Sprite(g_images.protagonist,0,26);
     g_sprites.grunt = new Sprite(g_images.grunt, 0, 30);
 
+	initializeEntities();
     entityManager.init();
-    initializeEntities();
 
     main.init();
 }
