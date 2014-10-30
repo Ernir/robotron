@@ -28,6 +28,10 @@ function initializeEntities() {
     entityManager.createProtagonist({
         cx : 200,
         cy : 200
+    }),
+    entityManager.createFamily({
+        cx : 100,
+        cy : 100
     })
 }
 
@@ -105,7 +109,8 @@ var g_images = {};
 function requestPreloads() {
 
     var requiredImages = {
-        protagonist: "https://notendur.hi.is/~eth31/cgp/staticdata/protagonist.png"
+        protagonist: "https://notendur.hi.is/~eth31/cgp/staticdata/protagonist.png",
+        family: "https://notendur.hi.is/~eth31/cgp/staticdata/Shapes/extralife.png"
     };
 
     imagesPreload(requiredImages, g_images, preloadDone);
@@ -116,6 +121,7 @@ var g_sprites = {};
 function preloadDone() {
 
     g_sprites.protagonist = new Sprite(g_images.protagonist);
+    g_sprites.family = new Sprite(g_images.family);
 
     entityManager.init();
     initializeEntities();

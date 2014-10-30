@@ -28,6 +28,7 @@ var entityManager = {
 // "PRIVATE" DATA
 
     _protagonists: [],
+    _family: [],
 
 // "PRIVATE" METHODS
 
@@ -52,7 +53,10 @@ var entityManager = {
 // i.e. thing which need `this` to be defined.
 //
     deferredSetup: function () {
-        this._categories = [this._protagonists];
+        this._categories = [
+                            this._protagonists,
+                            this._family
+                            ];
     },
 
     init: function () {
@@ -61,6 +65,10 @@ var entityManager = {
 
     createProtagonist: function (descr) {
         this._protagonists.push(new Protagonist(descr));
+    },
+
+    createFamily: function (descr) {
+        this._family.push(new Family(descr));
     },
 
     update: function (du) {

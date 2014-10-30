@@ -8,13 +8,13 @@
 
 // A generic contructor which accepts an arbitrary descriptor object
 function Family(descr) {
-
+console.log("hello");
     // Common inherited setup logic from Entity
     this.setup(descr);
 
-    this.sprite = g_sprites.protagonist;
+    this.sprite = g_sprites.family;
     // Make a noise when I am created
-    this.exampleSound.play();
+    //this.exampleSound.play();
 }
 
 Protagonist.prototype = new Entity();
@@ -50,7 +50,7 @@ Protagonist.prototype.getRadius = function () {
 
 Protagonist.prototype.render = function (ctx) {
 
-    g_sprites.protagonist.drawCentredAt(
+    g_sprites.family.drawCentredAt(
         ctx, this.cx, this.cy, this.rotation
     );
 };
