@@ -13,6 +13,7 @@ function Grunt(descr) {
     this.setup(descr);
 
     this.sprite = g_sprites.grunt;
+    this.target = entityManager._protagonists[0]; // TODO actually find one
 }
 
 Grunt.prototype = new Entity();
@@ -31,12 +32,30 @@ Grunt.prototype.update = function (du) {
     if (this._isDeadNow) {
         return entityManager.KILL_ME_NOW;
     }
+    this.seekTarget();
 
     this.cx += this.velX * du;
     this.cy += this.velY * du;
     util.capPositions(this);
 
     spatialManager.register(this);
+};
+
+Grunt.prototype.seekTarget = function () {
+    var xOffset = this.target.cx - this.cx;
+    var yOffset = this.target.cy - this.cy;
+
+    if (xOffset > 0) {
+        this.velX = 1;
+    } else {
+        this.velX = -1;
+    }
+
+    if (yOffset > 0) {
+        this.velY = 1;
+    } else {
+        this.velY = -1;
+    }
 };
 
 Grunt.prototype.getRadius = function () {
