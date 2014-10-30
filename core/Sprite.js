@@ -42,7 +42,9 @@ Sprite.prototype.drawAt = function (ctx, x, y) {
         this.width, // the width of the clipped image
         this.height, // the height of the clipped image
         x,
-        y
+        y,
+        this.width, // final scaled width (scale = 1 here)
+        this.height // final scaled height (scale = 1 here)
     );
 };
 
@@ -59,8 +61,7 @@ Sprite.prototype.drawCentredAt = function (ctx, cx, cy, rotation) {
     
     // drawImage expects "top-left" coords, so we offset our destination
     // coords accordingly, to draw our sprite centred at the origin
-    ctx.drawImage(this.image, 
-                  -w/2, -h/2);
+    this.drawAt(ctx,-w/2, -h/2);
     
     ctx.restore();
 };  
