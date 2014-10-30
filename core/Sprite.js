@@ -14,17 +14,36 @@
 
 // Construct a "sprite" from the given `image`,
 //
-function Sprite(image) {
+function Sprite(image,leftLim,rightLim) {
+
+    if(leftLim === undefined) {
+        this.leftLim = 0;
+    } else {
+        this.leftLim = leftLim;
+    }
+    if(rightLim === undefined) {
+        this.rightLim = image.width;
+    } else {
+        this.rightLim = rightLim;
+    }
+
     this.image = image;
 
-    this.width = image.width;
+    this.width = this.rightLim - this.leftLim;
     this.height = image.height;
     this.scale = 1;
 }
 
 Sprite.prototype.drawAt = function (ctx, x, y) {
-    ctx.drawImage(this.image, 
-                  x, y);
+    ctx.drawImage(
+        this.image, // Image
+        this.leftLim, // x coordinate to start clipping
+        0, // y coordinate to start clipping
+        this.width, // the width of the clipped image
+        this.height, // the height of the clipped image
+        x,
+        y
+    );
 };
 
 Sprite.prototype.drawCentredAt = function (ctx, cx, cy, rotation) {
