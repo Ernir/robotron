@@ -27,8 +27,8 @@ Protagonist.prototype.KEY_DOWN   = 'S'.charCodeAt(0);
 Protagonist.prototype.KEY_LEFT   = 'A'.charCodeAt(0);
 Protagonist.prototype.KEY_RIGHT  = 'D'.charCodeAt(0);
 
-Protagonist.prototype.KEY_SHOOTUP      = 38;
-Protagonist.prototype.KEY_SHOOTDOWN   = 40;
+Protagonist.prototype.KEY_SHOOTUP      = 40;
+Protagonist.prototype.KEY_SHOOTDOWN   = 38;
 Protagonist.prototype.KEY_SHOOTLEFT   = 37;
 Protagonist.prototype.KEY_SHOOTRIGHT  = 39;
 
