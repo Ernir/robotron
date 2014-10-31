@@ -99,17 +99,28 @@ Protagonist.prototype.computeMovement = function () {
 }
 
 Protagonist.prototype.fire = function () {
-    //Only up, down, left, right
-    if (keys[this.KEY_SHOOTUP]) {
+    if(keys[this.KEY_SHOOTRIGHT] && keys[this.KEY_SHOOTUP]) {
+        entityManager.fire(this.cx+1, this.cy+1);
+    }
+    else if(keys[this.KEY_SHOOTRIGHT] && keys[this.KEY_SHOOTDOWN]) {
+        entityManager.fire(this.cx+1, this.cy-1);
+    }
+    else if(keys[this.KEY_SHOOTLEFT] && keys[this.KEY_SHOOTUP]) {
+        entityManager.fire(this.cx-1, this.cy+1);
+    }
+    else if(keys[this.KEY_SHOOTLEFT] && keys[this.KEY_SHOOTDOWN]) {
+        entityManager.fire(this.cx-1, this.cy-1);
+    }
+    else if (keys[this.KEY_SHOOTUP]) {
         entityManager.fire(this.cx, this.cy+1);
     }
-    if (keys[this.KEY_SHOOTDOWN]) {
+    else if (keys[this.KEY_SHOOTDOWN]) {
         entityManager.fire(this.cx, this.cy-1);
     }
-    if (keys[this.KEY_SHOOTLEFT]) {
+    else if (keys[this.KEY_SHOOTLEFT]) {
         entityManager.fire(this.cx-1, this.cy);
     }
-    if (keys[this.KEY_SHOOTRIGHT]) {
+    else if (keys[this.KEY_SHOOTRIGHT]) {
         entityManager.fire(this.cx+1, this.cy);
     }
 }
