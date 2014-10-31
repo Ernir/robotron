@@ -78,7 +78,7 @@ Grunt.prototype.getRadius = function () {
 
 Grunt.prototype.render = function (ctx) {
 
-    g_sprites.grunt.drawCentredAt(
+    this.sprite.drawCentredAt(
         ctx, this.cx, this.cy, this.rotation
     );
 };

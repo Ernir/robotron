@@ -41,6 +41,7 @@ var entityManager = {
 		this.createFamily();
 		this.createFamily();
 		this.createFamily();
+        this.createHulk();
     },
 
     _forEachOf: function (aCategory, fn) {
@@ -133,6 +134,30 @@ var entityManager = {
             };
         }
         this._enemies.push(new Grunt(descr));
+    },
+
+    createHulk: function () {
+        var locationFound = false;
+        var playerSafeRadius = 150;
+		var descr;
+        while (!locationFound) {
+            var x = util.randRange(0, g_canvas.width);
+            var y = util.randRange(0, g_canvas.height);
+
+            var danger = spatialManager.findEntityInRange(
+												x,
+												y,
+												playerSafeRadius
+			);
+
+            if (!danger) locationFound = true;
+
+            descr = {
+                cx: x,
+                cy: y
+            };
+        }
+        this._enemies.push(new Hulk(descr));
     },
 
     createFamily: function () {

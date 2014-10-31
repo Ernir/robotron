@@ -111,7 +111,8 @@ function requestPreloads() {
     var requiredImages = {
         protagonist: "https://notendur.hi.is/~eth31/cgp/staticdata/sprites/Player.png",
         grunt : "https://notendur.hi.is/~eth31/cgp/staticdata/sprites/Grunt.png",
-        family: "https://notendur.hi.is/~eth31/cgp/staticdata/Shapes/extralife.png"
+        family: "https://notendur.hi.is/~eth31/cgp/staticdata/Shapes/extralife.png",
+        hulk : "https://notendur.hi.is/~eth31/cgp/staticdata/sprites/Hulk.png"
     };
 
     imagesPreload(requiredImages, g_images, preloadDone);
@@ -123,6 +124,7 @@ function preloadDone() {
 
     g_sprites.protagonist = new Sprite(g_images.protagonist,0,26);
     g_sprites.grunt = new Sprite(g_images.grunt, 0, 30);
+    g_sprites.hulk = new Sprite(g_images.hulk, 0, 40);
     g_sprites.family = new Sprite(g_images.family);
 
 	initializeEntities();
