@@ -101,16 +101,16 @@ Protagonist.prototype.computeMovement = function () {
 Protagonist.prototype.fire = function () {
     //Only up, down, left, right
     if (keys[this.KEY_SHOOTUP]) {
-        entityManager.fireBullet(this.cx, this.cy, 0, 1);
+        entityManager.fire(this.cx, this.cy+1);
     }
     if (keys[this.KEY_SHOOTDOWN]) {
-        entityManager.fireBullet(this.cx, this.cy, 0, -1);
+        entityManager.fire(this.cx, this.cy-1);
     }
     if (keys[this.KEY_SHOOTLEFT]) {
-        entityManager.fireBullet(this.cx, this.cy, -1, 0);
+        entityManager.fire(this.cx-1, this.cy);
     }
     if (keys[this.KEY_SHOOTRIGHT]) {
-        entityManager.fireBullet(this.cx, this.cy, 1, 0);
+        entityManager.fire(this.cx+1, this.cy);
     }
 }
 
