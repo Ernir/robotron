@@ -46,28 +46,30 @@ Grunt.prototype.seekTarget = function () {
     var xOffset = this.target.cx - this.cx;
     var yOffset = this.target.cy - this.cy;
 
+    this.velX = 0;
     if (xOffset > 0) {
         this.velX = 1;
-    } else {
+    } else if (xOffset < 0) {
         this.velX = -1;
     }
 
+    this.velY = 0;
     if (yOffset > 0) {
         this.velY = 1;
-    } else {
+    } else if (yOffset < 0) {
         this.velY = -1;
     }
-	
-	// Clamp vel to 1 pixel moving radius
-	if (xOffset !== 0 && yOffset !== 0) {
-		this.velX *= Math.cos(Math.PI / 4);
-		this.velY *= Math.sin(Math.PI / 4);
-	}
+
+    // Clamp vel to 1 pixel moving radius
+    if (xOffset !== 0 && yOffset !== 0) {
+        this.velX *= Math.cos(Math.PI / 4);
+        this.velY *= Math.sin(Math.PI / 4);
+    }
 };
 
 Grunt.prototype.takeBulletHit = function () {
     this.kill();
-	// Add score
+    // Add score
 };
 
 Grunt.prototype.getRadius = function () {
