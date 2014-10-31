@@ -34,14 +34,15 @@ var entityManager = {
 
 // "PRIVATE" METHODS
 
-    _generateThings: function () {
-        //TODO: Generate some
-		for (var i = 0; i < 5; i++)
-			this.createGrunt();
-		this.createFamily();
-		this.createFamily();
-		this.createFamily();
-        this.createHulk();
+    // Accepts an array of objects {n : [number], f : [function]}.
+    // Calls each [function] number [times].
+    _startLevel: function (levelDescription) {
+        for (var i = 0; i < levelDescription.length; i++) {
+            var entity = levelDescription[i];
+            for (var j = 0; j < entity.n; j++) {
+                entity.f.call(this);
+            }
+        }
     },
 
     _forEachOf: function (aCategory, fn) {
@@ -62,39 +63,50 @@ var entityManager = {
 //
     deferredSetup: function () {
         this._categories = [
-			this._protagonists, 
-			this._bullets, 
-			this._family, 
+			this._protagonists,
+			this._bullets,
+			this._family,
 			this._enemies
 		];
     },
 
     init: function () {
-        this._generateThings();
+
+        var level1 = [ // TODO create more levels and place them somewhere nice
+            { n : 1, f : this.createProtagonist },
+            { n : 5, f : this.createGrunt },
+            { n : 2, f : this.createHulk },
+            { n : 3, f : this.createFamily }
+        ];
+
+        this._startLevel(level1);
     },
 
     createProtagonist: function (descr) {
+        if (descr === undefined) {
+            descr = {cx : g_canvas.width/2, cy : g_canvas.height/2};
+        }
         this._protagonists.push(new Protagonist(descr));
     },
-	
+
 	fire: function (aimX, aimY) {
 		for (var i in this._protagonists) {
-			
+
             var pos = this._protagonists[i].getPos();
             var dirn = util.angleTo(pos.posX, pos.posY, aimX, aimY);
-            
+
             var launchdist = this._protagonists[i].getRadius() * 0.5;
-            
+
             var dirnX = Math.cos(dirn);
             var dirnY = Math.sin(dirn);
-            
-            this.fireBullet(pos.posX + launchdist * dirnX, 
-                            pos.posY + launchdist * dirnY, 
-                            dirnX, 
+
+            this.fireBullet(pos.posX + launchdist * dirnX,
+                            pos.posY + launchdist * dirnY,
+                            dirnX,
                             dirnY);
 		}
 	},
-	
+
 	fireBullet: function(cx, cy, dirnX, dirnY) {
 		this._bullets.push(new Bullet({
 			cx   : cx,
@@ -103,10 +115,10 @@ var entityManager = {
 			dirnY : dirnY
 		}));
 	},
-	
+
 	findProtagonist: function () {
 		var p = Math.floor(util.randRange(
-					0, 
+					0,
 					this._protagonists.length)
 		);
 		return this._protagonists[p];
@@ -121,8 +133,8 @@ var entityManager = {
             var y = util.randRange(0, g_canvas.height);
 
             var danger = spatialManager.findEntityInRange(
-												x, 
-												y, 
+												x,
+												y,
 												playerSafeRadius
 			);
 
@@ -136,7 +148,7 @@ var entityManager = {
         this._enemies.push(new Grunt(descr));
     },
 
-    createHulk: function () {
+    createHulk: function () { // TODO reuse some logic...
         var locationFound = false;
         var playerSafeRadius = 150;
 		var descr;

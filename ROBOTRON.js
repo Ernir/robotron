@@ -25,10 +25,7 @@ var g_ctx = g_canvas.getContext("2d");
 // =======================
 
 function initializeEntities() {
-    entityManager.createProtagonist({
-        cx : 200,
-        cy : 200
-    });
+    // TODO
 }
 
 // =============
