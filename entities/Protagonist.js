@@ -27,8 +27,8 @@ Protagonist.prototype.KEY_DOWN   = 'S'.charCodeAt(0);
 Protagonist.prototype.KEY_LEFT   = 'A'.charCodeAt(0);
 Protagonist.prototype.KEY_RIGHT  = 'D'.charCodeAt(0);
 
-Protagonist.prototype.KEY_SHOOTUP      = 40;
-Protagonist.prototype.KEY_SHOOTDOWN   = 38;
+Protagonist.prototype.KEY_SHOOTUP      = 38;
+Protagonist.prototype.KEY_SHOOTDOWN   = 40;
 Protagonist.prototype.KEY_SHOOTLEFT   = 37;
 Protagonist.prototype.KEY_SHOOTRIGHT  = 39;
 
@@ -99,30 +99,23 @@ Protagonist.prototype.computeMovement = function () {
 }
 
 Protagonist.prototype.fire = function () {
-    if(keys[this.KEY_SHOOTRIGHT] && keys[this.KEY_SHOOTUP]) {
-        entityManager.fire(this.cx+1, this.cy+1);
+    var x=0;
+    var y=0;
+
+    if (keys[this.KEY_SHOOTUP]) {
+        y+=-1;
     }
-    else if(keys[this.KEY_SHOOTRIGHT] && keys[this.KEY_SHOOTDOWN]) {
-        entityManager.fire(this.cx+1, this.cy-1);
+    if (keys[this.KEY_SHOOTDOWN]) {
+        y+=1;
     }
-    else if(keys[this.KEY_SHOOTLEFT] && keys[this.KEY_SHOOTUP]) {
-        entityManager.fire(this.cx-1, this.cy+1);
+    if (keys[this.KEY_SHOOTLEFT]) {
+        x+=-1
     }
-    else if(keys[this.KEY_SHOOTLEFT] && keys[this.KEY_SHOOTDOWN]) {
-        entityManager.fire(this.cx-1, this.cy-1);
+    if (keys[this.KEY_SHOOTRIGHT]) {
+        x+=1;
     }
-    else if (keys[this.KEY_SHOOTUP]) {
-        entityManager.fire(this.cx, this.cy+1);
-    }
-    else if (keys[this.KEY_SHOOTDOWN]) {
-        entityManager.fire(this.cx, this.cy-1);
-    }
-    else if (keys[this.KEY_SHOOTLEFT]) {
-        entityManager.fire(this.cx-1, this.cy);
-    }
-    else if (keys[this.KEY_SHOOTRIGHT]) {
-        entityManager.fire(this.cx+1, this.cy);
-    }
+    if(x!=0||y!=0)
+        entityManager.fire(this.cx+x, this.cy+y);
 }
 
 Protagonist.prototype.takeGruntHit = function () {
