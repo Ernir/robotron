@@ -22,12 +22,12 @@ Protagonist.prototype = new Entity();
 // HACKED-IN AUDIO (no preloading)
 Protagonist.prototype.exampleSound = new Audio("sounds/exampleSound.ogg");
 
-Protagonist.prototype.KEY_UP      = 'W'.charCodeAt(0);
+Protagonist.prototype.KEY_UP     = 'W'.charCodeAt(0);
 Protagonist.prototype.KEY_DOWN   = 'S'.charCodeAt(0);
 Protagonist.prototype.KEY_LEFT   = 'A'.charCodeAt(0);
 Protagonist.prototype.KEY_RIGHT  = 'D'.charCodeAt(0);
 
-Protagonist.prototype.KEY_SHOOTUP      = 38;
+Protagonist.prototype.KEY_SHOOTUP     = 38;
 Protagonist.prototype.KEY_SHOOTDOWN   = 40;
 Protagonist.prototype.KEY_SHOOTLEFT   = 37;
 Protagonist.prototype.KEY_SHOOTRIGHT  = 39;
@@ -35,8 +35,8 @@ Protagonist.prototype.KEY_SHOOTRIGHT  = 39;
 
 // Initial, inheritable, default values
 Protagonist.prototype.rotation = 0;
-Protagonist.prototype.cx = g_canvas.width/2;;
-Protagonist.prototype.cy = g_canvas.height/2;;
+// Protagonist.prototype.cx = g_canvas.width/2;;
+// Protagonist.prototype.cy = g_canvas.height/2;;
 Protagonist.prototype.velX = 0;
 Protagonist.prototype.velY = 0;
 
@@ -57,7 +57,7 @@ Protagonist.prototype.update = function (du) {
     this.cy += this.velY * du;
     this.capPositions();
 
-    this.fire();
+    this.maybeFire();
 
     // Handle collisions
     var hitEntity = this.findHitEntity();
@@ -98,7 +98,7 @@ Protagonist.prototype.computeMovement = function () {
     return {x: velX, y: velY};
 }
 
-Protagonist.prototype.fire = function () {
+Protagonist.prototype.maybeFire = function () {
     var x=0;
     var y=0;
 
@@ -125,6 +125,10 @@ Protagonist.prototype.takeGruntHit = function () {
 
 Protagonist.prototype.getRadius = function () {
     return (this.sprite.width / 2) * 0.9;
+};
+
+Protagonist.prototype.getPos = function () {
+    return {cx: this.cx, cy: this.cy};
 };
 
 Protagonist.prototype.render = function (ctx) {

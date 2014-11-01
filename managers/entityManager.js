@@ -31,12 +31,14 @@ var entityManager = {
 	_family: [],
 	_enemies: [],
 	_bullets: [],
+	
+	_bulletFrameCounter: 12,
 
 // "PRIVATE" METHODS
 
     _generateThings: function () {
         //TODO: Generate some
-		for (var i = 0; i < 5; i++)
+		for (var i = 0; i < 10; i++)
 			this.createGrunt();
 		this.createFamily();
 		this.createFamily();
@@ -77,21 +79,27 @@ var entityManager = {
     },
 	
 	fire: function (aimX, aimY) {
+		if (this._bulletFrameCounter !== 12) {
+			this._bulletFrameCounter++;
+			return;
+		}
+		
 		for (var i in this._protagonists) {
 			
             var pos = this._protagonists[i].getPos();
-            var dirn = util.angleTo(pos.posX, pos.posY, aimX, aimY);
+            var dirn = util.angleTo(pos.cx, pos.cy, aimX, aimY);
             
             var launchdist = this._protagonists[i].getRadius() * 0.5;
             
             var dirnX = Math.cos(dirn);
             var dirnY = Math.sin(dirn);
             
-            this.fireBullet(pos.posX + launchdist * dirnX, 
-                            pos.posY + launchdist * dirnY, 
+            this.fireBullet(pos.cx + launchdist * dirnX, 
+                            pos.cy + launchdist * dirnY, 
                             dirnX, 
                             dirnY);
 		}
+		this._bulletFrameCounter = 0;
 	},
 	
 	fireBullet: function(cx, cy, dirnX, dirnY) {
@@ -112,25 +120,28 @@ var entityManager = {
 	},
 
     createGrunt: function () {
-        var locationFound = false;
-        var playerSafeRadius = 150;
+        var playerSafeDist = 120;
 		var descr;
-        while (!locationFound) {
+        for (var i = 0; i < 100; i++) {
             var x = util.randRange(0, g_canvas.width);
             var y = util.randRange(0, g_canvas.height);
-
-            var danger = spatialManager.findEntityInRange(
-												x, 
-												y, 
-												playerSafeRadius
-			);
-
-            if (!danger) locationFound = true;
-
+			
+			var locationFound = true;
+			
+			for (var i in this._protagonists) {
+				var pPos = this._protagonists[i].getPos();
+				var distSq = util.distSq(x, y, pPos.cx, pPos.cy);
+				if (distSq < util.square(playerSafeDist))
+					locationFound = false;
+			}
+			
+			if (!locationFound) continue;
+			
             descr = {
                 cx: x,
                 cy: y
             };
+			break;
         }
         this._enemies.push(new Grunt(descr));
     },
