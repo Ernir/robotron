@@ -21,8 +21,8 @@ Grunt.prototype = new Entity();
 // Initial, inheritable, default values
 Grunt.prototype.killProtagonist = true;
 Grunt.prototype.rotation = 0;
-Grunt.prototype.cx = 100;
-Grunt.prototype.cy = 100;
+// Grunt.prototype.cx = 100;
+// Grunt.prototype.cy = 100;
 Grunt.prototype.velX = 0;
 Grunt.prototype.velY = 0;
 

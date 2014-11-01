@@ -127,10 +127,6 @@ Protagonist.prototype.getRadius = function () {
     return (this.sprite.width / 2) * 0.9;
 };
 
-Protagonist.prototype.getPos = function () {
-    return {cx: this.cx, cy: this.cy};
-};
-
 Protagonist.prototype.render = function (ctx) {
 
     g_sprites.protagonist.drawCentredAt(

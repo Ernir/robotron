@@ -32,7 +32,7 @@ var entityManager = {
 	_enemies: [],
 	_bullets: [],
 	
-	_bulletFrameCounter: 12,
+	_bulletFrameCounter: 1,
 
 // "PRIVATE" METHODS
 
@@ -79,7 +79,7 @@ var entityManager = {
     },
 	
 	fire: function (aimX, aimY) {
-		if (this._bulletFrameCounter !== 12) {
+		if (this._bulletFrameCounter !== 6) {
 			this._bulletFrameCounter++;
 			return;
 		}
@@ -87,22 +87,23 @@ var entityManager = {
 		for (var i in this._protagonists) {
 			
             var pos = this._protagonists[i].getPos();
-            var dirn = util.angleTo(pos.cx, pos.cy, aimX, aimY);
+            var dirn = util.angleTo(pos.posX, pos.posY, aimX, aimY);
             
-            var launchdist = this._protagonists[i].getRadius() * 0.5;
+            var launchdist = this._protagonists[i].getRadius() * 0.8;
             
             var dirnX = Math.cos(dirn);
             var dirnY = Math.sin(dirn);
             
-            this.fireBullet(pos.cx + launchdist * dirnX, 
-                            pos.cy + launchdist * dirnY, 
+            this.fireBullet(pos.posX + launchdist * dirnX, 
+                            pos.posY + launchdist * dirnY, 
                             dirnX, 
                             dirnY);
 		}
-		this._bulletFrameCounter = 0;
+		
 	},
 	
 	fireBullet: function(cx, cy, dirnX, dirnY) {
+		this._bulletFrameCounter = 1;
 		this._bullets.push(new Bullet({
 			cx   : cx,
 			cy   : cy,
@@ -130,7 +131,7 @@ var entityManager = {
 			
 			for (var i in this._protagonists) {
 				var pPos = this._protagonists[i].getPos();
-				var distSq = util.distSq(x, y, pPos.cx, pPos.cy);
+				var distSq = util.distSq(x, y, pPos.posX, pPos.posY);
 				if (distSq < util.square(playerSafeDist))
 					locationFound = false;
 			}
