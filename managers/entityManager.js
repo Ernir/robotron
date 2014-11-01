@@ -119,11 +119,9 @@ var entityManager = {
 		);
 		return this._protagonists[p];
 	},
-
-    createGrunt: function () {
-        var playerSafeDist = 120;
-		var descr;
-        for (var i = 0; i < 100; i++) {
+	
+	findSpawn: function (playerSafeDist) {
+		for (var i = 0; i < 100; i++) {
             var x = util.randRange(0, g_canvas.width);
             var y = util.randRange(0, g_canvas.height);
 			
@@ -138,24 +136,22 @@ var entityManager = {
 			
 			if (!locationFound) continue;
 			
-            descr = {
+            return {
                 cx: x,
                 cy: y
             };
-			break;
         }
+	},
+
+    createGrunt: function () {
+        var playerSafeDist = 120;
+		var descr = this.findSpawn(playerSafeDist);
         this._enemies.push(new Grunt(descr));
     },
 
     createFamily: function () {
-
-		var x = util.randRange(0, g_canvas.width);
-        var y = util.randRange(0, g_canvas.height);
-
-        var descr = {
-			cx: x,
-			cy: y
-		};
+		var playerSafeDist = 120;
+		var descr = this.findSpawn(playerSafeDist);
         this._family.push(new Family(descr));
     },
 

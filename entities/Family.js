@@ -68,6 +68,7 @@ Family.prototype.randomWalk = function () {
 }
 
 Family.prototype.takeProtagonistHit = function () {
+	this.kill();
     // I'm Saved!!!
 };
 
