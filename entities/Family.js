@@ -83,9 +83,8 @@ Family.prototype.takeHulkHit = function () {
 };
 
 Family.prototype.takeProtagonistHit = function () {
-	this.isSaved = true;
-    // I'm Saved!!!
-    //TODO: Update score
+	// I'm Saved!!!
+    this.isSaved = true;
     Player.updateScore(1000);
 };
 

@@ -66,7 +66,7 @@ Protagonist.prototype.update = function (du) {
 		if (canSave) canSave.call(hitEntity);
 		else {
 			var canKillMe = hitEntity.killProtagonist;
-			if (canKillMe) return entityManager.KILL_ME_NOW;
+			if (canKillMe) this.takeGruntHit();
 		}
     }
 
@@ -119,9 +119,12 @@ Protagonist.prototype.maybeFire = function () {
 }
 
 Protagonist.prototype.takeGruntHit = function () {
-    this.kill();
-    //TODO: update lives!
     Player.updateLives(-1);
+    if (Player.getLives()>0) {
+        this.setPos(g_canvas.width/2, g_canvas.height/2);
+    }else{
+        this.kill();
+    }
 };
 
 Protagonist.prototype.getRadius = function () {

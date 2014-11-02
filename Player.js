@@ -66,10 +66,10 @@ Player.prototype.render = function(ctx) {
     ctx.restore();
 
     // Display remaining lives
-    for (var i = 0; i < this.lives; i++) {
+    for (var i = 1; i < this.lives; i++) {
         g_sprites.family.drawCentredAt(ctx, 
-                                       g_canvas.width - (i+1)*10, 
-                                       10, 
+                                       g_canvas.width - i*20, 
+                                       15, 
                                        0);
     };
 };
