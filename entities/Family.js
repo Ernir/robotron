@@ -28,6 +28,7 @@ Family.prototype.cx = 100;
 Family.prototype.cy = 100;
 Family.prototype.velX = 0;
 Family.prototype.velY = 0;
+Family.prototype.panic = 1;
 
 Family.prototype.update = function (du) {
 
@@ -36,7 +37,7 @@ Family.prototype.update = function (du) {
     if (this._isDeadNow) {
         return entityManager.KILL_ME_NOW;
     }
-
+    if (Math.random()<0.01 && this.panic<3) {this.panic += 0.1;}
     this.randomWalk();
 
     this.cx += this.velX * du;
@@ -47,22 +48,22 @@ Family.prototype.update = function (du) {
 };
 
 Family.prototype.randomWalk = function () {
-    if (Math.random()<0.02) {
+    if (Math.random()<0.02*this.panic) {
         //2% chance to change direction
         
         var n = Math.floor(Math.random()*4);
         switch(n){
             case 0:
-                this.velX = -0.3;
+                this.velX = -0.3*this.panic;
                 break;
             case 1:
-                this.velY = -0.3;
+                this.velY = -0.3*this.panic;
                 break;
             case 2:
-                this.velX = 0.3;
+                this.velX = 0.3*this.panic;
                 break;
             case 3:
-                this.velY = 0.3;
+                this.velY = 0.3*this.panic;
         }
     }
 }
