@@ -91,13 +91,15 @@ Player.prototype.render = function(ctx) {
     ctx.font = "20px Arial";
     ctx.strokeStyle = "red";
     ctx.strokeText(this.score, 10, 20);
+    var disp = "X" + this.multiplier;
+    ctx.strokeText(disp, g_canvas.width/2 - 10, 20);
     ctx.restore();
 
     // Display remaining lives
     for (var i = 1; i < this.lives; i++) {
-        g_sprites.family.drawCentredAt(ctx, 
-                                       g_canvas.width - i*20, 
-                                       15, 
-                                       0);
+        g_sprites.extralife.drawCentredAt(ctx, 
+                                          g_canvas.width - i*20, 
+                                          15, 
+                                          0);
     };
 };

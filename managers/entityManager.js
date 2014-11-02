@@ -40,9 +40,8 @@ var entityManager = {
         //TODO: Generate some
 		for (var i = 0; i < 10; i++)
 			this.createGrunt();
-		this.createFamily();
-		this.createFamily();
-		this.createFamily();
+		for (var i = 0; i < 6; i++)
+            this.createFamily();
     },
 
     _forEachOf: function (aCategory, fn) {

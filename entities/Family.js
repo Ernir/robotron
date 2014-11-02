@@ -104,10 +104,10 @@ Family.prototype.render = function (ctx) {
                                       this.cy,
                                       this.rotation);
     }else if(this.isSaved){
-        g_sprites.score.drawCentredAt(ctx,
-                                      this.cx,
-                                      this.cy,
-                                      this.rotation);
+        g_sprites.score[Player.getMultiplier()].drawCentredAt(ctx,
+                                                              this.cx,
+                                                              this.cy,
+                                                              this.rotation);
     }else{
         g_sprites.family.drawCentredAt(ctx, 
                                        this.cx, 
