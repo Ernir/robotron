@@ -3,12 +3,22 @@
 // =================
 
 var keys = [];
+//space, left, up, right, down:
+var _prevents = [' '.charCodeAt(0), 37, 38, 39, 40];
 
 function handleKeydown(evt) {
+    //This will prevent the browser from doing things you don't want it to, like scrolling the page.
+    for(var i = 0; i<prevents.length; i++){
+        if(evt.keyCode===_prevents[i]){
+		    evt.preventDefault();
+        }
+    }
     keys[evt.keyCode] = true;
 }
 
 function handleKeyup(evt) {
+    if(evt.keyCode===KEY_SPACE)
+		evt.preventDefault();
     keys[evt.keyCode] = false;
 }
 
