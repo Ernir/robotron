@@ -112,7 +112,8 @@ function requestPreloads() {
         protagonist : "https://notendur.hi.is/~eth31/cgp/staticdata/sprites/Player.png",
         grunt : "https://notendur.hi.is/~eth31/cgp/staticdata/sprites/Grunt.png",
         family : "https://notendur.hi.is/~eth31/cgp/staticdata/Shapes/extralife.png",
-        skull : "https://notendur.hi.is/~eth31/cgp/staticdata/Shapes/Skull.png"
+        skull : "https://notendur.hi.is/~eth31/cgp/staticdata/Shapes/Skull.png",
+        score : "https://notendur.hi.is/~eth31/cgp/staticdata/Numbers%20and%20letters/HumanScore.png"
     };
 
     imagesPreload(requiredImages, g_images, preloadDone);
@@ -126,6 +127,7 @@ function preloadDone() {
     g_sprites.grunt = new Sprite(g_images.grunt, 0, 30);
     g_sprites.family = new Sprite(g_images.family);
     g_sprites.skull = new Sprite(g_images.skull);
+    g_sprites.score = new Sprite(g_images.score, 3, 37);
 
 	initializeEntities();
     entityManager.init();
