@@ -57,7 +57,7 @@ Protagonist.prototype.update = function (du) {
     this.cy += this.velY * du;
     this.capPositions();
 
-    this.maybeFire();
+    this.fireOnKey();
 
     // Handle collisions
     var hitEntity = this.findHitEntity();
@@ -98,7 +98,7 @@ Protagonist.prototype.computeMovement = function () {
     return {x: velX, y: velY};
 }
 
-Protagonist.prototype.maybeFire = function () {
+Protagonist.prototype.fireOnKey = function () {
     var x=0;
     var y=0;
 
@@ -114,8 +114,10 @@ Protagonist.prototype.maybeFire = function () {
     if (keys[this.KEY_SHOOTRIGHT]) {
         x+=1;
     }
-    if(x!=0||y!=0)
+
+    if(x!=0||y!=0){
         entityManager.fire(this.cx+x, this.cy+y);
+    }
 }
 
 Protagonist.prototype.takeGruntHit = function () {
