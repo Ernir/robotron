@@ -30,6 +30,8 @@ function initializeEntities() {
         cy : 300
     });
 }
+var Player = new Player();
+
 
 // =============
 // GATHER INPUTS
@@ -113,7 +115,8 @@ function requestPreloads() {
         grunt : "https://notendur.hi.is/~eth31/cgp/staticdata/sprites/Grunt.png",
         family : "https://notendur.hi.is/~eth31/cgp/staticdata/Shapes/extralife.png",
         skull : "https://notendur.hi.is/~eth31/cgp/staticdata/Shapes/Skull.png",
-        score : "https://notendur.hi.is/~eth31/cgp/staticdata/Numbers%20and%20letters/HumanScore.png"
+        score : "https://notendur.hi.is/~eth31/cgp/staticdata/Numbers%20and%20letters/HumanScore.png",
+        extralife : "https://notendur.hi.is/~eth31/cgp/staticdata/Shapes/extralife.png"
     };
 
     imagesPreload(requiredImages, g_images, preloadDone);
@@ -128,6 +131,7 @@ function preloadDone() {
     g_sprites.family = new Sprite(g_images.family);
     g_sprites.skull = new Sprite(g_images.skull);
     g_sprites.score = new Sprite(g_images.score, 3, 37);
+    g_sprites.extralife = new Sprite(g_images.extralife);
 
 	initializeEntities();
     entityManager.init();
