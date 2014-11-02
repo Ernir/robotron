@@ -31,6 +31,7 @@ var entityManager = {
 	_family: [],
 	_enemies: [],
 	_bullets: [],
+    _scoreImgs: [],
 	
 	_bulletFrameCounter: 1,
 
@@ -65,7 +66,8 @@ var entityManager = {
 			this._protagonists, 
 			this._bullets, 
 			this._family, 
-			this._enemies
+			this._enemies,
+            this._scoreImgs
 		];
     },
 
@@ -152,6 +154,10 @@ var entityManager = {
 		var playerSafeDist = 120;
 		var descr = this.findSpawn(playerSafeDist);
         this._family.push(new Family(descr));
+    },
+
+    createScoreImg: function (descr) {
+        this._scoreImgs.push(new ScoreImg(descr));
     },
 
     update: function (du) {

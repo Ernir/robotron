@@ -134,11 +134,9 @@ function preloadDone() {
     g_sprites.family = new Sprite(g_images.family);
     g_sprites.skull = new Sprite(g_images.skull);
     g_sprites.score = [];
-    g_sprites.score[1] = new Sprite(g_images.score,   3,  37);
-    g_sprites.score[2] = new Sprite(g_images.score,  37,  71);
-    g_sprites.score[3] = new Sprite(g_images.score,  71, 105);
-    g_sprites.score[4] = new Sprite(g_images.score, 105, 139);
-    g_sprites.score[5] = new Sprite(g_images.score, 139, 173);
+    for (var i = 0; i < 5; i++) {
+        g_sprites.score[i+1] = new Sprite(g_images.score, 3+(i*34), 37+(i*34));    
+    };
     g_sprites.extralife = new Sprite(g_images.extralife);
 
 	initializeEntities();

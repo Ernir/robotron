@@ -37,10 +37,10 @@ Family.prototype.update = function (du) {
 
     spatialManager.unregister(this);
     // Handle death
-    if (this._isDeadNow) {
+    if (this._isDeadNow || this.isSaved) {
         return entityManager.KILL_ME_NOW;
     }
-    if (this.isDying || this.isSaved) {
+    if (this.isDying) {
         this.lifeSpan += -du;        
         if (this.lifeSpan<=0) {
             this.kill();
@@ -84,9 +84,14 @@ Family.prototype.takeHulkHit = function () {
 
 Family.prototype.takeProtagonistHit = function () {
 	// I'm Saved!!!
-    this.isSaved = true;
+    //this.isSaved = true;
     Player.addScore(1000*Player.getMultiplier());
+    entityManager.createScoreImg({
+                                 cx: this.cx, 
+                                 cy: this.cy,
+                                 m : Player.getMultiplier()});    
     Player.addMultiplier();
+    this.kill();
 };
 
 Family.prototype.takeBulletHit = function () {
@@ -104,10 +109,10 @@ Family.prototype.render = function (ctx) {
                                       this.cy,
                                       this.rotation);
     }else if(this.isSaved){
-        g_sprites.score[Player.getMultiplier()].drawCentredAt(ctx,
+/*        g_sprites.score[Player.getMultiplier()].drawCentredAt(ctx,
                                                               this.cx,
                                                               this.cy,
-                                                              this.rotation);
+                                                              this.rotation);*/
     }else{
         g_sprites.family.drawCentredAt(ctx, 
                                        this.cx, 
