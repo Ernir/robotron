@@ -84,7 +84,6 @@ Family.prototype.takeHulkHit = function () {
 Family.prototype.takeProtagonistHit = function () {
 	this.kill();
     // I'm Saved!!!
-    //this.isDying = true;
 };
 
 Family.prototype.takeBulletHit = function () {
