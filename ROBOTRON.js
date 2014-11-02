@@ -120,7 +120,8 @@ function requestPreloads() {
         score : "https://notendur.hi.is/~eth31/cgp/staticdata/Numbers%20and%20letters/HumanScore.png",
         extralife : "https://notendur.hi.is/~eth31/cgp/staticdata/Shapes/extralife.png"
     };
-
+    //make sure that the names of object keys and the names of their images are the same before we do this
+    //var requiredImages = g_urls;
     imagesPreload(requiredImages, g_images, preloadDone);
 }
 
