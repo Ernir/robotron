@@ -85,6 +85,7 @@ Family.prototype.takeHulkHit = function () {
 Family.prototype.takeProtagonistHit = function () {
 	this.isSaved = true;
     // I'm Saved!!!
+    //TODO: update score
 };
 
 Family.prototype.takeBulletHit = function () {

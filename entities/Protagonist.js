@@ -120,7 +120,7 @@ Protagonist.prototype.maybeFire = function () {
 
 Protagonist.prototype.takeGruntHit = function () {
     this.kill();
-    //update lives!
+    //TODO: update lives!
 };
 
 Protagonist.prototype.getRadius = function () {
