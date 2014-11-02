@@ -29,6 +29,8 @@ Family.prototype.cy = 100;
 Family.prototype.velX = 0;
 Family.prototype.velY = 0;
 Family.prototype.panic = 1;
+Family.prototype.lifeSpan = 1*SECS_TO_NOMINALS;
+Family.prototype.isDying = false;
 
 Family.prototype.update = function (du) {
 
@@ -37,14 +39,21 @@ Family.prototype.update = function (du) {
     if (this._isDeadNow) {
         return entityManager.KILL_ME_NOW;
     }
-    if (Math.random()<0.01 && this.panic<3) {this.panic += 0.1;}
-    this.randomWalk();
+    if (this.isDying) {
+        this.lifeSpan += -du;        
+        if (this.lifeSpan<=0) {
+            this.kill();
+        }
+    }else{
+        if (Math.random()<0.01 && this.panic<3) {this.panic += 0.1;}
+        this.randomWalk();
 
-    this.cx += this.velX * du;
-    this.cy += this.velY * du;
-    this.capPositions();
+        this.cx += this.velX * du;
+        this.cy += this.velY * du;
+        this.capPositions();
 
-    spatialManager.register(this);
+        spatialManager.register(this);
+    }
 };
 
 Family.prototype.randomWalk = function () {
@@ -68,9 +77,14 @@ Family.prototype.randomWalk = function () {
     }
 }
 
+Family.prototype.takeHulkHit = function () {
+    this.isDying = true;
+};
+
 Family.prototype.takeProtagonistHit = function () {
 	this.kill();
     // I'm Saved!!!
+    //this.isDying = true;
 };
 
 Family.prototype.takeBulletHit = function () {
@@ -82,8 +96,15 @@ Family.prototype.getRadius = function () {
 };
 
 Family.prototype.render = function (ctx) {
-
-    g_sprites.family.drawCentredAt(
-        ctx, this.cx, this.cy, this.rotation
-    );
+    if (this.isDying) {
+        g_sprites.skull.drawCentredAt(ctx,
+                                      this.cx,
+                                      this.cy,
+                                      this.rotation);
+    }else{
+        g_sprites.family.drawCentredAt(ctx, 
+                                       this.cx, 
+                                       this.cy, 
+                                       this.rotation);
+    }
 };
