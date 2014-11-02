@@ -67,7 +67,7 @@ Grunt.prototype.seekTarget = function () {
 
 Grunt.prototype.takeBulletHit = function () {
     this.kill();
-	// Add score
+	Player.addScore(100 * Player.getMultiplier());
 };
 
 Grunt.prototype.getRadius = function () {

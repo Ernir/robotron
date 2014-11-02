@@ -66,7 +66,7 @@ Protagonist.prototype.update = function (du) {
 		if (canSave) canSave.call(hitEntity);
 		else {
 			var canKillMe = hitEntity.killProtagonist;
-			if (canKillMe) this.takeGruntHit();
+			if (canKillMe) this.takeEnemyHit();
 		}
     }
 
@@ -118,10 +118,11 @@ Protagonist.prototype.maybeFire = function () {
         entityManager.fire(this.cx+x, this.cy+y);
 }
 
-Protagonist.prototype.takeGruntHit = function () {
-    Player.updateLives(-1);
+Protagonist.prototype.takeEnemyHit = function () {
+    Player.updateLives();
     if (Player.getLives()>0) {
         this.setPos(g_canvas.width/2, g_canvas.height/2);
+        Player.resetMultiplier();
     }else{
         this.kill();
     }

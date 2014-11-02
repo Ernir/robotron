@@ -28,41 +28,69 @@ Player.prototype.setup = function (descr) {
     }
 };
 
-Player.prototype.lives = 5;
-Player.prototype.score = 0;
 Player.prototype.level = 1;
+Player.prototype.lives = 5;
+Player.prototype.multiplier = 1;
+Player.prototype.score = 0;
 
-Player.prototype.updateScore = function (score) {
-    this.score += score;
+
+Player.prototype.updateLevel = function () {
+    this.level += 1;
 };
 
-Player.prototype.updateLives = function (integer) {
-    this.lives += integer;
-};
-
-Player.prototype.updateLevel = function (integer) {
-    this.level += integer;
-};
-
-Player.prototype.getScore = function() {
-    return this.score;
-};
-
-Player.prototype.getLives = function() {
-    return this.lives;
+Player.prototype.resetLevel = function() {
+    this.level = 1;
 };
 
 Player.prototype.getLevel = function() {
     return this.level;
 };
 
+Player.prototype.updateLives = function () {
+    this.lives += -1;
+};
+
+Player.prototype.resetLives = function() {
+    this.lives = 5;
+};
+
+Player.prototype.getLives = function() {
+    return this.lives;
+};
+
+Player.prototype.addMultiplier = function() {
+    if (this.multiplier<5) {
+        this.multiplier += 1;
+    }
+};
+
+Player.prototype.resetMultiplier = function() {
+    this.multiplier = 1;
+};
+
+Player.prototype.getMultiplier = function() {
+    return this.multiplier;
+}
+
+Player.prototype.addScore = function (score) {
+    this.score += score;
+};
+
+Player.prototype.resetScore = function() {
+    this.score = 0;
+};
+
+Player.prototype.getScore = function() {
+    return this.score;
+};
+
 Player.prototype.render = function(ctx) {
     // Display the score
     ctx.save();
     ctx.lineWidth = 2;
-    ctx.font = "10px Arial";
+    ctx.font = "20px Arial";
     ctx.strokeStyle = "red";
-    ctx.strokeText(this.score, 10, 10);
+    ctx.strokeText(this.score, 10, 20);
     ctx.restore();
 
     // Display remaining lives
