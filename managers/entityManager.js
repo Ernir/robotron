@@ -31,6 +31,9 @@ var entityManager = {
 	_family: [],
 	_enemies: [],
 	_bullets: [],
+    _scoreImgs: [],
+	
+	_bulletFrameCounter: 1,
 
 // "PRIVATE" METHODS
 
@@ -63,10 +66,11 @@ var entityManager = {
 //
     deferredSetup: function () {
         this._categories = [
-			this._protagonists,
-			this._bullets,
-			this._family,
-			this._enemies
+			this._protagonists, 
+			this._bullets, 
+			this._family, 
+			this._enemies,
+            this._scoreImgs
 		];
     },
 
@@ -88,26 +92,33 @@ var entityManager = {
         }
         this._protagonists.push(new Protagonist(descr));
     },
-
+	
 	fire: function (aimX, aimY) {
+		if (this._bulletFrameCounter !== 6) {
+			this._bulletFrameCounter++;
+			return;
+		}
+		
 		for (var i in this._protagonists) {
-
+			
             var pos = this._protagonists[i].getPos();
             var dirn = util.angleTo(pos.posX, pos.posY, aimX, aimY);
-
-            var launchdist = this._protagonists[i].getRadius() * 0.5;
-
+            
+            var launchdist = this._protagonists[i].getRadius() * 0.8;
+            
             var dirnX = Math.cos(dirn);
             var dirnY = Math.sin(dirn);
-
-            this.fireBullet(pos.posX + launchdist * dirnX,
-                            pos.posY + launchdist * dirnY,
-                            dirnX,
+            
+            this.fireBullet(pos.posX + launchdist * dirnX, 
+                            pos.posY + launchdist * dirnY, 
+                            dirnX, 
                             dirnY);
 		}
+		
 	},
-
+	
 	fireBullet: function(cx, cy, dirnX, dirnY) {
+		this._bulletFrameCounter = 1;
 		this._bullets.push(new Bullet({
 			cx   : cx,
 			cy   : cy,
@@ -115,73 +126,52 @@ var entityManager = {
 			dirnY : dirnY
 		}));
 	},
-
+	
 	findProtagonist: function () {
 		var p = Math.floor(util.randRange(
-					0,
+					0, 
 					this._protagonists.length)
 		);
 		return this._protagonists[p];
 	},
-
-    createGrunt: function () {
-        var locationFound = false;
-        var playerSafeRadius = 150;
-		var descr;
-        while (!locationFound) {
+	
+	findSpawn: function (playerSafeDist) {
+		for (var i = 0; i < 100; i++) {
             var x = util.randRange(0, g_canvas.width);
             var y = util.randRange(0, g_canvas.height);
-
-            var danger = spatialManager.findEntityInRange(
-												x,
-												y,
-												playerSafeRadius
-			);
-
-            if (!danger) locationFound = true;
-
-            descr = {
+			
+			var locationFound = true;
+			
+			for (var i in this._protagonists) {
+				var pPos = this._protagonists[i].getPos();
+				var distSq = util.distSq(x, y, pPos.posX, pPos.posY);
+				if (distSq < util.square(playerSafeDist))
+					locationFound = false;
+			}
+			
+			if (!locationFound) continue;
+			
+            return {
                 cx: x,
                 cy: y
             };
         }
+	},
+
+    createGrunt: function () {
+        var playerSafeDist = 120;
+		var descr = this.findSpawn(playerSafeDist);
         this._enemies.push(new Grunt(descr));
     },
 
-    createHulk: function () { // TODO reuse some logic...
-        var locationFound = false;
-        var playerSafeRadius = 150;
-		var descr;
-        while (!locationFound) {
-            var x = util.randRange(0, g_canvas.width);
-            var y = util.randRange(0, g_canvas.height);
-
-            var danger = spatialManager.findEntityInRange(
-												x,
-												y,
-												playerSafeRadius
-			);
-
-            if (!danger) locationFound = true;
-
-            descr = {
-                cx: x,
-                cy: y
-            };
-        }
-        this._enemies.push(new Hulk(descr));
+    createFamily: function () {
+		var playerSafeDist = 120;
+		var descr = this.findSpawn(playerSafeDist);
+        this._family.push(new Family(descr));
     },
 
-    createFamily: function () {
-
-		var x = util.randRange(0, g_canvas.width);
-        var y = util.randRange(0, g_canvas.height);
-
-        var descr = {
-			cx: x,
-			cy: y
-		};
-        this._family.push(new Family(descr));
+    createScoreImg: function (descr) {
+        this._scoreImgs.push(new ScoreImg(descr));
     },
 
     update: function (du) {

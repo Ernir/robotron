@@ -28,51 +28,74 @@ Family.prototype.cx = 100;
 Family.prototype.cy = 100;
 Family.prototype.velX = 0;
 Family.prototype.velY = 0;
+Family.prototype.panic = 1;
+Family.prototype.lifeSpan = 1*SECS_TO_NOMINALS;
+Family.prototype.isDying = false;
+Family.prototype.isSaved = false;
 
 Family.prototype.update = function (du) {
 
     spatialManager.unregister(this);
     // Handle death
-    if (this._isDeadNow) {
+    if (this._isDeadNow || this.isSaved) {
         return entityManager.KILL_ME_NOW;
     }
+    if (this.isDying) {
+        this.lifeSpan += -du;        
+        if (this.lifeSpan<=0) {
+            this.kill();
+        }
+    }else{
+        if (Math.random()<0.01 && this.panic<3) {this.panic += 0.1;}
+        this.randomWalk();
 
-    this.randomWalk();
+        this.cx += this.velX * du;
+        this.cy += this.velY * du;
+        this.capPositions();
 
-    this.cx += this.velX * du;
-    this.cy += this.velY * du;
-    this.capPositions();
-
-    spatialManager.register(this);
+        spatialManager.register(this);
+    }
 };
 
 Family.prototype.randomWalk = function () {
-    if (Math.random()<0.02) {
+    if (Math.random()<0.02*this.panic) {
         //2% chance to change direction
         
         var n = Math.floor(Math.random()*4);
         switch(n){
             case 0:
-                this.velX = -0.3;
+                this.velX = -0.3*this.panic;
                 break;
             case 1:
-                this.velY = -0.3;
+                this.velY = -0.3*this.panic;
                 break;
             case 2:
-                this.velX = 0.3;
+                this.velX = 0.3*this.panic;
                 break;
             case 3:
-                this.velY = 0.3;
+                this.velY = 0.3*this.panic;
         }
     }
 }
 
+Family.prototype.takeHulkHit = function () {
+    this.isDying = true;
+};
+
 Family.prototype.takeProtagonistHit = function () {
-    // I'm Saved!!!
+	// I'm Saved!!!
+    //this.isSaved = true;
+    Player.addScore(1000*Player.getMultiplier());
+    entityManager.createScoreImg({
+                                 cx: this.cx, 
+                                 cy: this.cy,
+                                 m : Player.getMultiplier()});    
+    Player.addMultiplier();
+    this.kill();
 };
 
 Family.prototype.takeBulletHit = function () {
-    this.kill();
+    this.isDying = true;
 };
 
 Family.prototype.getRadius = function () {
@@ -80,8 +103,20 @@ Family.prototype.getRadius = function () {
 };
 
 Family.prototype.render = function (ctx) {
-
-    g_sprites.family.drawCentredAt(
-        ctx, this.cx, this.cy, this.rotation
-    );
+    if (this.isDying) {
+        g_sprites.skull.drawCentredAt(ctx,
+                                      this.cx,
+                                      this.cy,
+                                      this.rotation);
+    }else if(this.isSaved){
+/*        g_sprites.score[Player.getMultiplier()].drawCentredAt(ctx,
+                                                              this.cx,
+                                                              this.cy,
+                                                              this.rotation);*/
+    }else{
+        g_sprites.family.drawCentredAt(ctx, 
+                                       this.cx, 
+                                       this.cy, 
+                                       this.rotation);
+    }
 };
