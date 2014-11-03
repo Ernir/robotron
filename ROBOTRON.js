@@ -97,6 +97,7 @@ function renderSimulation(ctx) {
     entityManager.render(ctx);
 	
 	renderCrosshair(ctx);
+    Player.render(ctx);
 
     if (g_renderSpatialDebug) spatialManager.render(ctx);
 }
