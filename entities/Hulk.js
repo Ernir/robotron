@@ -19,6 +19,7 @@ function Hulk(descr) {
 
 Hulk.prototype = Object.create(Enemy.prototype);
 Hulk.prototype.timeSinceHit = Infinity;
+Hulk.prototype.killFamily = true;
 
 Hulk.prototype.update = function (du) {
 
