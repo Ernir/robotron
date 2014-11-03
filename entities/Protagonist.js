@@ -66,7 +66,7 @@ Protagonist.prototype.update = function (du) {
 		if (canSave) canSave.call(hitEntity);
 		else {
 			var canKillMe = hitEntity.killProtagonist;
-			if (canKillMe) this.takeEnemyHit();
+			if (canKillMe&&g_canBeKilled) this.takeEnemyHit();
 		}
     }
 
