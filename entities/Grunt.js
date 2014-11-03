@@ -21,8 +21,8 @@ Grunt.prototype = new Entity();
 // Initial, inheritable, default values
 Grunt.prototype.killProtagonist = true;
 Grunt.prototype.rotation = 0;
-Grunt.prototype.cx = 100;
-Grunt.prototype.cy = 100;
+// Grunt.prototype.cx = 100;
+// Grunt.prototype.cy = 100;
 Grunt.prototype.velX = 0;
 Grunt.prototype.velY = 0;
 
@@ -59,17 +59,17 @@ Grunt.prototype.seekTarget = function () {
     } else if (yOffset < 0) {
         this.velY = -1;
     }
-
-    // Clamp vel to 1 pixel moving radius
-    if (xOffset !== 0 && yOffset !== 0) {
-        this.velX *= Math.cos(Math.PI / 4);
-        this.velY *= Math.sin(Math.PI / 4);
-    }
+	
+	// Clamp vel to 1 pixel moving radius
+	if (xOffset !== 0 && yOffset !== 0) {
+		this.velX *= Math.cos(Math.PI / 4);
+		this.velY *= Math.sin(Math.PI / 4);
+	}
 };
 
 Grunt.prototype.takeBulletHit = function () {
     this.kill();
-    // Add score
+	Player.addScore(100 * Player.getMultiplier());
 };
 
 Grunt.prototype.getRadius = function () {

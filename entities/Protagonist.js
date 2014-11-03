@@ -22,21 +22,21 @@ Protagonist.prototype = new Entity();
 // HACKED-IN AUDIO (no preloading)
 Protagonist.prototype.exampleSound = new Audio("sounds/exampleSound.ogg");
 
-Protagonist.prototype.KEY_UP      = 'W'.charCodeAt(0);
+Protagonist.prototype.KEY_UP     = 'W'.charCodeAt(0);
 Protagonist.prototype.KEY_DOWN   = 'S'.charCodeAt(0);
 Protagonist.prototype.KEY_LEFT   = 'A'.charCodeAt(0);
 Protagonist.prototype.KEY_RIGHT  = 'D'.charCodeAt(0);
 
-Protagonist.prototype.KEY_SHOOTUP      = 40;
-Protagonist.prototype.KEY_SHOOTDOWN   = 38;
+Protagonist.prototype.KEY_SHOOTUP     = 38;
+Protagonist.prototype.KEY_SHOOTDOWN   = 40;
 Protagonist.prototype.KEY_SHOOTLEFT   = 37;
 Protagonist.prototype.KEY_SHOOTRIGHT  = 39;
 
 
 // Initial, inheritable, default values
 Protagonist.prototype.rotation = 0;
-Protagonist.prototype.cx = g_canvas.width/2;;
-Protagonist.prototype.cy = g_canvas.height/2;;
+// Protagonist.prototype.cx = g_canvas.width/2;;
+// Protagonist.prototype.cy = g_canvas.height/2;;
 Protagonist.prototype.velX = 0;
 Protagonist.prototype.velY = 0;
 
@@ -57,7 +57,7 @@ Protagonist.prototype.update = function (du) {
     this.cy += this.velY * du;
     this.capPositions();
 
-    this.fire();
+    this.maybeFire();
 
     // Handle collisions
     var hitEntity = this.findHitEntity();
@@ -66,7 +66,7 @@ Protagonist.prototype.update = function (du) {
 		if (canSave) canSave.call(hitEntity);
 		else {
 			var canKillMe = hitEntity.killProtagonist;
-			if (canKillMe) return entityManager.KILL_ME_NOW;
+			if (canKillMe) this.takeEnemyHit();
 		}
     }
 
@@ -98,36 +98,34 @@ Protagonist.prototype.computeMovement = function () {
     return {x: velX, y: velY};
 }
 
-Protagonist.prototype.fire = function () {
-    if(keys[this.KEY_SHOOTRIGHT] && keys[this.KEY_SHOOTUP]) {
-        entityManager.fire(this.cx+1, this.cy+1);
+Protagonist.prototype.maybeFire = function () {
+    var x=0;
+    var y=0;
+
+    if (keys[this.KEY_SHOOTUP]) {
+        y+=-1;
     }
-    else if(keys[this.KEY_SHOOTRIGHT] && keys[this.KEY_SHOOTDOWN]) {
-        entityManager.fire(this.cx+1, this.cy-1);
+    if (keys[this.KEY_SHOOTDOWN]) {
+        y+=1;
     }
-    else if(keys[this.KEY_SHOOTLEFT] && keys[this.KEY_SHOOTUP]) {
-        entityManager.fire(this.cx-1, this.cy+1);
+    if (keys[this.KEY_SHOOTLEFT]) {
+        x+=-1
     }
-    else if(keys[this.KEY_SHOOTLEFT] && keys[this.KEY_SHOOTDOWN]) {
-        entityManager.fire(this.cx-1, this.cy-1);
+    if (keys[this.KEY_SHOOTRIGHT]) {
+        x+=1;
     }
-    else if (keys[this.KEY_SHOOTUP]) {
-        entityManager.fire(this.cx, this.cy+1);
-    }
-    else if (keys[this.KEY_SHOOTDOWN]) {
-        entityManager.fire(this.cx, this.cy-1);
-    }
-    else if (keys[this.KEY_SHOOTLEFT]) {
-        entityManager.fire(this.cx-1, this.cy);
-    }
-    else if (keys[this.KEY_SHOOTRIGHT]) {
-        entityManager.fire(this.cx+1, this.cy);
-    }
+    if(x!=0||y!=0)
+        entityManager.fire(this.cx+x, this.cy+y);
 }
 
-Protagonist.prototype.takeGruntHit = function () {
-    this.kill();
-    //update lives!
+Protagonist.prototype.takeEnemyHit = function () {
+    Player.updateLives();
+    if (Player.getLives()>0) {
+        this.setPos(g_canvas.width/2, g_canvas.height/2);
+        Player.resetMultiplier();
+    }else{
+        this.kill();
+    }
 };
 
 Protagonist.prototype.getRadius = function () {

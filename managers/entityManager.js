@@ -31,16 +31,18 @@ var entityManager = {
 	_family: [],
 	_enemies: [],
 	_bullets: [],
+    _scoreImgs: [],
+	
+	_bulletFrameCounter: 1,
 
 // "PRIVATE" METHODS
 
     _generateThings: function () {
         //TODO: Generate some
-		for (var i = 0; i < 5; i++)
+		for (var i = 0; i < 10; i++)
 			this.createGrunt();
-		this.createFamily();
-		this.createFamily();
-		this.createFamily();
+		for (var i = 0; i < 6; i++)
+            this.createFamily();
     },
 
     _forEachOf: function (aCategory, fn) {
@@ -64,7 +66,8 @@ var entityManager = {
 			this._protagonists, 
 			this._bullets, 
 			this._family, 
-			this._enemies
+			this._enemies,
+            this._scoreImgs
 		];
     },
 
@@ -77,12 +80,17 @@ var entityManager = {
     },
 	
 	fire: function (aimX, aimY) {
+		if (this._bulletFrameCounter !== 6) {
+			this._bulletFrameCounter++;
+			return;
+		}
+		
 		for (var i in this._protagonists) {
 			
             var pos = this._protagonists[i].getPos();
             var dirn = util.angleTo(pos.posX, pos.posY, aimX, aimY);
             
-            var launchdist = this._protagonists[i].getRadius() * 0.5;
+            var launchdist = this._protagonists[i].getRadius() * 0.8;
             
             var dirnX = Math.cos(dirn);
             var dirnY = Math.sin(dirn);
@@ -92,9 +100,11 @@ var entityManager = {
                             dirnX, 
                             dirnY);
 		}
+		
 	},
 	
 	fireBullet: function(cx, cy, dirnX, dirnY) {
+		this._bulletFrameCounter = 1;
 		this._bullets.push(new Bullet({
 			cx   : cx,
 			cy   : cy,
@@ -110,41 +120,44 @@ var entityManager = {
 		);
 		return this._protagonists[p];
 	},
-
-    createGrunt: function () {
-        var locationFound = false;
-        var playerSafeRadius = 150;
-		var descr;
-        while (!locationFound) {
+	
+	findSpawn: function (playerSafeDist) {
+		for (var i = 0; i < 100; i++) {
             var x = util.randRange(0, g_canvas.width);
             var y = util.randRange(0, g_canvas.height);
-
-            var danger = spatialManager.findEntityInRange(
-												x, 
-												y, 
-												playerSafeRadius
-			);
-
-            if (!danger) locationFound = true;
-
-            descr = {
+			
+			var locationFound = true;
+			
+			for (var i in this._protagonists) {
+				var pPos = this._protagonists[i].getPos();
+				var distSq = util.distSq(x, y, pPos.posX, pPos.posY);
+				if (distSq < util.square(playerSafeDist))
+					locationFound = false;
+			}
+			
+			if (!locationFound) continue;
+			
+            return {
                 cx: x,
                 cy: y
             };
         }
+	},
+
+    createGrunt: function () {
+        var playerSafeDist = 120;
+		var descr = this.findSpawn(playerSafeDist);
         this._enemies.push(new Grunt(descr));
     },
 
     createFamily: function () {
-
-		var x = util.randRange(0, g_canvas.width);
-        var y = util.randRange(0, g_canvas.height);
-
-        var descr = {
-			cx: x,
-			cy: y
-		};
+		var playerSafeDist = 120;
+		var descr = this.findSpawn(playerSafeDist);
         this._family.push(new Family(descr));
+    },
+
+    createScoreImg: function (descr) {
+        this._scoreImgs.push(new ScoreImg(descr));
     },
 
     update: function (du) {

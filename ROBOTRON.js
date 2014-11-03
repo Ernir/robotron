@@ -26,10 +26,12 @@ var g_ctx = g_canvas.getContext("2d");
 
 function initializeEntities() {
     entityManager.createProtagonist({
-        cx : 200,
-        cy : 200
+        cx : 300,
+        cy : 300
     });
 }
+var Player = new Player();
+
 
 // =============
 // GATHER INPUTS
@@ -96,6 +98,8 @@ function renderSimulation(ctx) {
 	
 	renderCrosshair(ctx);
 
+    Player.render(ctx);
+
     if (g_renderSpatialDebug) spatialManager.render(ctx);
 }
 
@@ -109,11 +113,15 @@ var g_images = {};
 function requestPreloads() {
 
     var requiredImages = {
-        protagonist: "https://notendur.hi.is/~eth31/cgp/staticdata/sprites/Player.png",
+        protagonist : "https://notendur.hi.is/~eth31/cgp/staticdata/sprites/Player.png",
         grunt : "https://notendur.hi.is/~eth31/cgp/staticdata/sprites/Grunt.png",
-        family: "https://notendur.hi.is/~eth31/cgp/staticdata/Shapes/extralife.png"
+        family : "https://notendur.hi.is/~eth31/cgp/staticdata/Shapes/extralife.png",
+        skull : "https://notendur.hi.is/~eth31/cgp/staticdata/Shapes/Skull.png",
+        score : "https://notendur.hi.is/~eth31/cgp/staticdata/Numbers%20and%20letters/HumanScore.png",
+        extralife : "https://notendur.hi.is/~eth31/cgp/staticdata/Shapes/extralife.png"
     };
-
+    //make sure that the names of object keys and the names of their images are the same before we do this
+    //var requiredImages = g_urls;
     imagesPreload(requiredImages, g_images, preloadDone);
 }
 
@@ -124,6 +132,12 @@ function preloadDone() {
     g_sprites.protagonist = new Sprite(g_images.protagonist,0,26);
     g_sprites.grunt = new Sprite(g_images.grunt, 0, 30);
     g_sprites.family = new Sprite(g_images.family);
+    g_sprites.skull = new Sprite(g_images.skull);
+    g_sprites.score = [];
+    for (var i = 0; i < 5; i++) {
+        g_sprites.score[i+1] = new Sprite(g_images.score, 3+(i*34), 37+(i*34));    
+    };
+    g_sprites.extralife = new Sprite(g_images.extralife);
 
 	initializeEntities();
     entityManager.init();

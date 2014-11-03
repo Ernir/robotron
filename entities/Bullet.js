@@ -39,8 +39,8 @@ Bullet.prototype.fireSound = new Audio(
     
 // Initial, inheritable, default values
 Bullet.prototype.rotation = 0;
-Bullet.prototype.cx = 200;
-Bullet.prototype.cy = 200;
+// Bullet.prototype.cx = 200;
+// Bullet.prototype.cy = 200;
 Bullet.prototype.bulletVel = 10;
 Bullet.prototype.velX = 1;//this.bulletVel * this.dirnX;
 Bullet.prototype.velY = 1;//this.bulletVel * this.dirnY;
@@ -66,7 +66,6 @@ Bullet.prototype.update = function (du) {
     this.rotation = util.wrapRange(this.rotation,
                                    0, consts.FULL_CIRCLE);
 
-    
     // Handle collisions
     var hitEntity = this.findHitEntity();
     if (hitEntity) {
@@ -76,7 +75,6 @@ Bullet.prototype.update = function (du) {
     }
     
     spatialManager.register(this);
-
 };
 
 Bullet.prototype.getRadius = function () {
@@ -92,10 +90,5 @@ Bullet.prototype.render = function (ctx) {
     }
     ctx.fillStyle = "yellow";
     util.fillCircle(ctx, this.cx, this.cy, this.getRadius());
-    //console.log("You should see a bullet now, the radius is:",this.getRadius());
-    //console.log("location:", this.cx, this.cy);
-    /*g_sprites.bullet.drawWrappedCentredAt(
-        ctx, this.cx, this.cy, this.rotation
-    );*/
     ctx.restore();
 };
