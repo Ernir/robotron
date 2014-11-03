@@ -10,21 +10,13 @@
 function Grunt(descr) {
 
     // Common inherited setup logic from Entity
-    this.setup(descr);
+    Enemy.call(this, descr);
 
     this.sprite = g_sprites.grunt;
     this.target = entityManager.findProtagonist();
 }
 
-Grunt.prototype = new Entity();
-
-// Initial, inheritable, default values
-Grunt.prototype.killProtagonist = true;
-Grunt.prototype.rotation = 0;
-// Grunt.prototype.cx = 100;
-// Grunt.prototype.cy = 100;
-Grunt.prototype.velX = 0;
-Grunt.prototype.velY = 0;
+Grunt.prototype = Object.create(Enemy.prototype);
 
 Grunt.prototype.update = function (du) {
 
@@ -70,15 +62,4 @@ Grunt.prototype.seekTarget = function () {
 Grunt.prototype.takeBulletHit = function () {
     this.kill();
 	Player.addScore(100 * Player.getMultiplier());
-};
-
-Grunt.prototype.getRadius = function () {
-    return (this.sprite.width / 2) * 0.9;
-};
-
-Grunt.prototype.render = function (ctx) {
-
-    this.sprite.drawCentredAt(
-        ctx, this.cx, this.cy, this.rotation
-    );
 };
