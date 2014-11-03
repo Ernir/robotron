@@ -13,10 +13,11 @@ function Hulk(descr) {
 
     this.sprite = g_sprites.hulk;
     this.target = entityManager.findProtagonist();
+    this.xInaccuracy = util.randRange(-50,50);
+    this.yInaccuracy = util.randRange(-50,50);
 }
 
 Hulk.prototype = Object.create(Enemy.prototype);
-
 Hulk.prototype.timeSinceHit = Infinity;
 Hulk.prototype.panic = 1;
 
@@ -41,8 +42,9 @@ Hulk.prototype.update = function (du) {
 };
 
 Hulk.prototype.seekTarget = function () {
-    var xOffset = this.target.cx - this.cx;
-    var yOffset = this.target.cy - this.cy;
+    // Hulks don't quite aim on target.
+    var xOffset = this.target.cx - this.cx + this.xInaccuracy;
+    var yOffset = this.target.cy - this.cy + this.yInaccuracy;
 
     this.velX = 0;
     if (xOffset > 0) {
