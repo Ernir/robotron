@@ -12,14 +12,10 @@ function Hulk(descr) {
     Enemy.call(this, descr);
 
     this.sprite = g_sprites.hulk;
-    this.target = entityManager.findProtagonist();
-    this.xInaccuracy = util.randRange(-50,50);
-    this.yInaccuracy = util.randRange(-50,50);
 }
 
 Hulk.prototype = Object.create(Enemy.prototype);
 Hulk.prototype.timeSinceHit = Infinity;
-Hulk.prototype.panic = 1;
 
 Hulk.prototype.update = function (du) {
 
@@ -42,9 +38,11 @@ Hulk.prototype.update = function (du) {
 };
 
 Hulk.prototype.seekTarget = function () {
-    // Hulks don't quite aim on target.
-    var xOffset = this.target.cx - this.cx + this.xInaccuracy;
-    var yOffset = this.target.cy - this.cy + this.yInaccuracy;
+
+    this.findTarget();
+
+    var xOffset = this.target.cx - this.cx;
+    var yOffset = this.target.cy - this.cy;
 
     this.velX = 0;
     if (xOffset > 0) {
@@ -64,6 +62,15 @@ Hulk.prototype.seekTarget = function () {
     if (xOffset !== 0 && yOffset !== 0) {
         this.velX *= Math.cos(Math.PI / 4);
         this.velY *= Math.sin(Math.PI / 4);
+    }
+};
+
+Hulk.prototype.findTarget = function () {
+    // Hulks prefer family members.
+    // http://www.youtube.com/watch?v=940WwmYSYLE&t=1m33s
+    this.target = entityManager.findClosestFamilyMember(this.cx,this.cy);
+    if (this.target === null || this.target === undefined) {
+        this.target = entityManager.findProtagonist();
     }
 };
 

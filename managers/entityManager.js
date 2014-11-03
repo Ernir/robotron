@@ -134,6 +134,20 @@ var entityManager = {
 		);
 		return this._protagonists[p];
 	},
+
+    findClosestFamilyMember: function (posX, posY) {
+        var closest = null;
+        var minDistSq = Infinity;
+        for (var i = 0; i < this._family.length; i++) {
+            var member = this._family[i];
+            var distSq = util.distSq(posX, posY,member.cx,member.cy);
+            if (distSq < minDistSq) {
+                closest = member;
+                minDistSq = distSq;
+            }
+        }
+        return closest;
+    },
 	
 	findSpawn: function (playerSafeDist) {
 		for (var i = 0; i < 100; i++) {
