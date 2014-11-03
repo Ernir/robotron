@@ -43,6 +43,9 @@ Hulk.prototype.update = function (du) {
 Hulk.prototype.seekTarget = function () {
 
     this.findTarget();
+    if (this.target === null || this.target === undefined) {
+        return; // Escaping empty-field conditions that can occur in testing
+    }
 
     var xOffset = this.target.cx - this.cx;
     var yOffset = this.target.cy - this.cy;
