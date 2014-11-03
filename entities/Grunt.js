@@ -2,6 +2,8 @@
 // Grunt
 // ======
 
+// Grunts are simple robotrons that walk straight towards the main character
+
 "use strict";
 
 /* jshint browser: true, devel: true, globalstrict: true */

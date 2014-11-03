@@ -2,6 +2,9 @@
 // Hulk
 // ======
 
+// Hulks are indestructible robotrons that chase members of the last human
+// family.
+
 "use strict";
 
 /* jshint browser: true, devel: true, globalstrict: true */
