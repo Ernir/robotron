@@ -164,6 +164,12 @@ var entityManager = {
         this._enemies.push(new Grunt(descr));
     },
 
+    createHulk: function () {
+        var playerSafeDist = 120;
+		var descr = this.findSpawn(playerSafeDist);
+        this._enemies.push(new Hulk(descr));
+    },
+
     createFamily: function () {
 		var playerSafeDist = 120;
 		var descr = this.findSpawn(playerSafeDist);

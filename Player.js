@@ -70,7 +70,7 @@ Player.prototype.resetMultiplier = function() {
 
 Player.prototype.getMultiplier = function() {
     return this.multiplier;
-}
+};
 
 Player.prototype.addScore = function (score) {
     this.score += score;
