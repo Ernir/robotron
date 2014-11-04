@@ -21,6 +21,10 @@ CruiseMissile.prototype = Object.create(Enemy.prototype);
 
 CruiseMissile.prototype.update = function (du) {
 
+    if (this.target === null || this.target === undefined) {
+        this._isDeadNow = true;
+    }
+
     spatialManager.unregister(this);
     // Handle death
     if (this._isDeadNow) {
