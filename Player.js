@@ -97,7 +97,7 @@ Player.prototype.render = function(ctx) {
 
     // Display remaining lives
     for (var i = 1; i < this.lives; i++) {
-        g_sprites.extralife.drawCentredAt(ctx, 
+        g_sprites.Extralife.drawCentredAt(ctx, 
                                           g_canvas.width - i*20, 
                                           15, 
                                           0);

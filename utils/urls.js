@@ -1,4 +1,4 @@
-g_urls = {
+g_imgUrls = {
 	Brain : "https://notendur.hi.is/~eth31/cgp/staticdata/sprites/Brain.png",
 	Child : "https://notendur.hi.is/~eth31/cgp/staticdata/sprites/Child.png",
 	Dad : "https://notendur.hi.is/~eth31/cgp/staticdata/sprites/Dad.png",
@@ -6,7 +6,7 @@ g_urls = {
 	Grunt : "https://notendur.hi.is/~eth31/cgp/staticdata/sprites/Grunt.png",
 	Hulk : "https://notendur.hi.is/~eth31/cgp/staticdata/sprites/Hulk.png",
 	Mom : "https://notendur.hi.is/~eth31/cgp/staticdata/sprites/Mom.png",
-	Player : "https://notendur.hi.is/~eth31/cgp/staticdata/sprites/Player.png",
+	Protagonist : "https://notendur.hi.is/~eth31/cgp/staticdata/sprites/Protagonist.png",
 	Prog : "https://notendur.hi.is/~eth31/cgp/staticdata/sprites/Prog.png",
 	Quark : "https://notendur.hi.is/~eth31/cgp/staticdata/sprites/Quark.png",
 	Spheroid : "https://notendur.hi.is/~eth31/cgp/staticdata/sprites/Spheroid.png",
@@ -17,7 +17,7 @@ g_urls = {
 	Diamond : "https://notendur.hi.is/~eth31/cgp/staticdata/Shapes/Diamond.png",
 	Dizzy : "https://notendur.hi.is/~eth31/cgp/staticdata/Shapes/Dizzy.png",
 	EnforcerSpark : "https://notendur.hi.is/~eth31/cgp/staticdata/Shapes/EnforcerSpark.png",
-	extralife : "https://notendur.hi.is/~eth31/cgp/staticdata/Shapes/extralife.png",
+	Extralife : "https://notendur.hi.is/~eth31/cgp/staticdata/Shapes/extralife.png",
 	Rectangle : "https://notendur.hi.is/~eth31/cgp/staticdata/Shapes/Rectangle.png",
 	Skull : "https://notendur.hi.is/~eth31/cgp/staticdata/Shapes/Skull.png",
 	Spark : "https://notendur.hi.is/~eth31/cgp/staticdata/Shapes/Spark.png",
@@ -27,6 +27,10 @@ g_urls = {
 	RedAlphabet : "https://notendur.hi.is/~eth31/cgp/staticdata/Numbers%20and%20letters/RedAlphabet.png",
 	WhiteNumbers : "https://notendur.hi.is/~eth31/cgp/staticdata/Numbers%20and%20letters/WhiteNumbers.png",
 	HumanScore : "https://notendur.hi.is/~eth31/cgp/staticdata/Numbers%20and%20letters/HumanScore.png",
+	
+}
+
+g_audioUrls = {
 	brains : "https://notendur.hi.is/~eth31/cgp/staticdata/Sounds/brains.wav",
 	enfspark : "https://notendur.hi.is/~eth31/cgp/staticdata/Sounds/enfspark.wav",
 	explode : "https://notendur.hi.is/~eth31/cgp/staticdata/Sounds/explode.wav",
@@ -39,8 +43,7 @@ g_urls = {
 	shot : "https://notendur.hi.is/~eth31/cgp/staticdata/Sounds/shot.wav",
 	startsound : "https://notendur.hi.is/~eth31/cgp/staticdata/Sounds/startsound.wav",
 	walk : "https://notendur.hi.is/~eth31/cgp/staticdata/Sounds/walk.wav"
-}
-
+};
 
 /* 
 	URLs:

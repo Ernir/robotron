@@ -12,7 +12,7 @@ function Family(descr) {
     // Common inherited setup logic from Entity
     this.setup(descr);
 
-    this.sprite = g_sprites.family;
+    this.sprite = g_sprites.Dad;
     // Make a noise when I am created
     //this.exampleSound.play();
 }
@@ -58,7 +58,7 @@ Family.prototype.update = function (du) {
         // Handle collisions
         var hitEntity = this.findHitEntity();
         if (hitEntity) {
-            var canKillMe = hitEntity.killProtagonist;
+            var canKillMe = hitEntity.killFamily;
             if (canKillMe) {
                 this.takeChaserHit();
             }
@@ -115,7 +115,7 @@ Family.prototype.getRadius = function () {
 
 Family.prototype.render = function (ctx) {
     if (this.isDying) {
-        g_sprites.skull.drawCentredAt(ctx,
+        g_sprites.Skull.drawCentredAt(ctx,
             this.cx,
             this.cy,
             this.rotation);
@@ -125,7 +125,7 @@ Family.prototype.render = function (ctx) {
          this.cy,
          this.rotation);*/
     } else {
-        g_sprites.family.drawCentredAt(ctx,
+        g_sprites.Dad.drawCentredAt(ctx,
             this.cx,
             this.cy,
             this.rotation);

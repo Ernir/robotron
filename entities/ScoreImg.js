@@ -36,8 +36,8 @@ ScoreImg.prototype.update = function (du) {
 };
 
 ScoreImg.prototype.render = function (ctx) {
-    g_sprites.Score[this.m].drawCentredAt(ctx,
-                                          this.cx,
-                                          this.cy,
-                                          0);
+    g_sprites.HumanScore[this.m].drawCentredAt(ctx,
+                                               this.cx,
+                                               this.cy,
+                                               0);
 };

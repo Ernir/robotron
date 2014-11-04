@@ -110,30 +110,18 @@ function renderSimulation(ctx) {
 var g_images = {};
 
 function requestPreloads() {
-
-    var requiredImages = {
-        Protagonist: "https://notendur.hi.is/~eth31/cgp/staticdata/sprites/Player.png",
-        Grunt: "https://notendur.hi.is/~eth31/cgp/staticdata/sprites/Grunt.png",
-        Hulk: "https://notendur.hi.is/~eth31/cgp/staticdata/sprites/Hulk.png",
-        family: "https://notendur.hi.is/~eth31/cgp/staticdata/Shapes/extralife.png",
-        skull: "https://notendur.hi.is/~eth31/cgp/staticdata/Shapes/Skull.png",
-        Score: "https://notendur.hi.is/~eth31/cgp/staticdata/Numbers%20and%20letters/HumanScore.png",
-        brain: "https://notendur.hi.is/~eth31/cgp/staticdata/sprites/Brain.png",
-        extralife: "https://notendur.hi.is/~eth31/cgp/staticdata/Shapes/extralife.png"
-    };
-
+    var requiredImages = g_imgUrls;
     imagesPreload(requiredImages, g_images, preloadDone);
 }
 
 var g_sprites = {};
 
 function preloadDone() {
-
-    g_sprites.family = new Sprite(g_images.family);
-    g_sprites.skull = new Sprite(g_images.skull);
-    g_sprites.brain = new Sprite(g_images.brain, 0, 39);
-    g_sprites.extralife = new Sprite(g_images.extralife);
-
+    g_sprites.Dad = new Sprite(g_images.Dad,0,26);
+    g_sprites.Skull = new Sprite(g_images.Skull);
+    g_sprites.Brain = new Sprite(g_images.Brain, 0, 39);
+    g_sprites.Extralife = new Sprite(g_images.Extralife);
+    
     g_sprites.Protagonist = [];
     for (var i = 0; i < 12; i++) {
         g_sprites.Protagonist[i] = new Sprite(g_images.Protagonist, i*26, (i+1)*26);    
@@ -146,9 +134,9 @@ function preloadDone() {
     for (var i = 0; i < 3; i++) {
         g_sprites.Grunt[i] = new Sprite(g_images.Grunt, i*30, (i+1)*30);
     }
-    g_sprites.Score = [];
+    g_sprites.HumanScore = [];
     for (var i = 0; i < 5; i++) {
-        g_sprites.Score[i + 1] = new Sprite(g_images.Score, 3 + (i * 34), 37 + (i * 34));
+        g_sprites.HumanScore[i + 1] = new Sprite(g_images.HumanScore, 3 + (i * 34), 37 + (i * 34));
     }
 
     initializeEntities();

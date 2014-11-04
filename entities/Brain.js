@@ -8,7 +8,7 @@
 function Brain(descr) {
     Enemy.call(this, descr);
 
-    this.sprite = g_sprites.brain;
+    this.sprite = g_sprites.Brain;
 }
 
 Brain.prototype = Object.create(Enemy.prototype);
