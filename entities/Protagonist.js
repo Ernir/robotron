@@ -12,7 +12,7 @@ function Protagonist(descr) {
     // Common inherited setup logic from Entity
     this.setup(descr);
 
-    this.sprite = g_sprites.protagonist;
+    this.sprite = g_sprites.Protagonist[6];
     // Make a noise when I am created
     // this.exampleSound.play();
 }
@@ -39,8 +39,11 @@ Protagonist.prototype.rotation = 0;
 // Protagonist.prototype.cy = g_canvas.height/2;;
 Protagonist.prototype.velX = 0;
 Protagonist.prototype.velY = 0;
+Protagonist.prototype.startPos = {cx: this.cx, cy: this.cy};
 
 Protagonist.prototype.update = function (du) {
+    this.prevX = this.cx;
+    this.prevY = this.cy;
 
     spatialManager.unregister(this);
     // Handle death
@@ -133,8 +136,30 @@ Protagonist.prototype.getRadius = function () {
 };
 
 Protagonist.prototype.render = function (ctx) {
+    var distSq = util.distSq(this.cx, this.cy, this.startPos.cx, this.startPos.cy);
+    var angle = util.angleTo(this.startPos.cx, this.startPos.cy, this.cx, this.cy);
+    var PI = Math.PI;
+    var facing = 3; // right
+    if(angle > PI/4) facing = 9; //up
+    if(angle > PI*3/4) facing = 0; //left
+    if(angle > PI*5/4) facing = 6; //down
+    if(angle > PI*7/4) facing = 3; //right
 
-    g_sprites.protagonist.drawCentredAt(
-        ctx, this.cx, this.cy, this.rotation
-    );
+    switch(true) {
+        case distSq<3*3:
+            g_sprites.Protagonist[facing+0].drawCentredAt(ctx, this.cx, this.cy, 0);
+            break;
+        case distSq<6*6:
+            g_sprites.Protagonist[facing+1].drawCentredAt(ctx, this.cx, this.cy, 0);
+            break;
+        case distSq<9*9:
+            g_sprites.Protagonist[facing+0].drawCentredAt(ctx, this.cx, this.cy, 0);
+            break;
+        case distSq<12*12:
+            g_sprites.Protagonist[facing+2].drawCentredAt(ctx, this.cx, this.cy, 0);
+            break;
+        default:
+            this.startPos = {cx: this.cx, cy: this.cy};
+            g_sprites.Protagonist[facing+0].drawCentredAt(ctx, this.cx, this.cy, 0);
+    }
 };

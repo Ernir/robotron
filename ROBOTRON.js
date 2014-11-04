@@ -112,7 +112,7 @@ var g_images = {};
 function requestPreloads() {
 
     var requiredImages = {
-        protagonist: "https://notendur.hi.is/~eth31/cgp/staticdata/sprites/Player.png",
+        Protagonist: "https://notendur.hi.is/~eth31/cgp/staticdata/sprites/Player.png",
         Grunt: "https://notendur.hi.is/~eth31/cgp/staticdata/sprites/Grunt.png",
         Hulk: "https://notendur.hi.is/~eth31/cgp/staticdata/sprites/Hulk.png",
         family: "https://notendur.hi.is/~eth31/cgp/staticdata/Shapes/extralife.png",
@@ -129,12 +129,15 @@ var g_sprites = {};
 
 function preloadDone() {
 
-    g_sprites.protagonist = new Sprite(g_images.protagonist, 0, 26);
     g_sprites.family = new Sprite(g_images.family);
     g_sprites.skull = new Sprite(g_images.skull);
     g_sprites.brain = new Sprite(g_images.brain, 0, 39);
     g_sprites.extralife = new Sprite(g_images.extralife);
 
+    g_sprites.Protagonist = [];
+    for (var i = 0; i < 12; i++) {
+        g_sprites.Protagonist[i] = new Sprite(g_images.Protagonist, i*26, (i+1)*26);    
+    }
     g_sprites.Hulk = [];
     for (var i = 0; i < 9; i++) {
         g_sprites.Hulk[i] = new Sprite(g_images.Hulk, i*38, (i+1)*38);    

@@ -36,7 +36,7 @@ ScoreImg.prototype.update = function (du) {
 };
 
 ScoreImg.prototype.render = function (ctx) {
-    g_sprites.score[this.m].drawCentredAt(ctx,
+    g_sprites.Score[this.m].drawCentredAt(ctx,
                                           this.cx,
                                           this.cy,
                                           0);
