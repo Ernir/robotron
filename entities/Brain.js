@@ -16,6 +16,8 @@ Brain.prototype = Object.create(Enemy.prototype);
 Brain.prototype = Object.create(Enemy.prototype);
 Brain.prototype.timeSinceHit = Infinity;
 Brain.prototype.killFamily = true;
+Brain.prototype.missileFireChance = 0.01; // 1% chance of firing a CM per update
+// TODO: Find a good firing interval for the missiles.
 
 Brain.prototype.update = function (du) {
 
@@ -25,6 +27,10 @@ Brain.prototype.update = function (du) {
         return entityManager.KILL_ME_NOW;
     }
     this.seekTarget();
+
+    if(Math.random() < this.missileFireChance) {
+        entityManager.fireCruiseMissile(this.cx,this.cy);
+    }
 
     // Move, unless the Hulk has been shot in the last 1 second.
     this.timeSinceHit += du;
@@ -44,6 +50,8 @@ Brain.prototype.seekTarget = function () {
     if (this.target === null || this.target === undefined) {
         return; // Escaping empty-field conditions that can occur in testing
     }
+
+
 
     var xOffset = this.target.cx - this.cx;
     var yOffset = this.target.cy - this.cy;

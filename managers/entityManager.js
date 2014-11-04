@@ -191,6 +191,10 @@ var entityManager = {
         this._enemies.push(new Brain(descr));
     },
 
+    fireCruiseMissile: function (cx,cy) {
+        this._enemies.push(new CruiseMissile({cx: cx, cy: cy}));
+    },
+
     createFamily: function () {
 		var playerSafeDist = 120;
 		var descr = this.findSpawn(playerSafeDist);
