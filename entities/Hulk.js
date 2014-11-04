@@ -14,14 +14,17 @@
 function Hulk(descr) {
     Enemy.call(this, descr);
 
-    this.sprite = g_sprites.hulk;
+    this.sprite = g_sprites.Hulk[3];
 }
 
 Hulk.prototype = Object.create(Enemy.prototype);
 Hulk.prototype.timeSinceHit = Infinity;
 Hulk.prototype.killFamily = true;
+Hulk.prototype.startPos = {cx: this.cx, cy: this.cy};
 
 Hulk.prototype.update = function (du) {
+    this.prevX = this.cx;
+    this.prevY = this.cy;
 
     spatialManager.unregister(this);
     // Handle death
@@ -85,4 +88,31 @@ Hulk.prototype.findTarget = function () {
 Hulk.prototype.takeBulletHit = function () {
     // Hulks can't be killed. Shooting stuns them.
     this.timeSinceHit = 0;
+};
+
+Hulk.prototype.render = function (ctx) {
+    var distSq = util.distSq(this.cx, this.cy, this.startPos.cx, this.startPos.cy);
+    var angle = util.angleTo(this.startPos.cx, this.startPos.cy, this.cx, this.cy);
+    var PI = Math.PI;
+    var facing = 3; // up or down
+    if(angle > PI*3/4 && angle < PI*5/4) facing = 0; //left
+    if(angle > PI*7/4 || angle < PI*1/4) facing = 6; //right
+
+    switch(true) {
+        case distSq<12*12:
+            g_sprites.Hulk[facing+0].drawCentredAt(ctx, this.cx, this.cy, 0);
+            break;
+        case distSq<24*24:
+            g_sprites.Hulk[facing+1].drawCentredAt(ctx, this.cx, this.cy, 0);
+            break;
+        case distSq<36*36:
+            g_sprites.Hulk[facing+0].drawCentredAt(ctx, this.cx, this.cy, 0);
+            break;
+        case distSq<48*48:
+            g_sprites.Hulk[facing+2].drawCentredAt(ctx, this.cx, this.cy, 0);
+            break;
+        default:
+            this.startPos = {cx: this.cx, cy: this.cy};
+            g_sprites.Hulk[facing+0].drawCentredAt(ctx, this.cx, this.cy, 0);
+    }
 };

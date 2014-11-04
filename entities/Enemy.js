@@ -14,7 +14,7 @@ function Enemy(descr) {
     // Common inherited setup logic from Entity
     this.setup(descr);
 
-    this.sprite = g_sprites.grunt[0];
+    this.sprite = g_sprites.Grunt[0];
     this.target = entityManager.findProtagonist();
 }
 
