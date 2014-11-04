@@ -84,8 +84,11 @@ var util = {
         return x * x;
     },
 	
-	angleTo: function (cx, cy, posX, posY) {
-		return Math.atan2(posY - cy, posX - cx);
+	angleTo: function (x1, y1, x2, y2) {
+		var angle = Math.atan2(y2 - y1, x2 - x1);
+        if (angle < 0)
+            angle += 2 * Math.PI;
+        return angle;
 	},
 
 

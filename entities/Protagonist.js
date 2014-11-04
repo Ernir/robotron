@@ -140,9 +140,9 @@ Protagonist.prototype.render = function (ctx) {
     var angle = util.angleTo(this.startPos.cx, this.startPos.cy, this.cx, this.cy);
     var PI = Math.PI;
     var facing = 3; // right
-    if(angle > PI/4) facing = 9; //up
+    if(angle > PI*1/4) facing = 6; //down
     if(angle > PI*3/4) facing = 0; //left
-    if(angle > PI*5/4) facing = 6; //down
+    if(angle > PI*5/4) facing = 9; //up
     if(angle > PI*7/4) facing = 3; //right
 
     switch(true) {

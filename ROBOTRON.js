@@ -119,7 +119,6 @@ var g_sprites = {};
 function preloadDone() {
     g_sprites.Dad = new Sprite(g_images.Dad,0,26);
     g_sprites.Skull = new Sprite(g_images.Skull);
-    g_sprites.Brain = new Sprite(g_images.Brain, 0, 39);
     g_sprites.Extralife = new Sprite(g_images.Extralife);
     
     g_sprites.Protagonist = [];
@@ -137,6 +136,10 @@ function preloadDone() {
     g_sprites.HumanScore = [];
     for (var i = 0; i < 5; i++) {
         g_sprites.HumanScore[i + 1] = new Sprite(g_images.HumanScore, 3 + (i * 34), 37 + (i * 34));
+    }
+    g_sprites.Brain =[];
+    for (var i = 0; i < 12; i++) {
+        g_sprites.Brain[i] = new Sprite(g_images.Brain, i*38, (i+1)*38);
     }
 
     initializeEntities();

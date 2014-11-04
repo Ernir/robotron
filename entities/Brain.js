@@ -8,7 +8,7 @@
 function Brain(descr) {
     Enemy.call(this, descr);
 
-    this.sprite = g_sprites.Brain;
+    this.sprite = g_sprites.Brain[6];
 }
 
 Brain.prototype = Object.create(Enemy.prototype);
@@ -16,10 +16,13 @@ Brain.prototype = Object.create(Enemy.prototype);
 Brain.prototype = Object.create(Enemy.prototype);
 Brain.prototype.timeSinceHit = Infinity;
 Brain.prototype.killFamily = true;
-Brain.prototype.missileFireChance = 0.01; // 1% chance of firing a CM per update
+Brain.prototype.startPos = {cx: this.cx, cy: this.cy};
+Brain.prototype.missileFireChance = 0.005; // 0.5% chance of firing a CM per update
 // TODO: Find a good firing interval for the missiles.
 
 Brain.prototype.update = function (du) {
+    this.prevX = this.cx;
+    this.prevY = this.cy;
 
     spatialManager.unregister(this);
     // Handle death
@@ -50,8 +53,6 @@ Brain.prototype.seekTarget = function () {
     if (this.target === null || this.target === undefined) {
         return; // Escaping empty-field conditions that can occur in testing
     }
-
-
 
     var xOffset = this.target.cx - this.cx;
     var yOffset = this.target.cy - this.cy;
@@ -88,4 +89,48 @@ Brain.prototype.findTarget = function () {
 Brain.prototype.takeBulletHit = function () {
     this.kill();
 	Player.addScore(500 * Player.getMultiplier()); //TODO remove magic number
+};
+
+Brain.prototype.render = function (ctx) {
+    var distSq = util.distSq(
+                             this.cx, 
+                             this.cy, 
+                             this.startPos.cx, 
+                             this.startPos.cy);
+    var PI = Math.PI;
+    if(distSq === 0){
+        var angle = 0;
+    }else{
+        var angle = util.wrapRange(
+                                   util.angleTo(
+                                                this.startPos.cx, 
+                                                this.startPos.cy, 
+                                                this.cx, 
+                                                this.cy),
+                                   0,
+                                   2*PI);
+    }
+    var facing = 3; // right
+    if(angle > PI*1/4) facing = 6; //down
+    if(angle > PI*3/4) facing = 0; //left
+    if(angle > PI*5/4) facing = 9; //up
+    if(angle > PI*7/4) facing = 3; //right
+
+    switch(true) {
+        case distSq<3*3:
+            g_sprites.Brain[facing+0].drawCentredAt(ctx, this.cx, this.cy, 0);
+            break;
+        case distSq<6*6:
+            g_sprites.Brain[facing+1].drawCentredAt(ctx, this.cx, this.cy, 0);
+            break;
+        case distSq<9*9:
+            g_sprites.Brain[facing+0].drawCentredAt(ctx, this.cx, this.cy, 0);
+            break;
+        case distSq<12*12:
+            g_sprites.Brain[facing+2].drawCentredAt(ctx, this.cx, this.cy, 0);
+            break;
+        default:
+            this.startPos = {cx: this.cx, cy: this.cy};
+            g_sprites.Brain[facing+0].drawCentredAt(ctx, this.cx, this.cy, 0);
+    }
 };

@@ -104,7 +104,7 @@ var entityManager = {
 			
             var pos = this._protagonists[i].getPos();
             var dirn = util.angleTo(pos.posX, pos.posY, aimX, aimY);
-            
+            //console.log('firing angle:',dirn*180/Math.PI);
             var launchdist = this._protagonists[i].getRadius() * 0.8;
             
             var dirnX = Math.cos(dirn);
