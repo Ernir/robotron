@@ -117,9 +117,11 @@ function requestPreloads() {
 var g_sprites = {};
 
 function preloadDone() {
+    // Static images
     g_sprites.Skull = new Sprite(g_images.Skull);
     g_sprites.Extralife = new Sprite(g_images.Extralife);
     
+    // Spritesheets
     g_sprites.Dad = [];
     for (var i = 0; i < 12; i++) {
         g_sprites.Dad[i] = new Sprite(g_images.Dad, i*30, (i+1)*30);

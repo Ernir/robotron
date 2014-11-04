@@ -146,7 +146,7 @@ Protagonist.prototype.render = function (ctx) {
     if(angle > PI*7/4) facing = 3; //right
 
     switch(true) {
-        case distSq<3*3:
+        case distSq<3*3://TODO: Find the correct stepsize
             g_sprites.Protagonist[facing+0].drawCentredAt(ctx, this.cx, this.cy, 0);
             break;
         case distSq<6*6:
