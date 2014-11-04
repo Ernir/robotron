@@ -8,12 +8,35 @@
 function Brain(descr) {
     Enemy.call(this, descr);
 
-    this.sprite = g_sprites.brain; // TODO create this sprite
+    this.sprite = g_sprites.brain;
 }
 
 Brain.prototype = Object.create(Enemy.prototype);
 
-// TODO add all usual properties
+Brain.prototype = Object.create(Enemy.prototype);
+Brain.prototype.timeSinceHit = Infinity;
+Brain.prototype.killFamily = true;
+
+Brain.prototype.update = function (du) {
+
+    spatialManager.unregister(this);
+    // Handle death
+    if (this._isDeadNow) {
+        return entityManager.KILL_ME_NOW;
+    }
+    this.seekTarget();
+
+    // Move, unless the Hulk has been shot in the last 1 second.
+    this.timeSinceHit += du;
+    if (this.timeSinceHit > SECS_TO_NOMINALS * 1) {
+        this.cx += this.velX * du;
+        this.cy += this.velY * du;
+        this.capPositions();
+    }
+
+    spatialManager.register(this);
+};
+
 
 Brain.prototype.seekTarget = function () {
 
@@ -27,7 +50,7 @@ Brain.prototype.seekTarget = function () {
 
     this.velX = 0;
     if (xOffset > 0) {
-        this.velX = 1;
+        this.velX = 0.5;
     } else if (xOffset < 0) {
         this.velX = -1;
     }
@@ -36,7 +59,7 @@ Brain.prototype.seekTarget = function () {
     if (yOffset > 0) {
         this.velY = 1;
     } else if (yOffset < 0) {
-        this.velY = -1;
+        this.velY = -0.5;
     }
 
     // Clamp vel to 1 pixel moving radius
@@ -52,4 +75,9 @@ Brain.prototype.findTarget = function () {
     if (this.target === null || this.target === undefined) {
         this.target = entityManager.findProtagonist();
     }
+};
+
+Brain.prototype.takeBulletHit = function () {
+    this.kill();
+	Player.addScore(500 * Player.getMultiplier()); //TODO remove magic number
 };

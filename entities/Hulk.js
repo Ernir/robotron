@@ -41,6 +41,7 @@ Hulk.prototype.update = function (du) {
     spatialManager.register(this);
 };
 
+// TODO: Make them stupid.
 Hulk.prototype.seekTarget = function () {
 
     this.findTarget();

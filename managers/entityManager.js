@@ -80,6 +80,7 @@ var entityManager = {
             { n : 1, f : this.createProtagonist },
             { n : 5, f : this.createGrunt },
             { n : 2, f : this.createHulk },
+            { n : 1, f : this.createBrain },
             { n : 3, f : this.createFamily }
         ];
 
@@ -182,6 +183,12 @@ var entityManager = {
         var playerSafeDist = 120;
 		var descr = this.findSpawn(playerSafeDist);
         this._enemies.push(new Hulk(descr));
+    },
+
+    createBrain: function () {
+        var playerSafeDist = 120;
+		var descr = this.findSpawn(playerSafeDist);
+        this._enemies.push(new Brain(descr));
     },
 
     createFamily: function () {
