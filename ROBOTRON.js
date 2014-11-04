@@ -117,10 +117,13 @@ function requestPreloads() {
 var g_sprites = {};
 
 function preloadDone() {
-    g_sprites.Dad = new Sprite(g_images.Dad,0,26);
     g_sprites.Skull = new Sprite(g_images.Skull);
     g_sprites.Extralife = new Sprite(g_images.Extralife);
     
+    g_sprites.Dad = [];
+    for (var i = 0; i < 12; i++) {
+        g_sprites.Dad[i] = new Sprite(g_images.Dad, i*30, (i+1)*30);
+    }
     g_sprites.Protagonist = [];
     for (var i = 0; i < 12; i++) {
         g_sprites.Protagonist[i] = new Sprite(g_images.Protagonist, i*26, (i+1)*26);    

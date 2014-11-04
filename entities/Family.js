@@ -12,7 +12,7 @@ function Family(descr) {
     // Common inherited setup logic from Entity
     this.setup(descr);
 
-    this.sprite = g_sprites.Dad;
+    this.sprite = g_sprites.Dad[6];
     // Make a noise when I am created
     //this.exampleSound.play();
 }
@@ -32,8 +32,11 @@ Family.prototype.panic = 1;
 Family.prototype.lifeSpan = 1 * SECS_TO_NOMINALS;
 Family.prototype.isDying = false;
 Family.prototype.isSaved = false;
+Family.prototype.startPos = {cx: this.cx, cy: this.cy};
 
 Family.prototype.update = function (du) {
+    this.prevX = this.cx;
+    this.prevY = this.cy;
 
     spatialManager.unregister(this);
     // Handle death
@@ -120,14 +123,33 @@ Family.prototype.render = function (ctx) {
             this.cy,
             this.rotation);
     } else if (this.isSaved) {
-        /*        g_sprites.score[Player.getMultiplier()].drawCentredAt(ctx,
-         this.cx,
-         this.cy,
-         this.rotation);*/
+        return; // remove this case?
     } else {
-        g_sprites.Dad.drawCentredAt(ctx,
-            this.cx,
-            this.cy,
-            this.rotation);
+        var distSq = util.distSq(this.cx, this.cy, this.startPos.cx, this.startPos.cy);
+        var angle = util.angleTo(this.startPos.cx, this.startPos.cy, this.cx, this.cy);
+        var PI = Math.PI;
+        var facing = 3; // right
+        if(angle > PI*1/4) facing = 6; //down
+        if(angle > PI*3/4) facing = 0; //left
+        if(angle > PI*5/4) facing = 9; //up
+        if(angle > PI*7/4) facing = 3; //right
+
+        switch(true) {
+            case distSq<3*3:
+                g_sprites.Dad[facing+0].drawCentredAt(ctx, this.cx, this.cy, 0);
+                break;
+            case distSq<6*6:
+                g_sprites.Dad[facing+1].drawCentredAt(ctx, this.cx, this.cy, 0);
+                break;
+            case distSq<9*9:
+                g_sprites.Dad[facing+0].drawCentredAt(ctx, this.cx, this.cy, 0);
+                break;
+            case distSq<12*12:
+                g_sprites.Dad[facing+2].drawCentredAt(ctx, this.cx, this.cy, 0);
+                break;
+            default:
+                this.startPos = {cx: this.cx, cy: this.cy};
+                g_sprites.Dad[facing+0].drawCentredAt(ctx, this.cx, this.cy, 0);
+        }
     }
 };
