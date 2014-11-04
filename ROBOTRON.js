@@ -130,16 +130,20 @@ var g_sprites = {};
 function preloadDone() {
 
     g_sprites.protagonist = new Sprite(g_images.protagonist, 0, 26);
-    g_sprites.grunt = new Sprite(g_images.grunt, 0, 30);
     g_sprites.hulk = new Sprite(g_images.hulk, 0, 40);
     g_sprites.family = new Sprite(g_images.family);
     g_sprites.skull = new Sprite(g_images.skull);
     g_sprites.brain = new Sprite(g_images.brain, 0, 39);
+    g_sprites.extralife = new Sprite(g_images.extralife);
+
+    g_sprites.grunt = [];
+    for (var i = 0; i < 3; i++) {
+        g_sprites.grunt[i] = new Sprite(g_images.grunt, i*30, (i+1)*30);
+    }
     g_sprites.score = [];
     for (var i = 0; i < 5; i++) {
         g_sprites.score[i + 1] = new Sprite(g_images.score, 3 + (i * 34), 37 + (i * 34));
     }
-    g_sprites.extralife = new Sprite(g_images.extralife);
 
     initializeEntities();
     entityManager.init();

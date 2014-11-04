@@ -14,13 +14,16 @@ function Grunt(descr) {
     // Common inherited setup logic from Entity
     Enemy.call(this, descr);
 
-    this.sprite = g_sprites.grunt;
+    this.sprite = g_sprites.grunt[0];
     this.target = entityManager.findProtagonist();
 }
 
 Grunt.prototype = Object.create(Enemy.prototype);
+Grunt.prototype.startPos = {cx: this.cx, cy: this.cy};
 
 Grunt.prototype.update = function (du) {
+    this.prevX = this.cx;
+    this.prevY = this.cy;
 
     spatialManager.unregister(this);
     // Handle death
@@ -64,4 +67,25 @@ Grunt.prototype.seekTarget = function () {
 Grunt.prototype.takeBulletHit = function () {
     this.kill();
 	Player.addScore(100 * Player.getMultiplier());
+};
+
+Grunt.prototype.render = function (ctx) {
+    var distSq = util.distSq(this.cx, this.cy, this.startPos.cx, this.startPos.cy);
+    switch(true) {
+        case distSq<3*3:
+            g_sprites.grunt[0].drawCentredAt(ctx, this.cx, this.cy, 0);
+            break;
+        case distSq<6*6:
+            g_sprites.grunt[1].drawCentredAt(ctx, this.cx, this.cy, 0);
+            break;
+        case distSq<9*9:
+            g_sprites.grunt[0].drawCentredAt(ctx, this.cx, this.cy, 0);
+            break;
+        case distSq<12*12:
+            g_sprites.grunt[2].drawCentredAt(ctx, this.cx, this.cy, 0);
+            break;
+        default:
+            this.startPos = {cx: this.cx, cy: this.cy};
+            g_sprites.grunt[0].drawCentredAt(ctx, this.cx, this.cy, 0);
+    }
 };
