@@ -15,25 +15,29 @@ var g_mouseX = 0,
     g_mouseY = 0,
 	g_isMouseDown = false;
 
-function handleMouse(evt) {
+function handleMouseMove(evt) {
     
+	// Renew mouse positions
     g_mouseX = evt.clientX - g_canvas.offsetLeft;
     g_mouseY = evt.clientY - g_canvas.offsetTop;
-    
-    // If no button is being pressed, aim crosshairs
-    var button = evt.buttons === undefined ? evt.which : evt.buttons;
-    if (!button) {
-		g_isMouseDown = false;
-		return;
-	}
+}
+
+function handleMouseDown(evt) {
     
     // Set mouseDown
 	g_isMouseDown = true;
 }
 
-// Handle "down" and "move" events the same way.
-window.addEventListener("mousedown", handleMouse);
-window.addEventListener("mousemove", handleMouse);
+function handleMouseUp(evt) {
+    
+	// Set mouseDown to false
+	g_isMouseDown = false;
+}
+
+// Handle "up", "down" and "move" events separately.
+window.addEventListener("mousedown", handleMouseDown);
+window.addEventListener("mousemove", handleMouseMove);
+window.addEventListener("mouseup", handleMouseUp);
 
 function renderCrosshair(ctx) {
 	
