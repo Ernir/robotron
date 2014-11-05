@@ -35,8 +35,6 @@ Family.prototype.isSaved = false;
 Family.prototype.startPos = {cx: this.cx, cy: this.cy};
 
 Family.prototype.update = function (du) {
-    this.prevX = this.cx;
-    this.prevY = this.cy;
 
     spatialManager.unregister(this);
     // Handle death
@@ -98,7 +96,7 @@ Family.prototype.takeChaserHit = function () {
 
 Family.prototype.takeProtagonistHit = function () {
     // I'm Saved!!!
-    Player.addScore(1000 * Player.getMultiplier());
+    Player.addScore(Player.scoreValues.Family * Player.getMultiplier());
     entityManager.createScoreImg({
         cx: this.cx,
         cy: this.cy,

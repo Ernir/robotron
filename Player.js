@@ -32,7 +32,12 @@ Player.prototype.level = 1;
 Player.prototype.lives = 5;
 Player.prototype.multiplier = 1;
 Player.prototype.score = 0;
-
+Player.prototype.scoreValues = {
+                                Grunt: 100,
+                                Family: 1000,
+                                CM: 25,
+                                Brain: 500,
+                                };
 
 Player.prototype.updateLevel = function () {
     this.level += 1;

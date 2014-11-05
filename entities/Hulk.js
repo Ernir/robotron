@@ -23,8 +23,6 @@ Hulk.prototype.killFamily = true;
 Hulk.prototype.startPos = {cx: this.cx, cy: this.cy};
 
 Hulk.prototype.update = function (du) {
-    this.prevX = this.cx;
-    this.prevY = this.cy;
 
     spatialManager.unregister(this);
     // Handle death

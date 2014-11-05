@@ -71,7 +71,7 @@ CruiseMissile.prototype.seekTarget = function () {
 
 CruiseMissile.prototype.takeBulletHit = function () {
     this.kill();
-	Player.addScore(25 * Player.getMultiplier()); // TODO remove magic number
+	Player.addScore(Player.scoreValues.CM * Player.getMultiplier()); // TODO remove magic number
 };
 
 CruiseMissile.prototype.getRadius = function () {

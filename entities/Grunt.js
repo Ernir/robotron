@@ -22,8 +22,6 @@ Grunt.prototype = Object.create(Enemy.prototype);
 Grunt.prototype.startPos = {cx: this.cx, cy: this.cy};
 
 Grunt.prototype.update = function (du) {
-    this.prevX = this.cx;
-    this.prevY = this.cy;
 
     spatialManager.unregister(this);
     // Handle death
@@ -66,7 +64,7 @@ Grunt.prototype.seekTarget = function () {
 
 Grunt.prototype.takeBulletHit = function () {
     this.kill();
-	Player.addScore(100 * Player.getMultiplier());
+	Player.addScore(Player.scoreValues.Grunt * Player.getMultiplier());
 };
 
 Grunt.prototype.render = function (ctx) {

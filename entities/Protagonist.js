@@ -40,8 +40,6 @@ Protagonist.prototype.velY = 0;
 Protagonist.prototype.startPos = {cx: this.cx, cy: this.cy};
 
 Protagonist.prototype.update = function (du) {
-    this.prevX = this.cx;
-    this.prevY = this.cy;
 
     spatialManager.unregister(this);
     // Handle death
