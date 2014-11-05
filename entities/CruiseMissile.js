@@ -15,9 +15,11 @@ function CruiseMissile(descr) {
     Enemy.call(this, descr);
 
     this.target = entityManager.findProtagonist();
+    //TODO: add sound
 }
 
 CruiseMissile.prototype = Object.create(Enemy.prototype);
+CruiseMissile.prototype.lifeSpan = 5 * SECS_TO_NOMINALS;
 
 CruiseMissile.prototype.update = function (du) {
 
@@ -25,9 +27,10 @@ CruiseMissile.prototype.update = function (du) {
         this._isDeadNow = true;
     }
 
+    this.lifeSpan += -du;
     spatialManager.unregister(this);
     // Handle death
-    if (this._isDeadNow) {
+    if (this._isDeadNow || this.lifeSpan < 0) {
         return entityManager.KILL_ME_NOW;
     }
     this.seekTarget();
@@ -59,6 +62,12 @@ CruiseMissile.prototype.seekTarget = function () {
 	
 	// TODO: Clamp velocity
 };
+
+/*CruiseMissile.prototype.takeProtagonistHit = function () {
+    this.kill();
+    //TODO: drepa CM þegar hún lendir á Protagonist
+    //(virkar ekki alveg svona samt)
+}*/
 
 CruiseMissile.prototype.takeBulletHit = function () {
     this.kill();

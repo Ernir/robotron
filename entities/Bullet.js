@@ -45,7 +45,7 @@ Bullet.prototype.bulletVel = 10;
 Bullet.prototype.velX = 1;//this.bulletVel * this.dirnX;
 Bullet.prototype.velY = 1;//this.bulletVel * this.dirnY;
 // Convert times from milliseconds to "nominal" time units.
-Bullet.prototype.lifeSpan = 3000 / NOMINAL_UPDATE_INTERVAL;
+Bullet.prototype.lifeSpan = 3 * SECS_TO_NOMINALS;
 
 
 
