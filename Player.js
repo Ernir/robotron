@@ -84,6 +84,13 @@ Player.prototype.getScore = function() {
     return this.score;
 };
 
+Player.prototype.resetAll = function() {
+    this.resetLives();
+    this.resetLevel();
+    this.resetScore();
+    this.resetMultiplier();
+}
+
 Player.prototype.render = function(ctx) {
     // Display the score
     ctx.save();

@@ -67,6 +67,7 @@ var g_canBeKilled = true;
 
 var KEY_SPATIAL = keyCode('X');
 var KEY_KILLABLE = keyCode('K');
+var KEY_RESTART = keyCode('R');
 
 function processDiagnostics() {
 
@@ -75,6 +76,8 @@ function processDiagnostics() {
     if (eatKey(KEY_KILLABLE)) g_canBeKilled = !g_canBeKilled;
 
     if (g_isMouseDown) entityManager.fire(g_mouseX, g_mouseY);
+
+    if (eatKey(KEY_RESTART)) entityManager.restartGame();
 }
 
 

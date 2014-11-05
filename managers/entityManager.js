@@ -78,13 +78,26 @@ var entityManager = {
 
         var level1 = [ // TODO create more levels and place them somewhere nice
             { n : 1, f : this.createProtagonist },
-            { n : 5, f : this.createGrunt },
-            { n : 2, f : this.createHulk },
+            { n : 10, f : this.createGrunt },
+            { n : 1, f : this.createHulk },
             { n : 1, f : this.createBrain },
-            { n : 3, f : this.createFamily }
+            { n : 6, f : this.createFamily }
         ];
 
         this._startLevel(level1);
+    },
+
+    restartGame: function () {
+        //TODO: this properly :p
+        //TODO: add sound?
+        this._protagonists.length=0;
+        this._family.length=0;
+        this._enemies.length=0;
+        this._bullets.length=0;
+        this._scoreImgs.length=0;
+        this.init();
+        spatialManager.resetAll();
+        Player.resetAll();
     },
 
     createProtagonist: function (descr) {

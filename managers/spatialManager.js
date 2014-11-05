@@ -66,6 +66,11 @@ var spatialManager = {
 
     },
 
+    resetAll: function () {
+        this._nextSpatialID = 1;
+        this._entities.length=0;
+    },
+
     render: function (ctx) {
         var oldStyle = ctx.strokeStyle;
         ctx.strokeStyle = "red";
