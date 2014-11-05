@@ -35,8 +35,6 @@ Protagonist.prototype.KEY_SHOOTRIGHT  = 39;
 
 // Initial, inheritable, default values
 Protagonist.prototype.rotation = 0;
-// Protagonist.prototype.cx = g_canvas.width/2;;
-// Protagonist.prototype.cy = g_canvas.height/2;;
 Protagonist.prototype.velX = 0;
 Protagonist.prototype.velY = 0;
 Protagonist.prototype.startPos = {cx: this.cx, cy: this.cy};
@@ -69,7 +67,7 @@ Protagonist.prototype.update = function (du) {
 		if (canSave) canSave.call(hitEntity);
 		else {
 			var canKillMe = hitEntity.killProtagonist;
-			if (canKillMe&&g_canBeKilled) this.takeEnemyHit();
+			if (canKillMe && g_canBeKilled) this.takeEnemyHit();
 		}
     }
 
@@ -102,22 +100,22 @@ Protagonist.prototype.computeMovement = function () {
 }
 
 Protagonist.prototype.maybeFire = function () {
-    var x=0;
-    var y=0;
+    var x = 0;
+    var y = 0;
 
     if (keys[this.KEY_SHOOTUP]) {
-        y+=-1;
+        y -= 1;
     }
     if (keys[this.KEY_SHOOTDOWN]) {
-        y+=1;
+        y += 1;
     }
     if (keys[this.KEY_SHOOTLEFT]) {
-        x+=-1
+        x -= 1
     }
     if (keys[this.KEY_SHOOTRIGHT]) {
-        x+=1;
+        x += 1;
     }
-    if(x!=0||y!=0)
+    if(x != 0 || y != 0)
         entityManager.fire(this.cx+x, this.cy+y);
 	else if (g_isMouseDown) 
 		entityManager.fire(g_mouseX, g_mouseY);
@@ -127,10 +125,10 @@ Protagonist.prototype.maybeFire = function () {
 
 Protagonist.prototype.takeEnemyHit = function () {
     Player.updateLives();
-    if (Player.getLives()>0) {
-        this.setPos(g_canvas.width/2, g_canvas.height/2);
+    if (Player.getLives() > 0) {
+        this.setPos(g_canvas.width / 2, g_canvas.height / 2);
         Player.resetMultiplier();
-    }else{
+    } else {
         this.kill();
     }
 };

@@ -18,7 +18,6 @@ An object which displays a score for a short time
 
 function ScoreImg(descr) {
 
-//ScoreImg.prototype.setup = function (descr) {
     // Apply all setup properies from the (optional) descriptor
     for (var property in descr) {
         this[property] = descr[property];

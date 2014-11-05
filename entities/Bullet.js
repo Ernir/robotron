@@ -19,6 +19,7 @@ function Bullet(descr) {
     this.setup(descr);
 
     // Make a noise when I am created (i.e. fired)
+	this.fireSound.currentTime = 0;
     this.fireSound.play();
     
 /*
@@ -39,11 +40,9 @@ Bullet.prototype.fireSound = new Audio(
     
 // Initial, inheritable, default values
 Bullet.prototype.rotation = 0;
-// Bullet.prototype.cx = 200;
-// Bullet.prototype.cy = 200;
 Bullet.prototype.bulletVel = 10;
-Bullet.prototype.velX = 1;//this.bulletVel * this.dirnX;
-Bullet.prototype.velY = 1;//this.bulletVel * this.dirnY;
+Bullet.prototype.velX = 1;
+Bullet.prototype.velY = 1;
 // Convert times from milliseconds to "nominal" time units.
 Bullet.prototype.lifeSpan = 3 * SECS_TO_NOMINALS;
 

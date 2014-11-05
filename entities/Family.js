@@ -98,7 +98,6 @@ Family.prototype.takeChaserHit = function () {
 
 Family.prototype.takeProtagonistHit = function () {
     // I'm Saved!!!
-    //this.isSaved = true;
     Player.addScore(1000 * Player.getMultiplier());
     entityManager.createScoreImg({
         cx: this.cx,
@@ -122,8 +121,6 @@ Family.prototype.render = function (ctx) {
             this.cx,
             this.cy,
             this.rotation);
-    } else if (this.isSaved) {
-        return; // remove this case?
     } else {
         var distSq = util.distSq(this.cx, this.cy, this.startPos.cx, this.startPos.cy);
         var angle = util.angleTo(this.startPos.cx, this.startPos.cy, this.cx, this.cy);

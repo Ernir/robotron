@@ -54,6 +54,23 @@ var entityManager = {
             fn.call(aCategory[i]);
         }
     },
+	
+	_doOrDie: function () {
+		// TODO: DIE if you gots no life! ;D
+		if (Player.getLives() === 0)
+			return main.gameOver();
+		
+		// TODO: DO level up if enemies is empty
+		// Need to somehow distinguish between
+		// "undead" and killable enemies.
+		// Like separate categories?
+	},
+	
+	_clearLevel: function () {
+		for (var c = 0; c < this._categories.length; ++c) {
+            this._categories[c] = [];
+        }
+	},
 
 // PUBLIC METHODS
 
@@ -101,11 +118,20 @@ var entityManager = {
         Player.resetAll();
     },
 
+// ---------------------
+// Player entity methods
+	
     createProtagonist: function (descr) {
         if (descr === undefined) {
             descr = {cx : g_canvas.width/2, cy : g_canvas.height/2};
         }
         this._protagonists.push(new Protagonist(descr));
+    },
+
+    createFamily: function () {
+		var playerSafeDist = 120;
+		var descr = this.findSpawn(playerSafeDist);
+        this._family.push(new Family(descr));
     },
 	
 	fire: function (aimX, aimY) {
@@ -126,9 +152,9 @@ var entityManager = {
             this.fireBullet(pos.posX + launchdist * dirnX, 
                             pos.posY + launchdist * dirnY, 
                             dirnX, 
-                            dirnY);
+                            dirnY
+			);
 		}
-		
 	},
 	
 	fireBullet: function(cx, cy, dirnX, dirnY) {
@@ -142,8 +168,11 @@ var entityManager = {
 	},
 	
 	fireReset: function() {
-		this._bulletDU = 0;
+		this._bulletDU = this._bulletDuDelay;
 	},
+	
+// --------------------
+// Enemy entity methods
 	
 	findProtagonist: function () {
 		var p = Math.floor(util.randRange(
@@ -212,16 +241,13 @@ var entityManager = {
         this._enemies.push(new CruiseMissile({cx: cx, cy: cy}));
     },
 
-    createFamily: function () {
-		var playerSafeDist = 120;
-		var descr = this.findSpawn(playerSafeDist);
-        this._family.push(new Family(descr));
-    },
-
     createScoreImg: function (descr) {
         this._scoreImgs.push(new ScoreImg(descr));
     },
 
+// --------------------
+// Update & Render
+	
     update: function (du) {
 
         this._bulletDU += du;
@@ -244,7 +270,8 @@ var entityManager = {
                     ++i;
                 }
             }
-        }
+		}
+		this._doOrDie();
     },
 
     render: function (ctx) {
