@@ -75,8 +75,6 @@ function processDiagnostics() {
 
     if (eatKey(KEY_KILLABLE)) g_canBeKilled = !g_canBeKilled;
 
-    if (g_isMouseDown) entityManager.fire(g_mouseX, g_mouseY);
-
     if (eatKey(KEY_RESTART)) entityManager.restartGame();
 }
 

@@ -33,7 +33,8 @@ var entityManager = {
 	_bullets: [],
     _scoreImgs: [],
 	
-	_bulletFrameCounter: 1,
+	_bulletDU: 0,
+	_bulletDuDelay: 20,
 
 // "PRIVATE" METHODS
 
@@ -108,8 +109,8 @@ var entityManager = {
     },
 	
 	fire: function (aimX, aimY) {
-		if (this._bulletFrameCounter !== 6) {
-			this._bulletFrameCounter++;
+		if (this._bulletDU < this._bulletDuDelay) {
+			this._bulletDU++;
 			return;
 		}
 		
@@ -117,7 +118,6 @@ var entityManager = {
 			
             var pos = this._protagonists[i].getPos();
             var dirn = util.angleTo(pos.posX, pos.posY, aimX, aimY);
-            //console.log('firing angle:',dirn*180/Math.PI);
             var launchdist = this._protagonists[i].getRadius() * 0.8;
             
             var dirnX = Math.cos(dirn);
@@ -132,13 +132,17 @@ var entityManager = {
 	},
 	
 	fireBullet: function(cx, cy, dirnX, dirnY) {
-		this._bulletFrameCounter = 1;
+		this._bulletDU = 0;
 		this._bullets.push(new Bullet({
 			cx   : cx,
 			cy   : cy,
 			dirnX : dirnX,
 			dirnY : dirnY
 		}));
+	},
+	
+	fireReset: function() {
+		this._bulletDU = 0;
 	},
 	
 	findProtagonist: function () {
@@ -220,7 +224,9 @@ var entityManager = {
 
     update: function (du) {
 
-        for (var c = 0; c < this._categories.length; ++c) {
+        this._bulletDU += du;
+		
+		for (var c = 0; c < this._categories.length; ++c) {
 
             var aCategory = this._categories[c];
             var i = 0;
