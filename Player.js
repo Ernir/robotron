@@ -39,8 +39,12 @@ Player.prototype.scoreValues = {
                                 Brain: 500,
                                 };
 
-Player.prototype.updateLevel = function () {
+Player.prototype.addLevel = function () {
     this.level += 1;
+};
+
+Player.prototype.subtractLevel = function () {
+    this.level += -1;
 };
 
 Player.prototype.resetLevel = function() {
