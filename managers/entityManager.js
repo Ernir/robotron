@@ -99,7 +99,8 @@ var entityManager = {
             { n : 10, f : this.createGrunt },
             { n : 1, f : this.createHulk },
             { n : 1, f : this.createBrain },
-            { n : 6, f : this.createFamily }
+            { n : 6, f : this.createFamily },
+            { n :8, f : this.createElectrode}
         ];
 
         this._startLevel(level1);
@@ -243,6 +244,12 @@ var entityManager = {
 
     createScoreImg: function (descr) {
         this._scoreImgs.push(new ScoreImg(descr));
+    },
+
+    createElectrode: function() {
+        var playerSafeDist = 120;
+        var descr = this.findSpawn(playerSafeDist);
+        this._enemies.push(new Electrode(descr))
     },
 
 // --------------------

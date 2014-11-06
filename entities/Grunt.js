@@ -66,6 +66,9 @@ Grunt.prototype.takeBulletHit = function () {
     this.kill();
 	Player.addScore(Player.scoreValues.Grunt * Player.getMultiplier());
 };
+Grunt.prototype.takeElectrodeHit = function () {
+    this.takeBulletHit();
+};
 
 Grunt.prototype.render = function (ctx) {
     var distSq = util.distSq(this.cx, this.cy, this.startPos.cx, this.startPos.cy);

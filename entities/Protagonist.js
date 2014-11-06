@@ -130,6 +130,11 @@ Protagonist.prototype.takeEnemyHit = function () {
         this.kill();
     }
 };
+Protagonist.prototype.takeElectrodeHit = function () {
+    if(g_canBeKilled) {
+        this.takeEnemyHit();
+    }
+};
 
 Protagonist.prototype.getRadius = function () {
     return (this.sprite.width / 2) * 0.9;

@@ -143,9 +143,13 @@ function preloadDone() {
     for (var i = 0; i < 5; i++) {
         g_sprites.HumanScore[i + 1] = new Sprite(g_images.HumanScore, 3 + (i * 34), 37 + (i * 34));
     }
-    g_sprites.Brain =[];
+    g_sprites.Brain = [];
     for (var i = 0; i < 12; i++) {
         g_sprites.Brain[i] = new Sprite(g_images.Brain, i*38, (i+1)*38);
+    }
+    g_sprites.Electrode = [];
+    for (var i = 0; i < 3; i++) {
+        g_sprites.Electrode[i] = new Sprite(g_images.Triangle, i*27, (i+1)*27);
     }
 
     initializeEntities();
