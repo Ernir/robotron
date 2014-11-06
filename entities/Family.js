@@ -13,7 +13,6 @@ function Family(descr) {
     this.setup(descr);
 
     this.sprite = g_sprites.Dad[6];
-    this.startPos = {cx : this.cx, cy : this.cy};
     // Make a noise when I am created
     //this.exampleSound.play();
 }
@@ -38,6 +37,9 @@ Family.prototype.renderPos = {cx: this.cx, cy: this.cy};
 Family.prototype.update = function (du) {
 
     spatialManager.unregister(this);
+	
+	if (!this.startPos) this.startPos = this.getPos();
+	
     // Handle death
     if (this._isDeadNow || this.isSaved) {
         return entityManager.KILL_ME_NOW;

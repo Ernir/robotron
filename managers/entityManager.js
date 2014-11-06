@@ -109,10 +109,10 @@ var entityManager = {
     },
 
     resetPos: function () {
-        for (var c = 0; c < this._categories.length; ++c) {
+        for (var c = 1; c < this._categories.length; ++c) {
             for (var i = 0; i < this._categories[c].length; i++) {
                 var p = this._categories[c][i].startPos;
-                this._categories[c][i].setPos(p.posX, p.posY);
+                if (p) this._categories[c][i].setPos(p.posX, p.posY);
             };
         }
     },

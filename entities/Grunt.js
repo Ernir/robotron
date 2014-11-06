@@ -16,7 +16,6 @@ function Grunt(descr) {
 
     this.sprite = g_sprites.Grunt[0];
     this.target = entityManager.findProtagonist();
-    this.startPos = {cx : this.cx, cy : this.cy};
 }
 
 Grunt.prototype = Object.create(Enemy.prototype);
@@ -25,6 +24,9 @@ Grunt.prototype.renderPos = {cx: this.cx, cy: this.cy};
 Grunt.prototype.update = function (du) {
 
     spatialManager.unregister(this);
+	
+	if (!this.startPos) this.startPos = this.getPos();
+	
     // Handle death
     if (this._isDeadNow) {
         return entityManager.KILL_ME_NOW;

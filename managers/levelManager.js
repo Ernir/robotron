@@ -51,7 +51,7 @@ var levelManager = {
         // Used when the player dies, but has extra lives remaining
         //TODO: Call level transition screen
 
-        //entityManager.resetPos();
+		entityManager.resetPos();
 
         //TODO: Add sound
     },

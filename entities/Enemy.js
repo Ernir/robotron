@@ -16,7 +16,6 @@ function Enemy(descr) {
 
     this.sprite = g_sprites.Grunt[0];
     this.target = entityManager.findProtagonist();
-    this.startPos = {cx : this.cx, cy : this.cy};
 }
 
 Enemy.prototype = new Entity();
