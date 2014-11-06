@@ -26,9 +26,8 @@ g_imgUrls = {
 	GreenAlphabet : "https://notendur.hi.is/~eth31/cgp/staticdata/Numbers%20and%20letters/GreenAlphabet.png",
 	RedAlphabet : "https://notendur.hi.is/~eth31/cgp/staticdata/Numbers%20and%20letters/RedAlphabet.png",
 	WhiteNumbers : "https://notendur.hi.is/~eth31/cgp/staticdata/Numbers%20and%20letters/WhiteNumbers.png",
-	HumanScore : "https://notendur.hi.is/~eth31/cgp/staticdata/Numbers%20and%20letters/HumanScore.png",
-	
-}
+	HumanScore : "https://notendur.hi.is/~eth31/cgp/staticdata/Numbers%20and%20letters/HumanScore.png"
+};
 
 g_audioUrls = {
 	brains : "https://notendur.hi.is/~eth31/cgp/staticdata/Sounds/brains.wav",

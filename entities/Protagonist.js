@@ -95,7 +95,7 @@ Protagonist.prototype.computeMovement = function () {
 	}
     
     return {x: velX, y: velY};
-}
+};
 
 Protagonist.prototype.maybeFire = function () {
     var x = 0;
@@ -119,7 +119,7 @@ Protagonist.prototype.maybeFire = function () {
 		entityManager.fire(g_mouseX, g_mouseY);
 	else
 		entityManager.fireReset();
-}
+};
 
 Protagonist.prototype.takeEnemyHit = function () {
     Player.updateLives();
