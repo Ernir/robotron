@@ -19,7 +19,7 @@ function CruiseMissile(descr) {
 
 CruiseMissile.prototype = new Entity();
 CruiseMissile.prototype.lifeSpan = 5 * SECS_TO_NOMINALS;
-CruiseMissile.prototype.killProtagonist = false; //
+CruiseMissile.prototype.baseVel = 2;
 
 CruiseMissile.prototype.update = function (du) {
 
@@ -39,7 +39,6 @@ CruiseMissile.prototype.update = function (du) {
     var hitEntity = this.findHitEntity();
     if (hitEntity) {
         var canTakeHit = hitEntity.takeEnemyHit;
-        console.log(canTakeHit);
         if (canTakeHit) {
             canTakeHit.call(hitEntity);
             return entityManager.KILL_ME_NOW;
@@ -59,26 +58,20 @@ CruiseMissile.prototype.seekTarget = function () {
 
     this.velX = 0;
     if (xOffset > 0) {
-        this.velX = 2;
+        this.velX = this.baseVel;
     } else if (xOffset < 0) {
-        this.velX = -2;
+        this.velX = -this.baseVel;
     }
 
     this.velY = 0;
     if (yOffset > 0) {
         this.velY = 2;
     } else if (yOffset < 0) {
-        this.velY = -2;
+        this.velY = -this.baseVel;
     }
 
     // TODO: Clamp velocity
 };
-
-//CruiseMissile.prototype.takeProtagonistHit = function () {
-//    this.kill();
-//    //TODO: drepa CM þegar hún lendir á Protagonist
-//    //(virkar ekki alveg svona samt)
-//};
 
 CruiseMissile.prototype.takeBulletHit = function () {
     this.kill();
