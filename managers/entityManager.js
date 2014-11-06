@@ -58,12 +58,14 @@ var entityManager = {
 	_isFinished: function () {
 		// TODO: DIE if you gots no life! ;D
 		if (Player.getLives() === 0)
-			return //TODO: transition to main menu
+			return; //TODO: transition to main menu
 		
 		// TODO: DO level up if enemies is empty
 		// Need to somehow distinguish between
 		// "undead" and killable enemies.
 		// Like separate categories?
+		if (this._enemies.length === 0)
+			levelManager.nextLevel();
 	},
 	
 
