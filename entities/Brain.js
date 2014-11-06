@@ -17,6 +17,7 @@ Brain.prototype = Object.create(Enemy.prototype);
 Brain.prototype.timeSinceHit = Infinity;
 Brain.prototype.killFamily = true;
 Brain.prototype.startPos = {cx: this.cx, cy: this.cy};
+Brain.prototype.makesProgs = true;
 Brain.prototype.missileFireChance = 0.005; // 0.5% chance of firing a CM per update
 // TODO: Find a good firing interval for the missiles.
 

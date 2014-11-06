@@ -59,6 +59,9 @@ Family.prototype.update = function (du) {
         // Handle collisions
         var hitEntity = this.findHitEntity();
         if (hitEntity) {
+            if (hitEntity.makesProgs){
+                // TODO: Spawn new Prog
+            }
             var canKillMe = hitEntity.killFamily;
             if (canKillMe) {
                 this.takeChaserHit();
@@ -88,7 +91,7 @@ Family.prototype.randomWalk = function () {
                 this.velY = 0.3 * this.panic;
         }
     }
-}
+};
 
 Family.prototype.takeChaserHit = function () {
     this.isDying = true;
