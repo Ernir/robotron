@@ -27,7 +27,12 @@ var levelManager = {
         [], // level "0", skipped automatically
         [3,6],
         [4,10],
-        [5,6,1]
+        [5,6,1],
+        [5,8,3],
+        [4,0,0,2],
+        [6,6,2,1],
+        [6,10,3,3],
+        [5,0,2,5]
     ],
 
     // PUBLIC METHODS
