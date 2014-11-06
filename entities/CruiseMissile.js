@@ -12,14 +12,14 @@
 function CruiseMissile(descr) {
 
     // Common inherited setup logic from Entity
-    Enemy.call(this, descr);
+    this.setup(descr);
 
     this.target = entityManager.findProtagonist();
-    //TODO: add sound
 }
 
-CruiseMissile.prototype = Object.create(Enemy.prototype);
+CruiseMissile.prototype = new Entity();
 CruiseMissile.prototype.lifeSpan = 5 * SECS_TO_NOMINALS;
+CruiseMissile.prototype.killProtagonist = false; //
 
 CruiseMissile.prototype.update = function (du) {
 
@@ -34,6 +34,17 @@ CruiseMissile.prototype.update = function (du) {
         return entityManager.KILL_ME_NOW;
     }
     this.seekTarget();
+
+    // Handle collisions
+    var hitEntity = this.findHitEntity();
+    if (hitEntity) {
+        var canTakeHit = hitEntity.takeEnemyHit;
+        console.log(canTakeHit);
+        if (canTakeHit) {
+            canTakeHit.call(hitEntity);
+            return entityManager.KILL_ME_NOW;
+        }
+    }
 
     this.cx += this.velX * du;
     this.cy += this.velY * du;
@@ -59,19 +70,19 @@ CruiseMissile.prototype.seekTarget = function () {
     } else if (yOffset < 0) {
         this.velY = -2;
     }
-	
-	// TODO: Clamp velocity
+
+    // TODO: Clamp velocity
 };
 
-/*CruiseMissile.prototype.takeProtagonistHit = function () {
-    this.kill();
-    //TODO: drepa CM þegar hún lendir á Protagonist
-    //(virkar ekki alveg svona samt)
-}*/
+//CruiseMissile.prototype.takeProtagonistHit = function () {
+//    this.kill();
+//    //TODO: drepa CM þegar hún lendir á Protagonist
+//    //(virkar ekki alveg svona samt)
+//};
 
 CruiseMissile.prototype.takeBulletHit = function () {
     this.kill();
-	Player.addScore(Player.scoreValues.CM * Player.getMultiplier()); // TODO remove magic number
+    Player.addScore(Player.scoreValues.CM * Player.getMultiplier()); // TODO remove magic number
 };
 
 CruiseMissile.prototype.getRadius = function () {
@@ -80,7 +91,7 @@ CruiseMissile.prototype.getRadius = function () {
 
 CruiseMissile.prototype.render = function (ctx) {
     ctx.save();
-    var fadeThresh = Bullet.prototype.lifeSpan / 3;
+    var fadeThresh = CruiseMissile.prototype.lifeSpan / 3;
 
     if (this.lifeSpan < fadeThresh) {
         ctx.globalAlpha = this.lifeSpan / fadeThresh;
