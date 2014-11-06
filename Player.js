@@ -62,7 +62,6 @@ Player.prototype.addLives = function () {
 
 Player.prototype.subtractLives = function () {
     if(this.lives > 0) this.lives += -1;
-    levelManager.continueLevel();
 };
 
 Player.prototype.resetLives = function() {
