@@ -17,85 +17,51 @@ A module which handles level selection and transition.
 
 var levelManager = {
     // "PRIVATE" DATA
-    _levelSpecs: {
-        1 : {
-            Protagonist : 1,
-            Family : 3,
-            Grunt : 6
-        },
-        2 : {
-            Protagonist : 1,
-            Family : 4,
-            Grunt : 10
-        }
-        3 : {
-            Protagonist : 1,
-            Family : 5,
-            Grunt : 6,
-            Hulk : 1
-        },
-        4 : {
-            Protagonist : 1,
-            Family : 6,
-            Grunt : 8,
-            Hulk : 2
-        },
-        5 : {
-            Protagonist : 1,
-            Family : 5,
-            Brain : 3
-        },
-        6 : {
-            Protagonist : 1,
-            Family : 6,
-            Grunt : 6,
-            Hulk : 1,
-            Brain : 1
-        },
-        7 : {
-            Protagonist : 1,
-            Family : 6,
-            Grunt : 10,
-            Hulk : 2,
-            Brain : 1
-        },
-        8 : {
-            Protagonist : 1,
-            Family : 8,
-            Grunt : 12,
-            Hulk : 4,
-            Brain : 3
-        },
-        9 : {
-            Protagonist : 1,
-            Family : 8,
-            Grunt : 16,
-            Hulk : 4,
-            Brain : 4
-        },
-        10 : {
-            Protagonist : 1,
-            Family : 8,
-            Grunt : 20,
-            Hulk : 5,
-            Brain : 5
-        }
-    },
+    _levelSpecs: [
+    // Each number in the level array represents how many entities of the
+    // corresponding type should be created. There is always one protagonist,
+    // so we skip him in the level description
+    // Key:
+    // Family, Grunts, Hulks, Brains, Electrodes //TODO: add more entities
+
+        [], // level "0", skipped automatically
+        [3,6],
+        [4,10],
+        [5,6,1]
+    ],
 
     // PUBLIC METHODS
 
-    startLevel: function (LevelDesctiption) {
-        //entityManager.clearCategories();
-        //for each in LevelDesctiption create in entityManager
+    startLevel: function () {
+        // Create a fresh level
+        //TODO: Call level transition screen
+        entityManager.clearAll();
+        spatialManager.resetAll();
+        entityManager.init(this._levelSpecs[Player.level]);
+        //TODO: Add sound
+    },
+
+    continueLevel: function () {
+        // Reset all remaining entities in the level
+        // Used when the player dies, but has extra lives remaining
+        //TODO: Call level transition screen
+
+        //entityManager.resetPos();
+
+        //TODO: Add sound
     },
 
     nextLevel: function () {
-        Player.addlevel();
+        //TODO: Call level transition screen
+        Player.addLevel();
         this.startLevel();
+        //TODO: Add sound
     },
 
     prevLevel: function () {
-        Player.subtractlevel();
+        //TODO: Call level transition screen
+        Player.subtractLevel();
         this.startLevel();
+        //TODO: Add sound
     }    
 };

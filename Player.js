@@ -40,11 +40,12 @@ Player.prototype.scoreValues = {
                                 };
 
 Player.prototype.addLevel = function () {
-    this.level += 1;
+    if(this.level < 3) this.level += 1;
+    //TODO: increase the levelcap according to levelmanager._levelSpecs.length
 };
 
 Player.prototype.subtractLevel = function () {
-    this.level += -1;
+    if(this.level > 1) this.level += -1;
 };
 
 Player.prototype.resetLevel = function() {
@@ -55,8 +56,13 @@ Player.prototype.getLevel = function() {
     return this.level;
 };
 
-Player.prototype.updateLives = function () {
-    this.lives += -1;
+Player.prototype.addLives = function () {
+    this.lives += 1;
+};
+
+Player.prototype.subtractLives = function () {
+    if(this.lives > 0) this.lives += -1;
+    levelManager.continueLevel();
 };
 
 Player.prototype.resetLives = function() {
@@ -107,8 +113,8 @@ Player.prototype.render = function(ctx) {
     ctx.font = "20px Arial";
     ctx.strokeStyle = "red";
     ctx.strokeText(this.score, 10, 20);
-    var disp = "X" + this.multiplier;
-    ctx.strokeText(disp, g_canvas.width/2 - 10, 20);
+    var disp = "X" + this.multiplier + "  Level: " + this.level;
+    ctx.strokeText(disp, g_canvas.width/2 - 50, 20);
     ctx.restore();
 
     // Display remaining lives

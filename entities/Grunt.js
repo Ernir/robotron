@@ -16,10 +16,11 @@ function Grunt(descr) {
 
     this.sprite = g_sprites.Grunt[0];
     this.target = entityManager.findProtagonist();
+    this.startPos = {cx : this.cx, cy : this.cy};
 }
 
 Grunt.prototype = Object.create(Enemy.prototype);
-Grunt.prototype.startPos = {cx: this.cx, cy: this.cy};
+Grunt.prototype.renderPos = {cx: this.cx, cy: this.cy};
 
 Grunt.prototype.update = function (du) {
 
@@ -68,7 +69,7 @@ Grunt.prototype.takeBulletHit = function () {
 };
 
 Grunt.prototype.render = function (ctx) {
-    var distSq = util.distSq(this.cx, this.cy, this.startPos.cx, this.startPos.cy);
+    var distSq = util.distSq(this.cx, this.cy, this.renderPos.cx, this.renderPos.cy);
     switch(true) {
         case distSq<3*3:
             g_sprites.Grunt[0].drawCentredAt(ctx, this.cx, this.cy, 0);
@@ -83,7 +84,7 @@ Grunt.prototype.render = function (ctx) {
             g_sprites.Grunt[2].drawCentredAt(ctx, this.cx, this.cy, 0);
             break;
         default:
-            this.startPos = {cx: this.cx, cy: this.cy};
+            this.renderPos = {cx: this.cx, cy: this.cy};
             g_sprites.Grunt[0].drawCentredAt(ctx, this.cx, this.cy, 0);
     }
 };

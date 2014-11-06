@@ -32,6 +32,8 @@ function Entity() {
 
 };
 
+//Entity.prototype.startPos = {cx : 0, cy : 0};
+
 Entity.prototype.setup = function (descr) {
 
     // Apply all setup properies from the (optional) descriptor
