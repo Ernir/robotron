@@ -58,7 +58,7 @@ var entityManager = {
 	_doOrDie: function () {
 		// TODO: DIE if you gots no life! ;D
 		if (Player.getLives() === 0)
-			return main.gameOver();
+			return //main.gameOver(); //The program shouldn't quit just because you lost the game!
 		
 		// TODO: DO level up if enemies is empty
 		// Need to somehow distinguish between
