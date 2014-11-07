@@ -35,6 +35,9 @@ var entityManager = {
 	
 	_bulletDU: 0,
 	_bulletDuDelay: 20,
+	
+	_isChangingLevel: false,
+	_changingTimer: 2 * SECS_TO_NOMINALS,
 
 // "PRIVATE" METHODS
 
@@ -68,10 +71,72 @@ var entityManager = {
 			levelManager.nextLevel();
 	},
 	
-	_clearLevel: function () {
-		for (var c = 0; c < this._categories.length; ++c) {
-            this._categories[c] = [];
-        }
+	_changeLevel: function (ctx) {
+		// TODO: Add sound
+		var halfWidth = g_canvas.width / 2;
+		var halfHeight = (g_canvas.height - consts.wallTop) / 2;
+		var yMiddle = consts.wallTop + halfHeight;
+		var layerOffsetX = 5;
+		var layerOffsetY = halfHeight / (halfWidth / layerOffsetX);
+		var layers = halfWidth / layerOffsetX;
+		
+		var prevfillStyle = ctx.fillStyle;
+		ctx.fillStyle = "#FF55A3";
+		// TODO: Add a good color sceme
+		
+		if (this._changingTimer > SECS_TO_NOMINALS) {
+		
+			var range = (2 * SECS_TO_NOMINALS - this._changingTimer) / SECS_TO_NOMINALS;
+			var currentLayer = Math.floor(range * layers);
+			
+			for (var i = 1; i < currentLayer; i++) {
+				if (i % 9 < 9) ctx.fillStyle = "red";
+				if (i % 9 < 6) ctx.fillStyle = "#FF55A3";
+				if (i % 9 < 3) ctx.fillStyle = "blue";
+				ctx.fillRect(
+					halfWidth - i * layerOffsetX,
+					yMiddle - i * layerOffsetY,
+					i * layerOffsetX * 2,
+					i * layerOffsetY * 2
+				);
+			}
+			
+		} else {
+		
+			var range = this._changingTimer / SECS_TO_NOMINALS;
+			var currentLayer = Math.ceil(range * layers);
+			
+			for (var i = 1; i < currentLayer; i++) {
+				if (i % 6 < 6) ctx.fillStyle = "red";
+				if (i % 6 < 4) ctx.fillStyle = "#FF55A3";
+				if (i % 6 < 2) ctx.fillStyle = "blue";
+				ctx.fillRect(
+					i * layerOffsetX,
+					consts.wallTop + i * layerOffsetY,
+					g_canvas.width - i * layerOffsetX * 2,
+					g_canvas.height - consts.wallTop - i * layerOffsetY * 2
+				);
+			}
+			
+			range = (SECS_TO_NOMINALS - this._changingTimer) / SECS_TO_NOMINALS;
+			currentLayer = Math.ceil(range * layers);
+			
+			ctx.fillStyle = "black";
+			ctx.fillRect(
+				halfWidth - currentLayer * layerOffsetX,
+				yMiddle - currentLayer * layerOffsetY,
+				currentLayer * layerOffsetX * 2,
+				currentLayer * layerOffsetY * 2
+			);
+		}
+		
+		ctx.fillStyle = prevfillStyle;
+		
+		// Reset changing timer when level changing is complete
+		if (this._changingTimer < 0) {
+			this._isChangingLevel = false;
+			this._changingTimer = 2 * SECS_TO_NOMINALS;
+		}
 	},
 
 // PUBLIC METHODS
@@ -137,6 +202,7 @@ var entityManager = {
         for (var c = 0; c < this._categories.length; ++c) {
             this._categories[c].length = 0;
         }
+		this._isChangingLevel = true;
     },
 
 // ---------------------
@@ -277,7 +343,9 @@ var entityManager = {
 	
     update: function (du) {
 
-        this._bulletDU += du;
+        if (this._isChangingLevel) return this._changingTimer -= du;
+		
+		this._bulletDU += du;
 		
 		for (var c = 0; c < this._categories.length; ++c) {
 
@@ -303,7 +371,9 @@ var entityManager = {
 
     render: function (ctx) {
 
-        var debugX = 10, debugY = 100;
+        if (this._isChangingLevel) return this._changeLevel(ctx);
+		
+		var debugX = 10, debugY = 100;
 
         for (var c = 0; c < this._categories.length; ++c) {
 
