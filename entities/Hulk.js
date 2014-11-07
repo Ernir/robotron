@@ -21,8 +21,11 @@ Hulk.prototype = Object.create(Enemy.prototype);
 Hulk.prototype.timeSinceHit = Infinity;
 Hulk.prototype.killFamily = true;
 Hulk.prototype.renderPos = {cx: this.cx, cy: this.cy};
+Hulk.prototype.moveTime = SECS_TO_NOMINALS;
+Hulk.prototype.brainpower = 0.05;
 
 Hulk.prototype.update = function (du) {
+    this.moveTime += -du;
 
     spatialManager.unregister(this);
 	
@@ -49,7 +52,6 @@ Hulk.prototype.move = function (velX, velY, du) {
     this.capPositions();
 };
 
-// TODO: Make them stupid.
 Hulk.prototype.seekTarget = function () {
 
     this.findTarget();
@@ -59,25 +61,29 @@ Hulk.prototype.seekTarget = function () {
 
     var xOffset = this.target.cx - this.cx;
     var yOffset = this.target.cy - this.cy;
+    var difficulty = Math.random();
 
-    this.velX = 0;
-    if (xOffset > 0) {
-        this.velX = 1;
-    } else if (xOffset < 0) {
-        this.velX = -1;
-    }
-
-    this.velY = 0;
-    if (yOffset > 0) {
-        this.velY = 1;
-    } else if (yOffset < 0) {
-        this.velY = -1;
-    }
-
-    // Clamp vel to 1 pixel moving radius
-    if (xOffset !== 0 && yOffset !== 0) {
-        this.velX *= Math.cos(Math.PI / 4);
-        this.velY *= Math.sin(Math.PI / 4);
+    if(this.moveTime < 0 || 
+       (util.abs(xOffset) < 10 && difficulty < brainpower) || 
+       (util.abs(yOffset) < 10 && difficulty < brainpower)
+      ){
+        
+        this.velX = 0;
+        this.velY = 0;
+        if(util.abs(xOffset) > util.abs(yOffset)){
+            if (xOffset > 0) {
+                this.velX = 1;
+            }else{
+                this.velX = -1;
+            }
+        }else{
+            if (yOffset > 0) {
+                this.velY = 1;
+            }else{
+                this.velY = -1;
+            }
+        }
+        this.moveTime = 2 * SECS_TO_NOMINALS;
     }
 };
 
