@@ -57,6 +57,10 @@ Player.prototype.addLives = function () {
     this.lives += 1;
 };
 
+Player.prototype.subtractLives = function () {
+    if(this.lives > 0) this.lives += -1;
+};
+
 Player.prototype.resetLives = function () {
     this.lives = 5;
 };
