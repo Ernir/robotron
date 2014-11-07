@@ -32,11 +32,14 @@ Family.prototype.panic = 1;
 Family.prototype.lifeSpan = 1 * SECS_TO_NOMINALS;
 Family.prototype.isDying = false;
 Family.prototype.isSaved = false;
-Family.prototype.startPos = {cx: this.cx, cy: this.cy};
+Family.prototype.renderPos = {cx: this.cx, cy: this.cy};
 
 Family.prototype.update = function (du) {
 
     spatialManager.unregister(this);
+	
+	if (!this.startPos) this.startPos = this.getPos();
+	
     // Handle death
     if (this._isDeadNow || this.isSaved) {
         return entityManager.KILL_ME_NOW;
@@ -123,8 +126,8 @@ Family.prototype.render = function (ctx) {
             this.cy,
             this.rotation);
     } else {
-        var distSq = util.distSq(this.cx, this.cy, this.startPos.cx, this.startPos.cy);
-        var angle = util.angleTo(this.startPos.cx, this.startPos.cy, this.cx, this.cy);
+        var distSq = util.distSq(this.cx, this.cy, this.renderPos.cx, this.renderPos.cy);
+        var angle = util.angleTo(this.renderPos.cx, this.renderPos.cy, this.cx, this.cy);
         var PI = Math.PI;
         var facing = 3; // right
         if(angle > PI*1/4) facing = 6; //down
@@ -146,7 +149,7 @@ Family.prototype.render = function (ctx) {
                 g_sprites.Dad[facing+2].drawCentredAt(ctx, this.cx, this.cy, 0);
                 break;
             default:
-                this.startPos = {cx: this.cx, cy: this.cy};
+                this.renderPos = {cx: this.cx, cy: this.cy};
                 g_sprites.Dad[facing+0].drawCentredAt(ctx, this.cx, this.cy, 0);
         }
     }

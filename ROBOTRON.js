@@ -68,6 +68,8 @@ var g_canBeKilled = true;
 var KEY_SPATIAL = keyCode('X');
 var KEY_KILLABLE = keyCode('K');
 var KEY_RESTART = keyCode('R');
+var KEY_NEXT_LEVEL = 107;
+var KEY_PREV_LEVEL = 109;
 
 function processDiagnostics() {
 
@@ -75,7 +77,14 @@ function processDiagnostics() {
 
     if (eatKey(KEY_KILLABLE)) g_canBeKilled = !g_canBeKilled;
 
-    if (eatKey(KEY_RESTART)) entityManager.restartGame();
+    if (eatKey(KEY_RESTART)) {
+        Player.resetAll();
+        levelManager.startLevel();
+    };
+
+    if (eatKey(KEY_NEXT_LEVEL)) levelManager.nextLevel();
+
+    if (eatKey(KEY_PREV_LEVEL)) levelManager.prevLevel();
 }
 
 
@@ -153,7 +162,8 @@ function preloadDone() {
     }
 
     initializeEntities();
-    entityManager.init();
+    //entityManager.init();
+    levelManager.startLevel();
 
     main.init();
 }

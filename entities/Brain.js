@@ -9,6 +9,7 @@ function Brain(descr) {
     Enemy.call(this, descr);
 
     this.sprite = g_sprites.Brain[6];
+    this.startPos = {cx : this.cx, cy : this.cy};
 }
 
 Brain.prototype = Object.create(Enemy.prototype);
@@ -94,16 +95,16 @@ Brain.prototype.render = function (ctx) {
     var distSq = util.distSq(
                              this.cx, 
                              this.cy, 
-                             this.startPos.cx, 
-                             this.startPos.cy);
+                             this.renderPos.cx, 
+                             this.renderPos.cy);
     var PI = Math.PI;
     if(distSq === 0){
         var angle = 0;
     }else{
         var angle = util.wrapRange(
                                    util.angleTo(
-                                                this.startPos.cx, 
-                                                this.startPos.cy, 
+                                                this.renderPos.cx, 
+                                                this.renderPos.cy, 
                                                 this.cx, 
                                                 this.cy),
                                    0,
@@ -129,7 +130,7 @@ Brain.prototype.render = function (ctx) {
             g_sprites.Brain[facing+2].drawCentredAt(ctx, this.cx, this.cy, 0);
             break;
         default:
-            this.startPos = {cx: this.cx, cy: this.cy};
+            this.renderPos = {cx: this.cx, cy: this.cy};
             g_sprites.Brain[facing+0].drawCentredAt(ctx, this.cx, this.cy, 0);
     }
 };

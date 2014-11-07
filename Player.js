@@ -3,19 +3,19 @@
 //======
 /*
 
- An object which contains all the important parameters of the player such as
- the score, remaining lives and the current level number.
+An object which contains all the important parameters of the player such as
+the score, remaining lives and the current level number.
 
- */
+*/
 
 "use strict";
 
 /* jshint browser: true, devel: true, globalstrict: true */
 
 /*
- 0        1         2         3         4         5         6         7         8
- 12345678901234567890123456789012345678901234567890123456789012345678901234567890
- */
+0        1         2         3         4         5         6         7         8
+12345678901234567890123456789012345678901234567890123456789012345678901234567890
+*/
 
 function Player() {
 
@@ -40,8 +40,9 @@ Player.prototype.scoreValues = {
     Electrode: 50 // TODO: Find the webpage with the scores again, and update value
 };
 
-Player.prototype.updateLevel = function () {
-    this.level += 1;
+Player.prototype.addLevel = function () {
+    if(this.level < 8) this.level += 1;
+    //TODO: increase the levelcap according to levelmanager._levelSpecs.length
 };
 
 Player.prototype.resetLevel = function () {
@@ -52,8 +53,8 @@ Player.prototype.getLevel = function () {
     return this.level;
 };
 
-Player.prototype.updateLives = function () {
-    this.lives += -1;
+Player.prototype.addLives = function () {
+    this.lives += 1;
 };
 
 Player.prototype.resetLives = function () {
@@ -110,9 +111,9 @@ Player.prototype.render = function (ctx) {
 
     // Display remaining lives
     for (var i = 1; i < this.lives; i++) {
-        g_sprites.Extralife.drawCentredAt(ctx,
-                g_canvas.width - i * 20,
-            15,
-            0);
-    }
+        g_sprites.Extralife.drawCentredAt(ctx, 
+                                          g_canvas.width - i*20, 
+                                          15, 
+                                          0);
+    };
 };

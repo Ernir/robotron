@@ -13,6 +13,7 @@ function Protagonist(descr) {
     this.setup(descr);
 
     this.sprite = g_sprites.Protagonist[6];
+    this.startPos = {cx: this.cx, cy: this.cy};
     // Make a noise when I am created
     // this.exampleSound.play();
 }
@@ -37,7 +38,7 @@ Protagonist.prototype.KEY_SHOOTRIGHT  = 39;
 Protagonist.prototype.rotation = 0;
 Protagonist.prototype.velX = 0;
 Protagonist.prototype.velY = 0;
-Protagonist.prototype.startPos = {cx: this.cx, cy: this.cy};
+Protagonist.prototype.renderPos = {cx: this.cx, cy: this.cy};
 
 Protagonist.prototype.update = function (du) {
 
@@ -122,10 +123,11 @@ Protagonist.prototype.maybeFire = function () {
 };
 
 Protagonist.prototype.takeEnemyHit = function () {
-    Player.updateLives();
+    Player.subtractLives();
     if (Player.getLives() > 0) {
         this.setPos(g_canvas.width / 2, g_canvas.height / 2);
         Player.resetMultiplier();
+		levelManager.continueLevel();
     } else {
         this.kill();
     }
@@ -141,8 +143,8 @@ Protagonist.prototype.getRadius = function () {
 };
 
 Protagonist.prototype.render = function (ctx) {
-    var distSq = util.distSq(this.cx, this.cy, this.startPos.cx, this.startPos.cy);
-    var angle = util.angleTo(this.startPos.cx, this.startPos.cy, this.cx, this.cy);
+    var distSq = util.distSq(this.cx, this.cy, this.renderPos.cx, this.renderPos.cy);
+    var angle = util.angleTo(this.renderPos.cx, this.renderPos.cy, this.cx, this.cy);
     var PI = Math.PI;
     var facing = 3; // right
     if(angle > PI*1/4) facing = 6; //down
@@ -164,7 +166,7 @@ Protagonist.prototype.render = function (ctx) {
             g_sprites.Protagonist[facing+2].drawCentredAt(ctx, this.cx, this.cy, 0);
             break;
         default:
-            this.startPos = {cx: this.cx, cy: this.cy};
+            this.renderPos = {cx: this.cx, cy: this.cy};
             g_sprites.Protagonist[facing+0].drawCentredAt(ctx, this.cx, this.cy, 0);
     }
 };

@@ -20,11 +20,14 @@ function Hulk(descr) {
 Hulk.prototype = Object.create(Enemy.prototype);
 Hulk.prototype.timeSinceHit = Infinity;
 Hulk.prototype.killFamily = true;
-Hulk.prototype.startPos = {cx: this.cx, cy: this.cy};
+Hulk.prototype.renderPos = {cx: this.cx, cy: this.cy};
 
 Hulk.prototype.update = function (du) {
 
     spatialManager.unregister(this);
+	
+	if (!this.startPos) this.startPos = this.getPos();
+	
     // Handle death
     if (this._isDeadNow) {
         return entityManager.KILL_ME_NOW;
@@ -100,8 +103,8 @@ Hulk.prototype.takeBulletHit = function (descr) {
 };
 
 Hulk.prototype.render = function (ctx) {
-    var distSq = util.distSq(this.cx, this.cy, this.startPos.cx, this.startPos.cy);
-    var angle = util.angleTo(this.startPos.cx, this.startPos.cy, this.cx, this.cy);
+    var distSq = util.distSq(this.cx, this.cy, this.renderPos.cx, this.renderPos.cy);
+    var angle = util.angleTo(this.renderPos.cx, this.renderPos.cy, this.cx, this.cy);
     var PI = Math.PI;
     var facing = 3; // up or down
     if (angle > PI * 3 / 4 && angle < PI * 5 / 4) facing = 0; //left
@@ -121,7 +124,7 @@ Hulk.prototype.render = function (ctx) {
             g_sprites.Hulk[facing + 2].drawCentredAt(ctx, this.cx, this.cy, 0);
             break;
         default:
-            this.startPos = {cx: this.cx, cy: this.cy};
-            g_sprites.Hulk[facing + 0].drawCentredAt(ctx, this.cx, this.cy, 0);
+            this.renderPos = {cx: this.cx, cy: this.cy};
+            g_sprites.Hulk[facing+0].drawCentredAt(ctx, this.cx, this.cy, 0);
     }
 };

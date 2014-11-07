@@ -55,15 +55,17 @@ var entityManager = {
         }
     },
 	
-	_doOrDie: function () {
+	_isFinished: function () {
 		// TODO: DIE if you gots no life! ;D
 		if (Player.getLives() === 0)
-			return //main.gameOver(); //The program shouldn't quit just because you lost the game!
+			return; //TODO: transition to main menu
 		
 		// TODO: DO level up if enemies is empty
 		// Need to somehow distinguish between
 		// "undead" and killable enemies.
 		// Like separate categories?
+		if (this._enemies.length === 0)
+			levelManager.nextLevel();
 	},
 	
 	_clearLevel: function () {
@@ -92,31 +94,49 @@ var entityManager = {
 		];
     },
 
-    init: function () {
-
-        var level1 = [ // TODO create more levels and place them somewhere nice
+    init: function (level) {
+        
+        var descr = [
             { n : 1, f : this.createProtagonist },
-            { n : 10, f : this.createGrunt },
-            { n : 1, f : this.createHulk },
-            { n : 1, f : this.createBrain },
-            { n : 6, f : this.createFamily },
-            { n :8, f : this.createElectrode}
+            { n : 0, f : this.createFamily },
+            { n : 0, f : this.createGrunt },
+            { n : 0, f : this.createHulk },
+            { n : 0, f : this.createBrain },
+            { n : 0, f : this.createElectrode }
+            //TODO: add more entities
         ];
 
-        this._startLevel(level1);
+        for (var i = 0; i < level.length; i++) {
+            descr[i+1].n =level[i];
+        };
+
+        this._startLevel(descr);
     },
 
-    restartGame: function () {
-        //TODO: this properly :p
-        //TODO: add sound?
-        this._protagonists.length=0;
-        this._family.length=0;
-        this._enemies.length=0;
-        this._bullets.length=0;
-        this._scoreImgs.length=0;
-        this.init();
+    resetPos: function () {
+        for (var c = 1; c < this._categories.length; ++c) {
+            for (var i = 0; i < this._categories[c].length; i++) {
+                var p = this._categories[c][i].startPos;
+                if (p) this._categories[c][i].setPos(p.posX, p.posY);
+            };
+        }
+    },
+
+    respawnSurvivors: function () {
+        var level = [];
+        for (var c = 1; c < this._categories.length-1; ++c) {
+            level.push(this._categories[c].length);
+        }
+        console.log('new level:',level);
+        this.clearAll();
         spatialManager.resetAll();
-        Player.resetAll();
+        this.init(level);
+    },
+
+    clearAll: function () {
+        for (var c = 0; c < this._categories.length; ++c) {
+            this._categories[c].length = 0;
+        }
     },
 
 // ---------------------
@@ -278,7 +298,7 @@ var entityManager = {
                 }
             }
 		}
-		this._doOrDie();
+		this._isFinished();
     },
 
     render: function (ctx) {
