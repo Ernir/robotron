@@ -113,16 +113,11 @@ var util = {
     },
     capPositions: function(entity) {
 		var r = entity.getRadius();
-        entity.cx = Math.max(entity.cx, this.wallLeft + r);
-        entity.cx = Math.min(entity.cx, this.wallRight - r);
-        entity.cy = Math.max(entity.cy, this.wallTop + r);
-        entity.cy = Math.min(entity.cy, this.wallBottom - r);
+        entity.cx = Math.max(entity.cx, consts.wallLeft + r);
+        entity.cx = Math.min(entity.cx, consts.wallRight - r);
+        entity.cy = Math.max(entity.cy, consts.wallTop + r);
+        entity.cy = Math.min(entity.cy, consts.wallBottom - r);
     },
-	// TODO: Put these to some better place?
-	wallTop: 35,
-	wallBottom: g_canvas.height - 5,
-	wallLeft: 5,
-	wallRight: g_canvas.width - 5,
 
 
 // CANVAS OPS
@@ -134,9 +129,9 @@ var util = {
         ctx.fillStyle = "black";
         ctx.fillRect(0, 0, ctx.canvas.width, ctx.canvas.height);
 		ctx.fillStyle = "#FF55A3";
-        ctx.fillRect(0, 30, ctx.canvas.width, ctx.canvas.height-30);
+        ctx.fillRect(0, consts.wallTop, ctx.canvas.width, ctx.canvas.height-30);
 		ctx.fillStyle = "black";
-        ctx.fillRect(this.wallLeft, this.wallTop, ctx.canvas.width - 10, ctx.canvas.height - 40);
+        ctx.fillRect(consts.wallLeft, consts.wallTop + 5, ctx.canvas.width - 10, ctx.canvas.height - 40);
         ctx.fillStyle = prevfillStyle;
     },
 
