@@ -18,6 +18,9 @@ Electrode.prototype = Object.create(Enemy.prototype);
 Electrode.prototype.update = function (du) {
 
     spatialManager.unregister(this);
+
+    if (!this.startPos) this.startPos = this.getPos();
+
     // Handle death
     if (this._isDeadNow) {
         return entityManager.KILL_ME_NOW;

@@ -30,6 +30,7 @@ var entityManager = {
     _protagonists: [],
 	_family: [],
 	_enemies: [],
+    _invincibles: [],
 	_bullets: [],
     _scoreImgs: [],
 	
@@ -155,6 +156,7 @@ var entityManager = {
 			this._bullets, 
 			this._family, 
 			this._enemies,
+            this._invincibles,
             this._scoreImgs
 		];
     },
@@ -315,7 +317,7 @@ var entityManager = {
     createHulk: function () {
         var playerSafeDist = 120;
 		var descr = this.findSpawn(playerSafeDist);
-        this._enemies.push(new Hulk(descr));
+        this._invincibles.push(new Hulk(descr));
     },
 
     createBrain: function () {

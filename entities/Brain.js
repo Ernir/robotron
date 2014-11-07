@@ -9,7 +9,6 @@ function Brain(descr) {
     Enemy.call(this, descr);
 
     this.sprite = g_sprites.Brain[6];
-    this.startPos = {cx : this.cx, cy : this.cy};
 }
 
 Brain.prototype = Object.create(Enemy.prototype);
@@ -25,6 +24,9 @@ Brain.prototype.missileFireChance = 0.005; // 0.5% chance of firing a CM per upd
 Brain.prototype.update = function (du) {
 
     spatialManager.unregister(this);
+
+    if (!this.startPos) this.startPos = this.getPos();
+    
     // Handle death
     if (this._isDeadNow) {
         return entityManager.KILL_ME_NOW;
