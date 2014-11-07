@@ -256,7 +256,7 @@ var entityManager = {
     },
 
     fireCruiseMissile: function (cx,cy) {
-        this._enemies.push(new CruiseMissile({cx: cx, cy: cy}));
+        this._bullets.push(new CruiseMissile({cx: cx, cy: cy}));
     },
 
     createScoreImg: function (descr) {
