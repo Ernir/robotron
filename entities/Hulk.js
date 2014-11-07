@@ -64,8 +64,8 @@ Hulk.prototype.seekTarget = function () {
     var difficulty = Math.random();
 
     if(this.moveTime < 0 || 
-       (util.abs(xOffset) < 10 && difficulty < brainpower) || 
-       (util.abs(yOffset) < 10 && difficulty < brainpower)
+       (util.abs(xOffset) < 10 && difficulty < this.brainpower) || 
+       (util.abs(yOffset) < 10 && difficulty < this.brainpower)
       ){
         
         this.velX = 0;
