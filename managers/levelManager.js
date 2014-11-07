@@ -42,7 +42,20 @@ var levelManager = {
         //TODO: Call level transition screen
         entityManager.clearAll();
         spatialManager.resetAll();
-        entityManager.init(this._levelSpecs[Player.level]);
+        //if Player.level > this._levelSpecs make random level
+        if (Player.level > this._levelSpecs.length) {
+            var randomlevel = [];
+            console.log("hi");
+            console.log("randomlevel1:",randomlevel);
+            //TODO: uppfæra lykkjufjöldan til að vera í samræmi við fjölda óvina + family
+            for (var i = 0; i < 5; i++) {
+                randomlevel.push(Math.floor(Math.random()*10));
+            };
+            console.log("randomlevel2:",randomlevel);
+            entityManager.init(randomlevel);
+        }else{
+            entityManager.init(this._levelSpecs[Player.level]);
+        }
         //TODO: Add sound
     },
 
@@ -60,6 +73,8 @@ var levelManager = {
         //TODO: Call level transition screen
         Player.addLevel();
         this.startLevel();
+        console.log("Yo");
+        console.log("_levelSpecs.length:",this._levelSpecs.length);
         //TODO: Add sound
     },
 
