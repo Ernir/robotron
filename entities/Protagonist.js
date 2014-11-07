@@ -129,6 +129,7 @@ Protagonist.prototype.takeEnemyHit = function () {
         Player.resetMultiplier();
 		levelManager.continueLevel();
     } else {
+        //TODO: transition to game over screen
         this.kill();
     }
 };
