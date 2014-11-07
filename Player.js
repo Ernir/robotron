@@ -45,6 +45,10 @@ Player.prototype.addLevel = function () {
     //TODO: increase the levelcap according to levelmanager._levelSpecs.length
 };
 
+Player.prototype.subtractLevel = function () {
+    this.level += -1;
+};
+
 Player.prototype.resetLevel = function () {
     this.level = 1;
 };
