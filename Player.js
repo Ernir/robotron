@@ -95,22 +95,22 @@ Player.prototype.getScore = function () {
     return this.score;
 };
 
-Player.prototype.resetAll = function () {
+Player.prototype.resetAll = function() {
     this.resetLives();
     this.resetLevel();
     this.resetScore();
     this.resetMultiplier();
-};
+}
 
-Player.prototype.render = function (ctx) {
+Player.prototype.render = function(ctx) {
     // Display the score
     ctx.save();
     ctx.lineWidth = 2;
     ctx.font = "20px Arial";
     ctx.strokeStyle = "red";
     ctx.strokeText(this.score, 10, 20);
-    var disp = "X" + this.multiplier;
-    ctx.strokeText(disp, g_canvas.width / 2 - 10, 20);
+    var disp = "X" + this.multiplier + "  Level: " + this.level;
+    ctx.strokeText(disp, g_canvas.width/2 - 50, 20);
     ctx.restore();
 
     // Display remaining lives
