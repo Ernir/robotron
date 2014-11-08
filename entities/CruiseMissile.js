@@ -17,7 +17,7 @@ function CruiseMissile(descr) {
     this.target = entityManager.findProtagonist();
 }
 
-CruiseMissile.prototype = new Entity();
+CruiseMissile.prototype = Object.create(Enemy.prototype);
 CruiseMissile.prototype.lifeSpan = 5 * SECS_TO_NOMINALS;
 CruiseMissile.prototype.baseVel = 2;
 
@@ -40,16 +40,6 @@ CruiseMissile.prototype.update = function (du) {
 	
 	this.cx += this.velX * du;
     this.cy += this.velY * du;
-
-    // Handle collisions
-    var hitEntity = this.findHitEntity();
-    if (hitEntity) {
-        var canTakeHit = hitEntity.takeEnemyHit;
-        if (canTakeHit) {
-            canTakeHit.call(hitEntity);
-            return entityManager.KILL_ME_NOW;
-        }
-    }
 
     spatialManager.register(this);
 };
