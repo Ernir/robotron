@@ -164,6 +164,7 @@ var levelManager = {
 	gameOver: function () {
 		this._isGameOver = true;
 		this._isChangingLevel = true;
+		Player.addLives();
 	},
 	
 	isGameOver: function () {
