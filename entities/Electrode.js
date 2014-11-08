@@ -11,6 +11,7 @@ function Electrode(descr) {
     Enemy.call(this, descr);
 
     this.sprite = g_sprites.Electrode[0];
+    this.capPositions();
 }
 
 Electrode.prototype = Object.create(Enemy.prototype);
