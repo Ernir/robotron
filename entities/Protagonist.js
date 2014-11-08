@@ -123,15 +123,13 @@ Protagonist.prototype.maybeFire = function () {
 };
 
 Protagonist.prototype.takeEnemyHit = function () {
-    if(g_canBeKilled) {
-        Player.subtractLives();
-        if (Player.getLives() > 0) {
-            this.setPos(g_canvas.width / 2, g_canvas.height / 2);
-            Player.resetMultiplier();
-    		levelManager.continueLevel();
-        } else {
-            this.kill();
-        }
+    Player.subtractLives();
+    if (Player.getLives() > 0) {
+        this.setPos(g_canvas.width / 2, g_canvas.height / 2);
+        Player.resetMultiplier();
+		levelManager.continueLevel();
+    } else {
+        this.kill();
     }
 };
 
