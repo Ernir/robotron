@@ -49,15 +49,19 @@ Bullet.prototype.lifeSpan = 3 * SECS_TO_NOMINALS;
 
 
 Bullet.prototype.update = function (du) {
-    this.velX = this.bulletVel * this.dirnX;
-    this.velY = this.bulletVel * this.dirnY;
 
     spatialManager.unregister(this);
+	
+	// Handle death
     if(this._isDeadNow) return entityManager.KILL_ME_NOW;
     
     this.lifeSpan -= du;
     if (this.lifeSpan < 0) return entityManager.KILL_ME_NOW;
 
+	// Update positions
+	this.velX = this.bulletVel * this.dirnX;
+    this.velY = this.bulletVel * this.dirnY;
+	
     this.cx += this.velX * du;
     this.cy += this.velY * du;
 

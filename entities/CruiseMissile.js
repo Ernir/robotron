@@ -23,17 +23,23 @@ CruiseMissile.prototype.baseVel = 2;
 
 CruiseMissile.prototype.update = function (du) {
 
-    if (this.target === null || this.target === undefined) {
+    spatialManager.unregister(this);
+	
+	// Handle death
+	if (this.target === null || this.target === undefined) {
         this._isDeadNow = true;
     }
-
-    this.lifeSpan += -du;
-    spatialManager.unregister(this);
-    // Handle death
-    if (this._isDeadNow || this.lifeSpan < 0) {
-        return entityManager.KILL_ME_NOW;
-    }
+	
+    if(this._isDeadNow) return entityManager.KILL_ME_NOW;
+    
+    this.lifeSpan -= du;
+    if (this.lifeSpan < 0) return entityManager.KILL_ME_NOW;
+	
+	// Update positions
     this.seekTarget();
+	
+	this.cx += this.velX * du;
+    this.cy += this.velY * du;
 
     // Handle collisions
     var hitEntity = this.findHitEntity();
@@ -44,10 +50,6 @@ CruiseMissile.prototype.update = function (du) {
             return entityManager.KILL_ME_NOW;
         }
     }
-
-    this.cx += this.velX * du;
-    this.cy += this.velY * du;
-    this.capPositions();
 
     spatialManager.register(this);
 };
@@ -65,17 +67,21 @@ CruiseMissile.prototype.seekTarget = function () {
 
     this.velY = 0;
     if (yOffset > 0) {
-        this.velY = 2;
+        this.velY = this.baseVel;
     } else if (yOffset < 0) {
         this.velY = -this.baseVel;
     }
 
-    // TODO: Clamp velocity
+    // Clamp velocity to the radius of this.baseVel
+	if (this.velX !== 0 && this.velY !== 0) {
+		this.velX *= Math.cos(Math.PI / 4);
+		this.velY *= Math.sin(Math.PI / 4);
+	}
 };
 
 CruiseMissile.prototype.takeBulletHit = function () {
     this.kill();
-    Player.addScore(Player.scoreValues.CM * Player.getMultiplier()); // TODO remove magic number
+    Player.addScore(Player.scoreValues.CM * Player.getMultiplier());
 };
 
 CruiseMissile.prototype.getRadius = function () {
