@@ -49,6 +49,7 @@ var levelManager = {
         entityManager.clearAll();
         spatialManager.resetAll();
         this._isChangingLevel = true;
+		this._isGameOver = false;
 
         //if Player.level > the number of pre-made levels
         //then make a random level
