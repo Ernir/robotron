@@ -136,6 +136,11 @@ var entityManager = {
 		levelManager.setChangingLevel();
     },
 
+    clearPartial: function () {
+        this._bullets.length = 0;
+        this._scoreImgs.length = 0;
+    },
+
 // ---------------------
 // Player entity methods
 	

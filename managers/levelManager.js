@@ -62,7 +62,7 @@ var levelManager = {
     continueLevel: function () {
         // Reset all remaining entities in the level
         // Used when the player dies, but has extra lives remaining
-
+        entityManager.clearPartial();
 		entityManager.resetPos();
 
         //TODO: Add sound
