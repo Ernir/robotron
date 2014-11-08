@@ -123,6 +123,9 @@ var entityManager = {
     },
 
     clearPartial: function () {
+        for (var i = 0; i < this._bullets.length; i++) {
+            spatialManager.unregister(this._bullets[i]);
+        };
         this._bullets.length = 0;
         this._scoreImgs.length = 0;
     },
