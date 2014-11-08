@@ -70,6 +70,7 @@ var levelManager = {
         // Used when the player dies, but has extra lives remaining
         entityManager.clearPartial();
 		entityManager.resetPos();
+        spatialManager.resetAll();
         this._isChangingLevel = true; //TODO: Different animation?
     },
 
