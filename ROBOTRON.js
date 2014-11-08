@@ -57,7 +57,15 @@ function updateSimulation(du) {
 
     processDiagnostics();
 
-    entityManager.update(du);
+    if (Player.getLives() === 0) {};//TODO: Transition to main menu or game over screen
+
+    if (levelManager.isChangingLevel()) {
+        levelManager.reduceTimer(du);
+    }else{
+        entityManager.update(du);
+    }
+
+    if (entityManager.enemiesIsEmpty()) levelManager.nextLevel();
 }
 
 // GAME-SPECIFIC DIAGNOSTICS
@@ -104,12 +112,14 @@ function processDiagnostics() {
 
 function renderSimulation(ctx) {
 
-    entityManager.render(ctx);
-
-    renderCrosshair(ctx);
+    if (levelManager.isChangingLevel()) {
+        levelManager.changeLevel(ctx);
+    }else{
+        entityManager.render(ctx);
+        renderCrosshair(ctx);
+        if (g_renderSpatialDebug) spatialManager.render(ctx);
+    }
     Player.render(ctx);
-
-    if (g_renderSpatialDebug) spatialManager.render(ctx);
 }
 
 

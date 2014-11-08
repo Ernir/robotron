@@ -45,7 +45,10 @@ var levelManager = {
         // Create a fresh level
         entityManager.clearAll();
         spatialManager.resetAll();
-        //if Player.level > this._levelSpecs make random level
+        levelManager.setChangingLevel();
+
+        //if Player.level > the number of pre-made levels
+        //then make a random level
         if (Player.level >= this._levelSpecs.length) {
             var randomlevel = [];
             //TODO: uppfæra lykkjufjöldan til að vera í samræmi við fjölda óvina + family
@@ -64,6 +67,7 @@ var levelManager = {
         // Used when the player dies, but has extra lives remaining
         entityManager.clearPartial();
 		entityManager.resetPos();
+        levelManager.setChangingLevel(); //TODO: Different animation?
 
         //TODO: Add sound
     },

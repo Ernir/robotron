@@ -41,7 +41,7 @@ var entityManager = {
 
     // Accepts an array of objects {n : [number], f : [function]}.
     // Calls each [function] number [times].
-    _startLevel: function (levelDescription) {
+    _fillCategories: function (levelDescription) {
         for (var i = 0; i < levelDescription.length; i++) {
             var entity = levelDescription[i];
             for (var j = 0; j < entity.n; j++) {
@@ -55,19 +55,6 @@ var entityManager = {
             fn.call(aCategory[i]);
         }
     },
-	
-	_isFinished: function () {
-		// TODO: DIE if you gots no life! ;D
-		if (Player.getLives() === 0)
-			return; //TODO: transition to main menu
-		
-		// TODO: DO level up if enemies is empty
-		// Need to somehow distinguish between
-		// "undead" and killable enemies.
-		// Like separate categories?
-		if (this._enemies.length === 0)
-			levelManager.nextLevel();
-	},
 
 // PUBLIC METHODS
 
@@ -106,7 +93,7 @@ var entityManager = {
             descr[i+1].n =level[i];
         };
 
-        this._startLevel(descr);
+        this._fillCategories(descr);
     },
 
     resetPos: function () {
@@ -133,12 +120,16 @@ var entityManager = {
         for (var c = 0; c < this._categories.length; ++c) {
             this._categories[c].length = 0;
         }
-		levelManager.setChangingLevel();
     },
 
     clearPartial: function () {
         this._bullets.length = 0;
         this._scoreImgs.length = 0;
+    },
+
+    enemiesIsEmpty: function () {
+        if (this._enemies.length === 0)
+            return true;
     },
 
 // ---------------------
@@ -279,8 +270,6 @@ var entityManager = {
 	
     update: function (du) {
 
-        if (levelManager.isChangingLevel()) return levelManager.reduceTimer(du);
-		
 		this._bulletDU += du;
 		
 		for (var c = 0; c < this._categories.length; ++c) {
@@ -302,12 +291,9 @@ var entityManager = {
                 }
             }
 		}
-		this._isFinished();
     },
 
     render: function (ctx) {
-
-        if (levelManager.isChangingLevel()) return levelManager.changeLevel(ctx);
 		
 		var debugX = 10, debugY = 100;
 
