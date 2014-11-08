@@ -38,6 +38,9 @@ var levelManager = {
 	
 	_isChangingLevel: false,
 	_changingTimer: 2 * SECS_TO_NOMINALS,
+	
+	_isGameOver: false,
+	_isWon: false,
 
     // PUBLIC METHODS
 
@@ -45,7 +48,7 @@ var levelManager = {
         // Create a fresh level
         entityManager.clearAll();
         spatialManager.resetAll();
-        levelManager.setChangingLevel();
+        this._isChangingLevel = true;
 
         //if Player.level > the number of pre-made levels
         //then make a random level
@@ -66,7 +69,7 @@ var levelManager = {
         // Used when the player dies, but has extra lives remaining
         entityManager.clearPartial();
 		entityManager.resetPos();
-        levelManager.setChangingLevel(); //TODO: Different animation?
+        this._isChangingLevel = true; //TODO: Different animation?
     },
 
     nextLevel: function () {
@@ -79,7 +82,7 @@ var levelManager = {
         this.startLevel();
     },
 	
-	changeLevel: function (ctx) {
+	renderLevelChanger: function (ctx) {
 		// TODO: Add sound
 		var halfWidth = g_canvas.width / 2;
 		var halfHeight = (g_canvas.height - consts.wallTop) / 2;
@@ -150,12 +153,24 @@ var levelManager = {
 	reduceTimer: function (du) {
 		this._changingTimer -= du;
 	},
+
+	isChangingLevel: function () {
+		return this._isChangingLevel;
+	},
 	
-	setChangingLevel: function () {
+// -----------------
+// Game Over Methods
+	
+	gameOver: function () {
+		this._isGameOver = true;
 		this._isChangingLevel = true;
 	},
 	
-	isChangingLevel: function () {
-		return this._isChangingLevel;
+	isGameOver: function () {
+		return this._isGameOver;
+	},
+	
+	renderGameOver: function (ctx) {
+		// TODO: Game over screen and maybe animation
 	}
 };

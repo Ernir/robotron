@@ -57,13 +57,15 @@ function updateSimulation(du) {
 
     processDiagnostics();
 
-    if (Player.getLives() === 0) {};//TODO: Transition to main menu or game over screen
-
     if (levelManager.isChangingLevel()) {
         levelManager.reduceTimer(du);
-    }else{
+    } else {
         entityManager.update(du);
     }
+	
+	if (Player.getLives() === 0) {
+		levelManager.gameOver();
+	};//TODO: Transition to main menu or game over screen
 
     if (entityManager.enemiesIsEmpty()) levelManager.nextLevel();
 }
@@ -113,12 +115,20 @@ function processDiagnostics() {
 function renderSimulation(ctx) {
 
     if (levelManager.isChangingLevel()) {
-        levelManager.changeLevel(ctx);
-    }else{
+	
+        levelManager.renderLevelChanger(ctx);
+		
+	} else if (levelManager.isGameOver()) {
+	
+		levelManager.renderGameOver(ctx);
+		
+    } else {
+	
         entityManager.render(ctx);
         renderCrosshair(ctx);
         if (g_renderSpatialDebug) spatialManager.render(ctx);
     }
+	
     Player.render(ctx);
 }
 
@@ -172,7 +182,6 @@ function preloadDone() {
     }
 
     initializeEntities();
-    //entityManager.init();
     levelManager.startLevel();
 
     main.init();
