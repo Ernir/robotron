@@ -51,7 +51,7 @@ var levelManager = {
         //then make a random level
         if (Player.level >= this._levelSpecs.length) {
             var randomlevel = [];
-            //TODO: uppfæra lykkjufjöldan til að vera í samræmi við fjölda óvina + family
+            //TODO: update the loop according to the number of enemy + family types
             for (var i = 0; i < 5; i++) {
                 randomlevel.push(Math.floor(Math.random()*10));
             };
@@ -59,7 +59,6 @@ var levelManager = {
         }else{
             entityManager.init(this._levelSpecs[Player.level]);
         }
-        //TODO: Add sound
     },
 
     continueLevel: function () {
@@ -68,20 +67,16 @@ var levelManager = {
         entityManager.clearPartial();
 		entityManager.resetPos();
         levelManager.setChangingLevel(); //TODO: Different animation?
-
-        //TODO: Add sound
     },
 
     nextLevel: function () {
         Player.addLevel();
         this.startLevel();
-        //TODO: Add sound
     },
 
     prevLevel: function () {
         Player.subtractLevel();
         this.startLevel();
-        //TODO: Add sound
     },
 	
 	changeLevel: function (ctx) {
