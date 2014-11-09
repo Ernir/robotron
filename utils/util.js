@@ -111,13 +111,6 @@ var util = {
         }
         return this.square(dx) + this.square(dy);
     },
-    capPositions: function(entity) {
-		var r = entity.getRadius();
-        entity.cx = Math.max(entity.cx, consts.wallLeft + r);
-        entity.cx = Math.min(entity.cx, consts.wallRight - r);
-        entity.cy = Math.max(entity.cy, consts.wallTop + r);
-        entity.cy = Math.min(entity.cy, consts.wallBottom - r);
-    },
 
 
 // CANVAS OPS

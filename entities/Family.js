@@ -55,9 +55,10 @@ Family.prototype.update = function (du) {
         }
         this.randomWalk();
 
+        //TODO: Make them less likely to change direction after bouncing?
+        this.edgeBounce();
         this.cx += this.velX * du;
         this.cy += this.velY * du;
-        this.capPositions();
 
         // Handle collisions
         var hitEntity = this.findHitEntity();
