@@ -33,6 +33,7 @@ Family.prototype.lifeSpan = 1 * SECS_TO_NOMINALS;
 Family.prototype.isDying = false;
 Family.prototype.isSaved = false;
 Family.prototype.renderPos = {cx: this.cx, cy: this.cy};
+Family.prototype.willSpawnProg = false;
 
 Family.prototype.update = function (du) {
 
@@ -47,6 +48,9 @@ Family.prototype.update = function (du) {
     if (this.isDying) {
         this.lifeSpan += -du;
         if (this.lifeSpan <= 0) {
+            if(this.willSpawnProg){
+                entityManager.createProg(this.cx,this.cy);
+            }
             this.kill();
         }
     } else {
@@ -55,6 +59,7 @@ Family.prototype.update = function (du) {
         }
         this.randomWalk();
 
+        this.capPositions();
         //TODO: Make them less likely to change direction after bouncing?
         this.edgeBounce();
         this.cx += this.velX * du;
@@ -64,7 +69,7 @@ Family.prototype.update = function (du) {
         var hitEntity = this.findHitEntity();
         if (hitEntity) {
             if (hitEntity.makesProgs){
-                entityManager.createProg(this.cx,this.cy);
+                this.willSpawnProg = true;
             }
             var canKillMe = hitEntity.killFamily;
             if (canKillMe) {

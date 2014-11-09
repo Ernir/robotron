@@ -16,7 +16,7 @@ function Prog(descr) {
 }
 
 Prog.prototype = Object.create(Enemy.prototype);
-Prog.prototype.panic = 5;
+Prog.prototype.speed = 1;
 Prog.prototype.renderPos = {cx: this.cx, cy: this.cy};
 
 Prog.prototype.update = function (du) {
@@ -30,11 +30,9 @@ Prog.prototype.update = function (du) {
         return entityManager.KILL_ME_NOW;
     }
 
-    if (Math.random() < 0.01 && this.panic < 3) {
-        this.panic += 0.1;
-    }
     this.randomWalk();
 
+    this.capPositions();
     //TODO: Make them less likely to change direction after bouncing?
     this.edgeBounce();
 
@@ -47,22 +45,22 @@ Prog.prototype.update = function (du) {
 };
 
 Prog.prototype.randomWalk = function () {
-    if (Math.random() < 0.01 * this.panic) {
+    if (Math.random() < 0.02) {
         //2% chance to change direction
 
         var n = Math.floor(Math.random() * 4);
         switch (n) {
             case 0:
-                this.velX = -0.3 * this.panic;
+                this.velX = -this.speed;
                 break;
             case 1:
-                this.velY = -0.3 * this.panic;
+                this.velY = -this.speed;
                 break;
             case 2:
-                this.velX = 0.3 * this.panic;
+                this.velX = this.speed;
                 break;
             case 3:
-                this.velY = 0.3 * this.panic;
+                this.velY = this.speed;
         }
     }
 };
