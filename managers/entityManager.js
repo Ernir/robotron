@@ -271,7 +271,11 @@ var entityManager = {
     },
 
     createPowerup: function (cx,cy) {
-        this._drops.push(new Powerup({cx: cx, cy: cy}));
+        var type = Math.floor(Math.random()*2);
+        this._drops.push(new Powerup({cx: cx, 
+                                      cy: cy, 
+                                      type: type
+                                      }));
     },
 
 // --------------------

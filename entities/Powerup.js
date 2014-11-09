@@ -12,9 +12,22 @@ function Powerup(descr) {
     // Common inherited setup logic from Entity
     this.setup(descr);
     
+    switch(this.type){
+        case 0:
+            this.isExtralife = true;
+            break;
+        case 1:
+            this.isSpeedBoost = true;
+            break;
+    }
 }
 
 Powerup.prototype = new Entity();
+Powerup.prototype.isExtralife = false;
+Powerup.prototype.isSpeedBoost = false;
+Powerup.prototype.isScoreMultiplier = false;
+Powerup.prototype.isMachinegun = false;
+Powerup.prototype.isShotgun = false;
 
 Powerup.prototype.update = function (du) {
     spatialManager.unregister(this);
@@ -27,9 +40,10 @@ Powerup.prototype.update = function (du) {
 };
 
 Powerup.prototype.takeProtagonistHit = function () {
-    //TODO: interesting effect
+    //TODO: add more interesting effects
     this.kill();
-    Player.addLives();
+    if (this.isExtralife) Player.addLives();
+    if (this.isSpeedBoost) Player.addSpeed();
 };
 
 Powerup.prototype.getRadius = function () {
@@ -38,8 +52,9 @@ Powerup.prototype.getRadius = function () {
 
 Powerup.prototype.render = function (ctx) {
     ctx.save();
-    //TODO: Add a cool sprite
-    ctx.fillStyle = "cyan";
+    //TODO: Add cool sprites
+    if (this.isExtralife) ctx.fillStyle = "cyan";
+    if (this.isSpeedBoost) ctx.fillStyle = "red";
     util.fillCircle(ctx, this.cx, this.cy, this.getRadius());
     ctx.restore();
 };
