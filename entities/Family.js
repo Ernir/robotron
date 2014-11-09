@@ -114,6 +114,7 @@ Family.prototype.takeProtagonistHit = function () {
         cy: this.cy,
         m: Player.getMultiplier()});
     Player.addMultiplier();
+    Player.addSaveCount();
     this.kill();
 };
 

@@ -32,7 +32,7 @@ Player.prototype.level = 1;
 Player.prototype.lives = 5;
 Player.prototype.multiplier = 1;
 Player.prototype.score = 0;
-// Aths: Töflum ber ekki alveg saman um gildin.
+Player.prototype.saveCount = 0;
 Player.prototype.scoreValues = {
     Electrode: 0,
     Spark: 25,
@@ -47,7 +47,6 @@ Player.prototype.scoreValues = {
     Quark: 1000,
     Family: 1000
 };
-
 
 Player.prototype.addLevel = function () {
     this.level += 1;
