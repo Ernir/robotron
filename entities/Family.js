@@ -63,7 +63,7 @@ Family.prototype.update = function (du) {
         var hitEntity = this.findHitEntity();
         if (hitEntity) {
             if (hitEntity.makesProgs){
-                // TODO: Spawn new Prog
+                entityManager.createProg(this.cx,this.cy);
             }
             var canKillMe = hitEntity.killFamily;
             if (canKillMe) {

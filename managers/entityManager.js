@@ -268,6 +268,10 @@ var entityManager = {
         this._enemies.push(new Electrode(descr))
     },
 
+    createProg: function (cx,cy) {
+        this._enemies.push(new Prog({cx: cx, cy: cy}))
+    },
+
 // --------------------
 // Update & Render
 	

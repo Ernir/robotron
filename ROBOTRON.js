@@ -150,6 +150,7 @@ function preloadDone() {
     // Static images
     g_sprites.Skull = new Sprite(g_images.Skull);
     g_sprites.Extralife = new Sprite(g_images.Extralife);
+    g_sprites.Prog = new Sprite(g_images.Prog);
     
     // Spritesheets
     g_sprites.Dad = [];
