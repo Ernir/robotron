@@ -11,6 +11,7 @@ function Tank(descr) {
     Enemy.call(this, descr);
 
     this.sprite = g_sprites.Tank;
+    this.target = entityManager.findProtagonist();
     // TODO play spawning sound?
 }
 
@@ -31,11 +32,6 @@ Tank.prototype.update = function (du) {
         return entityManager.KILL_ME_NOW;
     }
 
-    if(Math.random() < this.shellFireChance) {
-        // TODO: launch shells instead of CMs...
-        entityManager.fireCruiseMissile(this.cx,this.cy);
-    }
-
     this.randomWalk();
 
     this.capPositions();
@@ -43,6 +39,17 @@ Tank.prototype.update = function (du) {
 
     this.cx += this.velX * du;
     this.cy += this.velY * du;
+
+    if (Math.random() < this.shellFireChance) {
+        // TODO: Add a bit of inaccuracy to the angle.
+        var angle = util.angleTo(
+            this.cx,
+            this.cy,
+            this.target.cx,
+            this.target.cy
+        );
+        entityManager.fireShell(this.cx, this.cy, angle);
+    }
 
     spatialManager.register(this);
 
