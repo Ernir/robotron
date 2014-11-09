@@ -11,7 +11,6 @@ function Prog(descr) {
     Enemy.call(this, descr);
 
     this.sprite = g_sprites.Prog;
-    this.target = entityManager.findProtagonist();
     // TODO play spawning sound?
 }
 
