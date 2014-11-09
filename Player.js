@@ -32,13 +32,22 @@ Player.prototype.level = 1;
 Player.prototype.lives = 5;
 Player.prototype.multiplier = 1;
 Player.prototype.score = 0;
+// Aths: Töflum ber ekki alveg saman um gildin.
 Player.prototype.scoreValues = {
+    Electrode: 0,
+    Spark: 25,
+    Shell: 50,
+    CruiseMissile: 75,
+    Prog: 100,
     Grunt: 100,
-    Family: 1000,
-    CM: 25,
+    Enforcer: 200,
+    Tank : 300,
     Brain: 500,
-    Electrode: 50 // TODO: Find the webpage with the scores again, and update value
+    Spheroid: 1000,
+    Quark: 1000,
+    Family: 1000
 };
+
 
 Player.prototype.addLevel = function () {
     this.level += 1;
