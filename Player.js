@@ -43,7 +43,6 @@ Player.prototype.scoreValues = {
 
 Player.prototype.addLevel = function () {
     this.level += 1;
-    //TODO: increase the levelcap according to levelmanager._levelSpecs.length
 };
 
 Player.prototype.subtractLevel = function () {

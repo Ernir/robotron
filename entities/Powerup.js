@@ -28,10 +28,17 @@ Powerup.prototype.update = function (du) {
 
 Powerup.prototype.takeProtagonistHit = function () {
     //TODO: interesting effect
+    this.kill();
+    Player.addLives();
+};
+
+Powerup.prototype.getRadius = function () {
+    return 4;
 };
 
 Powerup.prototype.render = function (ctx) {
     ctx.save();
+    //TODO: Add a cool sprite
     ctx.fillStyle = "cyan";
     util.fillCircle(ctx, this.cx, this.cy, this.getRadius());
     ctx.restore();
