@@ -11,6 +11,7 @@ g_imgUrls = {
 	Quark : "https://notendur.hi.is/~eth31/cgp/staticdata/sprites/Quark.png",
 	Spheroid : "https://notendur.hi.is/~eth31/cgp/staticdata/sprites/Spheroid.png",
 	Tank : "https://notendur.hi.is/~eth31/cgp/staticdata/sprites/Tank.png",
+	
 	2084 : "https://notendur.hi.is/~eth31/cgp/staticdata/Shapes/2084.png",
 	BlackDiamond : "https://notendur.hi.is/~eth31/cgp/staticdata/Shapes/BlackDiamond.png",
 	Checkers : "https://notendur.hi.is/~eth31/cgp/staticdata/Shapes/Checkers.png",
@@ -23,6 +24,7 @@ g_imgUrls = {
 	Spark : "https://notendur.hi.is/~eth31/cgp/staticdata/Shapes/Spark.png",
 	Square : "https://notendur.hi.is/~eth31/cgp/staticdata/Shapes/Square.png",
 	Triangle : "https://notendur.hi.is/~eth31/cgp/staticdata/Shapes/Triangle.png",
+	
 	GreenAlphabet : "https://notendur.hi.is/~eth31/cgp/staticdata/Numbers%20and%20letters/GreenAlphabet.png",
 	RedAlphabet : "https://notendur.hi.is/~eth31/cgp/staticdata/Numbers%20and%20letters/RedAlphabet.png",
 	WhiteNumbers : "https://notendur.hi.is/~eth31/cgp/staticdata/Numbers%20and%20letters/WhiteNumbers.png",
@@ -41,7 +43,9 @@ g_audioUrls = {
 	playerdead : "https://notendur.hi.is/~eth31/cgp/staticdata/Sounds/playerdead.wav",
 	shot : "https://notendur.hi.is/~eth31/cgp/staticdata/Sounds/shot.wav",
 	startsound : "https://notendur.hi.is/~eth31/cgp/staticdata/Sounds/startsound.wav",
-	walk : "https://notendur.hi.is/~eth31/cgp/staticdata/Sounds/walk.wav"
+	walk : "https://notendur.hi.is/~eth31/cgp/staticdata/Sounds/walk.wav",
+	
+	todIOF : "https://notendur.hi.is/~jiz2/TOL-S3/08%20lion%20-irony%20of%20fate-%20%5bfrom%20tales%20of%20destiny%5d.mp3"
 };
 
 /* 

@@ -74,12 +74,16 @@ function updateSimulation(du) {
 
 var g_renderSpatialDebug = false;
 var g_canBeKilled = true;
+var g_sounds = true;
+var g_music = true;
 
 var KEY_SPATIAL = keyCode('X');
 var KEY_KILLABLE = keyCode('K');
 var KEY_RESTART = keyCode('R');
 var KEY_NEXT_LEVEL = 107;
 var KEY_PREV_LEVEL = 109;
+var KEY_SOUND = keyCode('N');
+var KEY_MUSIC = keyCode('M');
 
 function processDiagnostics() {
 
@@ -95,6 +99,10 @@ function processDiagnostics() {
     if (eatKey(KEY_NEXT_LEVEL)) levelManager.nextLevel();
 
     if (eatKey(KEY_PREV_LEVEL)) levelManager.prevLevel();
+	
+	if (eatKey(KEY_SOUND)) g_sound = !g_sound;
+	
+	if (eatKey(KEY_MUSIC)) g_music = !g_music;
 }
 
 
