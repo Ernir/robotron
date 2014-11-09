@@ -41,8 +41,6 @@ var levelManager = {
 	
 	_isGameOver: false,
 	_isWon: false,
-	
-	_bgm: new Audio(g_audioUrls.todIOF),
 
     // PUBLIC METHODS
 
@@ -52,7 +50,6 @@ var levelManager = {
         spatialManager.resetAll();
         this._isChangingLevel = true;
 		this._isGameOver = false;
-		if (g_music) this._bgm.play();
 
         //if Player.level > the number of pre-made levels
         //then make a random level

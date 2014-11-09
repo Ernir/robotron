@@ -9,11 +9,14 @@ function Brain(descr) {
     Enemy.call(this, descr);
 
     this.sprite = g_sprites.Brain[6];
+	this.spawnSound.play()
 }
 
 Brain.prototype = Object.create(Enemy.prototype);
 
-Brain.prototype = Object.create(Enemy.prototype);
+// HACKED-IN AUDIO (no preloading)
+Brain.prototype.spawnSound = new Audio(g_audioUrls.brains);
+
 Brain.prototype.timeSinceHit = Infinity;
 Brain.prototype.killFamily = true;
 Brain.prototype.renderPos = {cx: this.cx, cy: this.cy};

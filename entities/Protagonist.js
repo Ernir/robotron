@@ -21,7 +21,7 @@ function Protagonist(descr) {
 Protagonist.prototype = new Entity();
 
 // HACKED-IN AUDIO (no preloading)
-Protagonist.prototype.exampleSound = new Audio("sounds/exampleSound.ogg");
+Protagonist.prototype.walkSound = new Audio(g_audioUrls.walk);
 
 Protagonist.prototype.KEY_UP     = 'W'.charCodeAt(0);
 Protagonist.prototype.KEY_DOWN   = 'S'.charCodeAt(0);
@@ -76,24 +76,32 @@ Protagonist.prototype.update = function (du) {
 Protagonist.prototype.computeMovement = function () {
 	var velX = 0;
 	var velY = 0;
+	var hasMoved = false;
     
     if (keys[this.KEY_UP]) {
         velY -= 5;
+		hasMoved = true;
     }
     if (keys[this.KEY_DOWN]) {
         velY += 5;
+		hasMoved = true;
     }
 	if (keys[this.KEY_LEFT]) {
         velX -= 5;
+		hasMoved = true;
     }
     if (keys[this.KEY_RIGHT]) {
         velX += 5;
+		hasMoved = true;
     }
 	// Clamp vel to 5 pixel moving radius
 	if (velX !== 0 && velY !== 0) {
 		velX *= Math.cos(Math.PI / 4);
 		velY *= Math.sin(Math.PI / 4);
 	}
+	
+	// Walk makes a sound if moved
+	if (g_sounds && hasMoved) this.walkSound.play()
     
     return {x: velX, y: velY};
 };

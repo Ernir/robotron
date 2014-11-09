@@ -28,6 +28,7 @@ function initializeEntities() {
     // TODO
 }
 var Player = new Player();
+var g_bgm = new Audio(g_audioUrls.todIOF);
 
 // =============
 // GATHER INPUTS
@@ -102,9 +103,11 @@ function processDiagnostics() {
 
     if (eatKey(KEY_PREV_LEVEL)) levelManager.prevLevel();
 	
-	if (eatKey(KEY_SOUND)) g_sound = !g_sound;
+	if (eatKey(KEY_SOUND)) g_sounds = !g_sounds;
 	
 	if (eatKey(KEY_MUSIC)) g_music = !g_music;
+	if (g_music) g_bgm.play();
+	else g_bgm.pause();
 }
 
 
