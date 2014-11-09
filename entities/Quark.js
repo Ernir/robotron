@@ -16,7 +16,7 @@ function Quark(descr) {
 
 Quark.prototype = Object.create(Enemy.prototype);
 Quark.prototype.speed = 2;
-Quark.prototype.tankSpawnChance = 0.02; //2% chance of spawning a tank/update
+Quark.prototype.tankSpawnChance = 0.005; //0,5% chance of spawning a tank/update
 // TODO: Find a good spawn interval.
 Quark.prototype.renderPos = {cx: this.cx, cy: this.cy};
 
@@ -32,8 +32,7 @@ Quark.prototype.update = function (du) {
     }
 
     if(Math.random() < this.tankSpawnChance) {
-        // TODO: launch tanks instead of CMs...
-        entityManager.fireCruiseMissile(this.cx,this.cy);
+        entityManager.createTank(this.cx,this.cy);
     }
 
     this.randomWalk();

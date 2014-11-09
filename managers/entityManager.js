@@ -279,6 +279,10 @@ var entityManager = {
         this._enemies.push(new Quark(descr))
     },
 
+    createTank: function(cx,cy) {
+        this._enemies.push(new Tank({cx: cx, cy: cy}))
+    },
+
 // --------------------
 // Update & Render
 	
