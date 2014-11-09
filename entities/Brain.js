@@ -5,6 +5,8 @@
 // Brains launch seeking cruise missiles
 // Brains turn family members into Progs
 
+"use strict";
+
 function Brain(descr) {
     Enemy.call(this, descr);
 
@@ -29,6 +31,7 @@ Brain.prototype.update = function (du) {
     
     // Handle death
     if (this._isDeadNow) {
+        entityManager.createPowerup(this.cx,this.cy);
         return entityManager.KILL_ME_NOW;
     }
     this.seekTarget();

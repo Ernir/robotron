@@ -267,7 +267,7 @@ var entityManager = {
     createElectrode: function () {
         var playerSafeDist = 120;
         var descr = this.findSpawn(playerSafeDist);
-        this._enemies.push(new Electrode(descr))
+        this._enemies.push(new Electrode(descr));
     },
 
     createPowerup: function (cx,cy) {
