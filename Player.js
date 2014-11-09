@@ -48,6 +48,19 @@ Player.prototype.scoreValues = {
     Family: 1000
 };
 
+Player.prototype.addSaveCount = function () {
+   this.saveCount += 1;
+   if (this.saveCount > 6) {
+       this.addLives();
+        this.resetSaveCount();
+    }
+};
+
+Player.prototype.resetSaveCount = function () {
+    this.saveCount = 0;
+};
+
+
 Player.prototype.addLevel = function () {
     this.level += 1;
     //TODO: increase the levelcap according to levelmanager._levelSpecs.length
