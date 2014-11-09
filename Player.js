@@ -32,6 +32,7 @@ Player.prototype.level = 1;
 Player.prototype.lives = 5;
 Player.prototype.multiplier = 1;
 Player.prototype.score = 0;
+Player.prototype.saveCount = 0;
 Player.prototype.scoreValues = {
     Grunt: 100,
     Family: 1000,
@@ -97,6 +98,18 @@ Player.prototype.resetScore = function () {
 
 Player.prototype.getScore = function () {
     return this.score;
+};
+
+Player.prototype.addSaveCount = function () {
+    this.saveCount += 1;
+    if (this.saveCount > 6) {
+        this.addLives();
+        this.resetSaveCount();
+    }
+};
+
+Player.prototype.resetSaveCount = function () {
+    this.saveCount = 0;
 };
 
 Player.prototype.resetAll = function() {

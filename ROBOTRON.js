@@ -60,7 +60,9 @@ function updateSimulation(du) {
     if (levelManager.isChangingLevel()) {
         levelManager.reduceTimer(du);
     } else {
-        entityManager.update(du);
+        if (!levelManager.isGameOver()) {
+            entityManager.update(du);
+        }
     }
 	
 	if (Player.getLives() === 0) {
