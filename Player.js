@@ -33,6 +33,8 @@ Player.prototype.lives = 5;
 Player.prototype.multiplier = 1;
 Player.prototype.score = 0;
 Player.prototype.saveCount = 0;
+Player.prototype.speed = 2;
+Player.prototype.speedTimer = 10 * SECS_TO_NOMINALS;
 Player.prototype.scoreValues = {
     Grunt: 100,
     Family: 1000,
@@ -43,7 +45,6 @@ Player.prototype.scoreValues = {
 
 Player.prototype.addLevel = function () {
     this.level += 1;
-    //TODO: increase the levelcap according to levelmanager._levelSpecs.length
 };
 
 Player.prototype.subtractLevel = function () {
@@ -112,10 +113,28 @@ Player.prototype.resetSaveCount = function () {
     this.saveCount = 0;
 };
 
+Player.prototype.addSpeed = function () {
+    if (this.speed < 5) this.speed = 5;
+}
+
+Player.prototype.getSpeed = function () {
+    return this.speed;
+}
+
+Player.prototype.tickSpeedTimer = function (du) {
+    this.speedTimer += -du;
+    if (this.speedTimer < 0) this.resetSpeed();
+}
+
+Player.prototype.resetSpeed = function () {
+    this.speed = 2;
+}
+
 Player.prototype.resetAll = function() {
     this.resetLives();
     this.resetLevel();
     this.resetScore();
+    this.resetSpeed();
     this.resetMultiplier();
 }
 

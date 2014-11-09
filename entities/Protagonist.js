@@ -49,6 +49,7 @@ Protagonist.prototype.update = function (du) {
     }
 	
 	// Perform movement
+    if (Player.getSpeed() > 2) Player.tickSpeedTimer(du);
     var vel = this.computeMovement();
 	this.velX = vel.x;
 	this.velY = vel.y;
@@ -79,19 +80,19 @@ Protagonist.prototype.computeMovement = function () {
 	var hasMoved = false;
     
     if (keys[this.KEY_UP]) {
-        velY -= 5;
+        velY -= Player.getSpeed();
 		hasMoved = true;
     }
     if (keys[this.KEY_DOWN]) {
-        velY += 5;
+        velY += Player.getSpeed();
 		hasMoved = true;
     }
 	if (keys[this.KEY_LEFT]) {
-        velX -= 5;
+        velX -= Player.getSpeed();
 		hasMoved = true;
     }
     if (keys[this.KEY_RIGHT]) {
-        velX += 5;
+        velX += Player.getSpeed();
 		hasMoved = true;
     }
 	// Clamp vel to 5 pixel moving radius
