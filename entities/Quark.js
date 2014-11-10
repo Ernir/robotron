@@ -16,7 +16,7 @@ function Quark(descr) {
     this.baseSpeed = 1;
     this.velX = this.baseSpeed*util.randTrinary();
     this.velY = this.baseSpeed*util.randTrinary();
-
+    this.tanksSpawned = 0;
     // TODO play spawning sound?
 }
 
@@ -25,6 +25,7 @@ Quark.prototype.baseSpeed = 2;
 Quark.prototype.tankSpawnChance = 0.005; //0,5% chance of spawning a tank/update
 // TODO: Find a good spawn interval.
 Quark.prototype.renderPos = {cx: this.cx, cy: this.cy};
+Quark.prototype.maxTanks = 6;
 
 Quark.prototype.update = function (du) {
 
@@ -37,7 +38,9 @@ Quark.prototype.update = function (du) {
         return entityManager.KILL_ME_NOW;
     }
 
-    if(Math.random() < this.tankSpawnChance) {
+    // maxTanks is effectively zero-indexed
+    if(Math.random() < this.tankSpawnChance && this.tanksSpawned < this.maxTanks) {
+        this.tanksSpawned++;
         entityManager.createTank(this.cx,this.cy);
     }
 
