@@ -163,6 +163,10 @@ function preloadDone() {
     // Static images
     g_sprites.Skull = new Sprite(g_images.Skull);
     g_sprites.Extralife = new Sprite(g_images.Extralife);
+    g_sprites.Prog = new Sprite(g_images.Prog);
+
+    g_sprites.Quark = new Sprite(g_images.Quark, 42*4, 42*5); // TODO animate
+    g_sprites.Tank = new Sprite(g_images.Tank, 0, 36); // TODO animate
     
     // Spritesheets
     g_sprites.Dad = [];

@@ -36,15 +36,36 @@ Player.prototype.saveCount = 0;
 Player.prototype.speed = 2;
 Player.prototype.speedTimer = 10 * SECS_TO_NOMINALS;
 Player.prototype.scoreValues = {
+    Electrode: 0,
+    Spark: 25,
+    Shell: 50,
+    CruiseMissile: 75,
+    Prog: 100,
     Grunt: 100,
-    Family: 1000,
-    CM: 25,
+    Enforcer: 200,
+    Tank : 300,
     Brain: 500,
-    Electrode: 50 // TODO: Find the webpage with the scores again, and update value
+    Spheroid: 1000,
+    Quark: 1000,
+    Family: 1000
 };
+
+Player.prototype.addSaveCount = function () {
+   this.saveCount += 1;
+   if (this.saveCount > 6) {
+       this.addLives();
+        this.resetSaveCount();
+    }
+};
+
+Player.prototype.resetSaveCount = function () {
+    this.saveCount = 0;
+};
+
 
 Player.prototype.addLevel = function () {
     this.level += 1;
+    //TODO: increase the levelcap according to levelmanager._levelSpecs.length
 };
 
 Player.prototype.subtractLevel = function () {
