@@ -90,12 +90,16 @@ CruiseMissile.prototype.getRadius = function () {
 
 CruiseMissile.prototype.render = function (ctx) {
     ctx.save();
-    var fadeThresh = CruiseMissile.prototype.lifeSpan / 3;
+    var bombThresh = CruiseMissile.prototype.lifeSpan / 15;
 
-    if (this.lifeSpan < fadeThresh) {
-        ctx.globalAlpha = this.lifeSpan / fadeThresh;
+    if (this.lifeSpan < bombThresh) {
+        var fraction = this.lifeSpan / bombThresh;
+        var explosion = this.getRadius() + (1-fraction) * 3;
+        ctx.fillStyle = "orange";
+        util.fillCircle(ctx, this.cx, this.cy, explosion);
+    }else{
+        ctx.fillStyle = "green";
+        util.fillCircle(ctx, this.cx, this.cy, this.getRadius());
     }
-    ctx.fillStyle = "green";
-    util.fillCircle(ctx, this.cx, this.cy, this.getRadius());
     ctx.restore();
 };
