@@ -74,7 +74,8 @@ var entityManager = {
 			this._family, 
 			this._enemies,
             this._invincibles,
-            this._scoreImgs
+            this._scoreImgs,
+            this._drops
 		];
     },
 
@@ -279,7 +280,7 @@ var entityManager = {
     },
 	createProg: function (cx,cy) {
         this._enemies.push(new Prog({cx: cx, cy: cy}));
-    }
+    },
 
     createQuark: function() {
         var playerSafeDist = 120;
