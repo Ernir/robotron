@@ -20,7 +20,8 @@ function Family(descr) {
 Family.prototype = new Entity();
 
 // HACKED-IN AUDIO (no preloading)
-Family.prototype.exampleSound = new Audio("sounds/exampleSound.ogg");
+Family.prototype.deadSound = new Audio(g_audioUrls.familydead);
+Family.prototype.savedSound = new Audio(g_audioUrls.familypick);
 
 // Initial, inheritable, default values
 Family.prototype.rotation = 0;
@@ -31,7 +32,6 @@ Family.prototype.velY = 0;
 Family.prototype.panic = 1;
 Family.prototype.lifeSpan = 1 * SECS_TO_NOMINALS;
 Family.prototype.isDying = false;
-Family.prototype.isSaved = false;
 Family.prototype.renderPos = {cx: this.cx, cy: this.cy};
 Family.prototype.willSpawnProg = false;
 
@@ -42,10 +42,15 @@ Family.prototype.update = function (du) {
 	if (!this.startPos) this.startPos = this.getPos();
 	
     // Handle death
-    if (this._isDeadNow || this.isSaved) {
+    if (this._isDeadNow) {
         return entityManager.KILL_ME_NOW;
     }
     if (this.isDying) {
+		if (!this.died) {
+			this.deadSound.currentTime = 0;
+			this.died = true;
+		}
+		if (g_sounds) this.deadSound.play();
         this.lifeSpan += -du;
         if (this.lifeSpan <= 0) {
             if(this.willSpawnProg){
@@ -115,6 +120,8 @@ Family.prototype.takeProtagonistHit = function () {
         m: Player.getMultiplier()});
     Player.addMultiplier();
     Player.addSaveCount();
+	this.savedSound.currentTime = 0;
+	if (g_sounds) this.savedSound.play();
     this.kill();
 };
 

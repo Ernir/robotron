@@ -28,6 +28,7 @@ function initializeEntities() {
     // TODO
 }
 var Player = new Player();
+var g_bgm = new Audio(g_audioUrls.todIOF);
 
 // =============
 // GATHER INPUTS
@@ -76,12 +77,16 @@ function updateSimulation(du) {
 
 var g_renderSpatialDebug = false;
 var g_canBeKilled = true;
+var g_sounds = true;
+var g_music = true;
 
 var KEY_SPATIAL = keyCode('X');
 var KEY_KILLABLE = keyCode('K');
 var KEY_RESTART = keyCode('R');
 var KEY_NEXT_LEVEL = 107;
 var KEY_PREV_LEVEL = 109;
+var KEY_SOUND = keyCode('N');
+var KEY_MUSIC = keyCode('M');
 
 function processDiagnostics() {
 
@@ -97,6 +102,12 @@ function processDiagnostics() {
     if (eatKey(KEY_NEXT_LEVEL)) levelManager.nextLevel();
 
     if (eatKey(KEY_PREV_LEVEL)) levelManager.prevLevel();
+	
+	if (eatKey(KEY_SOUND)) g_sounds = !g_sounds;
+	
+	if (eatKey(KEY_MUSIC)) g_music = !g_music;
+	if (g_music) g_bgm.play();
+	else g_bgm.pause();
 }
 
 
@@ -159,32 +170,27 @@ function preloadDone() {
     
     // Spritesheets
     g_sprites.Dad = [];
+    g_sprites.Protagonist = [];
+    g_sprites.Brain = [];
+    g_sprites.Hulk = [];
+    g_sprites.Grunt = [];
+    g_sprites.Electrode = [];
+    g_sprites.HumanScore = [];
+
     for (var i = 0; i < 12; i++) {
         g_sprites.Dad[i] = new Sprite(g_images.Dad, i*30, (i+1)*30);
+        g_sprites.Protagonist[i] = new Sprite(g_images.Protagonist, i*26, (i+1)*26);
+        g_sprites.Brain[i] = new Sprite(g_images.Brain, i*38, (i+1)*38);
     }
-    g_sprites.Protagonist = [];
-    for (var i = 0; i < 12; i++) {
-        g_sprites.Protagonist[i] = new Sprite(g_images.Protagonist, i*26, (i+1)*26);    
-    }
-    g_sprites.Hulk = [];
     for (var i = 0; i < 9; i++) {
         g_sprites.Hulk[i] = new Sprite(g_images.Hulk, i*38, (i+1)*38);    
     }
-    g_sprites.Grunt = [];
     for (var i = 0; i < 3; i++) {
         g_sprites.Grunt[i] = new Sprite(g_images.Grunt, i*30, (i+1)*30);
+        g_sprites.Electrode[i] = new Sprite(g_images.Triangle, i*27, (i+1)*27);
     }
-    g_sprites.HumanScore = [];
     for (var i = 0; i < 5; i++) {
         g_sprites.HumanScore[i + 1] = new Sprite(g_images.HumanScore, 3 + (i * 34), 37 + (i * 34));
-    }
-    g_sprites.Brain = [];
-    for (var i = 0; i < 12; i++) {
-        g_sprites.Brain[i] = new Sprite(g_images.Brain, i*38, (i+1)*38);
-    }
-    g_sprites.Electrode = [];
-    for (var i = 0; i < 3; i++) {
-        g_sprites.Electrode[i] = new Sprite(g_images.Triangle, i*27, (i+1)*27);
     }
 
     initializeEntities();

@@ -41,7 +41,8 @@ g_audioUrls = {
 	playerdead : "https://notendur.hi.is/~eth31/cgp/staticdata/Sounds/playerdead.wav",
 	shot : "https://notendur.hi.is/~eth31/cgp/staticdata/Sounds/shot.wav",
 	startsound : "https://notendur.hi.is/~eth31/cgp/staticdata/Sounds/startsound.wav",
-	walk : "https://notendur.hi.is/~eth31/cgp/staticdata/Sounds/walk.wav"
+	walk : "https://notendur.hi.is/~eth31/cgp/staticdata/Sounds/walk.wav",
+	todIOF : "https://notendur.hi.is/~jiz2/TOL-S3/08%20lion%20-irony%20of%20fate-%20%5bfrom%20tales%20of%20destiny%5d.mp3"
 };
 
 /* 

@@ -33,6 +33,7 @@ var entityManager = {
     _invincibles: [],
 	_bullets: [],
     _scoreImgs: [],
+    _drops: [],
 	
 	_bulletDU: 0,
 	_bulletDuDelay: 20,
@@ -73,7 +74,8 @@ var entityManager = {
 			this._family, 
 			this._enemies,
             this._invincibles,
-            this._scoreImgs
+            this._scoreImgs,
+            this._drops
 		];
     },
 
@@ -263,13 +265,20 @@ var entityManager = {
         this._scoreImgs.push(new ScoreImg(descr));
     },
 
-    createElectrode: function() {
+    createElectrode: function () {
         var playerSafeDist = 120;
         var descr = this.findSpawn(playerSafeDist);
         this._enemies.push(new Electrode(descr));
     },
 
-    createProg: function (cx,cy) {
+    createPowerup: function (cx,cy) {
+        var type = Math.floor(Math.random()*2);
+        this._drops.push(new Powerup({cx: cx, 
+                                      cy: cy, 
+                                      type: type
+                                      }));
+    },
+	createProg: function (cx,cy) {
         this._enemies.push(new Prog({cx: cx, cy: cy}));
     },
 
@@ -286,9 +295,6 @@ var entityManager = {
     fireShell: function(cx, cy, angle) {
         this._enemies.push(new Shell({cx: cx, cy: cy, initialAngle: angle}));
     },
-//    fireShell: function (cx,cy) {
-//        this._bullets.push(new CruiseMissile({cx: cx, cy: cy}));
-//    },
 
 // --------------------
 // Update & Render
