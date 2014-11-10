@@ -114,29 +114,38 @@ Player.prototype.resetSaveCount = function () {
 };
 
 Player.prototype.addSpeed = function () {
+    this.resetSpeedTimer();
     if (this.speed < 5) this.speed = 5;
-}
+};
 
 Player.prototype.getSpeed = function () {
     return this.speed;
-}
+};
 
 Player.prototype.tickSpeedTimer = function (du) {
     this.speedTimer += -du;
-    if (this.speedTimer < 0) this.resetSpeed();
-}
+    if (this.speedTimer < 0) {
+        this.resetSpeed();
+        this.resetSpeedTimer();
+    }
+};
 
 Player.prototype.resetSpeed = function () {
     this.speed = 2;
 }
+
+Player.prototype.resetSpeedTimer = function () {
+    this.speedTimer = 10 * SECS_TO_NOMINALS;
+};
 
 Player.prototype.resetAll = function() {
     this.resetLives();
     this.resetLevel();
     this.resetScore();
     this.resetSpeed();
+    this.resetSpeedTimer();
     this.resetMultiplier();
-}
+};
 
 Player.prototype.render = function(ctx) {
     // Display the score
