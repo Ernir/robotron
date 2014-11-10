@@ -153,32 +153,27 @@ function preloadDone() {
     
     // Spritesheets
     g_sprites.Dad = [];
+    g_sprites.Protagonist = [];
+    g_sprites.Brain = [];
+    g_sprites.Hulk = [];
+    g_sprites.Grunt = [];
+    g_sprites.Electrode = [];
+    g_sprites.HumanScore = [];
+
     for (var i = 0; i < 12; i++) {
         g_sprites.Dad[i] = new Sprite(g_images.Dad, i*30, (i+1)*30);
+        g_sprites.Protagonist[i] = new Sprite(g_images.Protagonist, i*26, (i+1)*26);
+        g_sprites.Brain[i] = new Sprite(g_images.Brain, i*38, (i+1)*38);
     }
-    g_sprites.Protagonist = [];
-    for (var i = 0; i < 12; i++) {
-        g_sprites.Protagonist[i] = new Sprite(g_images.Protagonist, i*26, (i+1)*26);    
-    }
-    g_sprites.Hulk = [];
     for (var i = 0; i < 9; i++) {
         g_sprites.Hulk[i] = new Sprite(g_images.Hulk, i*38, (i+1)*38);    
     }
-    g_sprites.Grunt = [];
     for (var i = 0; i < 3; i++) {
         g_sprites.Grunt[i] = new Sprite(g_images.Grunt, i*30, (i+1)*30);
+        g_sprites.Electrode[i] = new Sprite(g_images.Triangle, i*27, (i+1)*27);
     }
-    g_sprites.HumanScore = [];
     for (var i = 0; i < 5; i++) {
         g_sprites.HumanScore[i + 1] = new Sprite(g_images.HumanScore, 3 + (i * 34), 37 + (i * 34));
-    }
-    g_sprites.Brain = [];
-    for (var i = 0; i < 12; i++) {
-        g_sprites.Brain[i] = new Sprite(g_images.Brain, i*38, (i+1)*38);
-    }
-    g_sprites.Electrode = [];
-    for (var i = 0; i < 3; i++) {
-        g_sprites.Electrode[i] = new Sprite(g_images.Triangle, i*27, (i+1)*27);
     }
 
     initializeEntities();

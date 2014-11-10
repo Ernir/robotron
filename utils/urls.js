@@ -11,6 +11,7 @@ g_imgUrls = {
 	Quark : "https://notendur.hi.is/~eth31/cgp/staticdata/sprites/Quark.png",
 	Spheroid : "https://notendur.hi.is/~eth31/cgp/staticdata/sprites/Spheroid.png",
 	Tank : "https://notendur.hi.is/~eth31/cgp/staticdata/sprites/Tank.png",
+
 	2084 : "https://notendur.hi.is/~eth31/cgp/staticdata/Shapes/2084.png",
 	BlackDiamond : "https://notendur.hi.is/~eth31/cgp/staticdata/Shapes/BlackDiamond.png",
 	Checkers : "https://notendur.hi.is/~eth31/cgp/staticdata/Shapes/Checkers.png",
@@ -23,6 +24,7 @@ g_imgUrls = {
 	Spark : "https://notendur.hi.is/~eth31/cgp/staticdata/Shapes/Spark.png",
 	Square : "https://notendur.hi.is/~eth31/cgp/staticdata/Shapes/Square.png",
 	Triangle : "https://notendur.hi.is/~eth31/cgp/staticdata/Shapes/Triangle.png",
+	
 	GreenAlphabet : "https://notendur.hi.is/~eth31/cgp/staticdata/Numbers%20and%20letters/GreenAlphabet.png",
 	RedAlphabet : "https://notendur.hi.is/~eth31/cgp/staticdata/Numbers%20and%20letters/RedAlphabet.png",
 	WhiteNumbers : "https://notendur.hi.is/~eth31/cgp/staticdata/Numbers%20and%20letters/WhiteNumbers.png",
