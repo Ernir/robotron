@@ -14,10 +14,9 @@ function Shell(descr) {
     // Common inherited setup logic from Entity
     this.setup(descr);
 
-    this.baseVel = 3;
+    this.baseVel = 5;
     this.velX = this.baseVel*Math.cos(descr.initialAngle);
     this.velY = this.baseVel*Math.sin(descr.initialAngle);
-    console.log(Math.cos(descr.initialAngle)^2,Math.sin(descr.initialAngle)^2);
 }
 
 Shell.prototype = new Entity();
