@@ -11,11 +11,17 @@ function Quark(descr) {
     Enemy.call(this, descr);
 
     this.sprite = g_sprites.Quark;
+
+    // Initializing speed
+    this.baseSpeed = 1;
+    this.velX = this.baseSpeed*util.randTrinary();
+    this.velY = this.baseSpeed*util.randTrinary();
+
     // TODO play spawning sound?
 }
 
 Quark.prototype = Object.create(Enemy.prototype);
-Quark.prototype.speed = 2;
+Quark.prototype.baseSpeed = 2;
 Quark.prototype.tankSpawnChance = 0.005; //0,5% chance of spawning a tank/update
 // TODO: Find a good spawn interval.
 Quark.prototype.renderPos = {cx: this.cx, cy: this.cy};
@@ -55,16 +61,16 @@ Quark.prototype.randomWalk = function () {
         var n = Math.floor(Math.random() * 4);
         switch (n) {
             case 0:
-                this.velX = -this.speed;
+                this.velX = -this.baseSpeed;
                 break;
             case 1:
-                this.velY = -this.speed;
+                this.velY = -this.baseSpeed;
                 break;
             case 2:
-                this.velX = this.speed;
+                this.velX = this.baseSpeed;
                 break;
             case 3:
-                this.velY = this.speed;
+                this.velY = this.baseSpeed;
         }
     }
 };

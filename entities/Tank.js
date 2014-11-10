@@ -12,11 +12,15 @@ function Tank(descr) {
 
     this.sprite = g_sprites.Tank;
     this.target = entityManager.findProtagonist();
+
+    // Initializing speed
+    this.baseSpeed = 1;
+    this.velX = this.baseSpeed*util.randTrinary();
+    this.velY = this.baseSpeed*util.randTrinary();
     // TODO play spawning sound?
 }
 
 Tank.prototype = Object.create(Enemy.prototype);
-Tank.prototype.speed = 1;
 Tank.prototype.shellFireChance = 0.01; //1% chance of firing a shell/update
 // TODO: Find a good firing interval.
 Tank.prototype.renderPos = {cx: this.cx, cy: this.cy};
@@ -62,19 +66,21 @@ Tank.prototype.randomWalk = function () {
         var n = Math.floor(Math.random() * 4);
         switch (n) {
             case 0:
-                this.velX = -this.speed;
+                this.velX = -this.baseSpeed;
                 break;
             case 1:
-                this.velY = -this.speed;
+                this.velY = -this.baseSpeed;
                 break;
             case 2:
-                this.velX = this.speed;
+                this.velX = this.baseSpeed;
                 break;
             case 3:
-                this.velY = this.speed;
+                this.velY = this.baseSpeed;
         }
     }
 };
+
+
 
 Tank.prototype.takeBulletHit = function () {
     this.kill();

@@ -76,6 +76,11 @@ var util = {
         return (min + Math.random() * (max - min));
     },
 
+    // Returns -1, 0 or 1
+    randTrinary: function() {
+        return Math.floor(Math.random()*3)-1;
+    },
+
 
 // MISC
 // ====
