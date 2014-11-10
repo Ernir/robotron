@@ -2,31 +2,31 @@
 // Quark
 // ======
 
-// Quarks spawn Tanks.
-// Quarks fly around quickly and randomly.
+// Spheroids spawn Enforcers.
+// Spheroids (probably...) fly around quickly and randomly.
 
-function Quark(descr) {
+function Spheroid(descr) {
 
     // Common inherited setup logic from Entity
     Enemy.call(this, descr);
 
-    this.sprite = g_sprites.Quark;
+    this.sprite = g_sprites.Spheroid;
 
     // Initializing speed
-    this.baseSpeed = 1;
+    this.baseSpeed = 3;
     this.velX = this.baseSpeed*util.randTrinary();
     this.velY = this.baseSpeed*util.randTrinary();
     this.tanksSpawned = 0;
     // TODO play spawning sound?
 }
 
-Quark.prototype = Object.create(Enemy.prototype);
-Quark.prototype.tankSpawnChance = 0.005; //0,5% chance of spawning a tank/update
+Spheroid.prototype = Object.create(Enemy.prototype);
+Spheroid.prototype.tankSpawnChance = 0.005; //0,5% chance of spawning a tank/update
 // TODO: Find a good spawn interval.
-Quark.prototype.renderPos = {cx: this.cx, cy: this.cy};
-Quark.prototype.maxTanks = 6;
+Spheroid.prototype.renderPos = {cx: this.cx, cy: this.cy};
+Spheroid.prototype.maxTanks = 6;
 
-Quark.prototype.update = function (du) {
+Spheroid.prototype.update = function (du) {
 
     spatialManager.unregister(this);
 
@@ -40,7 +40,7 @@ Quark.prototype.update = function (du) {
     // maxTanks is effectively zero-indexed
     if(Math.random() < this.tankSpawnChance && this.tanksSpawned < this.maxTanks) {
         this.tanksSpawned++;
-        entityManager.createTank(this.cx,this.cy);
+        entityManager.createTank(this.cx,this.cy); // TODO: Spawn Enforcers instead
     }
 
     this.randomWalk();
@@ -56,7 +56,7 @@ Quark.prototype.update = function (du) {
 
 };
 
-Quark.prototype.randomWalk = function () {
+Spheroid.prototype.randomWalk = function () {
     if (Math.random() < 0.005) {
         //0.5% chance to change direction
 
@@ -77,11 +77,11 @@ Quark.prototype.randomWalk = function () {
     }
 };
 
-Quark.prototype.takeBulletHit = function () {
+Spheroid.prototype.takeBulletHit = function () {
     this.kill();
-    Player.addScore(Player.scoreValues.Quark * Player.getMultiplier());
+    Player.addScore(Player.scoreValues.Spheroid * Player.getMultiplier());
 };
 
-Quark.prototype.render = function (ctx) {
+Spheroid.prototype.render = function (ctx) {
     this.sprite.drawCentredAt(ctx, this.cx, this.cy, 0);
 };

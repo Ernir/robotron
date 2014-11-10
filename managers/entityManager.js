@@ -88,7 +88,8 @@ var entityManager = {
             { n : 0, f : this.createHulk },
             { n : 0, f : this.createBrain },
             { n : 0, f : this.createElectrode },
-            { n : 0, f : this.createQuark }
+            { n : 0, f : this.createQuark },
+            { n : 0, f : this.createSpheroid }
             //TODO: add more entities
         ];
 
@@ -294,6 +295,12 @@ var entityManager = {
 
     fireShell: function(cx, cy, angle) {
         this._enemies.push(new Shell({cx: cx, cy: cy, initialAngle: angle}));
+    },
+
+    createSpheroid: function() {
+        var playerSafeDist = 120;
+        var descr = this.findSpawn(playerSafeDist);
+        this._enemies.push(new Spheroid(descr));
     },
 
 // --------------------
