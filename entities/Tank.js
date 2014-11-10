@@ -22,7 +22,6 @@ function Tank(descr) {
 
 Tank.prototype = Object.create(Enemy.prototype);
 Tank.prototype.shellFireChance = 0.01; //1% chance of firing a shell/update
-// TODO: Find a good firing interval.
 Tank.prototype.renderPos = {cx: this.cx, cy: this.cy};
 
 Tank.prototype.update = function (du) {
@@ -45,7 +44,8 @@ Tank.prototype.update = function (du) {
     this.cy += this.velY * du;
 
     if (Math.random() < this.shellFireChance) {
-        // TODO: Add a bit of inaccuracy to the angle.
+        // TODO: Do this amazing trick shot box-in AI thing.
+        // http://www.robotron2084guidebook.com/gameplay/tanks/
         var angle = util.angleTo(
             this.cx,
             this.cy,
