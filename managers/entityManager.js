@@ -33,6 +33,7 @@ var entityManager = {
     _invincibles: [],
 	_bullets: [],
     _scoreImgs: [],
+    _drops: [],
 	
 	_bulletDU: 0,
 	_bulletDuDelay: 20,
@@ -73,7 +74,8 @@ var entityManager = {
 			this._family, 
 			this._enemies,
             this._invincibles,
-            this._scoreImgs
+            this._scoreImgs,
+            this._drops
 		];
     },
 
@@ -262,10 +264,18 @@ var entityManager = {
         this._scoreImgs.push(new ScoreImg(descr));
     },
 
-    createElectrode: function() {
+    createElectrode: function () {
         var playerSafeDist = 120;
         var descr = this.findSpawn(playerSafeDist);
-        this._enemies.push(new Electrode(descr))
+        this._enemies.push(new Electrode(descr));
+    },
+
+    createPowerup: function (cx,cy) {
+        var type = Math.floor(Math.random()*2);
+        this._drops.push(new Powerup({cx: cx, 
+                                      cy: cy, 
+                                      type: type
+                                      }));
     },
 
 // --------------------

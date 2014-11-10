@@ -28,6 +28,7 @@ function initializeEntities() {
     // TODO
 }
 var Player = new Player();
+var g_bgm = new Audio(g_audioUrls.todIOF);
 
 // =============
 // GATHER INPUTS
@@ -60,7 +61,9 @@ function updateSimulation(du) {
     if (levelManager.isChangingLevel()) {
         levelManager.reduceTimer(du);
     } else {
-        entityManager.update(du);
+        if (!levelManager.isGameOver()) {
+            entityManager.update(du);
+        }
     }
 	
 	if (Player.getLives() === 0) {
@@ -74,12 +77,16 @@ function updateSimulation(du) {
 
 var g_renderSpatialDebug = false;
 var g_canBeKilled = true;
+var g_sounds = true;
+var g_music = true;
 
 var KEY_SPATIAL = keyCode('X');
 var KEY_KILLABLE = keyCode('K');
 var KEY_RESTART = keyCode('R');
 var KEY_NEXT_LEVEL = 107;
 var KEY_PREV_LEVEL = 109;
+var KEY_SOUND = keyCode('N');
+var KEY_MUSIC = keyCode('M');
 
 function processDiagnostics() {
 
@@ -95,6 +102,12 @@ function processDiagnostics() {
     if (eatKey(KEY_NEXT_LEVEL)) levelManager.nextLevel();
 
     if (eatKey(KEY_PREV_LEVEL)) levelManager.prevLevel();
+	
+	if (eatKey(KEY_SOUND)) g_sounds = !g_sounds;
+	
+	if (eatKey(KEY_MUSIC)) g_music = !g_music;
+	if (g_music) g_bgm.play();
+	else g_bgm.pause();
 }
 
 

@@ -20,7 +20,7 @@ function Bullet(descr) {
 
     // Make a noise when I am created (i.e. fired)
 	this.fireSound.currentTime = 0;
-    this.fireSound.play();
+    if (g_sounds) this.fireSound.play();
     
 /*
     // Diagnostics to check inheritance stuff
@@ -33,10 +33,7 @@ function Bullet(descr) {
 Bullet.prototype = new Entity();
 
 // HACKED-IN AUDIO (no preloading)
-Bullet.prototype.fireSound = new Audio(
-    "sounds/exampleSound.ogg");
-/*Bullet.prototype.zappedSound = new Audio(
-    "sounds/bulletZapped.ogg");*/
+Bullet.prototype.fireSound = new Audio(g_audioUrls.shot);
     
 // Initial, inheritable, default values
 Bullet.prototype.rotation = 0;
