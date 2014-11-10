@@ -33,6 +33,7 @@ Family.prototype.panic = 1;
 Family.prototype.lifeSpan = 1 * SECS_TO_NOMINALS;
 Family.prototype.isDying = false;
 Family.prototype.renderPos = {cx: this.cx, cy: this.cy};
+Family.prototype.willSpawnProg = false;
 
 Family.prototype.update = function (du) {
 
@@ -52,6 +53,9 @@ Family.prototype.update = function (du) {
 		if (g_sounds) this.deadSound.play();
         this.lifeSpan += -du;
         if (this.lifeSpan <= 0) {
+            if(this.willSpawnProg){
+                entityManager.createProg(this.cx,this.cy);
+            }
             this.kill();
         }
     } else {
@@ -60,15 +64,17 @@ Family.prototype.update = function (du) {
         }
         this.randomWalk();
 
+        this.capPositions();
+        //TODO: Make them less likely to change direction after bouncing?
+        this.edgeBounce();
         this.cx += this.velX * du;
         this.cy += this.velY * du;
-        this.capPositions();
 
         // Handle collisions
         var hitEntity = this.findHitEntity();
         if (hitEntity) {
             if (hitEntity.makesProgs){
-                // TODO: Spawn new Prog
+                this.willSpawnProg = true;
             }
             var canKillMe = hitEntity.killFamily;
             if (canKillMe) {

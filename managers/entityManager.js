@@ -87,7 +87,8 @@ var entityManager = {
             { n : 0, f : this.createGrunt },
             { n : 0, f : this.createHulk },
             { n : 0, f : this.createBrain },
-            { n : 0, f : this.createElectrode }
+            { n : 0, f : this.createElectrode },
+            { n : 0, f : this.createQuark }
             //TODO: add more entities
         ];
 
@@ -276,6 +277,23 @@ var entityManager = {
                                       cy: cy, 
                                       type: type
                                       }));
+    },
+	createProg: function (cx,cy) {
+        this._enemies.push(new Prog({cx: cx, cy: cy}));
+    },
+
+    createQuark: function() {
+        var playerSafeDist = 120;
+        var descr = this.findSpawn(playerSafeDist);
+        this._enemies.push(new Quark(descr));
+    },
+
+    createTank: function(cx,cy) {
+        this._enemies.push(new Tank({cx: cx, cy: cy}));
+    },
+
+    fireShell: function(cx, cy, angle) {
+        this._enemies.push(new Shell({cx: cx, cy: cy, initialAngle: angle}));
     },
 
 // --------------------

@@ -76,6 +76,11 @@ var util = {
         return (min + Math.random() * (max - min));
     },
 
+    // Returns -1, 0 or 1
+    randTrinary: function() {
+        return Math.floor(Math.random()*3)-1;
+    },
+
 
 // MISC
 // ====
@@ -110,13 +115,6 @@ var util = {
             dy = yWrap - dy;
         }
         return this.square(dx) + this.square(dy);
-    },
-    capPositions: function(entity) {
-		var r = entity.getRadius();
-        entity.cx = Math.max(entity.cx, consts.wallLeft + r);
-        entity.cx = Math.min(entity.cx, consts.wallRight - r);
-        entity.cy = Math.max(entity.cy, consts.wallTop + r);
-        entity.cy = Math.min(entity.cy, consts.wallBottom - r);
     },
 
 
