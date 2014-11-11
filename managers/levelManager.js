@@ -93,7 +93,7 @@ var levelManager = {
 		var layers = halfWidth / layerOffsetX;
 		
 		var prevfillStyle = ctx.fillStyle;
-		ctx.fillStyle = "#FF55A3";
+
 		// TODO: Add a good color sceme
 		
 		if (this._changingTimer > SECS_TO_NOMINALS) {
@@ -114,7 +114,7 @@ var levelManager = {
 			}
 			
 		} else {
-		
+
 			var range = this._changingTimer / SECS_TO_NOMINALS;
 			var currentLayer = Math.ceil(range * layers);
 			
@@ -174,5 +174,19 @@ var levelManager = {
 	
 	renderGameOver: function (ctx) {
 		// TODO: Game over screen and maybe animation
+		//score
+		var prevfillStyle = ctx.fillStyle;
+		var str = "", hw=g_canvas.width/2 ,hh=g_canvas.height/2;
+		ctx.font = "bold 60px sans-serif"
+		ctx.fillStyle ="rgba(255,255,255,0.3)"; //not sure if you want this
+		ctx.fillRect(0, hh/2, hw*2, hh);
+		ctx.fillStyle ="red";
+		ctx.textAlign = "center";
+		str = "GAME OVER";
+		ctx.fillText(str, hw, hh);
+		str = "Press R to restart";
+		ctx.font = "bold 20px sans-serif"
+		ctx.fillText(str,hw,hh*3/2-10); //10 is the font's halfheight
+		ctx.fillStyle = prevfillStyle;
 	}
 };

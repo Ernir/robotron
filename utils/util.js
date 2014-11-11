@@ -126,7 +126,7 @@ var util = {
         var prevfillStyle = ctx.fillStyle;
         ctx.fillStyle = "black";
         ctx.fillRect(0, 0, ctx.canvas.width, ctx.canvas.height);
-		ctx.fillStyle = "#FF55A3";
+		ctx.fillStyle = "red";
         ctx.fillRect(0, consts.wallTop, ctx.canvas.width, ctx.canvas.height-30);
 		ctx.fillStyle = "black";
         ctx.fillRect(consts.wallLeft, consts.wallTop + 5, ctx.canvas.width - 10, ctx.canvas.height - 40);
