@@ -168,6 +168,7 @@ function preloadDone() {
     g_sprites.Quark = new Sprite(g_images.Quark, 42*4, 42*5); // TODO animate
     g_sprites.Tank = new Sprite(g_images.Tank, 0, 36); // TODO animate
     g_sprites.Spheroid = new Sprite(g_images.Spheroid, 42*6, 42*7); // TODO animate
+    g_sprites.Enforcer = new Sprite(g_images.Enforcer, 0, 29); // TODO blink!
     
     // Spritesheets
     g_sprites.Dad = [];

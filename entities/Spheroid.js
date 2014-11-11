@@ -40,7 +40,7 @@ Spheroid.prototype.update = function (du) {
     // maxTanks is effectively zero-indexed
     if(Math.random() < this.tankSpawnChance && this.tanksSpawned < this.maxTanks) {
         this.tanksSpawned++;
-        entityManager.createTank(this.cx,this.cy); // TODO: Spawn Enforcers instead
+        entityManager.createEnforcer(this.cx,this.cy);
     }
 
     this.randomWalk();
@@ -57,8 +57,8 @@ Spheroid.prototype.update = function (du) {
 };
 
 Spheroid.prototype.randomWalk = function () {
-    if (Math.random() < 0.005) {
-        //0.5% chance to change direction
+    if (Math.random() < 0.02) {
+        //2% chance to change direction
 
         var n = Math.floor(Math.random() * 4);
         switch (n) {

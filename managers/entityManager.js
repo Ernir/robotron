@@ -295,13 +295,17 @@ var entityManager = {
     },
 
     fireShell: function(cx, cy, angle) {
-        this._enemies.push(new Shell({cx: cx, cy: cy, initialAngle: angle}));
+        this._bullets.push(new Shell({cx: cx, cy: cy, initialAngle: angle}));
     },
 
     createSpheroid: function() {
         var playerSafeDist = 120;
         var descr = this.findSpawn(playerSafeDist);
         this._enemies.push(new Spheroid(descr));
+    },
+
+    createEnforcer: function(cx,cy) {
+        this._enemies.push(new Enforcer({cx: cx, cy: cy}));
     },
 
 // --------------------
