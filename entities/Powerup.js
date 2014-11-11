@@ -28,6 +28,9 @@ function Powerup(descr) {
         case 4:
             this.isShotgun = true;
             break;
+        case 5:
+            this.isShield = true;
+            break;
     }
 }
 
@@ -37,6 +40,7 @@ Powerup.prototype.isSpeedBoost = false;
 Powerup.prototype.isScoreMultiplier = false;
 Powerup.prototype.isMachinegun = false;
 Powerup.prototype.isShotgun = false;
+Powerup.prototype.isShield = false;
 
 Powerup.prototype.update = function (du) {
     spatialManager.unregister(this);
@@ -57,13 +61,14 @@ Powerup.prototype.takeProtagonistHit = function () {
     if (this.isMachinegun) {
         Player.hasShotgun = false;
         Player.setFireRate(5);
-        Player.setAmmo(100); // TODO: decide on using addAmmo or setAmmo?
+        Player.addAmmo(100);
     };
     if (this.isShotgun) {
         Player.hasShotgun = true;
         Player.setFireRate(100);
-        Player.setAmmo(100);
-    }
+        Player.addAmmo(100);
+    };
+    if (this.isShield) Player.addShieldTime();
 };
 
 Powerup.prototype.getRadius = function () {
@@ -73,11 +78,12 @@ Powerup.prototype.getRadius = function () {
 Powerup.prototype.render = function (ctx) {
     ctx.save();
     //TODO: Add cool sprites
-    if (this.isExtralife) ctx.fillStyle = "cyan";
+    if (this.isExtralife) ctx.fillStyle = "white";
     if (this.isSpeedBoost) ctx.fillStyle = "red";
     if (this.isScoreMultiplier) ctx.fillStyle = "magenta";
     if (this.isMachinegun) ctx.fillStyle = "lime";
     if (this.isShotgun) ctx.fillStyle = "orange";
+    if (this.isShield) ctx.fillStyle = "cyan";
     util.fillCircle(ctx, this.cx, this.cy, this.getRadius());
     ctx.restore();
 };

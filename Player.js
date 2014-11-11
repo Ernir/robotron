@@ -38,6 +38,7 @@ Player.prototype.speedTimer = 10 * SECS_TO_NOMINALS;
 Player.prototype.fireRate = 20;
 Player.prototype.ammo = 0;
 Player.prototype.hasShotgun = false;
+Player.prototype.shieldTime = 0;
 Player.prototype.scoreValues = {
     Electrode: 0,
     Spark: 25,
@@ -65,6 +66,8 @@ Player.prototype.resetAll = function() {
     this.resetMultiplier();
     this.resetFireRate();
     this.resetAmmo();
+    this.resetShield();
+    this.resetShieldTime();
 };
 
 Player.prototype.render = function(ctx) {
@@ -91,15 +94,17 @@ Player.prototype.render = function(ctx) {
     // TODO: redesign the score bar
     var text = "Ammo: " + this.ammo;
     ctx.strokeText(text, g_canvas.width/2 - 160, 20);
+    
+    var moretxt = "Shield: " + Math.ceil(this.shieldTime / SECS_TO_NOMINALS);
+    ctx.strokeText(moretxt, g_canvas.width/2 + 80, 20);
     ctx.restore();
 };
 
-// -------------
-// Basic Methods
+// ---------------------------
+// General attribute modifiers
 
 Player.prototype.addLevel = function () {
     this.level += 1;
-    //TODO: increase the levelcap according to levelmanager._levelSpecs.length
 };
 
 Player.prototype.subtractLevel = function () {
@@ -128,6 +133,7 @@ Player.prototype.getScore = function () {
 
 Player.prototype.addLives = function () {
     this.lives += 1;
+    if (this.lives > 8) this.lives = 8;
 };
 
 Player.prototype.subtractLives = function () {
@@ -172,7 +178,7 @@ Player.prototype.resetSaveCount = function () {
 };
 
 // ---------------
-// Speedup Methods
+// Speed Methods
 
 Player.prototype.addSpeed = function () {
     this.resetSpeedTimer();
@@ -199,8 +205,47 @@ Player.prototype.resetSpeedTimer = function () {
     this.speedTimer = 10 * SECS_TO_NOMINALS;
 };
 
+// --------------
+// Shield Methods
+
+Player.prototype.getShieldTime = function () {
+    return this.shieldTime;
+};
+
+Player.prototype.setShieldTime = function (time) {
+    this.shieldTime = time * SECS_TO_NOMINALS;
+};
+
+Player.prototype.addShieldTime = function() {
+    this.activateShield();
+    this.shieldTime += 20 * SECS_TO_NOMINALS;
+    if (this.shieldTime > 60 * SECS_TO_NOMINALS) {
+        this.setShieldTime(60);
+    };
+};
+
+Player.prototype.tickShieldTime = function (du) {
+    this.shieldTime += -du;
+    if (this.shieldTime < 0) {
+        this.resetShield();
+        this.resetShieldTime();
+    }
+};
+
+Player.prototype.activateShield = function () {
+    g_canBeKilled = false;
+};
+
+Player.prototype.resetShield = function () {
+    g_canBeKilled = true;
+};
+
+Player.prototype.resetShieldTime = function () {
+    this.shieldTime = 0;
+}
+
 // -------------------
-// Machine Gun Methods
+// Gun Methods
 
 Player.prototype.getFireRate = function () {
     return this.fireRate;
@@ -230,6 +275,7 @@ Player.prototype.subtractAmmo = function () {
 
 Player.prototype.addAmmo = function (ammo) {
     this.ammo += ammo;
+    if (this.ammo > 500) this.setAmmo(500);
 };
 
 Player.prototype.resetAmmo = function () {

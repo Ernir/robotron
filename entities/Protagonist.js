@@ -50,6 +50,7 @@ Protagonist.prototype.update = function (du) {
 	
 	// Perform movement
     if (Player.getSpeed() > 2) Player.tickSpeedTimer(du);
+    if (Player.getShieldTime() > 0) Player.tickShieldTime(du);
     var vel = this.computeMovement();
 	this.velX = vel.x;
 	this.velY = vel.y;
@@ -178,5 +179,14 @@ Protagonist.prototype.render = function (ctx) {
         default:
             this.renderPos = {cx: this.cx, cy: this.cy};
             g_sprites.Protagonist[facing+0].drawCentredAt(ctx, this.cx, this.cy, 0);
+    }
+
+    // Draw the shield
+    if (!g_canBeKilled) {
+        ctx.save();
+        ctx.globalAlpha = 0.3
+        ctx.fillStyle = "cyan";
+        util.fillCircle(ctx, this.cx, this.cy, this.getRadius()+2);
+        ctx.restore();
     }
 };
