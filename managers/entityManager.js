@@ -36,7 +36,6 @@ var entityManager = {
     _drops: [],
 	
 	_bulletDU: 0,
-	_bulletDuDelay: 20,
 
 // "PRIVATE" METHODS
 
@@ -162,18 +161,27 @@ var entityManager = {
 		
 		for (var i in this._protagonists) {
 			
-            var pos = this._protagonists[i].getPos();
-            var dirn = util.angleTo(pos.posX, pos.posY, aimX, aimY);
             var launchdist = this._protagonists[i].getRadius() * 0.8;
+            var pos = this._protagonists[i].getPos();
+
+            var shots = 1;
+            if (Player.hasShotgun) shots = 5;
             
-            var dirnX = Math.cos(dirn);
-            var dirnY = Math.sin(dirn);
-            
-            this.fireBullet(pos.posX + launchdist * dirnX, 
-                            pos.posY + launchdist * dirnY, 
-                            dirnX, 
-                            dirnY
-			);
+            for (var j = 0; j < shots; j++) {
+                
+                var dirn = util.angleTo(pos.posX, pos.posY, aimX, aimY);
+                var scatter = 0;
+                if (Player.hasShotgun) scatter = (Math.random()-0.5)/3;
+                dirn += scatter;
+                var dirnX = Math.cos(dirn);
+                var dirnY = Math.sin(dirn);
+                
+                this.fireBullet(pos.posX + launchdist * dirnX, 
+                                pos.posY + launchdist * dirnY, 
+                                dirnX, 
+                                dirnY
+    			);
+            }
 		}
 	},
 	
@@ -273,7 +281,7 @@ var entityManager = {
     },
 
     createPowerup: function (cx,cy) {
-        var type = Math.floor(Math.random()*4);
+        var type = Math.floor(Math.random()*5);
         this._drops.push(new Powerup({cx: cx, 
                                       cy: cy, 
                                       type: type

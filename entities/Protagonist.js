@@ -127,8 +127,6 @@ Protagonist.prototype.maybeFire = function () {
         entityManager.fire(this.cx+x, this.cy+y);
 	else if (g_isMouseDown) 
 		entityManager.fire(g_mouseX, g_mouseY);
-	else
-		entityManager.fireReset();
 };
 
 Protagonist.prototype.takeEnemyHit = function () {

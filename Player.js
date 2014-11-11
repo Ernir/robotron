@@ -37,6 +37,7 @@ Player.prototype.speed = 2;
 Player.prototype.speedTimer = 10 * SECS_TO_NOMINALS;
 Player.prototype.fireRate = 20;
 Player.prototype.ammo = 0;
+Player.prototype.hasShotgun = false;
 Player.prototype.scoreValues = {
     Electrode: 0,
     Spark: 25,
@@ -171,6 +172,7 @@ Player.prototype.setFireRate = function (fireRate) {
 
 Player.prototype.resetFireRate = function () {
     this.fireRate = 20;
+    this.hasShotgun = false;
 };
 
 Player.prototype.getAmmo = function () {

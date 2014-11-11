@@ -69,10 +69,15 @@ Bullet.prototype.update = function (du) {
     // Handle collisions
     var hitEntity = this.findHitEntity();
     if (hitEntity) {
-        var canTakeHit = hitEntity.takeBulletHit;
-        var descr = {velX : this.velX, velY : this.velY, du : du};
-        if (canTakeHit) canTakeHit.call(hitEntity, descr);
-        return entityManager.KILL_ME_NOW;
+        // The bulletVel check is a hack to stop the shotgun bullets 
+        // from killing each other on spawn
+        // TODO: find a better way to stop the bullets from killing each other
+        if (!hitEntity.bulletVel) {
+            var canTakeHit = hitEntity.takeBulletHit;
+            var descr = {velX : this.velX, velY : this.velY, du : du};
+            if (canTakeHit) canTakeHit.call(hitEntity, descr);
+            return entityManager.KILL_ME_NOW;
+        }
     }
     
     spatialManager.register(this);

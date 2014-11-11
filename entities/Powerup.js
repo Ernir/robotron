@@ -58,7 +58,11 @@ Powerup.prototype.takeProtagonistHit = function () {
         Player.setFireRate(5);
         Player.setAmmo(100); // TODO: decide on using addAmmo or setAmmo?
     };
-    if (this.isShotgun) return;
+    if (this.isShotgun) {
+        Player.hasShotgun = true;
+        Player.setFireRate(100);
+        Player.setAmmo(100);
+    }
 };
 
 Powerup.prototype.getRadius = function () {
