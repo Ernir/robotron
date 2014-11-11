@@ -11,7 +11,7 @@ function Brain(descr) {
     Enemy.call(this, descr);
 
     this.sprite = g_sprites.Brain[6];
-if (g_sounds) this.spawnSound.play();
+	if (g_sounds) this.spawnSound.play();
 }
 
 Brain.prototype = Object.create(Enemy.prototype);

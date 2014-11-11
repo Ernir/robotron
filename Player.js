@@ -53,18 +53,49 @@ Player.prototype.scoreValues = {
     Family: 1000
 };
 
-Player.prototype.addSaveCount = function () {
-   this.saveCount += 1;
-   if (this.saveCount > 6) {
-       this.addLives();
-        this.resetSaveCount();
-    }
+// -------------
+// Basic Methods
+
+Player.prototype.resetAll = function() {
+    this.resetLives();
+    this.resetLevel();
+    this.resetScore();
+    this.resetSpeed();
+    this.resetSpeedTimer();
+    this.resetMultiplier();
+    this.resetFireRate();
+    this.resetAmmo();
 };
 
-Player.prototype.resetSaveCount = function () {
-    this.saveCount = 0;
+Player.prototype.render = function(ctx) {
+    // Display the score
+    ctx.save();
+    ctx.lineWidth = 2;
+    ctx.font = "20px Arial";
+    ctx.strokeStyle = "red";
+    ctx.strokeText(this.score, 10, 20);
+    var disp = "X" + this.multiplier + "  Level: " + this.level;
+    ctx.strokeText(disp, g_canvas.width/2 - 50, 20);
+    
+
+    // Display remaining lives
+    for (var i = 1; i < this.lives; i++) {
+        g_sprites.Extralife.drawCentredAt(ctx, 
+                                          g_canvas.width - i*20, 
+                                          15, 
+                                          0
+										 );
+    };
+
+    // Display ammo
+    // TODO: redesign the score bar
+    var text = "Ammo: " + this.ammo;
+    ctx.strokeText(text, g_canvas.width/2 - 160, 20);
+    ctx.restore();
 };
 
+// -------------
+// Basic Methods
 
 Player.prototype.addLevel = function () {
     this.level += 1;
@@ -83,6 +114,18 @@ Player.prototype.getLevel = function () {
     return this.level;
 };
 
+Player.prototype.addScore = function (score) {
+    this.score += score;
+};
+
+Player.prototype.resetScore = function () {
+    this.score = 0;
+};
+
+Player.prototype.getScore = function () {
+    return this.score;
+};
+
 Player.prototype.addLives = function () {
     this.lives += 1;
 };
@@ -99,6 +142,9 @@ Player.prototype.getLives = function () {
     return this.lives;
 };
 
+// --------------
+// Rescue Methods
+
 Player.prototype.addMultiplier = function () {
     if (this.multiplier < 5) {
         this.multiplier += 1;
@@ -113,18 +159,6 @@ Player.prototype.getMultiplier = function () {
     return this.multiplier;
 };
 
-Player.prototype.addScore = function (score) {
-    this.score += score;
-};
-
-Player.prototype.resetScore = function () {
-    this.score = 0;
-};
-
-Player.prototype.getScore = function () {
-    return this.score;
-};
-
 Player.prototype.addSaveCount = function () {
     this.saveCount += 1;
     if (this.saveCount > 6) {
@@ -136,6 +170,9 @@ Player.prototype.addSaveCount = function () {
 Player.prototype.resetSaveCount = function () {
     this.saveCount = 0;
 };
+
+// ---------------
+// Speedup Methods
 
 Player.prototype.addSpeed = function () {
     this.resetSpeedTimer();
@@ -161,6 +198,9 @@ Player.prototype.resetSpeed = function () {
 Player.prototype.resetSpeedTimer = function () {
     this.speedTimer = 10 * SECS_TO_NOMINALS;
 };
+
+// -------------------
+// Machine Gun Methods
 
 Player.prototype.getFireRate = function () {
     return this.fireRate;
@@ -194,41 +234,4 @@ Player.prototype.addAmmo = function (ammo) {
 
 Player.prototype.resetAmmo = function () {
     this.ammo = 20;
-};
-
-Player.prototype.resetAll = function() {
-    this.resetLives();
-    this.resetLevel();
-    this.resetScore();
-    this.resetSpeed();
-    this.resetSpeedTimer();
-    this.resetMultiplier();
-    this.resetFireRate();
-    this.resetAmmo();
-};
-
-Player.prototype.render = function(ctx) {
-    // Display the score
-    ctx.save();
-    ctx.lineWidth = 2;
-    ctx.font = "20px Arial";
-    ctx.strokeStyle = "red";
-    ctx.strokeText(this.score, 10, 20);
-    var disp = "X" + this.multiplier + "  Level: " + this.level;
-    ctx.strokeText(disp, g_canvas.width/2 - 50, 20);
-    
-
-    // Display remaining lives
-    for (var i = 1; i < this.lives; i++) {
-        g_sprites.Extralife.drawCentredAt(ctx, 
-                                          g_canvas.width - i*20, 
-                                          15, 
-                                          0);
-    };
-
-    // Display ammo
-    // TODO: redesign the score bar
-    var text = "Ammo: " + this.ammo;
-    ctx.strokeText(text, g_canvas.width/2 - 160, 20);
-    ctx.restore();
 };

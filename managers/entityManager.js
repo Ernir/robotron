@@ -196,10 +196,6 @@ var entityManager = {
         Player.subtractAmmo();
 	},
 	
-	fireReset: function() {
-		this._bulletDU = Player.fireRate;
-	},
-	
 // --------------------
 // Enemy entity methods
 	
