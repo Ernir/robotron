@@ -54,7 +54,10 @@ Powerup.prototype.takeProtagonistHit = function () {
     if (this.isExtralife) Player.addLives();
     if (this.isSpeedBoost) Player.addSpeed();
     if (this.isScoreMultiplier) Player.addMultiplier();
-    if (this.isMachinegun) return;
+    if (this.isMachinegun) {
+        Player.setFireRate(5);
+        Player.setAmmo(100); // TODO: decide on using addAmmo or setAmmo?
+    };
     if (this.isShotgun) return;
 };
 
