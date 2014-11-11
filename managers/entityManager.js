@@ -28,15 +28,15 @@ var entityManager = {
 // "PRIVATE" DATA
 
     _protagonists: [],
-	_family: [],
-	_enemies: [],
+    _family: [],
+    _enemies: [],
     _invincibles: [],
-	_bullets: [],
+    _bullets: [],
     _scoreImgs: [],
     _drops: [],
-	
-	_bulletDU: 0,
-	_bulletDuDelay: 20,
+
+    _bulletDU: 0,
+    _bulletDuDelay: 20,
 
 // "PRIVATE" METHODS
 
@@ -69,33 +69,34 @@ var entityManager = {
 //
     deferredSetup: function () {
         this._categories = [
-			this._protagonists, 
-			this._bullets, 
-			this._family, 
-			this._enemies,
+            this._protagonists,
+            this._bullets,
+            this._family,
+            this._enemies,
             this._invincibles,
             this._scoreImgs,
             this._drops
-		];
+        ];
     },
 
     init: function (level) {
-        
+
         var descr = [
-            { n : 1, f : this.createProtagonist },
-            { n : 0, f : this.createFamily },
-            { n : 0, f : this.createGrunt },
-            { n : 0, f : this.createHulk },
-            { n : 0, f : this.createBrain },
-            { n : 0, f : this.createElectrode },
-            { n : 0, f : this.createQuark },
-            { n : 0, f : this.createSpheroid }
+            { n: 1, f: this.createProtagonist },
+            { n: 0, f: this.createFamily },
+            { n: 0, f: this.createGrunt },
+            { n: 0, f: this.createHulk },
+            { n: 0, f: this.createBrain },
+            { n: 0, f: this.createElectrode },
+            { n: 0, f: this.createQuark },
+            { n: 0, f: this.createSpheroid }
             //TODO: add more entities
         ];
 
         for (var i = 0; i < level.length; i++) {
-            descr[i+1].n =level[i];
-        };
+            descr[i + 1].n = level[i];
+        }
+        ;
 
         this._fillCategories(descr);
     },
@@ -105,16 +106,17 @@ var entityManager = {
             for (var i = 0; i < this._categories[c].length; i++) {
                 var p = this._categories[c][i].startPos;
                 if (p) this._categories[c][i].setPos(p.posX, p.posY);
-            };
+            }
+            ;
         }
     },
 
     respawnSurvivors: function () {
         var level = [];
-        for (var c = 1; c < this._categories.length-1; ++c) {
+        for (var c = 1; c < this._categories.length - 1; ++c) {
             level.push(this._categories[c].length);
         }
-        console.log('new level:',level);
+        console.log('new level:', level);
         this.clearAll();
         spatialManager.resetAll();
         this.init(level);
@@ -129,7 +131,8 @@ var entityManager = {
     clearPartial: function () {
         for (var i = 0; i < this._bullets.length; i++) {
             spatialManager.unregister(this._bullets[i]);
-        };
+        }
+        ;
         this._bullets.length = 0;
         this._scoreImgs.length = 0;
     },
@@ -141,75 +144,75 @@ var entityManager = {
 
 // ---------------------
 // Player entity methods
-	
+
     createProtagonist: function (descr) {
         if (descr === undefined) {
-            descr = {cx : g_canvas.width/2, cy : g_canvas.height/2};
+            descr = {cx: g_canvas.width / 2, cy: g_canvas.height / 2};
         }
         this._protagonists.push(new Protagonist(descr));
     },
 
     createFamily: function () {
-		var playerSafeDist = 120;
-		var descr = this.findSpawn(playerSafeDist);
+        var playerSafeDist = 120;
+        var descr = this.findSpawn(playerSafeDist);
         this._family.push(new Family(descr));
     },
-	
-	fire: function (aimX, aimY) {
-		if (this._bulletDU < Player.fireRate) {
-			this._bulletDU++;
-			return;
-		}
-		
-		for (var i in this._protagonists) {
-			
+
+    fire: function (aimX, aimY) {
+        if (this._bulletDU < Player.fireRate) {
+            this._bulletDU++;
+            return;
+        }
+
+        for (var i in this._protagonists) {
+
             var pos = this._protagonists[i].getPos();
             var dirn = util.angleTo(pos.posX, pos.posY, aimX, aimY);
             var launchdist = this._protagonists[i].getRadius() * 0.8;
-            
+
             var dirnX = Math.cos(dirn);
             var dirnY = Math.sin(dirn);
-            
-            this.fireBullet(pos.posX + launchdist * dirnX, 
-                            pos.posY + launchdist * dirnY, 
-                            dirnX, 
-                            dirnY
-			);
-		}
-	},
-	
-	fireBullet: function(cx, cy, dirnX, dirnY) {
-		this._bulletDU = 0;
-		this._bullets.push(new Bullet({
-			cx   : cx,
-			cy   : cy,
-			dirnX : dirnX,
-			dirnY : dirnY
-		}));
+
+            this.fireBullet(pos.posX + launchdist * dirnX,
+                    pos.posY + launchdist * dirnY,
+                dirnX,
+                dirnY
+            );
+        }
+    },
+
+    fireBullet: function (cx, cy, dirnX, dirnY) {
+        this._bulletDU = 0;
+        this._bullets.push(new Bullet({
+            cx: cx,
+            cy: cy,
+            dirnX: dirnX,
+            dirnY: dirnY
+        }));
         Player.subtractAmmo();
-	},
-	
-	fireReset: function() {
-		this._bulletDU = Player.fireRate;
-	},
-	
+    },
+
+    fireReset: function () {
+        this._bulletDU = Player.fireRate;
+    },
+
 // --------------------
 // Enemy entity methods
-	
-	findProtagonist: function () {
-		var p = Math.floor(util.randRange(
-					0, 
-					this._protagonists.length)
-		);
-		return this._protagonists[p];
-	},
+
+    findProtagonist: function () {
+        var p = Math.floor(util.randRange(
+                0,
+                this._protagonists.length)
+        );
+        return this._protagonists[p];
+    },
 
     findClosestFamilyMember: function (posX, posY) {
         var closest = null;
         var minDistSq = Infinity;
         for (var i = 0; i < this._family.length; i++) {
             var member = this._family[i];
-            var distSq = util.distSq(posX, posY,member.cx,member.cy);
+            var distSq = util.distSq(posX, posY, member.cx, member.cy);
             if (distSq < minDistSq) {
                 closest = member;
                 minDistSq = distSq;
@@ -217,49 +220,49 @@ var entityManager = {
         }
         return closest;
     },
-	
-	findSpawn: function (playerSafeDist) {
-		for (var i = 0; i < 100; i++) {
+
+    findSpawn: function (playerSafeDist) {
+        for (var i = 0; i < 100; i++) {
             var x = util.randRange(0, g_canvas.width);
             var y = util.randRange(0, g_canvas.height);
-			
-			var locationFound = true;
-			
-			for (var i in this._protagonists) {
-				var pPos = this._protagonists[i].getPos();
-				var distSq = util.distSq(x, y, pPos.posX, pPos.posY);
-				if (distSq < util.square(playerSafeDist))
-					locationFound = false;
-			}
-			
-			if (!locationFound) continue;
-			
+
+            var locationFound = true;
+
+            for (var i in this._protagonists) {
+                var pPos = this._protagonists[i].getPos();
+                var distSq = util.distSq(x, y, pPos.posX, pPos.posY);
+                if (distSq < util.square(playerSafeDist))
+                    locationFound = false;
+            }
+
+            if (!locationFound) continue;
+
             return {
                 cx: x,
                 cy: y
             };
         }
-	},
+    },
 
     createGrunt: function () {
         var playerSafeDist = 120;
-		var descr = this.findSpawn(playerSafeDist);
+        var descr = this.findSpawn(playerSafeDist);
         this._enemies.push(new Grunt(descr));
     },
 
     createHulk: function () {
         var playerSafeDist = 120;
-		var descr = this.findSpawn(playerSafeDist);
+        var descr = this.findSpawn(playerSafeDist);
         this._invincibles.push(new Hulk(descr));
     },
 
     createBrain: function () {
         var playerSafeDist = 120;
-		var descr = this.findSpawn(playerSafeDist);
+        var descr = this.findSpawn(playerSafeDist);
         this._enemies.push(new Brain(descr));
     },
 
-    fireCruiseMissile: function (cx,cy) {
+    fireCruiseMissile: function (cx, cy) {
         this._bullets.push(new CruiseMissile({cx: cx, cy: cy}));
     },
 
@@ -273,49 +276,53 @@ var entityManager = {
         this._enemies.push(new Electrode(descr));
     },
 
-    createPowerup: function (cx,cy) {
-        var type = Math.floor(Math.random()*4);
-        this._drops.push(new Powerup({cx: cx, 
-                                      cy: cy, 
-                                      type: type
-                                      }));
+    createPowerup: function (cx, cy) {
+        var type = Math.floor(Math.random() * 4);
+        this._drops.push(new Powerup({cx: cx,
+            cy: cy,
+            type: type
+        }));
     },
-	createProg: function (cx,cy) {
+    createProg: function (cx, cy) {
         this._enemies.push(new Prog({cx: cx, cy: cy}));
     },
 
-    createQuark: function() {
+    createQuark: function () {
         var playerSafeDist = 120;
         var descr = this.findSpawn(playerSafeDist);
         this._enemies.push(new Quark(descr));
     },
 
-    createTank: function(cx,cy) {
+    createTank: function (cx, cy) {
         this._enemies.push(new Tank({cx: cx, cy: cy}));
     },
 
-    fireShell: function(cx, cy, angle) {
+    fireShell: function (cx, cy, angle) {
         this._bullets.push(new Shell({cx: cx, cy: cy, initialAngle: angle}));
     },
 
-    createSpheroid: function() {
+    createSpheroid: function () {
         var playerSafeDist = 120;
         var descr = this.findSpawn(playerSafeDist);
         this._enemies.push(new Spheroid(descr));
     },
 
-    createEnforcer: function(cx,cy) {
+    createEnforcer: function (cx, cy) {
         this._enemies.push(new Enforcer({cx: cx, cy: cy}));
+    },
+
+    fireSpark: function (cx, cy, angle) {
+        this._bullets.push(new Spark({cx: cx, cy: cy, initialAngle: angle}));
     },
 
 // --------------------
 // Update & Render
-	
+
     update: function (du) {
 
-		this._bulletDU += du;
-		
-		for (var c = 0; c < this._categories.length; ++c) {
+        this._bulletDU += du;
+
+        for (var c = 0; c < this._categories.length; ++c) {
 
             var aCategory = this._categories[c];
             var i = 0;
@@ -333,12 +340,12 @@ var entityManager = {
                     ++i;
                 }
             }
-		}
+        }
     },
 
     render: function (ctx) {
-		
-		var debugX = 10, debugY = 100;
+
+        var debugX = 10, debugY = 100;
 
         for (var c = 0; c < this._categories.length; ++c) {
 

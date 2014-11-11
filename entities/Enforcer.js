@@ -45,8 +45,7 @@ Enforcer.prototype.update = function (du) {
             this.target.cx,
             this.target.cy
         );
-        // TODO: Fire sparks instead of shells
-        entityManager.fireShell(this.cx, this.cy, angle);
+        entityManager.fireSpark(this.cx, this.cy, angle);
     }
 
     spatialManager.register(this);
