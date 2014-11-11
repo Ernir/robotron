@@ -55,6 +55,7 @@ Powerup.prototype.takeProtagonistHit = function () {
     if (this.isSpeedBoost) Player.addSpeed();
     if (this.isScoreMultiplier) Player.addMultiplier();
     if (this.isMachinegun) {
+        Player.hasShotgun = false;
         Player.setFireRate(5);
         Player.setAmmo(100); // TODO: decide on using addAmmo or setAmmo?
     };
