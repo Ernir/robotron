@@ -35,6 +35,8 @@ Player.prototype.score = 0;
 Player.prototype.saveCount = 0;
 Player.prototype.speed = 2;
 Player.prototype.speedTimer = 10 * SECS_TO_NOMINALS;
+Player.prototype.fireRate = 20;
+Player.prototype.ammo = 0;
 Player.prototype.scoreValues = {
     Electrode: 0,
     Spark: 25,
@@ -159,6 +161,39 @@ Player.prototype.resetSpeedTimer = function () {
     this.speedTimer = 10 * SECS_TO_NOMINALS;
 };
 
+Player.prototype.getFireRate = function () {
+    return this.fireRate;
+};
+
+Player.prototype.setFireRate = function (fireRate) {
+    this.fireRate = fireRate;
+};
+
+Player.prototype.resetFireRate = function () {
+    this.fireRate = 20;
+};
+
+Player.prototype.getAmmo = function () {
+    return this.ammo;
+};
+
+Player.prototype.setAmmo = function (ammo) {
+    this.ammo = ammo;
+};
+
+Player.prototype.subtractAmmo = function () {
+    if (this.ammo > 0) this.ammo += -1;
+    if (this.ammo < 1) this.resetFireRate();
+};
+
+Player.prototype.addAmmo = function (ammo) {
+    this.ammo += ammo;
+};
+
+Player.prototype.resetAmmo = function () {
+    this.ammo = 20;
+};
+
 Player.prototype.resetAll = function() {
     this.resetLives();
     this.resetLevel();
@@ -166,6 +201,8 @@ Player.prototype.resetAll = function() {
     this.resetSpeed();
     this.resetSpeedTimer();
     this.resetMultiplier();
+    this.resetFireRate();
+    this.resetAmmo();
 };
 
 Player.prototype.render = function(ctx) {
@@ -177,7 +214,7 @@ Player.prototype.render = function(ctx) {
     ctx.strokeText(this.score, 10, 20);
     var disp = "X" + this.multiplier + "  Level: " + this.level;
     ctx.strokeText(disp, g_canvas.width/2 - 50, 20);
-    ctx.restore();
+    
 
     // Display remaining lives
     for (var i = 1; i < this.lives; i++) {
@@ -186,4 +223,10 @@ Player.prototype.render = function(ctx) {
                                           15, 
                                           0);
     };
+
+    // Display ammo
+    // TODO: redesign the score bar
+    var text = "Ammo: " + this.ammo;
+    ctx.strokeText(text, g_canvas.width/2 - 160, 20);
+    ctx.restore();
 };

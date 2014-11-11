@@ -19,6 +19,15 @@ function Powerup(descr) {
         case 1:
             this.isSpeedBoost = true;
             break;
+        case 2:
+            this.isScoreMultiplier = true;
+            break;
+        case 3:
+            this.isMachinegun = true;
+            break;
+        case 4:
+            this.isShotgun = true;
+            break;
     }
 }
 
@@ -44,6 +53,12 @@ Powerup.prototype.takeProtagonistHit = function () {
     this.kill();
     if (this.isExtralife) Player.addLives();
     if (this.isSpeedBoost) Player.addSpeed();
+    if (this.isScoreMultiplier) Player.addMultiplier();
+    if (this.isMachinegun) {
+        Player.setFireRate(5);
+        Player.setAmmo(100); // TODO: decide on using addAmmo or setAmmo?
+    };
+    if (this.isShotgun) return;
 };
 
 Powerup.prototype.getRadius = function () {
@@ -55,6 +70,9 @@ Powerup.prototype.render = function (ctx) {
     //TODO: Add cool sprites
     if (this.isExtralife) ctx.fillStyle = "cyan";
     if (this.isSpeedBoost) ctx.fillStyle = "red";
+    if (this.isScoreMultiplier) ctx.fillStyle = "magenta";
+    if (this.isMachinegun) ctx.fillStyle = "lime";
+    if (this.isShotgun) ctx.fillStyle = "orange";
     util.fillCircle(ctx, this.cx, this.cy, this.getRadius());
     ctx.restore();
 };

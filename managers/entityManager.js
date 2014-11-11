@@ -156,7 +156,7 @@ var entityManager = {
     },
 	
 	fire: function (aimX, aimY) {
-		if (this._bulletDU < this._bulletDuDelay) {
+		if (this._bulletDU < Player.fireRate) {
 			this._bulletDU++;
 			return;
 		}
@@ -186,10 +186,11 @@ var entityManager = {
 			dirnX : dirnX,
 			dirnY : dirnY
 		}));
+        Player.subtractAmmo();
 	},
 	
 	fireReset: function() {
-		this._bulletDU = this._bulletDuDelay;
+		this._bulletDU = Player.fireRate;
 	},
 	
 // --------------------
@@ -273,7 +274,7 @@ var entityManager = {
     },
 
     createPowerup: function (cx,cy) {
-        var type = Math.floor(Math.random()*2);
+        var type = Math.floor(Math.random()*4);
         this._drops.push(new Powerup({cx: cx, 
                                       cy: cy, 
                                       type: type

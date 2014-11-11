@@ -80,7 +80,7 @@ Entity.prototype.capPositions = function () {
     var r = this.getRadius();
     this.cx = Math.max(this.cx, consts.wallLeft + r);
     this.cx = Math.min(this.cx, consts.wallRight - r);
-    this.cy = Math.max(this.cy, consts.wallTop + r);
+    this.cy = Math.max(this.cy, consts.wallTop + consts.wallThickness + r);
     this.cy = Math.min(this.cy, consts.wallBottom - r);
 };
 

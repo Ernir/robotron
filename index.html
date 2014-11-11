@@ -1,20 +1,19 @@
 <!DOCTYPE html>
-<html>
-  <head>
+<html lang="en">
+<head>
     <meta charset="UTF-8">
     <title>Robotron</title>
-  </head>
-  <body>
+</head>
 
-	<canvas id="myCanvas" width="800" height="600"
-		style="border: 1px solid black;">
-	Sorry, but your browser does not support the HTML5 canvas tag.
+<body>
+	<canvas id="myCanvas" width="800" height="600" style="border: 1px solid black;">
+	   Sorry, but your browser does not support the HTML5 canvas tag.
 	</canvas>
 
     <div id="output"></div>
 
-    <div class="wrapper">
-        <h1>CONTROLS</h1>
+    <div id="shortcuts">
+        <h1>KEYBOARD SHORTCUTS</h1>
             <td>
                 <h2>Movement</h2>
                 <ul>
@@ -26,15 +25,15 @@
                 <h2>Fire weapon</h2>
                 <ul>
                     <li>Arrow keys = fire in the arrow's direction</li>
-                    <li>mouse movement = aim</li>
-                    <li>mouse button = fire</li>
+                    <li>Mouse movement = aim</li>
+                    <li>Mouse click = fire</li>
                 </ul>
             </td>
-        <div class="toggles">
+        <div id="toggles">
             <h2>Toggles</h2>
             <ul>
-                <li>M = Music on/off (not yet implemented)</li>
-                <li>N = Sound effects on/off (not yet implemented)</li>
+                <li>M = Music on/off</li>
+                <li>N = Sound effects on/off</li>
                 <li>R = Restart game</li>
                 <li>P = Pause the game</li>
                 <li>O = When paused - continue 1 frame</li>
@@ -43,13 +42,14 @@
             <h2>Diagnostics</h2>
             <ul>
                 <li>+ = Next level</li>
-                <li>- = Previous level>/li>
+                <li>- = Previous level</li>
                 <li>K = Invincible mode</li>
                 <li>C = Clear the screen on/off</li>
                 <li>B = Draw a red box</li>
                 <li>U = Draw a white box</li>
                 <li>F = Toggle flipflop</li>
                 <li>R = Toggle render (toggleable only when paused)</li>
+                <li>X = Toggle red collision circles around entities</li>
                 <li>T = Show timer</li>
             </ul>
         </div>
