@@ -181,7 +181,7 @@ var levelManager = {
 		ctx.fillStyle ="rgba(255,255,255,0.3)"; //not sure if you want this
 		ctx.fillRect(0, hh/2, hw*2, hh);
 		ctx.fillStyle ="red";
-		prevTextAlign = ctx.textAlign;
+		var prevTextAlign = ctx.textAlign;
 		ctx.textAlign = "center";
 		str = "GAME OVER";
 		ctx.fillText(str, hw, hh);
