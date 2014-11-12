@@ -130,6 +130,10 @@ var entityManager = {
         };
         this._bullets.length = 0;
         this._scoreImgs.length = 0;
+        for (var i = 0; i < this._enemies.length; i++) {
+            var unit = this._enemies[i];
+            if (unit.resetRage) unit.resetRage();
+        }
     },
 
     enemiesIsEmpty: function () {

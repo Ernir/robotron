@@ -78,6 +78,10 @@ Grunt.prototype.rage = function (du) {
     this.speed = Math.min(this.speed, this.maxSpeed);
 };
 
+Grunt.prototype.resetRage = function () {
+    this.speed = this.baseSpeed;
+};
+
 Grunt.prototype.takeBulletHit = function () {
     this.kill();
 	Player.addScore(Player.scoreValues.Grunt * Player.getMultiplier());
