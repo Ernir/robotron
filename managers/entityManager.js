@@ -87,7 +87,8 @@ var entityManager = {
             { n : 0, f : this.createHulk },
             { n : 0, f : this.createBrain },
             { n : 0, f : this.createElectrode },
-            { n : 0, f : this.createQuark }
+            { n : 0, f : this.createQuark },
+            { n : 0, f : this.createSpheroid }
             //TODO: add more entities
         ];
 

@@ -75,8 +75,10 @@ Bullet.prototype.update = function (du) {
         if (!hitEntity.bulletVel) {
             var canTakeHit = hitEntity.takeBulletHit;
             var descr = {velX : this.velX, velY : this.velY, du : du};
-            if (canTakeHit) canTakeHit.call(hitEntity, descr);
-            return entityManager.KILL_ME_NOW;
+            if (canTakeHit)  {
+                canTakeHit.call(hitEntity, descr);
+                return entityManager.KILL_ME_NOW;
+            }
         }
     }
     
