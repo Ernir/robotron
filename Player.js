@@ -279,5 +279,5 @@ Player.prototype.addAmmo = function (ammo) {
 };
 
 Player.prototype.resetAmmo = function () {
-    this.ammo = 20;
+    this.ammo = 0;
 };

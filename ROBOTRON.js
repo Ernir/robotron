@@ -83,10 +83,17 @@ var g_music = true;
 var KEY_SPATIAL = keyCode('X');
 var KEY_KILLABLE = keyCode('K');
 var KEY_RESTART = keyCode('R');
-var KEY_NEXT_LEVEL = 107;
-var KEY_PREV_LEVEL = 109;
+var KEY_NEXT_LEVEL = 107; // Numpad +
+var KEY_PREV_LEVEL = 109; // Numpad -
 var KEY_SOUND = keyCode('N');
 var KEY_MUSIC = keyCode('M');
+var KEY_PWRUP_RESET = 96; // Numpad 0
+var KEY_EXTRA_LIFE = 97; // Numpad 1
+var KEY_SPEED = 98; // Numpad 2
+var KEY_SCORE_MP = 99; // Numpad 3
+var KEY_MACHINEGUN = 100; // Numpad 4
+var KEY_SHOTGUN = 101; // Numpad 5
+var KEY_SHIELD = 102; // Numpad 6
 
 function processDiagnostics() {
 
@@ -106,8 +113,31 @@ function processDiagnostics() {
 	if (eatKey(KEY_SOUND)) g_sounds = !g_sounds;
 	
 	if (eatKey(KEY_MUSIC)) g_music = !g_music;
-	if (g_music) g_bgm.play();
+	
+    if (g_music) g_bgm.play();
 	else g_bgm.pause();
+
+    if (eatKey(KEY_EXTRA_LIFE)) Player.addLives();
+
+    if (eatKey(KEY_SPEED)) Player.addSpeed();
+
+    if (eatKey(KEY_SCORE_MP)) Player.addMultiplier();
+
+    if (eatKey(KEY_MACHINEGUN)) {
+        Player.hasShotgun = false;
+        Player.setFireRate(5);
+        Player.addAmmo(100);
+    }
+
+    if (eatKey(KEY_SHOTGUN)) {
+        Player.hasShotgun = true;
+        Player.setFireRate(100);
+        Player.addAmmo(100);
+    }
+
+    if (eatKey(KEY_SHIELD)) Player.addShieldTime();
+
+    if (eatKey(KEY_PWRUP_RESET)) Player.resetAll();
 }
 
 
