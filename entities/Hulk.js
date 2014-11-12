@@ -21,11 +21,11 @@ Hulk.prototype = Object.create(Enemy.prototype);
 Hulk.prototype.timeSinceHit = Infinity;
 Hulk.prototype.killFamily = true;
 Hulk.prototype.renderPos = {cx: this.cx, cy: this.cy};
-Hulk.prototype.moveTime = SECS_TO_NOMINALS;
+Hulk.prototype.bootTime = 2 * SECS_TO_NOMINALS;
 Hulk.prototype.brainpower = 0.05;
 
 Hulk.prototype.update = function (du) {
-    this.moveTime += -du;
+    this.bootTime += -du;
 
     spatialManager.unregister(this);
 	
@@ -63,7 +63,7 @@ Hulk.prototype.seekTarget = function () {
     var yOffset = this.target.cy - this.cy;
     var difficulty = Math.random();
 
-    if(this.moveTime < 0 || 
+    if(this.bootTime < 0 || 
        (util.abs(xOffset) < 10 && difficulty < this.brainpower) || 
        (util.abs(yOffset) < 10 && difficulty < this.brainpower)
       ){
@@ -83,7 +83,7 @@ Hulk.prototype.seekTarget = function () {
                 this.velY = -1;
             }
         }
-        this.moveTime = 2 * SECS_TO_NOMINALS;
+        this.bootTime = 2 * SECS_TO_NOMINALS;
     }
 };
 

@@ -27,8 +27,10 @@ Brain.prototype.missileFireChance = 0.005; // 0.5% chance of firing a CM per upd
 // TODO: Find a good firing interval for the missiles.
 Brain.prototype.dropChance = 0.3; // 30% chance of a random drop
 // TODO: decide on the dropchance
+Brain.prototype.bootTime = SECS_TO_NOMINALS;
 
 Brain.prototype.update = function (du) {
+    if (this.bootTime >= 0) this.bootTime += -du;
 
     spatialManager.unregister(this);
 
@@ -66,18 +68,20 @@ Brain.prototype.seekTarget = function () {
     var xOffset = this.target.cx - this.cx;
     var yOffset = this.target.cy - this.cy;
 
-    this.velX = 0;
-    if (xOffset > 0) {
-        this.velX = 0.5;
-    } else if (xOffset < 0) {
-        this.velX = -1;
-    }
+    if(this.bootTime < 0){
+        this.velX = 0;
+        if (xOffset > 0) {
+            this.velX = 0.5;
+        } else if (xOffset < 0) {
+            this.velX = -1;
+        }
 
-    this.velY = 0;
-    if (yOffset > 0) {
-        this.velY = 1;
-    } else if (yOffset < 0) {
-        this.velY = -0.5;
+        this.velY = 0;
+        if (yOffset > 0) {
+            this.velY = 1;
+        } else if (yOffset < 0) {
+            this.velY = -0.5;
+        }
     }
 
     // Clamp vel to 1 pixel moving radius
