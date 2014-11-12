@@ -1,30 +1,32 @@
 // ======
-// Tank
+// Quark
 // ======
 
-// Tanks are spawned by Quarks. Tanks fire rebounding tank shells.
-// Tanks roll around randomly.
+// Spheroids spawn Enforcers.
+// Spheroids (probably...) fly around quickly and randomly.
 
-function Tank(descr) {
+function Spheroid(descr) {
 
     // Common inherited setup logic from Entity
     Enemy.call(this, descr);
 
-    this.sprite = g_sprites.Tank;
-    this.target = entityManager.findProtagonist();
+    this.sprite = g_sprites.Spheroid;
 
     // Initializing speed
-    this.baseSpeed = 1;
+    this.baseSpeed = 3;
     this.velX = this.baseSpeed*util.randTrinary();
     this.velY = this.baseSpeed*util.randTrinary();
+    this.tanksSpawned = 0;
     // TODO play spawning sound?
 }
 
-Tank.prototype = Object.create(Enemy.prototype);
-Tank.prototype.shellFireChance = 0.01; //1% chance of firing a shell/update
-Tank.prototype.renderPos = {cx: this.cx, cy: this.cy};
+Spheroid.prototype = Object.create(Enemy.prototype);
+Spheroid.prototype.tankSpawnChance = 0.005; //0,5% chance of spawning a tank/update
+// TODO: Find a good spawn interval.
+Spheroid.prototype.renderPos = {cx: this.cx, cy: this.cy};
+Spheroid.prototype.maxTanks = 6;
 
-Tank.prototype.update = function (du) {
+Spheroid.prototype.update = function (du) {
 
     spatialManager.unregister(this);
 
@@ -35,6 +37,12 @@ Tank.prototype.update = function (du) {
         return entityManager.KILL_ME_NOW;
     }
 
+    // maxTanks is effectively zero-indexed
+    if(Math.random() < this.tankSpawnChance && this.tanksSpawned < this.maxTanks) {
+        this.tanksSpawned++;
+        entityManager.createEnforcer(this.cx,this.cy);
+    }
+
     this.randomWalk();
 
     this.capPositions();
@@ -43,25 +51,14 @@ Tank.prototype.update = function (du) {
     this.cx += this.velX * du;
     this.cy += this.velY * du;
 
-    if (Math.random() < this.shellFireChance) {
-        // TODO: Do this amazing trick shot box-in AI thing.
-        // http://www.robotron2084guidebook.com/gameplay/tanks/
-        var angle = util.angleTo(
-            this.cx,
-            this.cy,
-            this.target.cx,
-            this.target.cy
-        );
-        entityManager.fireShell(this.cx, this.cy, angle);
-    }
 
     spatialManager.register(this);
 
 };
 
-Tank.prototype.randomWalk = function () {
-    if (Math.random() < 0.005) {
-        //0.5% chance to change direction
+Spheroid.prototype.randomWalk = function () {
+    if (Math.random() < 0.02) {
+        //2% chance to change direction
 
         var n = Math.floor(Math.random() * 4);
         switch (n) {
@@ -80,13 +77,11 @@ Tank.prototype.randomWalk = function () {
     }
 };
 
-
-
-Tank.prototype.takeBulletHit = function () {
+Spheroid.prototype.takeBulletHit = function () {
     this.kill();
-    Player.addScore(Player.scoreValues.Tank * Player.getMultiplier());
+    Player.addScore(Player.scoreValues.Spheroid * Player.getMultiplier());
 };
 
-Tank.prototype.render = function (ctx) {
+Spheroid.prototype.render = function (ctx) {
     this.sprite.drawCentredAt(ctx, this.cx, this.cy, 0);
 };
