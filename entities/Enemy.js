@@ -28,11 +28,18 @@ Enemy.prototype.killProtagonist = true;
 Enemy.prototype.rotation = 0;
 Enemy.prototype.velX = 0;
 Enemy.prototype.velY = 0;
+Enemy.prototype.dropChance = 0.05; // All enemies have at least a 5% chance 
+                                   // to drop a powerup
 
 Enemy.prototype.kill = function () {
     this._isDeadNow = true;
 	this.explode.currentTime = 0;
 	if (g_sounds) this.explode.play();
+
+    var result = Math.random();
+    if (this.dropChance > result) {
+        entityManager.createPowerup(this.cx,this.cy);
+    }
 };
 
 Enemy.prototype.getRadius = function () {

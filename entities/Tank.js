@@ -23,6 +23,7 @@ function Tank(descr) {
 Tank.prototype = Object.create(Enemy.prototype);
 Tank.prototype.shellFireChance = 0.01; //1% chance of firing a shell/update
 Tank.prototype.renderPos = {cx: this.cx, cy: this.cy};
+Tank.prototype.dropChance = 1; // 100% chance of a random drop
 
 Tank.prototype.update = function (du) {
 

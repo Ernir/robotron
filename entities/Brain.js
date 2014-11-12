@@ -25,8 +25,7 @@ Brain.prototype.renderPos = {cx: this.cx, cy: this.cy};
 Brain.prototype.makesProgs = true;
 Brain.prototype.missileFireChance = 0.005; // 0.5% chance of firing a CM per update
 // TODO: Find a good firing interval for the missiles.
-Brain.prototype.dropChance = 0.5; // 50% chance of a random drop
-// TODO: decide on the dropchance
+Brain.prototype.dropChance = 0.9; // 90% chance of a random drop
 Brain.prototype.bootTime = SECS_TO_NOMINALS;
 
 Brain.prototype.update = function (du) {
@@ -102,11 +101,6 @@ Brain.prototype.findTarget = function () {
 Brain.prototype.takeBulletHit = function () {
     this.kill();
 	Player.addScore(Player.scoreValues.Brain * Player.getMultiplier());
-
-    var result = Math.random();
-    if (this.dropChance > result) {
-        entityManager.createPowerup(this.cx,this.cy);
-    }
 };
 
 Brain.prototype.render = function (ctx) {
