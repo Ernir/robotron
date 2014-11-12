@@ -65,23 +65,91 @@ Spark.prototype.edgeHug = function () {
 
     var rightWallIntersect = cx + velX > consts.wallRight - r;
     var leftWallIntersect = cx + velX < consts.wallLeft + r;
-    var topWallIntersect = cy + velY < consts.wallTop + r;
+    var topWallIntersect = cy + velY < consts.wallTop + consts.wallThickness + r;
     var bottomWallIntersect = cy + velY > consts.wallBottom - r;
 
-    var newVelX = velX;
-    var newVelY = velY;
-
     if (leftWallIntersect || rightWallIntersect) { // LR borders
-        newVelX = 0;
-        newVelY = util.sign(velY) * baseVel;
+        this.velX = 0;
+        this.velY = util.sign(velY) * baseVel;
     }
     if (topWallIntersect || bottomWallIntersect) { // TB borders
-        newVelX = util.sign(velX) * baseVel;
-        newVelY = 0;
+        this.velX = util.sign(velX) * baseVel;
+        this.velY = 0;
     }
 
-    this.velX = newVelX;
-    this.velY = newVelY;
+    // Literal corner cases below. //TODO: handle all of them, and refactor.
+    // Note: A velocity component shouldn't be exactly 0 unless the spark had been
+    //       sliding against a wall.
+    if (topWallIntersect && this.velX === 0) {
+        this.velX = baseVel;
+        this.velY = 0;
+    }
+    if (rightWallIntersect && this.velY === 0) {
+        this.velX = 0;
+        this.velY = baseVel;
+    }
+    if (bottomWallIntersect && this.velX === 0) {
+        this.velX = -baseVel;
+        this.velY = 0;
+    }
+    if (leftWallIntersect && this.velY === 0) {
+        this.velX = 0;
+        this.velY = -baseVel;
+    }
+
+
+//    var absVelX = util.abs(newVelX); // Only concerned with edges here
+//    var absVelY = util.abs(newVelY);
+//    if (topWallIntersect && leftWallIntersect) { // TL corner
+//        if (absVelX > absVelY) {
+//            // Travel down
+//            newVelX = 0;
+//            newVelY = baseVel;
+//        } else {
+//            // Travel right
+//            newVelX = baseVel;
+//            newVelY = 0;
+//        }
+//    }
+//
+//    if (topWallIntersect && rightWallIntersect) { // TR corner
+//        if (absVelX > absVelY) {
+//            // Travel down
+//            newVelX = 0;
+//            newVelY = baseVel;
+//        } else {
+//            // Travel left
+//            newVelX = -baseVel;
+//            newVelY = 0;
+//        }
+//    }
+//
+//    if (rightWallIntersect && bottomWallIntersect) { // BR corner
+//        if (absVelX > absVelY) {
+//            // Travel up
+//            newVelX = 0;
+//            newVelY = -baseVel;
+//        } else {
+//            // Travel left
+//            newVelX = -baseVel;
+//            newVelY = 0;
+//        }
+//    }
+//
+//    if (bottomWallIntersect && leftWallIntersect) { // BL corner
+//        if (absVelX > absVelY) {
+//            // Travel up
+//            newVelX = 0;
+//            newVelY = -baseVel;
+//        } else {
+//            // Travel right
+//            newVelX = baseVel;
+//            newVelY = 0;
+//        }
+//    }
+//
+//    this.velX = newVelX;
+//    this.velY = newVelY;
 };
 
 Spark.prototype.takeBulletHit = function () {
