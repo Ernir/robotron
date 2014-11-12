@@ -277,7 +277,7 @@ var entityManager = {
     },
 
     createPowerup: function (cx,cy) {
-        var type = 5;//Math.floor(Math.random()*5);
+        var type = Math.floor(Math.random()*6);
         this._drops.push(new Powerup({cx: cx, 
                                       cy: cy, 
                                       type: type
