@@ -28,7 +28,7 @@ function initializeEntities() {
     // TODO
 }
 var Player = new Player();
-var g_bgm = new Audio(g_audioUrls.todIOF);
+var g_bgm = new Audio(g_audioUrls.music);
 
 // =============
 // GATHER INPUTS
