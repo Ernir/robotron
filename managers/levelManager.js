@@ -23,17 +23,16 @@ var levelManager = {
     // corresponding type should be created. There is always one protagonist,
     // so we skip him in the level description
     // Key:
-    // Family, Grunts, Hulks, Brains, Electrodes //TODO: add more entities
+    // Family, Grunts, Hulks, Brains, Electrodes, Quarks (not the Star Trek DS9 version) //TODO: add more entities
 
         [], // level "0", skipped automatically
         [3,6],
-        [4,10],
         [5,6,1],
-        [5,8,3],
-        [4,0,0,2],
-        [6,6,2,1],
-        [6,10,3,3],
-        [5,0,2,5]
+        [5,4,2,2],
+        [6,6,4,2,4],
+        [6,6,2,1,6,1],
+        [6,10,3,3,6,2],
+        [5,5,6,4,8,3]
     ],
 	
 	_isChangingLevel: false,
@@ -56,7 +55,7 @@ var levelManager = {
         if (Player.level >= this._levelSpecs.length) {
             var randomlevel = [];
             //TODO: update the loop according to the number of enemy + family types
-            for (var i = 0; i < 5; i++) {
+            for (var i = 0; i < 6; i++) {
                 randomlevel.push(Math.floor(Math.random()*10));
             };
             entityManager.init(randomlevel);

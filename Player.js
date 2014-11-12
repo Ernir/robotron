@@ -73,12 +73,12 @@ Player.prototype.resetAll = function() {
 Player.prototype.render = function(ctx) {
     // Display the score
     ctx.save();
-    ctx.lineWidth = 2;
+    ctx.lineWidth = 1.5;
     ctx.font = "20px Arial";
-    ctx.strokeStyle = "red";
-    ctx.strokeText(this.score, 10, 20);
+    ctx.fillStyle = "red";
+    ctx.fillText(this.score, 10, 20);
     var disp = "X" + this.multiplier + "  Level: " + this.level;
-    ctx.strokeText(disp, g_canvas.width/2 - 50, 20);
+    ctx.fillText(disp, g_canvas.width/2 - 50, 20);
     
 
     // Display remaining lives
@@ -93,10 +93,10 @@ Player.prototype.render = function(ctx) {
     // Display ammo
     // TODO: redesign the score bar
     var text = "Ammo: " + this.ammo;
-    ctx.strokeText(text, g_canvas.width/2 - 160, 20);
+    ctx.fillText(text, g_canvas.width/2 - 160, 20);
     
     var moretxt = "Shield: " + Math.ceil(this.shieldTime / SECS_TO_NOMINALS);
-    ctx.strokeText(moretxt, g_canvas.width/2 + 80, 20);
+    ctx.fillText(moretxt, g_canvas.width/2 + 80, 20);
     ctx.restore();
 };
 
