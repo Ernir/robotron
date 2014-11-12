@@ -3,6 +3,7 @@
 // ======
 
 // Grunts are simple robotrons that walk straight towards the main character
+// Grunts rage, getting faster over time
 
 "use strict";
 
@@ -20,6 +21,10 @@ function Grunt(descr) {
 
 Grunt.prototype = Object.create(Enemy.prototype);
 Grunt.prototype.renderPos = {cx: this.cx, cy: this.cy};
+Grunt.prototype.baseSpeed = 1;
+Grunt.prototype.speed = 1;
+Grunt.prototype.maxSpeed = 2.5;
+Grunt.prototype.maxRageReachedTime = 30*SECS_TO_NOMINALS;
 
 Grunt.prototype.update = function (du) {
 
@@ -31,6 +36,7 @@ Grunt.prototype.update = function (du) {
     if (this._isDeadNow) {
         return entityManager.KILL_ME_NOW;
     }
+    this.rage(du);
     this.seekTarget();
 
     this.cx += this.velX * du;
@@ -46,23 +52,30 @@ Grunt.prototype.seekTarget = function () {
 
     this.velX = 0;
     if (xOffset > 0) {
-        this.velX = 1;
+        this.velX = this.speed;
     } else if (xOffset < 0) {
-        this.velX = -1;
+        this.velX = -this.speed;
     }
 
     this.velY = 0;
     if (yOffset > 0) {
-        this.velY = 1;
+        this.velY = this.speed;
     } else if (yOffset < 0) {
-        this.velY = -1;
+        this.velY = -this.speed;
     }
 	
-	// Clamp vel to 1 pixel moving radius
+	// Clamp vel
 	if (xOffset !== 0 && yOffset !== 0) {
-		this.velX *= Math.cos(Math.PI / 4);
-		this.velY *= Math.sin(Math.PI / 4);
+		this.velX *= this.speed*Math.cos(Math.PI / 4);
+		this.velY *= this.speed*Math.sin(Math.PI / 4);
 	}
+};
+
+// Increases the grunt's speed over time.
+Grunt.prototype.rage = function (du) {
+    var timeFraction = du/this.maxRageReachedTime;
+    this.speed += (this.maxSpeed - this.baseSpeed)*timeFraction;
+    this.speed = Math.min(this.speed, this.maxSpeed);
 };
 
 Grunt.prototype.takeBulletHit = function () {
