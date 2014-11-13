@@ -31,6 +31,7 @@ var entityManager = {
 	_family: [],
 	_enemies: [],
     _ignoredEnemies: [],
+    _spawnedEnemies: [],
 	_bullets: [],
     _scoreImgs: [],
     _drops: [],
@@ -74,6 +75,7 @@ var entityManager = {
 			this._family, 
 			this._enemies,
             this._ignoredEnemies,
+            this._spawnedEnemies,
             this._scoreImgs
 		];
     },
@@ -127,8 +129,12 @@ var entityManager = {
     clearPartial: function () {
         for (var i = 0; i < this._bullets.length; i++) {
             spatialManager.unregister(this._bullets[i]);
-        };
+        }
         this._bullets.length = 0;
+        for (var i = 0; i < this._spawnedEnemies.length; i++) {
+            spatialManager.unregister(this._spawnedEnemies[i]);
+        }
+        this._spawnedEnemies.length = 0;
         this._scoreImgs.length = 0;
         for (var i = 0; i < this._enemies.length; i++) {
             var unit = this._enemies[i];
@@ -288,7 +294,7 @@ var entityManager = {
                                       }));
     },
 	createProg: function (cx,cy) {
-        this._enemies.push(new Prog({cx: cx, cy: cy}));
+        this._spawnedEnemies.push(new Prog({cx: cx, cy: cy}));
     },
 
     createQuark: function() {
@@ -298,7 +304,7 @@ var entityManager = {
     },
 
     createTank: function(cx,cy) {
-        this._enemies.push(new Tank({cx: cx, cy: cy}));
+        this._spawnedEnemies.push(new Tank({cx: cx, cy: cy}));
     },
 
     fireShell: function (cx, cy, angle) {
@@ -312,7 +318,7 @@ var entityManager = {
     },
 
     createEnforcer: function (cx, cy) {
-        this._enemies.push(new Enforcer({cx: cx, cy: cy}));
+        this._spawnedEnemies.push(new Enforcer({cx: cx, cy: cy}));
     },
 
     fireSpark: function (cx, cy, angle) {

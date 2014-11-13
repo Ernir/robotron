@@ -36,6 +36,7 @@ Protagonist.prototype.KEY_SHOOTRIGHT  = 39;
 
 // Initial, inheritable, default values
 Protagonist.prototype.rotation = 0;
+Protagonist.prototype.stepsize = 10;
 Protagonist.prototype.velX = 0;
 Protagonist.prototype.velY = 0;
 Protagonist.prototype.renderPos = {cx: this.cx, cy: this.cy};
@@ -164,21 +165,21 @@ Protagonist.prototype.render = function (ctx) {
     if(angle > PI*7/4) facing = 3; //right
 
     switch(true) {
-        case distSq<3*3://TODO: Find the correct stepsize
+        case distSq<util.square(this.stepsize):
             g_sprites.Protagonist[facing+0].drawCentredAt(ctx, this.cx, this.cy, 0);
             break;
-        case distSq<6*6:
+        case distSq<util.square(this.stepsize*2):
             g_sprites.Protagonist[facing+1].drawCentredAt(ctx, this.cx, this.cy, 0);
             break;
-        case distSq<9*9:
+        case distSq<util.square(this.stepsize*3):
             g_sprites.Protagonist[facing+0].drawCentredAt(ctx, this.cx, this.cy, 0);
             break;
-        case distSq<12*12:
+        case distSq<util.square(this.stepsize*4):
             g_sprites.Protagonist[facing+2].drawCentredAt(ctx, this.cx, this.cy, 0);
             break;
         default:
-            this.renderPos = {cx: this.cx, cy: this.cy};
             g_sprites.Protagonist[facing+0].drawCentredAt(ctx, this.cx, this.cy, 0);
+            this.renderPos = {cx: this.cx, cy: this.cy};
     }
 
     // Draw the shield
