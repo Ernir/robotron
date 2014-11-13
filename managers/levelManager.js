@@ -46,8 +46,7 @@ var levelManager = {
         this._isChangingLevel = true;
 		this._isGameOver = false;
 
-        //if Player.level > the number of pre-made levels
-        //then make a random level
+        // Level generator
         if (Player.level >= this._levelSpecs.length) {
 
             var L = Player.level;
@@ -85,16 +84,17 @@ var levelManager = {
                     break;
                 case (L+6) % 10 === 0:
                     // Hulk wave or Enforcer/Tank wave
-                    if (g_Debug) console.log("hulks or enforcers/tanks");
                     randomlevel.push(10); // Family
                     randomlevel.push(3+Math.floor(L/3)); // Electrodes
                     if (Math.random()<0.5) {
+                        if (g_Debug) console.log("enforcers/tanks");
                         randomlevel.push(0); // Grunts
                         randomlevel.push(0); // Hulks
                         randomlevel.push(4+Math.floor(L/3)); // Spheroids
                         randomlevel.push(0); // Brains
-                        randomlevel.push(2+Math.floor(L/4)); // Quarks                        
+                        randomlevel.push(2+Math.floor(Math.random()*L/4)); // Quarks
                     }else{
+                        if (g_Debug) console.log("hulks");
                         randomlevel.push(Math.floor(Math.random()*5)+4); // Grunts
                         randomlevel.push(6+Math.floor(L/2)); // Hulks
                         randomlevel.push(Math.floor(Math.random()*3)); // Spheroids
