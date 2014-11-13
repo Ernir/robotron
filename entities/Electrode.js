@@ -15,8 +15,11 @@ function Electrode(descr) {
 }
 
 Electrode.prototype = Object.create(Enemy.prototype);
+Electrode.prototype.animation = 0;
 
 Electrode.prototype.update = function (du) {
+    this.animation += du;
+    if (this.animation > SECS_TO_NOMINALS) this.animation = 0;
 
     spatialManager.unregister(this);
 
@@ -41,4 +44,17 @@ Electrode.prototype.update = function (du) {
 Electrode.prototype.takeBulletHit = function () {
     this.kill();
 	Player.addScore(Player.scoreValues.Electrode * Player.getMultiplier());
+};
+
+Electrode.prototype.render = function (ctx) {
+    switch(true) {
+        case this.animation < SECS_TO_NOMINALS/5:
+            g_sprites.Electrode[(this.shapes*3)+0].drawCentredAt(ctx, this.cx, this.cy, 0);
+            break;
+        case this.animation < 2*SECS_TO_NOMINALS/3:
+            g_sprites.Electrode[(this.shapes*3)+1].drawCentredAt(ctx, this.cx, this.cy, 0);
+            break;
+        default:
+            g_sprites.Electrode[(this.shapes*3)+2].drawCentredAt(ctx, this.cx, this.cy, 0);
+    }
 };

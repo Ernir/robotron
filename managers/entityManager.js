@@ -284,6 +284,7 @@ var entityManager = {
     createElectrode: function () {
         var playerSafeDist = 120;
         var descr = this.findSpawn(playerSafeDist);
+        descr.shapes = Math.floor(Math.random()*7);
         this._ignoredEnemies.push(new Electrode(descr));
     },
 

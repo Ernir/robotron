@@ -213,16 +213,22 @@ function preloadDone() {
     g_sprites.HumanScore = [];
 
     for (var i = 0; i < 12; i++) {
-        g_sprites.Dad[i] = new Sprite(g_images.Dad, i*30, (i+1)*30);
-        g_sprites.Protagonist[i] = new Sprite(g_images.Protagonist, i*26, (i+1)*26);
-        g_sprites.Brain[i] = new Sprite(g_images.Brain, i*38, (i+1)*38);
+        g_sprites.Dad.push(new Sprite(g_images.Dad, i*30, (i+1)*30));
+        g_sprites.Protagonist.push(new Sprite(g_images.Protagonist, i*26, (i+1)*26));
+        g_sprites.Brain.push(new Sprite(g_images.Brain, i*38, (i+1)*38));
     }
     for (var i = 0; i < 9; i++) {
-        g_sprites.Hulk[i] = new Sprite(g_images.Hulk, i*38, (i+1)*38);    
+        g_sprites.Hulk.push(new Sprite(g_images.Hulk, i*38, (i+1)*38));    
     }
     for (var i = 0; i < 3; i++) {
-        g_sprites.Grunt[i] = new Sprite(g_images.Grunt, i*30, (i+1)*30);
+        g_sprites.Grunt.push(new Sprite(g_images.Grunt, i*30, (i+1)*30));
         g_sprites.Electrode[i] = new Sprite(g_images.Triangle, i*27, (i+1)*27);
+        g_sprites.Electrode[i+3] = new Sprite(g_images.Square, i*27, (i+1)*27);
+        g_sprites.Electrode[i+6] = new Sprite(g_images.Rectangle, i*27, (i+1)*27);
+        g_sprites.Electrode[i+9] = new Sprite(g_images.Dizzy, i*27, (i+1)*27);
+        g_sprites.Electrode[i+12] = new Sprite(g_images.Diamond, i*27, (i+1)*27);
+        g_sprites.Electrode[i+15] = new Sprite(g_images.Checkers, i*27, (i+1)*27);
+        g_sprites.Electrode[i+18] = new Sprite(g_images.BlackDiamond, i*27, (i+1)*27);
     }
     for (var i = 0; i < 5; i++) {
         g_sprites.HumanScore[i + 1] = new Sprite(g_images.HumanScore, 3 + (i * 34), 37 + (i * 34));
