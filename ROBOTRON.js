@@ -211,6 +211,7 @@ function preloadDone() {
     g_sprites.Grunt = [];
     g_sprites.Electrode = [];
     g_sprites.HumanScore = [];
+    g_sprites.Spheroid = [];
 
     for (var i = 0; i < 12; i++) {
         g_sprites.Dad.push(new Sprite(g_images.Dad, i*30, (i+1)*30));
@@ -223,6 +224,13 @@ function preloadDone() {
     for (var i = 0; i < 9; i++) {
         g_sprites.Hulk.push(new Sprite(g_images.Hulk, i*38, (i+1)*38));    
     }
+    for (var i = 0; i < 3; i++) {
+        g_sprites.Grunt.push(new Sprite(g_images.Grunt, i*30, (i+1)*30));
+    }
+    for (var i = 0; i < 5; i++) {
+        g_sprites.HumanScore[i + 1] = new Sprite(g_images.HumanScore, 3 + (i * 34), 37 + (i * 34));
+    }
+
     g_sprites.Electrode.push(new Sprite(g_images.Triangle, 2, 20));
     g_sprites.Electrode.push(new Sprite(g_images.Triangle, 36, 48));
     g_sprites.Electrode.push(new Sprite(g_images.Triangle, 70, 76));
@@ -245,12 +253,14 @@ function preloadDone() {
     g_sprites.Electrode.push(new Sprite(g_images.BlackDiamond, 36, 50, 10, 24));
     g_sprites.Electrode.push(new Sprite(g_images.BlackDiamond, 68, 78, 12, 22));
 
-    for (var i = 0; i < 3; i++) {
-        g_sprites.Grunt.push(new Sprite(g_images.Grunt, i*30, (i+1)*30));
-    }
-    for (var i = 0; i < 5; i++) {
-        g_sprites.HumanScore[i + 1] = new Sprite(g_images.HumanScore, 3 + (i * 34), 37 + (i * 34));
-    }
+    g_sprites.Spheroid.push(new Sprite(g_images.Spheroid, 16, 18, 20, 22));
+    g_sprites.Spheroid.push(new Sprite(g_images.Spheroid, 56, 62));
+    g_sprites.Spheroid.push(new Sprite(g_images.Spheroid, 96, 106));
+    g_sprites.Spheroid.push(new Sprite(g_images.Spheroid, 136, 150));
+    g_sprites.Spheroid.push(new Sprite(g_images.Spheroid, 176, 194));
+    g_sprites.Spheroid.push(new Sprite(g_images.Spheroid, 216, 238));
+    g_sprites.Spheroid.push(new Sprite(g_images.Spheroid, 256, 282));
+    g_sprites.Spheroid.push(new Sprite(g_images.Spheroid, 296, 326));
 
     initializeEntities();
     levelManager.startLevel();

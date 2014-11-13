@@ -10,7 +10,7 @@ function Spheroid(descr) {
     // Common inherited setup logic from Entity
     Enemy.call(this, descr);
 
-    this.sprite = g_sprites.Spheroid;
+    this.sprite = g_sprites.Spheroid[5];
 
     // Initializing speed
     this.baseSpeed = 3;
@@ -28,6 +28,8 @@ Spheroid.prototype.maxTanks = 6;
 Spheroid.prototype.constructionTime = SECS_TO_NOMINALS;
 
 Spheroid.prototype.update = function (du) {
+    this.animation += du;
+    if (this.animation > SECS_TO_NOMINALS) this.animation = 0;
 
     spatialManager.unregister(this);
 
@@ -90,5 +92,6 @@ Spheroid.prototype.takeBulletHit = function () {
 };
 
 Spheroid.prototype.render = function (ctx) {
-    this.sprite.drawCentredAt(ctx, this.cx, this.cy, 0);
+    var temp = Math.floor(8 * this.animation / SECS_TO_NOMINALS);
+    g_sprites.Spheroid[temp].drawCentredAt(ctx, this.cx, this.cy, 0);
 };
