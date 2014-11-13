@@ -22,6 +22,7 @@ function Tank(descr) {
 
 Tank.prototype = Object.create(Enemy.prototype);
 Tank.prototype.shellFireChance = 0.01; //1% chance of firing a shell/update
+Tank.prototype.ammo = 20;
 Tank.prototype.renderPos = {cx: this.cx, cy: this.cy};
 Tank.prototype.dropChance = 1; // 100% chance of a random drop
 
@@ -44,7 +45,7 @@ Tank.prototype.update = function (du) {
     this.cx += this.velX * du;
     this.cy += this.velY * du;
 
-    if (Math.random() < this.shellFireChance) {
+    if (Math.random() < this.shellFireChance && this.ammo > 0) {
         // TODO: Do this amazing trick shot box-in AI thing.
         // http://www.robotron2084guidebook.com/gameplay/tanks/
         var angle = util.angleTo(
@@ -53,6 +54,7 @@ Tank.prototype.update = function (du) {
             this.target.cx,
             this.target.cy
         );
+        this.ammo--;
         entityManager.fireShell(this.cx, this.cy, angle);
     }
 

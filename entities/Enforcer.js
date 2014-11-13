@@ -20,6 +20,7 @@ function Enforcer(descr) {
 }
 
 Enforcer.prototype = Object.create(Enemy.prototype);
+Enforcer.prototype.ammo = 20;
 Enforcer.prototype.sparkFireChance = 0.01; //1% chance of firing a spark/update
 
 Enforcer.prototype.update = function (du) {
@@ -38,13 +39,14 @@ Enforcer.prototype.update = function (du) {
     this.cy += this.velY * du;
     this.capPositions();
 
-    if (Math.random() < this.sparkFireChance) {
+    if (Math.random() < this.sparkFireChance && this.ammo > 0) {
         var angle = util.angleTo(
             this.cx,
             this.cy,
             this.target.cx,
             this.target.cy
         );
+        this.ammo--;
         entityManager.fireSpark(this.cx, this.cy, angle);
     }
 
