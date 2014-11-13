@@ -37,6 +37,7 @@ g_audioUrls = {
 	brains : "https://notendur.hi.is/~eth31/cgp/staticdata/Sounds/brains.wav",
 	enfspark : "https://notendur.hi.is/~eth31/cgp/staticdata/Sounds/enfspark.wav",
 	explode : "https://notendur.hi.is/~eth31/cgp/staticdata/Sounds/explode.wav",
+	explosion : "https://notendur.hi.is/~jiz2/TOL-S3/ProjectRobotron/explosion.wav",
 	familypick : "https://notendur.hi.is/~eth31/cgp/staticdata/Sounds/familypick.wav",
 	familypickrampage : "https://notendur.hi.is/~eth31/cgp/staticdata/Sounds/familypickrampage.wav",
 	familydead : "https://notendur.hi.is/~eth31/cgp/staticdata/Sounds/familydead.wav",

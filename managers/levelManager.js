@@ -94,7 +94,7 @@ var levelManager = {
                         randomlevel.push(4+Math.floor(L/3)); // Spheroids
                         randomlevel.push(0); // Brains
                         randomlevel.push(2+Math.floor(L/4)); // Quarks                        
-                    }else{
+                    } else {
                         randomlevel.push(Math.floor(Math.random()*5)+4); // Grunts
                         randomlevel.push(6+Math.floor(L/2)); // Hulks
                         randomlevel.push(Math.floor(Math.random()*3)); // Spheroids
@@ -120,14 +120,14 @@ var levelManager = {
                     randomlevel.push(Math.floor(Math.random()*3)); // Spheroids
             }
 
-
             if (g_Debug) {
                 console.log("This level consists of:",randomlevel);
                 console.log("Key: [Family, Electrodes, Grunts, Hulks, Spheroids, Brains, Quarks]");
                 console.log("");
             }
             entityManager.init(randomlevel);
-        }else{
+			
+        } else {
             entityManager.init(this._levelSpecs[Player.level]);
         }
     },

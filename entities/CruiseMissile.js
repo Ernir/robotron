@@ -13,13 +13,19 @@ function CruiseMissile(descr) {
 
     // Common inherited setup logic from Entity
     this.setup(descr);
+	
+	// HACKED-IN AUDIO (no preloading)
+	this.bombSound = new Audio(g_audioUrls.explosion);
 
     this.target = entityManager.findProtagonist();
 }
 
+
+
 CruiseMissile.prototype = new Entity();
 CruiseMissile.prototype.lifeSpan = 5 * SECS_TO_NOMINALS;
 CruiseMissile.prototype.baseVel = 2;
+CruiseMissile.prototype.exploded = false;
 
 CruiseMissile.prototype.update = function (du) {
 
@@ -93,6 +99,12 @@ CruiseMissile.prototype.render = function (ctx) {
     var bombThresh = CruiseMissile.prototype.lifeSpan / 15;
 
     if (this.lifeSpan < bombThresh) {
+		if (!this.exploded) {
+			// Play explosion sound if thresh is met and
+			// has yet exploded
+			if (g_sounds) this.bombSound.play();
+			this.exploded = true;
+		}
         var fraction = this.lifeSpan / bombThresh;
         var explosion = this.getRadius() + (1-fraction) * 3;
         ctx.fillStyle = "orange";
