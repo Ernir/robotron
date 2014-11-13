@@ -217,18 +217,36 @@ function preloadDone() {
         g_sprites.Protagonist.push(new Sprite(g_images.Protagonist, i*26, (i+1)*26));
         g_sprites.Brain.push(new Sprite(g_images.Brain, i*38, (i+1)*38));
     }
+    // One of the Brain sprites it misaligned on the spritesheet
+    g_sprites.Brain[6] = new Sprite(g_images.Brain, 226, 263, 2);
+
     for (var i = 0; i < 9; i++) {
         g_sprites.Hulk.push(new Sprite(g_images.Hulk, i*38, (i+1)*38));    
     }
+    g_sprites.Electrode.push(new Sprite(g_images.Triangle, 2, 20));
+    g_sprites.Electrode.push(new Sprite(g_images.Triangle, 36, 48));
+    g_sprites.Electrode.push(new Sprite(g_images.Triangle, 70, 76));
+    g_sprites.Electrode.push(new Sprite(g_images.Square, 6, 22));
+    g_sprites.Electrode.push(new Sprite(g_images.Square, 39, 53));
+    g_sprites.Electrode.push(new Sprite(g_images.Square, 73, 79));
+    g_sprites.Electrode.push(new Sprite(g_images.Rectangle, 5, 15));
+    g_sprites.Electrode.push(new Sprite(g_images.Rectangle, 29, 35));
+    g_sprites.Electrode.push(new Sprite(g_images.Rectangle, 53, 55));
+    g_sprites.Electrode.push(new Sprite(g_images.Dizzy, 7, 26));
+    g_sprites.Electrode.push(new Sprite(g_images.Dizzy, 37, 51));
+    g_sprites.Electrode.push(new Sprite(g_images.Dizzy, 71, 81));
+    g_sprites.Electrode.push(new Sprite(g_images.Diamond, 4, 21));
+    g_sprites.Electrode.push(new Sprite(g_images.Diamond, 30, 44));
+    g_sprites.Electrode.push(new Sprite(g_images.Diamond, 59, 65));
+    g_sprites.Electrode.push(new Sprite(g_images.Checkers, 3, 17));
+    g_sprites.Electrode.push(new Sprite(g_images.Checkers, 33, 47));
+    g_sprites.Electrode.push(new Sprite(g_images.Checkers, 67, 73));
+    g_sprites.Electrode.push(new Sprite(g_images.BlackDiamond, 13, 23, 12, 22));
+    g_sprites.Electrode.push(new Sprite(g_images.BlackDiamond, 36, 50, 10, 24));
+    g_sprites.Electrode.push(new Sprite(g_images.BlackDiamond, 68, 78, 12, 22));
+
     for (var i = 0; i < 3; i++) {
         g_sprites.Grunt.push(new Sprite(g_images.Grunt, i*30, (i+1)*30));
-        g_sprites.Electrode[i] = new Sprite(g_images.Triangle, i*27, (i+1)*27);
-        g_sprites.Electrode[i+3] = new Sprite(g_images.Square, i*27, (i+1)*27);
-        g_sprites.Electrode[i+6] = new Sprite(g_images.Rectangle, i*27, (i+1)*27);
-        g_sprites.Electrode[i+9] = new Sprite(g_images.Dizzy, i*27, (i+1)*27);
-        g_sprites.Electrode[i+12] = new Sprite(g_images.Diamond, i*27, (i+1)*27);
-        g_sprites.Electrode[i+15] = new Sprite(g_images.Checkers, i*27, (i+1)*27);
-        g_sprites.Electrode[i+18] = new Sprite(g_images.BlackDiamond, i*27, (i+1)*27);
     }
     for (var i = 0; i < 5; i++) {
         g_sprites.HumanScore[i + 1] = new Sprite(g_images.HumanScore, 3 + (i * 34), 37 + (i * 34));
