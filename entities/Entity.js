@@ -97,7 +97,7 @@ Entity.prototype.edgeBounce = function () {
         bounceHappened = true;
         this.velX = -this.velX;
     }
-    if (cy + velY > consts.wallBottom - r || cy + velY < consts.wallTop + r) {
+    if (cy + velY > consts.wallBottom - r || cy + velY < consts.wallTop + consts.wallThickness + r) {
         bounceHappened = true;
         this.velY = -this.velY;
     }
