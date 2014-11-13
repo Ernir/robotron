@@ -25,10 +25,13 @@ Quark.prototype.tankSpawnChance = 0.005; //0,5% chance of spawning a tank/update
 // TODO: Find a good spawn interval.
 Quark.prototype.renderPos = {cx: this.cx, cy: this.cy};
 Quark.prototype.maxTanks = 6;
+Quark.prototype.constructionTime = SECS_TO_NOMINALS;
 
 Quark.prototype.update = function (du) {
 
     spatialManager.unregister(this);
+
+    this.constructionTime += -du;
 
     if (!this.startPos) this.startPos = this.getPos();
 
@@ -38,9 +41,13 @@ Quark.prototype.update = function (du) {
     }
 
     // maxTanks is effectively zero-indexed
-    if(Math.random() < this.tankSpawnChance && this.tanksSpawned < this.maxTanks) {
+    if(Math.random() < this.tankSpawnChance && 
+        this.tanksSpawned < this.maxTanks &&
+        this.constructionTime < 0) 
+    {
         this.tanksSpawned++;
         entityManager.createTank(this.cx,this.cy);
+        this.constructionTime = 2 * SECS_TO_NOMINALS;
     }
 
     this.randomWalk();

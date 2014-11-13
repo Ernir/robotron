@@ -143,7 +143,8 @@ var entityManager = {
     },
 
     enemiesIsEmpty: function () {
-        if (this._enemies.length === 0)
+        if (this._enemies.length === 0 &&
+            this._spawnedEnemies.length === 0)
             return true;
     },
 
