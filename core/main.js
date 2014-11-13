@@ -74,6 +74,7 @@ main._isGameOver = false;
 
 main.gameOver = function () {
     this._isGameOver = true;
+	g_bgm.pause();
     console.log("gameOver: quitting...");
 };
 
