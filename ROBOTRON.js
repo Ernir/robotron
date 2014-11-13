@@ -75,7 +75,7 @@ function updateSimulation(du) {
 
 // GAME-SPECIFIC DIAGNOSTICS
 
-var g_renderSpatialDebug = false;
+var g_Debug = false;
 var g_canBeKilled = true;
 var g_sounds = true;
 var g_music = true;
@@ -97,18 +97,18 @@ var KEY_SHIELD = 102; // Numpad 6
 
 function processDiagnostics() {
 
-    if (eatKey(KEY_SPATIAL)) g_renderSpatialDebug = !g_renderSpatialDebug;
+    if (eatKey(KEY_SPATIAL)) g_Debug = !g_Debug;
 
-    if (eatKey(KEY_KILLABLE)) g_canBeKilled = !g_canBeKilled;
+    if (eatKey(KEY_KILLABLE) && g_Debug) g_canBeKilled = !g_canBeKilled;
 
     if (eatKey(KEY_RESTART)) {
         Player.resetAll();
         levelManager.startLevel();
     };
 
-    if (eatKey(KEY_NEXT_LEVEL)) levelManager.nextLevel();
+    if (eatKey(KEY_NEXT_LEVEL) && g_Debug) levelManager.nextLevel();
 
-    if (eatKey(KEY_PREV_LEVEL)) levelManager.prevLevel();
+    if (eatKey(KEY_PREV_LEVEL) && g_Debug) levelManager.prevLevel();
 	
 	if (eatKey(KEY_SOUND)) g_sounds = !g_sounds;
 	
@@ -117,27 +117,27 @@ function processDiagnostics() {
     if (g_music) g_bgm.play();
 	else g_bgm.pause();
 
-    if (eatKey(KEY_EXTRA_LIFE)) Player.addLives();
+    if (eatKey(KEY_EXTRA_LIFE) && g_Debug) Player.addLives();
 
-    if (eatKey(KEY_SPEED)) Player.addSpeed();
+    if (eatKey(KEY_SPEED) && g_Debug) Player.addSpeed();
 
-    if (eatKey(KEY_SCORE_MP)) Player.addMultiplier();
+    if (eatKey(KEY_SCORE_MP) && g_Debug) Player.addMultiplier();
 
-    if (eatKey(KEY_MACHINEGUN)) {
+    if (eatKey(KEY_MACHINEGUN) && g_Debug) {
         Player.hasShotgun = false;
         Player.setFireRate(5);
         Player.addAmmo(100);
     }
 
-    if (eatKey(KEY_SHOTGUN)) {
+    if (eatKey(KEY_SHOTGUN) && g_Debug) {
         Player.hasShotgun = true;
         Player.setFireRate(100);
         Player.addAmmo(100);
     }
 
-    if (eatKey(KEY_SHIELD)) Player.addShieldTime();
+    if (eatKey(KEY_SHIELD) && g_Debug) Player.addShieldTime();
 
-    if (eatKey(KEY_PWRUP_RESET)) Player.resetAll();
+    if (eatKey(KEY_PWRUP_RESET) && g_Debug) Player.resetAll();
 }
 
 
@@ -169,7 +169,7 @@ function renderSimulation(ctx) {
 	
         entityManager.render(ctx);
         renderCrosshair(ctx);
-        if (g_renderSpatialDebug) spatialManager.render(ctx);
+        if (g_Debug) spatialManager.render(ctx);
     }
 	
     Player.render(ctx);

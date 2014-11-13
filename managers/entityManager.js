@@ -30,7 +30,7 @@ var entityManager = {
     _protagonists: [],
 	_family: [],
 	_enemies: [],
-    _invincibles: [],
+    _ignoredEnemies: [],
 	_bullets: [],
     _scoreImgs: [],
     _drops: [],
@@ -72,7 +72,7 @@ var entityManager = {
 			this._bullets, 
 			this._family, 
 			this._enemies,
-            this._invincibles,
+            this._ignoredEnemies,
             this._scoreImgs,
             this._drops
 		];
@@ -83,13 +83,12 @@ var entityManager = {
         var descr = [
             { n : 1, f : this.createProtagonist },
             { n : 0, f : this.createFamily },
+            { n : 0, f : this.createElectrode },
             { n : 0, f : this.createGrunt },
             { n : 0, f : this.createHulk },
+            { n : 0, f : this.createSpheroid },
             { n : 0, f : this.createBrain },
-            { n : 0, f : this.createElectrode },
-            { n : 0, f : this.createQuark },
-            { n : 0, f : this.createSpheroid }
-            //TODO: add more entities
+            { n : 0, f : this.createQuark }
         ];
 
         for (var i = 0; i < level.length; i++) {
@@ -258,7 +257,7 @@ var entityManager = {
     createHulk: function () {
         var playerSafeDist = 120;
 		var descr = this.findSpawn(playerSafeDist);
-        this._invincibles.push(new Hulk(descr));
+        this._ignoredEnemies.push(new Hulk(descr));
     },
 
     createBrain: function () {
@@ -278,7 +277,7 @@ var entityManager = {
     createElectrode: function () {
         var playerSafeDist = 120;
         var descr = this.findSpawn(playerSafeDist);
-        this._enemies.push(new Electrode(descr));
+        this._ignoredEnemies.push(new Electrode(descr));
     },
 
     createPowerup: function (cx,cy) {
