@@ -65,7 +65,7 @@ Powerup.prototype.takeProtagonistHit = function () {
     };
     if (this.isShotgun) {
         Player.hasShotgun = true;
-        Player.setFireRate(100);
+        Player.setFireRate(70);
         Player.addAmmo(100);
     };
     if (this.isShield) Player.addShieldTime();

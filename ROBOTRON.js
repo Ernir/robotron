@@ -131,7 +131,7 @@ function processDiagnostics() {
 
     if (eatKey(KEY_SHOTGUN) && g_Debug) {
         Player.hasShotgun = true;
-        Player.setFireRate(100);
+        Player.setFireRate(70);
         Player.addAmmo(100);
     }
 

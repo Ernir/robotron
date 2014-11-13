@@ -169,7 +169,7 @@ var entityManager = {
             var pos = this._protagonists[i].getPos();
 
             var shots = 1;
-            if (Player.hasShotgun) shots = 5;
+            if (Player.hasShotgun) shots = 7;
             
             for (var j = 0; j < shots; j++) {
                 
