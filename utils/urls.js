@@ -12,6 +12,8 @@ g_imgUrls = {
 	Spheroid : "https://notendur.hi.is/~eth31/cgp/staticdata/sprites/Spheroid.png",
 	Tank : "https://notendur.hi.is/~eth31/cgp/staticdata/sprites/Tank.png",
 	
+	Shield: "https://notendur.hi.is/~jiz2/TOL-S3/ProjectRobotron/shield.png",
+	Wing: "https://notendur.hi.is/~jiz2/TOL-S3/ProjectRobotron/wing.png",
 	2084 : "https://notendur.hi.is/~eth31/cgp/staticdata/Shapes/2084.png",
 	BlackDiamond : "https://notendur.hi.is/~eth31/cgp/staticdata/Shapes/BlackDiamond.png",
 	Checkers : "https://notendur.hi.is/~eth31/cgp/staticdata/Shapes/Checkers.png",
@@ -44,7 +46,7 @@ g_audioUrls = {
 	shot : "https://notendur.hi.is/~eth31/cgp/staticdata/Sounds/shot.wav",
 	startsound : "https://notendur.hi.is/~eth31/cgp/staticdata/Sounds/startsound.wav",
 	walk : "https://notendur.hi.is/~eth31/cgp/staticdata/Sounds/walk.wav",
-	todIOF : "https://notendur.hi.is/~jiz2/TOL-S3/08%20lion%20-irony%20of%20fate-%20%5bfrom%20tales%20of%20destiny%5d.mp3",
+	todIOF : "https://notendur.hi.is/~jiz2/TOL-S3/ProjectRobotron/IronyOfFate.mp3",
     music : "https://notendur.hi.is/~odv1/Tölvuleikjaforritun/RoboBarrier2/sounds/rafmagnad11.mp3"
 };
 

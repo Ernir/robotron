@@ -74,14 +74,15 @@ main._isGameOver = false;
 
 main.gameOver = function () {
     this._isGameOver = true;
+	g_bgm.pause();
     console.log("gameOver: quitting...");
 };
 
 // Simple voluntary quit mechanism
 //
-var KEY_QUIT = 'Q'.charCodeAt(0);
+var KEY_ESCAPE = 27; // Esc-key
 function requestedQuit() {
-    return keys[KEY_QUIT];
+    return keys[KEY_ESCAPE];
 }
 
 // Annoying shim for Firefox and Safari
