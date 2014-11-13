@@ -14,7 +14,7 @@
 
 // Construct a "sprite" from the given `image`,
 //
-function Sprite(image,leftLim,rightLim) {
+function Sprite(image,leftLim,rightLim,topLim,bottomLim) {
 
     if(leftLim === undefined) {
         this.leftLim = 0;
@@ -26,11 +26,21 @@ function Sprite(image,leftLim,rightLim) {
     } else {
         this.rightLim = rightLim;
     }
+    if(topLim === undefined) {
+        this.topLim = 0;
+    } else {
+        this.topLim = topLim;
+    }
+    if(bottomLim === undefined) {
+        this.bottomLim = image.height;
+    } else {
+        this.bottomLim = bottomLim;
+    }
 
     this.image = image;
 
     this.width = this.rightLim - this.leftLim;
-    this.height = image.height;
+    this.height = this.bottomLim - this.topLim;
     this.scale = 1;
 }
 
@@ -38,7 +48,7 @@ Sprite.prototype.drawAt = function (ctx, x, y) {
     ctx.drawImage(
         this.image, // Image
         this.leftLim, // x coordinate to start clipping
-        0, // y coordinate to start clipping
+        this.topLim, // y coordinate to start clipping
         this.width, // the width of the clipped image
         this.height, // the height of the clipped image
         x,
