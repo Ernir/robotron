@@ -25,10 +25,13 @@ Spheroid.prototype.tankSpawnChance = 0.005; //0,5% chance of spawning a tank/upd
 // TODO: Find a good spawn interval.
 Spheroid.prototype.renderPos = {cx: this.cx, cy: this.cy};
 Spheroid.prototype.maxTanks = 6;
+Spheroid.prototype.constructionTime = SECS_TO_NOMINALS;
 
 Spheroid.prototype.update = function (du) {
 
     spatialManager.unregister(this);
+
+    this.constructionTime += -du;
 
     if (!this.startPos) this.startPos = this.getPos();
 
@@ -38,9 +41,13 @@ Spheroid.prototype.update = function (du) {
     }
 
     // maxTanks is effectively zero-indexed
-    if(Math.random() < this.tankSpawnChance && this.tanksSpawned < this.maxTanks) {
+    if(Math.random() < this.tankSpawnChance && 
+        this.tanksSpawned < this.maxTanks &&
+        this.constructionTime < 0) 
+    {
         this.tanksSpawned++;
         entityManager.createEnforcer(this.cx,this.cy);
+        this.constructionTime = SECS_TO_NOMINALS;
     }
 
     this.randomWalk();
