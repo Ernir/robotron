@@ -12,6 +12,7 @@ g_imgUrls = {
 	Spheroid : "https://notendur.hi.is/~eth31/cgp/staticdata/sprites/Spheroid.png",
 	Tank : "https://notendur.hi.is/~eth31/cgp/staticdata/sprites/Tank.png",
 	
+	Shield: "https://notendur.hi.is/~jiz2/TOL-S3/ProjectRobotron/shield.png",
 	Wing: "https://notendur.hi.is/~jiz2/TOL-S3/ProjectRobotron/wing.png",
 	2084 : "https://notendur.hi.is/~eth31/cgp/staticdata/Shapes/2084.png",
 	BlackDiamond : "https://notendur.hi.is/~eth31/cgp/staticdata/Shapes/BlackDiamond.png",

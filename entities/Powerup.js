@@ -30,7 +30,8 @@ function Powerup(descr) {
             this.isShotgun = true;
             break;
         case 5:
-            this.isShield = true;
+            this.isShield = true
+			this.sprite = g_sprites.Shield;
             break;
     }
 }
