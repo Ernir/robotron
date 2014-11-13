@@ -99,7 +99,7 @@ var entityManager = {
     },
 
     resetPos: function () {
-        for (var c = 1; c < this._categories.length; ++c) {
+        for (var c = 2; c < this._categories.length; ++c) {
             for (var i = 0; i < this._categories[c].length; i++) {
                 var p = this._categories[c][i].startPos;
                 if (p) this._categories[c][i].setPos(p.posX, p.posY);
