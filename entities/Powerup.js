@@ -18,6 +18,7 @@ function Powerup(descr) {
             break;
         case 1:
             this.isSpeedBoost = true;
+			this.sprite = g_sprites.Wing;
             break;
         case 2:
             this.isScoreMultiplier = true;
@@ -72,6 +73,7 @@ Powerup.prototype.takeProtagonistHit = function () {
 };
 
 Powerup.prototype.getRadius = function () {
+	if (this.sprite) return this.sprite.width / 2;
     return 4;
 };
 
@@ -84,6 +86,8 @@ Powerup.prototype.render = function (ctx) {
     if (this.isMachinegun) ctx.fillStyle = "lime";
     if (this.isShotgun) ctx.fillStyle = "orange";
     if (this.isShield) ctx.fillStyle = "cyan";
-    util.fillCircle(ctx, this.cx, this.cy, this.getRadius());
+	
+	if (this.sprite) this.sprite.drawCentredAt(ctx, this.cx, this.cy, 0);
+    else util.fillCircle(ctx, this.cx, this.cy, this.getRadius());
     ctx.restore();
 };
