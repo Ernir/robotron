@@ -10,7 +10,7 @@ function Tank(descr) {
     // Common inherited setup logic from Entity
     Enemy.call(this, descr);
 
-    this.sprite = g_sprites.Tank;
+    this.sprite = g_sprites.Tank[0];
     this.target = entityManager.findProtagonist();
 
     // Initializing speed
@@ -91,5 +91,23 @@ Tank.prototype.takeBulletHit = function () {
 };
 
 Tank.prototype.render = function (ctx) {
-    this.sprite.drawCentredAt(ctx, this.cx, this.cy, 0);
+    var distSq = util.distSq(this.cx, this.cy, this.renderPos.cx, this.renderPos.cy);
+    var px = 36;
+    switch (true) {
+        case distSq < px*px:
+            g_sprites.Tank[0].drawCentredAt(ctx, this.cx, this.cy, 0);
+            break;
+        case distSq < px*px*4:
+            g_sprites.Tank[1].drawCentredAt(ctx, this.cx, this.cy, 0);
+            break;
+        case distSq < px*px*16:
+            g_sprites.Tank[2].drawCentredAt(ctx, this.cx, this.cy, 0);
+            break;
+        case distSq < px*px*64:
+            g_sprites.Tank[3].drawCentredAt(ctx, this.cx, this.cy, 0);
+            break;
+        default:
+            this.renderPos = {cx: this.cx, cy: this.cy};
+            g_sprites.Tank[0].drawCentredAt(ctx, this.cx, this.cy, 0);
+    }
 };
