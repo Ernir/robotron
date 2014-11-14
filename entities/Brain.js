@@ -142,7 +142,7 @@ Brain.prototype.render = function (ctx) {
             g_sprites.Brain[facing+2].drawCentredAt(ctx, this.cx, this.cy, 0);
             break;
         default:
-            this.renderPos = {cx: this.cx, cy: this.cy};
             g_sprites.Brain[facing+0].drawCentredAt(ctx, this.cx, this.cy, 0);
+            this.renderPos = {cx: this.cx, cy: this.cy};
     }
 };
