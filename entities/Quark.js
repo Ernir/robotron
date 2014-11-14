@@ -10,7 +10,7 @@ function Quark(descr) {
     // Common inherited setup logic from Entity
     Enemy.call(this, descr);
 
-    this.sprite = g_sprites.Quark;
+    this.sprite = g_sprites.Quark[5];
 
     // Initializing speed
     this.baseSpeed = 1;
@@ -28,6 +28,8 @@ Quark.prototype.maxTanks = 6;
 Quark.prototype.constructionTime = SECS_TO_NOMINALS;
 
 Quark.prototype.update = function (du) {
+    this.animation += du;
+    if (this.animation > SECS_TO_NOMINALS) this.animation = 0;
 
     spatialManager.unregister(this);
 
@@ -90,5 +92,7 @@ Quark.prototype.takeBulletHit = function () {
 };
 
 Quark.prototype.render = function (ctx) {
-    this.sprite.drawCentredAt(ctx, this.cx, this.cy, 0);
+    var temp = Math.floor(9 * this.animation / SECS_TO_NOMINALS);
+    if (temp > 8) temp = 8;
+    g_sprites.Quark[temp].drawCentredAt(ctx, this.cx, this.cy, 0);
 };

@@ -93,5 +93,6 @@ Spheroid.prototype.takeBulletHit = function () {
 
 Spheroid.prototype.render = function (ctx) {
     var temp = Math.floor(8 * this.animation / SECS_TO_NOMINALS);
+    if (temp > 7) temp = 7;
     g_sprites.Spheroid[temp].drawCentredAt(ctx, this.cx, this.cy, 0);
 };

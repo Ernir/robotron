@@ -15,7 +15,6 @@ function Electrode(descr) {
 }
 
 Electrode.prototype = Object.create(Enemy.prototype);
-Electrode.prototype.animation = 0;
 
 Electrode.prototype.update = function (du) {
     this.animation += du;
