@@ -161,7 +161,6 @@ var entityManager = {
     createFamily: function () {
 		var playerSafeDist = 120;
 		var descr = this.findSpawn(playerSafeDist);
-        descr.person = Math.floor(Math.random()*3);
         this._family.push(new Family(descr));
     },
 	

@@ -205,8 +205,6 @@ function preloadDone() {
     
     // Spritesheets
     g_sprites.Dad = [];
-    g_sprites.Mom = [];
-    g_sprites.Child = [];
     g_sprites.Protagonist = [];
     g_sprites.Brain = [];
     g_sprites.Hulk = [];
@@ -219,14 +217,9 @@ function preloadDone() {
 
     for (var i = 0; i < 12; i++) {
         g_sprites.Dad.push(new Sprite(g_images.Dad, i*30, (i+1)*30));
-        g_sprites.Mom.push(new Sprite(g_images.Mom, i*26, (i+1)*26));
-        g_sprites.Child.push(new Sprite(g_images.Child, i*22, (i+1)*22));
         g_sprites.Protagonist.push(new Sprite(g_images.Protagonist, i*26, (i+1)*26));
         g_sprites.Brain.push(new Sprite(g_images.Brain, i*38, (i+1)*38));
     }
-
-    g_sprites.Family = g_sprites.Dad.concat(g_sprites.Mom, g_sprites.Child);
-    
     // One of the Brain sprites it misaligned on the spritesheet
     g_sprites.Brain[6] = new Sprite(g_images.Brain, 226, 263, 2);
 

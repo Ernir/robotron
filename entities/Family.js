@@ -29,7 +29,6 @@ Family.prototype.cx = 100;
 Family.prototype.cy = 100;
 Family.prototype.velX = 0;
 Family.prototype.velY = 0;
-Family.prototype.stepsize = 10;
 Family.prototype.panic = 1;
 Family.prototype.lifeSpan = 1 * SECS_TO_NOMINALS;
 Family.prototype.isDying = false;
@@ -150,24 +149,22 @@ Family.prototype.render = function (ctx) {
         if(angle > PI*5/4) facing = 9; //up
         if(angle > PI*7/4) facing = 3; //right
 
-        var P = this.person * 12;
-
         switch(true) {
-            case distSq<util.square(this.stepsize):
-                g_sprites.Family[P + facing + 0].drawCentredAt(ctx, this.cx, this.cy, 0);
+            case distSq<3*3:
+                g_sprites.Dad[facing+0].drawCentredAt(ctx, this.cx, this.cy, 0);
                 break;
-            case distSq<util.square(this.stepsize*2):
-                g_sprites.Family[P + facing + 1].drawCentredAt(ctx, this.cx, this.cy, 0);
+            case distSq<6*6:
+                g_sprites.Dad[facing+1].drawCentredAt(ctx, this.cx, this.cy, 0);
                 break;
-            case distSq<util.square(this.stepsize*3):
-                g_sprites.Family[P + facing + 0].drawCentredAt(ctx, this.cx, this.cy, 0);
+            case distSq<9*9:
+                g_sprites.Dad[facing+0].drawCentredAt(ctx, this.cx, this.cy, 0);
                 break;
-            case distSq<util.square(this.stepsize*4):
-                g_sprites.Family[P + facing + 2].drawCentredAt(ctx, this.cx, this.cy, 0);
+            case distSq<12*12:
+                g_sprites.Dad[facing+2].drawCentredAt(ctx, this.cx, this.cy, 0);
                 break;
             default:
-                g_sprites.Family[P + facing + 0].drawCentredAt(ctx, this.cx, this.cy, 0);
                 this.renderPos = {cx: this.cx, cy: this.cy};
+                g_sprites.Dad[facing+0].drawCentredAt(ctx, this.cx, this.cy, 0);
         }
     }
 };
