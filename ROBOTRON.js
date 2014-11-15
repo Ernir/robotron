@@ -196,6 +196,9 @@ function preloadDone() {
     g_sprites.Prog = new Sprite(g_images.Prog);
 	g_sprites.Wing = new Sprite(g_images.Wing);
 	g_sprites.Shield = new Sprite(g_images.Shield);
+	g_sprites.Heart = new Sprite(g_images.Heart);
+	g_sprites.Ammo = new Sprite(g_images.Ammo);
+	g_sprites.Shotgun = new Sprite(g_images.Shotgun);
 
     //g_sprites.Quark = new Sprite(g_images.Quark, 42*4, 42*5); // TODO animate
     //g_sprites.Tank = new Sprite(g_images.Tank, 0, 36); // TODO animate

@@ -11,10 +11,14 @@ function Powerup(descr) {
 
     // Common inherited setup logic from Entity
     this.setup(descr);
+	
+	// HACKED-IN AUDIO (no preloading)
+	this.pickupSound = new Audio(g_audioUrls.pickitem);
     
     switch(this.type){
         case 0:
             this.isExtralife = true;
+			this.sprite = g_sprites.Heart;
             break;
         case 1:
             this.isSpeedBoost = true;
@@ -25,9 +29,11 @@ function Powerup(descr) {
             break;
         case 3:
             this.isMachinegun = true;
+			this.sprite = g_sprites.Ammo;
             break;
         case 4:
             this.isShotgun = true;
+			this.sprite = g_sprites.Shotgun;
             break;
         case 5:
             this.isShield = true
@@ -55,7 +61,7 @@ Powerup.prototype.update = function (du) {
 };
 
 Powerup.prototype.takeProtagonistHit = function () {
-    //TODO: add more interesting effects
+	if (g_sounds) this.pickupSound.play();
     this.kill();
     if (this.isExtralife) Player.addLives();
     if (this.isSpeedBoost) Player.addSpeed();
@@ -81,12 +87,7 @@ Powerup.prototype.getRadius = function () {
 Powerup.prototype.render = function (ctx) {
     ctx.save();
     //TODO: Add cool sprites
-    if (this.isExtralife) ctx.fillStyle = "white";
-    if (this.isSpeedBoost) ctx.fillStyle = "red";
     if (this.isScoreMultiplier) ctx.fillStyle = "magenta";
-    if (this.isMachinegun) ctx.fillStyle = "lime";
-    if (this.isShotgun) ctx.fillStyle = "orange";
-    if (this.isShield) ctx.fillStyle = "cyan";
 	
 	if (this.sprite) this.sprite.drawCentredAt(ctx, this.cx, this.cy, 0);
     else util.fillCircle(ctx, this.cx, this.cy, this.getRadius());
