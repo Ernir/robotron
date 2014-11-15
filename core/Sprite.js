@@ -14,7 +14,7 @@
 
 // Construct a "sprite" from the given `image`,
 //
-function Sprite(image,leftLim,rightLim,topLim,bottomLim) {
+function Sprite(image,leftLim,rightLim,topLim,bottomLim,scale) {
 
     if(leftLim === undefined) {
         this.leftLim = 0;
@@ -36,12 +36,16 @@ function Sprite(image,leftLim,rightLim,topLim,bottomLim) {
     } else {
         this.bottomLim = bottomLim;
     }
+    if (scale === undefined) {
+        this.scale = 1;
+    } else {
+        this.scale = scale;
+    }
 
     this.image = image;
 
     this.width = this.rightLim - this.leftLim;
     this.height = this.bottomLim - this.topLim;
-    this.scale = 1;
 }
 
 Sprite.prototype.drawAt = function (ctx, x, y) {

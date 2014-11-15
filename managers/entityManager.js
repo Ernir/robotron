@@ -290,10 +290,10 @@ var entityManager = {
     },
 
     createPowerup: function (cx,cy) {
-        var type = Math.floor(Math.random()*6);
+        var brand = Math.floor(Math.random()*6);
         this._drops.push(new Powerup({cx: cx, 
                                       cy: cy, 
-                                      type: type
+                                      brand: brand
                                       }));
     },
 	createProg: function (cx,cy) {

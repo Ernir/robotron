@@ -14,30 +14,30 @@ function Powerup(descr) {
 	
 	// HACKED-IN AUDIO (no preloading)
 	this.pickupSound = new Audio(g_audioUrls.pickitem);
-    
-    switch(this.type){
+
+    switch(this.brand){
         case 0:
             this.isExtralife = true;
-			this.sprite = g_sprites.Heart;
+			//this.sprite = g_sprites.Heart;
             break;
         case 1:
-            this.isSpeedBoost = true;
-			this.sprite = g_sprites.Wing;
+            this.isShotgun = true;
+            //this.sprite = g_sprites.Shotgun;
             break;
         case 2:
-            this.isScoreMultiplier = true;
+            this.isMachinegun = true;
+            //this.sprite = g_sprites.Ammo;
             break;
         case 3:
-            this.isMachinegun = true;
-			this.sprite = g_sprites.Ammo;
+            this.isSpeedBoost = true;
+			//this.sprite = g_sprites.Wing;
             break;
         case 4:
-            this.isShotgun = true;
-			this.sprite = g_sprites.Shotgun;
+            this.isShield = true
+            //this.sprite = g_sprites.Shield;
             break;
         case 5:
-            this.isShield = true
-			this.sprite = g_sprites.Shield;
+            this.isScoreMultiplier = true;
             break;
     }
 }
@@ -49,8 +49,12 @@ Powerup.prototype.isScoreMultiplier = false;
 Powerup.prototype.isMachinegun = false;
 Powerup.prototype.isShotgun = false;
 Powerup.prototype.isShield = false;
+Powerup.prototype.loop = SECS_TO_NOMINALS;
 
 Powerup.prototype.update = function (du) {
+    this.animation += du;
+    if (this.animation > this.loop) this.animation = 0;
+
     spatialManager.unregister(this);
     
     if (this._isDeadNow) {
@@ -80,16 +84,11 @@ Powerup.prototype.takeProtagonistHit = function () {
 };
 
 Powerup.prototype.getRadius = function () {
-	if (this.sprite) return this.sprite.width / 2;
-    return 4;
+    return 8;
 };
 
 Powerup.prototype.render = function (ctx) {
-    ctx.save();
-    //TODO: Add cool sprites
-    if (this.isScoreMultiplier) ctx.fillStyle = "magenta";
-	
-	if (this.sprite) this.sprite.drawCentredAt(ctx, this.cx, this.cy, 0);
-    else util.fillCircle(ctx, this.cx, this.cy, this.getRadius());
-    ctx.restore();
+    var temp = Math.floor(8* this.animation / this.loop);
+    if (temp > 7) temp = 0;
+    g_sprites.PowerUps[8*this.brand+temp].drawCentredAt(ctx, this.cx, this.cy, 0);
 };

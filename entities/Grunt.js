@@ -23,8 +23,8 @@ Grunt.prototype = Object.create(Enemy.prototype);
 Grunt.prototype.renderPos = {cx: this.cx, cy: this.cy};
 Grunt.prototype.baseSpeed = 1;
 Grunt.prototype.speed = 1;
-Grunt.prototype.maxSpeed = 2.5;
-Grunt.prototype.maxRageReachedTime = 30*SECS_TO_NOMINALS;
+Grunt.prototype.maxSpeed = 3;
+Grunt.prototype.maxRageReachedTime = 40*SECS_TO_NOMINALS;
 
 Grunt.prototype.update = function (du) {
 

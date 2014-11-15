@@ -200,12 +200,7 @@ function preloadDone() {
 	g_sprites.Ammo = new Sprite(g_images.Ammo);
 	g_sprites.Shotgun = new Sprite(g_images.Shotgun);
 
-    //g_sprites.Quark = new Sprite(g_images.Quark, 42*4, 42*5); // TODO animate
-    //g_sprites.Tank = new Sprite(g_images.Tank, 0, 36); // TODO animate
-    //g_sprites.Spheroid = new Sprite(g_images.Spheroid, 42*6, 42*7); // TODO animate
-    //g_sprites.Enforcer = new Sprite(g_images.Enforcer, 0, 29); // TODO blink!
-    //g_sprites.Spark = new Sprite(g_images.Spark, 0, 30); // TODO animate
-    
+        
     // Spritesheets
     g_sprites.Dad = [];
     g_sprites.Mom = [];
@@ -221,6 +216,7 @@ function preloadDone() {
     g_sprites.Tank = [];
     g_sprites.Enforcer = [];
     g_sprites.EnforcerSpark = [];
+    g_sprites.PowerUps = [];
 
     for (var i = 0; i < 12; i++) {
         g_sprites.Dad.push(new Sprite(g_images.Dad, i*30, (i+1)*30));
@@ -246,6 +242,9 @@ function preloadDone() {
     }
     for (var i = 0; i < 6; i++) {
         g_sprites.Enforcer.push(new Sprite(g_images.Enforcer, i*29, (i+1)*29));
+        for (var j = 0; j < 8; j++) {
+            g_sprites.PowerUps.push(new Sprite(g_images.PowerUps, j*2473/6, (j+1)*2473/6, i*412.25, (i+1)*412.25, 0.1));
+        }
     }
 
     g_sprites.Electrode.push(new Sprite(g_images.Triangle, 2, 20));
