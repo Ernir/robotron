@@ -15,39 +15,46 @@ function Enforcer(descr) {
     // Common inherited setup logic from Entity
     Enemy.call(this, descr);
 
-    this.sprite = g_sprites.Enforcer;
+    this.sprite = g_sprites.Enforcer[0];
     this.target = entityManager.findProtagonist();
 }
 
 Enforcer.prototype = Object.create(Enemy.prototype);
 Enforcer.prototype.ammo = 20;
 Enforcer.prototype.sparkFireChance = 0.01; //1% chance of firing a spark/update
+Enforcer.prototype.spawnTime = SECS_TO_NOMINALS;
 
 Enforcer.prototype.update = function (du) {
 
     spatialManager.unregister(this);
-	
+
 	if (!this.startPos) this.startPos = this.getPos();
-	
+
     // Handle death
     if (this._isDeadNow) {
         return entityManager.KILL_ME_NOW;
     }
-    this.seekTarget();
 
-    this.cx += this.velX * du;
-    this.cy += this.velY * du;
-    this.capPositions();
+    if (this.animation < this.spawnTime) {
+        this.animation += du;
+    } else {
+    
+        this.seekTarget();
 
-    if (Math.random() < this.sparkFireChance && this.ammo > 0) {
-        var angle = util.angleTo(
-            this.cx,
-            this.cy,
-            this.target.cx,
-            this.target.cy
-        );
-        this.ammo--;
-        entityManager.fireSpark(this.cx, this.cy, angle);
+        this.cx += this.velX * du;
+        this.cy += this.velY * du;
+        this.capPositions();
+
+        if (Math.random() < this.sparkFireChance && this.ammo > 0) {
+            var angle = util.angleTo(
+                this.cx,
+                this.cy,
+                this.target.cx,
+                this.target.cy
+            );
+            this.ammo--;
+            entityManager.fireSpark(this.cx, this.cy, angle);
+        }
     }
 
     spatialManager.register(this);
@@ -84,5 +91,7 @@ Enforcer.prototype.takeBulletHit = function () {
 };
 
 Enforcer.prototype.render = function (ctx) {
-    this.sprite.drawCentredAt(ctx, this.cx, this.cy, 0);
+    var temp = Math.ceil(6 * this.animation / SECS_TO_NOMINALS);
+    if (temp > 5) temp = 0;
+    g_sprites.Enforcer[temp].drawCentredAt(ctx, this.cx, this.cy, 0);
 };
