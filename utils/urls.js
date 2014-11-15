@@ -49,6 +49,8 @@ g_audioUrls = {
 	newlevel : "https://notendur.hi.is/~eth31/cgp/staticdata/Sounds/newlevel.wav",
 	playerdead : "https://notendur.hi.is/~eth31/cgp/staticdata/Sounds/playerdead.wav",
 	shot : "https://notendur.hi.is/~eth31/cgp/staticdata/Sounds/shot.wav",
+	shell : "https://notendur.hi.is/~jiz2/TOL-S3/ProjectRobotron/shell.mp3",
+	spark : "https://notendur.hi.is/~jiz2/TOL-S3/ProjectRobotron/spark.mp3",
 	startsound : "https://notendur.hi.is/~eth31/cgp/staticdata/Sounds/startsound.wav",
 	walk : "https://notendur.hi.is/~eth31/cgp/staticdata/Sounds/walk.wav",
 	pickitem: "https://notendur.hi.is/~jiz2/TOL-S3/ProjectRobotron/pickitem.mp3",

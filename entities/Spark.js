@@ -16,6 +16,12 @@ function Spark(descr) {
     this.setup(descr);
 
     this.sprite = g_sprites.Spark;
+	
+	// HACKED-IN AUDIO (no preloading)
+	this.fireSound = new Audio(g_audioUrls.spark);
+
+	// Make a noise when I am created (i.e. fired)
+    if (g_sounds) this.fireSound.play();
 
     this.baseVel = 5;
     this.velX = this.baseVel * Math.cos(descr.initialAngle);

@@ -13,6 +13,12 @@
 function Shell(descr) {
     // Common inherited setup logic from Entity
     this.setup(descr);
+	
+	// HACKED-IN AUDIO (no preloading)
+	this.fireSound = new Audio(g_audioUrls.shell);
+	
+	// Make a noise when I am created (i.e. fired)
+    if (g_sounds) this.fireSound.play();
 
     this.baseVel = 5;
     this.velX = this.baseVel*Math.cos(descr.initialAngle);
