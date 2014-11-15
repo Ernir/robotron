@@ -198,7 +198,7 @@ function preloadDone() {
 	g_sprites.Shield = new Sprite(g_images.Shield);
 
     //g_sprites.Quark = new Sprite(g_images.Quark, 42*4, 42*5); // TODO animate
-    g_sprites.Tank = new Sprite(g_images.Tank, 0, 36); // TODO animate
+    //g_sprites.Tank = new Sprite(g_images.Tank, 0, 36); // TODO animate
     //g_sprites.Spheroid = new Sprite(g_images.Spheroid, 42*6, 42*7); // TODO animate
     g_sprites.Enforcer = new Sprite(g_images.Enforcer, 0, 29); // TODO blink!
     g_sprites.Spark = new Sprite(g_images.Spark, 0, 30); // TODO animate
@@ -215,6 +215,7 @@ function preloadDone() {
     g_sprites.HumanScore = [];
     g_sprites.Spheroid = [];
     g_sprites.Quark = [];
+    g_sprites.Tank = [];
 
     for (var i = 0; i < 12; i++) {
         g_sprites.Dad.push(new Sprite(g_images.Dad, i*30, (i+1)*30));
@@ -279,6 +280,12 @@ function preloadDone() {
     g_sprites.Quark.push(new Sprite(g_images.Quark, 258, 284));
     g_sprites.Quark.push(new Sprite(g_images.Quark, 298, 328));
     g_sprites.Quark.push(new Sprite(g_images.Quark, 340, 370));
+
+    g_sprites.Tank.push(new Sprite(g_images.Tank, 1 , 27));
+    g_sprites.Tank.push(new Sprite(g_images.Tank, 39 , 65));
+    g_sprites.Tank.push(new Sprite(g_images.Tank, 77 , 103));
+    g_sprites.Tank.push(new Sprite(g_images.Tank, 115, 141));
+
 
     initializeEntities();
     levelManager.startLevel();

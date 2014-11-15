@@ -5,16 +5,18 @@
 // Tanks are spawned by Quarks. Tanks fire rebounding tank shells.
 // Tanks roll around randomly.
 
+"use strict";
+
 function Tank(descr) {
 
     // Common inherited setup logic from Entity
     Enemy.call(this, descr);
 
-    this.sprite = g_sprites.Tank;
+    this.sprite = g_sprites.Tank[0];
     this.target = entityManager.findProtagonist();
 
     // Initializing speed
-    this.baseSpeed = 1;
+    this.baseSpeed = 0.9;
     this.velX = this.baseSpeed*util.randTrinary();
     this.velY = this.baseSpeed*util.randTrinary();
     // TODO play spawning sound?
@@ -25,6 +27,8 @@ Tank.prototype.shellFireChance = 0.01; //1% chance of firing a shell/update
 Tank.prototype.ammo = 20;
 Tank.prototype.renderPos = {cx: this.cx, cy: this.cy};
 Tank.prototype.dropChance = 1; // 100% chance of a random drop
+Tank.prototype.renderPos = this.cx;
+Tank.prototype.stepsize = 3;
 
 Tank.prototype.update = function (du) {
 
@@ -91,5 +95,37 @@ Tank.prototype.takeBulletHit = function () {
 };
 
 Tank.prototype.render = function (ctx) {
-    this.sprite.drawCentredAt(ctx, this.cx, this.cy, 0);
+    
+    var dist = this.cx - this.renderPos;
+    var left = false;
+    if (dist < 0) left = true;
+    var step = 0;
+
+    switch(true) {
+        case util.abs(dist) < this.stepsize:
+            step = 0;
+            if (left) step = 3;
+            break;
+        case util.abs(dist) < this.stepsize * 2:
+            step = 1;
+            if (left) step = 2;
+            break;
+        case util.abs(dist) < this.stepsize * 3:
+            step = 2;
+            if (left) step = 1;
+            break;
+        case util.abs(dist) < this.stepsize * 4:
+            step = 3;
+            if (left) step = 0;
+            break;
+        default:
+            step = 0;
+            this.renderPos = this.cx;
+    }
+    //var temp = util.wrapRange(facing * step, 0, 3);
+    console.log("step",step);
+    console.log(this.cx, this.cy);
+    console.log(g_sprites.Tank);
+    g_sprites.Tank[step].drawCentredAt(ctx, this.cx, this.cy, 0);
+    //g_sprites.Tank[0].drawCentredAt(ctx, this.cx, this.cy, 0);
 };
