@@ -15,7 +15,7 @@ function Spark(descr) {
     // Common inherited setup logic from Entity
     this.setup(descr);
 
-    this.sprite = g_sprites.Spark;
+    this.sprite = g_sprites.EnforcerSpark[0];
 	
 	// HACKED-IN AUDIO (no preloading)
 	this.fireSound = new Audio(g_audioUrls.spark);
@@ -30,9 +30,13 @@ function Spark(descr) {
 
 Spark.prototype = new Entity();
 Spark.prototype.lifeSpan = 5 * SECS_TO_NOMINALS;
+Spark.prototype.rotationTime = SECS_TO_NOMINALS / 2;
 
 Spark.prototype.update = function (du) {
     spatialManager.unregister(this);
+
+    this.animation += du;
+    if (this.animation > this.rotationTime) this.animation = 0;
 
     // Handle death
     if (this._isDeadNow) return entityManager.KILL_ME_NOW;
@@ -168,5 +172,7 @@ Spark.prototype.getRadius = function () {
 };
 
 Spark.prototype.render = function (ctx) {
-    this.sprite.drawCentredAt(ctx, this.cx, this.cy, 0);
+    var temp = Math.floor(4 * this.animation / this.rotationTime);
+    if (temp > 3) temp = 0;
+    g_sprites.EnforcerSpark[temp].drawCentredAt(ctx, this.cx, this.cy, 0);
 };

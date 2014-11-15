@@ -204,7 +204,7 @@ function preloadDone() {
     //g_sprites.Tank = new Sprite(g_images.Tank, 0, 36); // TODO animate
     //g_sprites.Spheroid = new Sprite(g_images.Spheroid, 42*6, 42*7); // TODO animate
     //g_sprites.Enforcer = new Sprite(g_images.Enforcer, 0, 29); // TODO blink!
-    g_sprites.Spark = new Sprite(g_images.Spark, 0, 30); // TODO animate
+    //g_sprites.Spark = new Sprite(g_images.Spark, 0, 30); // TODO animate
     
     // Spritesheets
     g_sprites.Dad = [];
@@ -220,6 +220,7 @@ function preloadDone() {
     g_sprites.Quark = [];
     g_sprites.Tank = [];
     g_sprites.Enforcer = [];
+    g_sprites.EnforcerSpark = [];
 
     for (var i = 0; i < 12; i++) {
         g_sprites.Dad.push(new Sprite(g_images.Dad, i*30, (i+1)*30));
@@ -293,6 +294,10 @@ function preloadDone() {
     g_sprites.Tank.push(new Sprite(g_images.Tank, 77 , 103));
     g_sprites.Tank.push(new Sprite(g_images.Tank, 115, 141));
 
+    g_sprites.EnforcerSpark.push(new Sprite(g_images.EnforcerSpark, 6, 20));
+    g_sprites.EnforcerSpark.push(new Sprite(g_images.EnforcerSpark, 34, 44));
+    g_sprites.EnforcerSpark.push(new Sprite(g_images.EnforcerSpark, 58, 72));
+    g_sprites.EnforcerSpark.push(new Sprite(g_images.EnforcerSpark, 86, 96));
 
     initializeEntities();
     levelManager.startLevel();
