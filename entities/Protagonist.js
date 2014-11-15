@@ -135,6 +135,7 @@ Protagonist.prototype.maybeFire = function () {
 Protagonist.prototype.takeEnemyHit = function () {
     if(g_canBeKilled) {
         Player.subtractLives();
+        if (g_sounds) this.loseSound.play();
         if (Player.getLives() > 0) {
             this.setPos(g_canvas.width / 2, g_canvas.height / 2);
             Player.resetMultiplier();
@@ -143,7 +144,6 @@ Protagonist.prototype.takeEnemyHit = function () {
             this.kill();
         }
     }
-	if (g_sounds) this.loseSound.play();
 };
 
 Protagonist.prototype.takeElectrodeHit = function () {
