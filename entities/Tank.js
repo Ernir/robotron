@@ -122,10 +122,5 @@ Tank.prototype.render = function (ctx) {
             step = 0;
             this.renderPos = this.cx;
     }
-    //var temp = util.wrapRange(facing * step, 0, 3);
-    console.log("step",step);
-    console.log(this.cx, this.cy);
-    console.log(g_sprites.Tank);
     g_sprites.Tank[step].drawCentredAt(ctx, this.cx, this.cy, 0);
-    //g_sprites.Tank[0].drawCentredAt(ctx, this.cx, this.cy, 0);
 };
