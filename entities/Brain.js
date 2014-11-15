@@ -19,7 +19,6 @@ Brain.prototype = Object.create(Enemy.prototype);
 // HACKED-IN AUDIO (no preloading)
 Brain.prototype.spawnSound = new Audio(g_audioUrls.brains);
 
-Brain.prototype.timeSinceHit = Infinity;
 Brain.prototype.killFamily = true;
 Brain.prototype.renderPos = {cx: this.cx, cy: this.cy};
 Brain.prototype.makesProgs = true;
@@ -45,13 +44,9 @@ Brain.prototype.update = function (du) {
         entityManager.fireCruiseMissile(this.cx,this.cy);
     }
 
-    // Move, unless the Hulk has been shot in the last 1 second.
-    this.timeSinceHit += du;
-    if (this.timeSinceHit > SECS_TO_NOMINALS * 1) {
-        this.cx += this.velX * du;
-        this.cy += this.velY * du;
-        this.capPositions();
-    }
+    this.cx += this.velX * du;
+    this.cy += this.velY * du;
+    this.capPositions();
 
     spatialManager.register(this);
 };
