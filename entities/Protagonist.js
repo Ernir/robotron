@@ -22,6 +22,7 @@ Protagonist.prototype = new Entity();
 
 // HACKED-IN AUDIO (no preloading)
 Protagonist.prototype.walkSound = new Audio(g_audioUrls.walk);
+Protagonist.prototype.loseSound = new Audio(g_audioUrls.loselife);
 
 Protagonist.prototype.KEY_UP     = 'W'.charCodeAt(0);
 Protagonist.prototype.KEY_DOWN   = 'S'.charCodeAt(0);
@@ -142,6 +143,7 @@ Protagonist.prototype.takeEnemyHit = function () {
             this.kill();
         }
     }
+	if (g_sounds) this.loseSound.play();
 };
 
 Protagonist.prototype.takeElectrodeHit = function () {

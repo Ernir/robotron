@@ -66,6 +66,9 @@ function updateSimulation(du) {
         }
     }
 	
+	if (g_music) g_bgm.play();
+	else g_bgm.pause();
+	
 	if (Player.getLives() === 0) {
 		levelManager.gameOver();
 	};//TODO: Transition to main menu or game over screen
@@ -113,9 +116,6 @@ function processDiagnostics() {
 	if (eatKey(KEY_SOUND)) g_sounds = !g_sounds;
 	
 	if (eatKey(KEY_MUSIC)) g_music = !g_music;
-	
-    if (g_music) g_bgm.play();
-	else g_bgm.pause();
 
     if (eatKey(KEY_EXTRA_LIFE) && g_Debug) Player.addLives();
 

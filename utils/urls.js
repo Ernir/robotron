@@ -53,6 +53,7 @@ g_audioUrls = {
 	spark : "https://notendur.hi.is/~jiz2/TOL-S3/ProjectRobotron/spark.mp3",
 	startsound : "https://notendur.hi.is/~eth31/cgp/staticdata/Sounds/startsound.wav",
 	walk : "https://notendur.hi.is/~eth31/cgp/staticdata/Sounds/walk.wav",
+	loselife : "https://notendur.hi.is/~jiz2/TOL-S3/ProjectRobotron/loselife.mp3",
 	pickitem: "https://notendur.hi.is/~jiz2/TOL-S3/ProjectRobotron/pickitem.mp3",
 	todIOF : "https://notendur.hi.is/~jiz2/TOL-S3/ProjectRobotron/IronyOfFate.mp3",
     music : "https://notendur.hi.is/~odv1/Tölvuleikjaforritun/RoboBarrier2/sounds/rafmagnad11.mp3"
