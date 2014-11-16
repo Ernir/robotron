@@ -17,6 +17,7 @@ function Grunt(descr) {
 
     this.sprite = g_sprites.Grunt[0];
     this.target = entityManager.findProtagonist();
+    this.makeParticles();
 }
 
 Grunt.prototype = Object.create(Enemy.prototype);
@@ -25,18 +26,30 @@ Grunt.prototype.stepsize = 3;
 Grunt.prototype.baseSpeed = 1;
 Grunt.prototype.speed = 1;
 Grunt.prototype.maxSpeed = 3;
-Grunt.prototype.maxRageReachedTime = 40*SECS_TO_NOMINALS;
+Grunt.prototype.maxRageReachedTime = 40 * SECS_TO_NOMINALS;
+
+Grunt.prototype.isDying = false;
+Grunt.prototype.isSpawning = true;
+
+Grunt.prototype.spawnTime = 1*SECS_TO_NOMINALS;
+Grunt.prototype.deathTime = 1*SECS_TO_NOMINALS;
+Grunt.prototype.timeElapsed = 0;
 
 Grunt.prototype.update = function (du) {
 
     spatialManager.unregister(this);
-	
-	if (!this.startPos) this.startPos = this.getPos();
-	
+
+    if (!this.startPos) this.startPos = this.getPos();
+
     // Handle death
     if (this._isDeadNow) {
         return entityManager.KILL_ME_NOW;
     }
+
+    if (true) {
+        this.updateParticles(du);
+    }
+
     this.rage(du);
     this.seekTarget();
 
@@ -64,18 +77,18 @@ Grunt.prototype.seekTarget = function () {
     } else if (yOffset < 0) {
         this.velY = -this.speed;
     }
-	
-	// Clamp vel
-	if (xOffset !== 0 && yOffset !== 0) {
-		this.velX *= this.speed*Math.cos(Math.PI / 4);
-		this.velY *= this.speed*Math.sin(Math.PI / 4);
-	}
+
+    // Clamp vel
+    if (xOffset !== 0 && yOffset !== 0) {
+        this.velX *= this.speed * Math.cos(Math.PI / 4);
+        this.velY *= this.speed * Math.sin(Math.PI / 4);
+    }
 };
 
 // Increases the grunt's speed over time.
 Grunt.prototype.rage = function (du) {
-    var timeFraction = du/this.maxRageReachedTime;
-    this.speed += (this.maxSpeed - this.baseSpeed)*timeFraction;
+    var timeFraction = du / this.maxRageReachedTime;
+    this.speed += (this.maxSpeed - this.baseSpeed) * timeFraction;
     this.speed = Math.min(this.speed, this.maxSpeed);
 };
 
@@ -85,29 +98,94 @@ Grunt.prototype.resetRage = function () {
 
 Grunt.prototype.takeBulletHit = function () {
     this.kill();
-	Player.addScore(Player.scoreValues.Grunt * Player.getMultiplier());
+    Player.addScore(Player.scoreValues.Grunt * Player.getMultiplier());
 };
 Grunt.prototype.takeElectrodeHit = function () {
     this.takeBulletHit();
 };
 
 Grunt.prototype.render = function (ctx) {
+    this.renderParticles(ctx);
     var distSq = util.distSq(this.cx, this.cy, this.renderPos.cx, this.renderPos.cy);
-    switch(true) {
+    switch (true) {
         case distSq < util.square(this.stepsize):
             g_sprites.Grunt[0].drawCentredAt(ctx, this.cx, this.cy, 0);
             break;
-        case distSq < util.square(this.stepsize*2):
+        case distSq < util.square(this.stepsize * 2):
             g_sprites.Grunt[1].drawCentredAt(ctx, this.cx, this.cy, 0);
             break;
-        case distSq < util.square(this.stepsize*3):
+        case distSq < util.square(this.stepsize * 3):
             g_sprites.Grunt[0].drawCentredAt(ctx, this.cx, this.cy, 0);
             break;
-        case distSq < util.square(this.stepsize*4):
+        case distSq < util.square(this.stepsize * 4):
             g_sprites.Grunt[2].drawCentredAt(ctx, this.cx, this.cy, 0);
             break;
         default:
             this.renderPos = {cx: this.cx, cy: this.cy};
             g_sprites.Grunt[0].drawCentredAt(ctx, this.cx, this.cy, 0);
+    }
+};
+
+Grunt.prototype.colors = [
+    {color: "red", ratio: 0.70},
+    {color: "yellow", ratio: 0.15},
+    {color: "#800080", ratio: 0.05},
+    {color: "#00FF00", ratio: 0.05},
+    {color: "white", ratio: 0.05}
+];
+Grunt.prototype.totalParticles = 50;
+
+Grunt.prototype.makeParticles = function () {
+    // TODO: Refactor this monster
+    this.particles = [];
+
+    var spawnRange = this.getRadius() * 10;
+    var inaccuracy = this.getRadius() * 0.6;
+
+    for (var i = 0; i < this.colors.length; i++) {
+        var colorDefinition = this.colors[i];
+        var numberOfParticles = colorDefinition.ratio * this.totalParticles;
+        for (var j = 0; j < numberOfParticles; j++) {
+
+            var longSign = util.randSign();
+            var shortSign = util.randSign();
+            var longAxisOffset = longSign * util.randRange(0, spawnRange);
+            var shortAxisOffset = shortSign * util.randRange(0, inaccuracy);
+
+            var xOffset, yOffset, xVelocity, yVelocity;
+            var isOnXAxis = Math.random() < 0.5;
+            if (isOnXAxis) {
+                xOffset = longAxisOffset;
+                xVelocity = -longSign*0.2;
+                yVelocity = 0;
+                yOffset = shortAxisOffset;
+            } else {
+                xOffset = shortAxisOffset;
+                xVelocity = 0;
+                yVelocity = -longSign*0.2;
+                yOffset = longAxisOffset;
+            }
+            this.particles.push(new WarpParticle({
+                offX: xOffset,
+                offY: yOffset,
+                velX: xVelocity,
+                velY: yVelocity,
+                color: colorDefinition.color
+            }));
+        }
+    }
+};
+
+Grunt.prototype.updateParticles = function (du) {
+    for(var i = 0; i < this.particles.length; i++) {
+        var particle = this.particles[i];
+        particle.update(du);
+    }
+};
+
+Grunt.prototype.renderParticles = function (ctx) {
+    for (var i = 0; i < this.particles.length; i++) {
+        var particle = this.particles[i];
+        particle.render(ctx, this.cx, this.cy);
     }
 };
