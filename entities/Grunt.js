@@ -21,6 +21,7 @@ function Grunt(descr) {
 
 Grunt.prototype = Object.create(Enemy.prototype);
 Grunt.prototype.renderPos = {cx: this.cx, cy: this.cy};
+Grunt.prototype.stepsize = 3;
 Grunt.prototype.baseSpeed = 1;
 Grunt.prototype.speed = 1;
 Grunt.prototype.maxSpeed = 3;
@@ -93,16 +94,16 @@ Grunt.prototype.takeElectrodeHit = function () {
 Grunt.prototype.render = function (ctx) {
     var distSq = util.distSq(this.cx, this.cy, this.renderPos.cx, this.renderPos.cy);
     switch(true) {
-        case distSq<3*3:
+        case distSq < util.square(this.stepsize):
             g_sprites.Grunt[0].drawCentredAt(ctx, this.cx, this.cy, 0);
             break;
-        case distSq<6*6:
+        case distSq < util.square(this.stepsize*2):
             g_sprites.Grunt[1].drawCentredAt(ctx, this.cx, this.cy, 0);
             break;
-        case distSq<9*9:
+        case distSq < util.square(this.stepsize*3):
             g_sprites.Grunt[0].drawCentredAt(ctx, this.cx, this.cy, 0);
             break;
-        case distSq<12*12:
+        case distSq < util.square(this.stepsize*4):
             g_sprites.Grunt[2].drawCentredAt(ctx, this.cx, this.cy, 0);
             break;
         default:

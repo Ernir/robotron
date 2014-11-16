@@ -21,6 +21,7 @@ Hulk.prototype = Object.create(Enemy.prototype);
 Hulk.prototype.timeSinceHit = Infinity;
 Hulk.prototype.killFamily = true;
 Hulk.prototype.renderPos = {cx: this.cx, cy: this.cy};
+Hulk.prototype.stepsize = 12;
 Hulk.prototype.bootTime = 2 * SECS_TO_NOMINALS;
 Hulk.prototype.brainpower = 0.05;
 
@@ -117,16 +118,16 @@ Hulk.prototype.render = function (ctx) {
     if (angle > PI * 7 / 4 || angle < PI * 1 / 4) facing = 6; //right
 
     switch (true) {
-        case distSq < 12 * 12:
+        case distSq < util.square(this.stepsize):
             g_sprites.Hulk[facing + 0].drawCentredAt(ctx, this.cx, this.cy, 0);
             break;
-        case distSq < 24 * 24:
+        case distSq < util.square(this.stepsize*2):
             g_sprites.Hulk[facing + 1].drawCentredAt(ctx, this.cx, this.cy, 0);
             break;
-        case distSq < 36 * 36:
+        case distSq < util.square(this.stepsize*3):
             g_sprites.Hulk[facing + 0].drawCentredAt(ctx, this.cx, this.cy, 0);
             break;
-        case distSq < 48 * 48:
+        case distSq < util.square(this.stepsize*4):
             g_sprites.Hulk[facing + 2].drawCentredAt(ctx, this.cx, this.cy, 0);
             break;
         default:

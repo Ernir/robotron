@@ -21,6 +21,7 @@ Brain.prototype.spawnSound = new Audio(g_audioUrls.brains);
 
 Brain.prototype.killFamily = true;
 Brain.prototype.renderPos = {cx: this.cx, cy: this.cy};
+Brain.prototype.stepsize = 3;
 Brain.prototype.makesProgs = true;
 Brain.prototype.missileFireChance = 0.005; // 0.5% chance of firing a CM per update
 // TODO: Find a good firing interval for the missiles.
@@ -124,16 +125,16 @@ Brain.prototype.render = function (ctx) {
     if(angle > PI*7/4) facing = 3; //right
 
     switch(true) {
-        case distSq<3*3:
+        case distSq < util.square(this.stepsize):
             g_sprites.Brain[facing+0].drawCentredAt(ctx, this.cx, this.cy, 0);
             break;
-        case distSq<6*6:
+        case distSq < util.square(this.stepsize*2):
             g_sprites.Brain[facing+1].drawCentredAt(ctx, this.cx, this.cy, 0);
             break;
-        case distSq<9*9:
+        case distSq < util.square(this.stepsize*3):
             g_sprites.Brain[facing+0].drawCentredAt(ctx, this.cx, this.cy, 0);
             break;
-        case distSq<12*12:
+        case distSq < util.square(this.stepsize*4):
             g_sprites.Brain[facing+2].drawCentredAt(ctx, this.cx, this.cy, 0);
             break;
         default:

@@ -79,7 +79,6 @@ Prog.prototype.getRadius = function () {
 };
 
 Prog.prototype.render = function (ctx) {
-    //g_sprites.Prog.drawCentredAt(ctx, this.cx, this.cy, 0);
 
     var distSq = util.distSq(this.cx, this.cy, this.renderPos.cx, this.renderPos.cy);
     var angle = util.angleTo(this.renderPos.cx, this.renderPos.cy, this.cx, this.cy);
