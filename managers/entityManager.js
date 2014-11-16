@@ -69,13 +69,13 @@ var entityManager = {
 //
     deferredSetup: function () {
         this._categories = [
+            this._spawnedEnemies,
 			this._drops,
 			this._protagonists, 
 			this._bullets, 
 			this._family, 
 			this._enemies,
             this._ignoredEnemies,
-            this._spawnedEnemies,
             this._scoreImgs
 		];
     },

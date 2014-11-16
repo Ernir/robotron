@@ -17,7 +17,7 @@ function Prog(descr) {
 Prog.prototype = Object.create(Enemy.prototype);
 Prog.prototype.speed = 1;
 Prog.prototype.renderPos = {cx: this.cx, cy: this.cy};
-Family.prototype.stepsize = 10;
+Prog.prototype.stepsize = 10;
 
 Prog.prototype.update = function (du) {
 
