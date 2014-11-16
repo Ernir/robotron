@@ -39,10 +39,16 @@ Spark.prototype.update = function (du) {
     if (this.animation > this.rotationTime) this.animation = 0;
 
     // Handle death
-    if (this._isDeadNow) return entityManager.KILL_ME_NOW;
+    if (this._isDeadNow) {
+        this.spawnFragment(5,2);
+        return entityManager.KILL_ME_NOW;
+    }
 
     this.lifeSpan -= du;
-    if (this.lifeSpan < 0) return entityManager.KILL_ME_NOW;
+    if (this.lifeSpan < 0) {
+        this.spawnFragment(5,2);
+        return entityManager.KILL_ME_NOW;
+    }
 
     // Update positions
     this.capPositions();
@@ -57,6 +63,7 @@ Spark.prototype.update = function (du) {
         var canTakeHit = hitEntity.takeEnemyHit;
         if (canTakeHit) {
             canTakeHit.call(hitEntity);
+            this.spawnFragment(5,2);
             return entityManager.KILL_ME_NOW;
         }
     }

@@ -18,23 +18,18 @@ function Powerup(descr) {
     switch(this.brand){
         case 0:
             this.isExtralife = true;
-			//this.sprite = g_sprites.Heart;
             break;
         case 1:
             this.isShotgun = true;
-            //this.sprite = g_sprites.Shotgun;
             break;
         case 2:
             this.isMachinegun = true;
-            //this.sprite = g_sprites.Ammo;
             break;
         case 3:
             this.isSpeedBoost = true;
-			//this.sprite = g_sprites.Wing;
             break;
         case 4:
             this.isShield = true
-            //this.sprite = g_sprites.Shield;
             break;
         case 5:
             this.isScoreMultiplier = true;
@@ -72,13 +67,17 @@ Powerup.prototype.takeProtagonistHit = function () {
     if (this.isScoreMultiplier) Player.addMultiplier();
     if (this.isMachinegun) {
         Player.hasShotgun = false;
+        Player.hasMachineGun = true;
         Player.setFireRate(5);
         Player.addAmmo(100);
     };
     if (this.isShotgun) {
         Player.hasShotgun = true;
+        Player.hasMachineGun = false;
         Player.setFireRate(70);
         Player.addAmmo(100);
+        var gunSound = new Audio(g_audioUrls.shotgunReload);
+        gunSound.play();
     };
     if (this.isShield) Player.addShieldTime();
 };

@@ -20,6 +20,7 @@ var g_isUpdateOdd = false;
 
 function update(dt) {
     
+    checkAlways();
     // Get out if skipping (e.g. due to pause-mode)
     //
     if (shouldSkipUpdate()) return;
@@ -58,6 +59,7 @@ var g_isUpdatePaused = false;
 function shouldSkipUpdate() {
     if (eatKey(KEY_PAUSE)) {
         g_isUpdatePaused = !g_isUpdatePaused;
+		if (!g_isUpdatePaused) g_isRenderPaused = false;
     }
     return g_isUpdatePaused && !eatKey(KEY_STEP);    
 }

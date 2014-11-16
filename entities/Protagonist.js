@@ -50,7 +50,7 @@ Protagonist.prototype.update = function (du) {
     }
 
 	// Perform movement
-    if (Player.getSpeed() > 2) Player.tickSpeedTimer(du);
+    if (Player.getSpeed() > 3) Player.tickSpeedTimer(du);
     if (Player.getShieldTime() > 0) Player.tickShieldTime(du);
     var vel = this.computeMovement();
 	this.velX = vel.x;
@@ -187,6 +187,7 @@ Protagonist.prototype.render = function (ctx) {
         ctx.save();
         ctx.globalAlpha = 0.3
         ctx.fillStyle = "cyan";
+        if (Player.getShieldTime() < 5 * SECS_TO_NOMINALS) {ctx.fillStyle = "red";};
         util.fillCircle(ctx, this.cx, this.cy, this.getRadius()+2);
         ctx.restore();
     }

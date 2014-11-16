@@ -57,7 +57,10 @@ g_audioUrls = {
 	loselife : "https://notendur.hi.is/~jiz2/TOL-S3/ProjectRobotron/loselife.mp3",
 	pickitem: "https://notendur.hi.is/~jiz2/TOL-S3/ProjectRobotron/pickitem.mp3",
 	todIOF : "https://notendur.hi.is/~jiz2/TOL-S3/ProjectRobotron/IronyOfFate.mp3",
-    music : "https://notendur.hi.is/~odv1/Tölvuleikjaforritun/RoboBarrier2/sounds/rafmagnad11.mp3"
+    music : "https://notendur.hi.is/~odv1/Tölvuleikjaforritun/RoboBarrier2/sounds/rafmagnad11.mp3",
+    machineGun : "https://notendur.hi.is/~odv1/Tölvuleikjaforritun/Robotron/sounds/laser.wav",
+    shotgunFire : "https://notendur.hi.is/~odv1/Tölvuleikjaforritun/Robotron/sounds/shotgunFire.mp3",
+    shotgunReload : "https://notendur.hi.is/~odv1/Tölvuleikjaforritun/Robotron/sounds/shotgunReload.mp3"
 };
 
 /* 

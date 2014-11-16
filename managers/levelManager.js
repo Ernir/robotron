@@ -34,6 +34,7 @@ var levelManager = {
 	_isChangingLevel: false,
 	_changingTimer: 2 * SECS_TO_NOMINALS,
 	
+	_onMenu: true,
 	_isGameOver: false,
 	_isWon: false,
 
@@ -44,6 +45,7 @@ var levelManager = {
         entityManager.clearAll();
         spatialManager.resetAll();
         this._isChangingLevel = true;
+		this._onMenu = false;
 		this._isGameOver = false;
 
         // Level generator
@@ -225,6 +227,29 @@ var levelManager = {
 	isChangingLevel: function () {
 		return this._isChangingLevel;
 	},
+
+// -----------------
+// Main Menu Methods
+	
+	isInMenu: function () {
+		return this._onMenu;
+	},
+	
+	renderMenu: function (ctx) {
+		ctx.save();
+		var str = "", hw=g_canvas.width/2 ,hh=g_canvas.height/2;
+		ctx.font = "bold 60px sans-serif";
+		ctx.fillStyle ="rgba(255,255,255,0.3)"; //not sure if you want this
+		ctx.fillRect(0, hh/2, hw*2, hh);
+		ctx.fillStyle ="red";
+		ctx.textAlign = "center";
+		str = "ROBOTRON";
+		ctx.fillText(str, hw, hh);
+		str = "Press R to start the game!";
+		ctx.font = "bold 20px sans-serif";
+		ctx.fillText(str,hw,hh*3/2-10); //10 is the font's halfheight
+		ctx.restore();
+	},
 	
 // -----------------
 // Game Over Methods
@@ -240,8 +265,7 @@ var levelManager = {
 	},
 	
 	renderGameOver: function (ctx) {
-		// TODO: Game over screen and maybe animation
-		//score
+		//TODO: Add Highscore
 		ctx.save();
 		var str = "", hw=g_canvas.width/2 ,hh=g_canvas.height/2;
 		ctx.font = "bold 60px sans-serif";

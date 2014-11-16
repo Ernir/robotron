@@ -32,10 +32,16 @@ Shell.prototype.update = function (du) {
     spatialManager.unregister(this);
 	
 	// Handle death
-    if(this._isDeadNow) return entityManager.KILL_ME_NOW;
+    if(this._isDeadNow) {
+        this.spawnFragment(12);
+        return entityManager.KILL_ME_NOW;
+    }
     
     this.lifeSpan -= du;
-    if (this.lifeSpan < 0) return entityManager.KILL_ME_NOW;
+    if (this.lifeSpan < 0) {
+        this.spawnFragment(12);
+        return entityManager.KILL_ME_NOW;
+    }
 	
 	// Update positions
     this.capPositions();
@@ -50,6 +56,7 @@ Shell.prototype.update = function (du) {
         var canTakeHit = hitEntity.takeEnemyHit;
         if (canTakeHit) {
             canTakeHit.call(hitEntity);
+            this.spawnFragment(12);
             return entityManager.KILL_ME_NOW;
         }
     }
@@ -68,12 +75,12 @@ Shell.prototype.getRadius = function () {
 
 Shell.prototype.render = function (ctx) {
     ctx.save();
-    var fadeThresh = CruiseMissile.prototype.lifeSpan / 3;
+    /*var fadeThresh = CruiseMissile.prototype.lifeSpan / 3;
 
     if (this.lifeSpan < fadeThresh) {
         ctx.globalAlpha = this.lifeSpan / fadeThresh;
-    }
-    ctx.fillStyle = "cyan";
+    }*/
+    ctx.fillStyle = "grey";
     util.fillCircle(ctx, this.cx, this.cy, this.getRadius());
     ctx.restore();
 };

@@ -38,6 +38,7 @@ Player.prototype.speedTimer = 10 * SECS_TO_NOMINALS;
 Player.prototype.fireRate = 20;
 Player.prototype.ammo = 0;
 Player.prototype.hasShotgun = false;
+Player.prototype.hasMachineGun = false;
 Player.prototype.shieldTime = 0;
 Player.prototype.scoreValues = {
     Electrode: 0,
@@ -71,8 +72,13 @@ Player.prototype.resetAll = function() {
 };
 
 Player.prototype.render = function(ctx) {
-    // Display the score
     ctx.save();
+	
+	// Display score bar
+	ctx.fillStyle = "black";
+	ctx.fillRect(0, 0, ctx.canvas.width, consts.wallTop);
+	
+	// Display the score
     ctx.lineWidth = 1.5;
     ctx.font = "20px Arial";
     ctx.fillStyle = "red";
@@ -91,12 +97,20 @@ Player.prototype.render = function(ctx) {
     };
 
     // Display ammo
-    // TODO: redesign the score bar
     var text = "Ammo: " + this.ammo;
     ctx.fillText(text, g_canvas.width/2 - 160, 20);
     
+	// Display shield
     var moretxt = "Shield: " + Math.ceil(this.shieldTime / SECS_TO_NOMINALS);
     ctx.fillText(moretxt, g_canvas.width/2 + 80, 20);
+	
+	// Display border
+	ctx.fillStyle = "red";
+	ctx.fillRect(0, consts.wallTop, ctx.canvas.width, consts.wallThickness);
+	ctx.fillRect(0, consts.wallTop, consts.wallLeft, g_canvas.height - consts.wallTop);
+	ctx.fillRect(0, consts.wallBottom, g_canvas.width, consts.wallThickness);
+	ctx.fillRect(consts.wallRight, consts.wallTop, consts.wallThickness, g_canvas.height - consts.wallTop);
+	
     ctx.restore();
 };
 
@@ -258,6 +272,7 @@ Player.prototype.setFireRate = function (fireRate) {
 Player.prototype.resetFireRate = function () {
     this.fireRate = 20;
     this.hasShotgun = false;
+    this.hasMachineGun = false;
 };
 
 Player.prototype.getAmmo = function () {

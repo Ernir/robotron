@@ -15,7 +15,7 @@ function Prog(descr) {
 }
 
 Prog.prototype = Object.create(Enemy.prototype);
-Prog.prototype.speed = 1;
+Prog.prototype.speed = 1.5;
 Prog.prototype.renderPos = {cx: this.cx, cy: this.cy};
 Prog.prototype.stepsize = 10;
 

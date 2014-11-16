@@ -38,6 +38,7 @@ var entityManager = {
     _particles: [],
 	
 	_bulletDU: 0,
+    _reload: false,
 
 // "PRIVATE" METHODS
 
@@ -74,10 +75,10 @@ var entityManager = {
 			this._drops,
 			this._protagonists, 
             this._particles,
-			this._bullets, 
 			this._family, 
 			this._enemies,
             this._ignoredEnemies,
+            this._bullets, 
             this._scoreImgs
 		];
     },
@@ -198,6 +199,7 @@ var entityManager = {
     			);
             }
 		}
+        if (Player.hasShotgun) this._reload = true;
 	},
 	
 	fireBullet: function(cx, cy, dirnX, dirnY) {
@@ -258,6 +260,18 @@ var entityManager = {
             };
         }
 	},
+	
+	createScoreImg: function (descr) {
+        this._scoreImgs.push(new ScoreImg(descr));
+    },
+	
+	createPowerup: function (cx,cy) {
+        var brand = Math.floor(Math.random()*6);
+        this._drops.push(new Powerup({cx: cx, 
+                                      cy: cy, 
+                                      brand: brand
+                                      }));
+    },
 
     createGrunt: function () {
         var playerSafeDist = 120;
@@ -277,28 +291,13 @@ var entityManager = {
         this._enemies.push(new Brain(descr));
     },
 
-    fireCruiseMissile: function (cx,cy) {
-        this._bullets.push(new CruiseMissile({cx: cx, cy: cy}));
-    },
-
-    createScoreImg: function (descr) {
-        this._scoreImgs.push(new ScoreImg(descr));
-    },
-
     createElectrode: function () {
         var playerSafeDist = 120;
         var descr = this.findSpawn(playerSafeDist);
         descr.shapes = Math.floor(Math.random()*7);
         this._ignoredEnemies.push(new Electrode(descr));
     },
-
-    createPowerup: function (cx,cy) {
-        var brand = Math.floor(Math.random()*6);
-        this._drops.push(new Powerup({cx: cx, 
-                                      cy: cy, 
-                                      brand: brand
-                                      }));
-    },
+    
 	createProg: function (cx,cy) {
         this._spawnedEnemies.push(new Prog({cx: cx, cy: cy}));
     },
@@ -311,11 +310,7 @@ var entityManager = {
 
     createTank: function(cx,cy) {
         this._spawnedEnemies.push(new Tank({cx: cx, cy: cy}));
-    },
-
-    fireShell: function (cx, cy, angle) {
-        this._bullets.push(new Shell({cx: cx, cy: cy, initialAngle: angle}));
-    },
+    },    
 
     createSpheroid: function () {
         var playerSafeDist = 120;
@@ -326,16 +321,28 @@ var entityManager = {
     createEnforcer: function (cx, cy) {
         this._spawnedEnemies.push(new Enforcer({cx: cx, cy: cy}));
     },
+	
+	fireCruiseMissile: function (cx,cy) {
+        this._bullets.push(new CruiseMissile({cx: cx, cy: cy}));
+    },
+	
+	fireShell: function (cx, cy, angle) {
+        this._bullets.push(new Shell({cx: cx, cy: cy, initialAngle: angle}));
+    },
 
     fireSpark: function (cx, cy, angle) {
         this._bullets.push(new Spark({cx: cx, cy: cy, initialAngle: angle}));
     },
 
-// --------------------
+// ------------------------
 // Particle effects methods
 
     createCMTrail: function (cx, cy) {
         this._particles.push(new CMTrail({cx: cx, cy: cy}));
+    },
+
+    createParticle: function (descr) {
+        this._particles.push(new Particle(descr));
     },
 
 // --------------------
@@ -345,6 +352,12 @@ var entityManager = {
 
 		this._bulletDU += du;
 		
+        if (this._reload && this._bulletDU > Player.fireRate / 4) {
+                var gunSound = new Audio(g_audioUrls.shotgunReload);
+                gunSound.play();
+                this._reload = false;
+        }
+
 		for (var c = 0; c < this._categories.length; ++c) {
 
             var aCategory = this._categories[c];
@@ -367,8 +380,6 @@ var entityManager = {
     },
 
     render: function (ctx) {
-		
-		var debugX = 10, debugY = 100;
 
         for (var c = 0; c < this._categories.length; ++c) {
 
@@ -379,7 +390,6 @@ var entityManager = {
                 aCategory[i].render(ctx);
 
             }
-            debugY += 10;
         }
     }
 

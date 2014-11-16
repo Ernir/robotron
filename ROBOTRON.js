@@ -58,20 +58,24 @@ function updateSimulation(du) {
 
     processDiagnostics();
 
-    if (levelManager.isChangingLevel()) {
+    if (levelManager.isInMenu()) {
+	
+		return;
+		
+	} else if (levelManager.isChangingLevel()) {
+	
         levelManager.reduceTimer(du);
+		
     } else {
+	
         if (!levelManager.isGameOver()) {
             entityManager.update(du);
         }
     }
 	
-	if (g_music) g_bgm.play();
-	else g_bgm.pause();
-	
 	if (Player.getLives() === 0) {
 		levelManager.gameOver();
-	};//TODO: Transition to main menu or game over screen
+	};
 
     if (entityManager.enemiesIsEmpty()) levelManager.nextLevel();
 }
@@ -80,11 +84,13 @@ function updateSimulation(du) {
 
 var g_Debug = false;
 var g_canBeKilled = true;
+var g_friendlyFire = true;
 var g_sounds = true;
 var g_music = true;
 
-var KEY_SPATIAL = keyCode('X');
+var KEY_DEBUG = keyCode('X');
 var KEY_KILLABLE = keyCode('K');
+var KEY_FRIENDLYFIRE = keyCode('F');
 var KEY_RESTART = keyCode('R');
 var KEY_NEXT_LEVEL = 107; // Numpad +
 var KEY_PREV_LEVEL = 109; // Numpad -
@@ -100,46 +106,84 @@ var KEY_SHIELD = 102; // Numpad 6
 
 function processDiagnostics() {
 
-    if (eatKey(KEY_SPATIAL)) g_Debug = !g_Debug;
-
-    if (eatKey(KEY_KILLABLE) && g_Debug) g_canBeKilled = !g_canBeKilled;
+    if (eatKey(KEY_KILLABLE) && g_Debug) {
+        g_canBeKilled = !g_canBeKilled;
+        g_hasCheated = true;
+    }
+	
+	if (eatKey(KEY_FRIENDLYFIRE) && g_Debug) {
+        g_friendlyFire = !g_friendlyFire;
+        g_hasCheated = true;
+    }
 
     if (eatKey(KEY_RESTART)) {
         Player.resetAll();
         levelManager.startLevel();
-    };
+    }
 
-    if (eatKey(KEY_NEXT_LEVEL) && g_Debug) levelManager.nextLevel();
+    if (eatKey(KEY_NEXT_LEVEL) && g_Debug) {
+        levelManager.nextLevel();
+        g_hasCheated = true;
+    }
 
-    if (eatKey(KEY_PREV_LEVEL) && g_Debug) levelManager.prevLevel();
+    if (eatKey(KEY_PREV_LEVEL) && g_Debug) {
+        levelManager.prevLevel();
+        g_hasCheated = true;
+    }
 	
-	if (eatKey(KEY_SOUND)) g_sounds = !g_sounds;
-	
-	if (eatKey(KEY_MUSIC)) g_music = !g_music;
+    if (eatKey(KEY_EXTRA_LIFE) && g_Debug) {
+        Player.addLives();
+        g_hasCheated = true;
+    }
 
-    if (eatKey(KEY_EXTRA_LIFE) && g_Debug) Player.addLives();
+    if (eatKey(KEY_SPEED) && g_Debug) {
+        Player.addSpeed();
+        g_hasCheated = true;
+    }
 
-    if (eatKey(KEY_SPEED) && g_Debug) Player.addSpeed();
-
-    if (eatKey(KEY_SCORE_MP) && g_Debug) Player.addMultiplier();
+    if (eatKey(KEY_SCORE_MP) && g_Debug) {
+        Player.addMultiplier();
+        g_hasCheated = true;
+    }
 
     if (eatKey(KEY_MACHINEGUN) && g_Debug) {
         Player.hasShotgun = false;
+        Player.hasMachineGun = true;
         Player.setFireRate(5);
         Player.addAmmo(100);
+        g_hasCheated = true;
     }
 
     if (eatKey(KEY_SHOTGUN) && g_Debug) {
         Player.hasShotgun = true;
+        Player.hasMachineGun = false;
         Player.setFireRate(70);
         Player.addAmmo(100);
+        g_hasCheated = true;
     }
 
-    if (eatKey(KEY_SHIELD) && g_Debug) Player.addShieldTime();
+    if (eatKey(KEY_SHIELD) && g_Debug) {
+        Player.addShieldTime();
+        g_hasCheated = true;
+    }
 
-    if (eatKey(KEY_PWRUP_RESET) && g_Debug) Player.resetAll();
+    if (eatKey(KEY_PWRUP_RESET) && g_Debug) {
+        Player.resetAll();
+        g_hasCheated = true;
+    }
 }
 
+function checkAlways() {
+
+    if (eatKey(KEY_DEBUG)) g_Debug = !g_Debug;
+
+    if (eatKey(KEY_SOUND)) g_sounds = !g_sounds;
+    
+    if (eatKey(KEY_MUSIC)) g_music = !g_music;
+	
+    if (g_music) g_bgm.play();
+    else g_bgm.pause();
+}
 
 // =================
 // RENDER SIMULATION
@@ -157,7 +201,11 @@ function processDiagnostics() {
 
 function renderSimulation(ctx) {
 
-    if (levelManager.isChangingLevel()) {
+    if (levelManager.isInMenu()) {
+	
+		levelManager.renderMenu(ctx);
+		
+    } else if (levelManager.isChangingLevel()) {
 	
         levelManager.renderLevelChanger(ctx);
 		
@@ -302,8 +350,6 @@ function preloadDone() {
     g_sprites.EnforcerSpark.push(new Sprite(g_images.EnforcerSpark, 86, 96));
 
     initializeEntities();
-    levelManager.startLevel();
-
     main.init();
 }
 
