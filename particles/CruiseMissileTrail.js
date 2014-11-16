@@ -18,6 +18,7 @@ function CMTrail(descr) {
 }
 
 CMTrail.prototype.lifeSpan = SECS_TO_NOMINALS / 2;
+CMTrail.prototype.radius = 3;
 
 CMTrail.prototype.update = function (du) {
     
@@ -25,18 +26,15 @@ CMTrail.prototype.update = function (du) {
     if (this.lifeSpan < 0) return entityManager.KILL_ME_NOW;
 };
 
-CMTrail.prototype.getRadius = function () {
-    return 3;
-};
-
 CMTrail.prototype.render = function (ctx) {
     ctx.save();
-    var fadeThresh = this.lifeSpan / 3;
-
+    var fadeThresh = 3 * CMTrail.prototype.lifeSpan / 4;
+    var radius = this.radius;
     if (this.lifeSpan < fadeThresh) {
         ctx.globalAlpha = this.lifeSpan / fadeThresh;
+        radius = this.radius * this.lifeSpan / fadeThresh;
     }
     ctx.fillStyle = "yellow";
-    util.fillCircle(ctx, this.cx, this.cy, this.getRadius());
+    util.fillCircle(ctx, this.cx, this.cy, radius);
     ctx.restore();
 };
