@@ -106,10 +106,14 @@ Entity.prototype.edgeBounce = function () {
     return bounceHappened;
 };
 
-Entity.prototype.spawnFragment = function (num) {
+Entity.prototype.spawnFragment = function (num,SpecificColor) {
     for (var i = 0; i < num; i++) {
         var dirn = Math.random()*2*Math.PI;
-        var color = Math.floor(Math.random()*3);
+        if (SpecificColor === undefined) {
+            var color = Math.floor(Math.random()*3);
+        } else {
+            var color = SpecificColor;
+        }
         var descr = {cx: this.cx,
                      cy: this.cy,
                      dirn: dirn,

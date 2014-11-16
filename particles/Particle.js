@@ -22,7 +22,7 @@ Particle.prototype.radius = 3;
 Particle.prototype.speed = 0.5;
 Particle.prototype.velX = 0;
 Particle.prototype.velY = 0;
-Particle.prototype.colors = ["yellow","orange","red"];
+Particle.prototype.colors = ["yellow","orange","red","lime","cyan"];
 
 Particle.prototype.update = function (du) {
     

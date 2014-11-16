@@ -43,17 +43,25 @@ Bullet.prototype.velY = 1;
 // Convert times from milliseconds to "nominal" time units.
 Bullet.prototype.lifeSpan = 3 * SECS_TO_NOMINALS;
 
-
-
 Bullet.prototype.update = function (du) {
 
     spatialManager.unregister(this);
 	
 	// Handle death
-    if(this._isDeadNow) return entityManager.KILL_ME_NOW;
+    if(this._isDeadNow) {
+        if (Player.hasMachineGun) this.spawnFragment(5,4);
+        if (Player.hasShotgun) this.spawnFragment(5,1);
+        if (!Player.hasMachineGun && !Player.hasShotgun) this.spawnFragment(5,3);
+        return entityManager.KILL_ME_NOW;
+    }
     
     this.lifeSpan -= du;
-    if (this.lifeSpan < 0) return entityManager.KILL_ME_NOW;
+    if (this.lifeSpan < 0) {
+        if (Player.hasMachineGun) this.spawnFragment(5,4);
+        if (Player.hasShotgun) this.spawnFragment(5,1);
+        if (!Player.hasMachineGun && !Player.hasShotgun) this.spawnFragment(5,3);
+        return entityManager.KILL_ME_NOW;
+    }
 
 	// Update positions
 	this.velX = this.bulletVel * this.dirnX;
@@ -81,6 +89,9 @@ Bullet.prototype.update = function (du) {
             if (canTakeHit || (g_friendlyFire && canFriendlyHit))  {
                 if (canTakeHit) canTakeHit.call(hitEntity, descr);
 				else canFriendlyHit.call(hitEntity);
+                if (Player.hasMachineGun) this.spawnFragment(5,4);
+                if (Player.hasShotgun) this.spawnFragment(5,1);
+                if (!Player.hasMachineGun && !Player.hasShotgun) this.spawnFragment(5,3);
                 return entityManager.KILL_ME_NOW;
             }
         }
