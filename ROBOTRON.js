@@ -193,7 +193,6 @@ function preloadDone() {
     // Static images
     g_sprites.Skull = new Sprite(g_images.Skull);
     g_sprites.Extralife = new Sprite(g_images.Extralife);
-    g_sprites.Prog = new Sprite(g_images.Prog);
 	g_sprites.Wing = new Sprite(g_images.Wing);
 	g_sprites.Shield = new Sprite(g_images.Shield);
 	g_sprites.Heart = new Sprite(g_images.Heart);
@@ -217,6 +216,8 @@ function preloadDone() {
     g_sprites.Enforcer = [];
     g_sprites.EnforcerSpark = [];
     g_sprites.PowerUps = [];
+    g_sprites.Prog = [];
+
 
     for (var i = 0; i < 12; i++) {
         g_sprites.Dad.push(new Sprite(g_images.Dad, i*30, (i+1)*30));
@@ -224,6 +225,8 @@ function preloadDone() {
         g_sprites.Child.push(new Sprite(g_images.Child, i*22, (i+1)*22));
         g_sprites.Protagonist.push(new Sprite(g_images.Protagonist, i*26, (i+1)*26));
         g_sprites.Brain.push(new Sprite(g_images.Brain, i*38, (i+1)*38));
+        g_sprites.Prog.push(new Sprite(g_images.Prog, i*30, (i+1)*30));
+
     }
 
     g_sprites.Family = g_sprites.Dad.concat(g_sprites.Mom, g_sprites.Child);
