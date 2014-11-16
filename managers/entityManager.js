@@ -74,10 +74,10 @@ var entityManager = {
 			this._drops,
 			this._protagonists, 
             this._particles,
-			this._bullets, 
 			this._family, 
 			this._enemies,
             this._ignoredEnemies,
+            this._bullets, 
             this._scoreImgs
 		];
     },
@@ -336,6 +336,10 @@ var entityManager = {
 
     createCMTrail: function (cx, cy) {
         this._particles.push(new CMTrail({cx: cx, cy: cy}));
+    },
+
+    createParticle: function (descr) {
+        this._particles.push(new Particle(descr));
     },
 
 // --------------------
