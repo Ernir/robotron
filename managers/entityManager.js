@@ -38,6 +38,7 @@ var entityManager = {
     _particles: [],
 	
 	_bulletDU: 0,
+    _reload: false,
 
 // "PRIVATE" METHODS
 
@@ -198,6 +199,7 @@ var entityManager = {
     			);
             }
 		}
+        if (Player.hasShotgun) this._reload = true;
 	},
 	
 	fireBullet: function(cx, cy, dirnX, dirnY) {
@@ -350,6 +352,13 @@ var entityManager = {
 
 		this._bulletDU += du;
 		
+        if (this._reload && this._bulletDU > Player.fireRate / 2) {
+                var gunSound = new Audio(g_audioUrls.shotgunReload);
+                gunSound.play();
+                this._reload = false;
+                console.log("ka-chink!");
+        }
+
 		for (var c = 0; c < this._categories.length; ++c) {
 
             var aCategory = this._categories[c];

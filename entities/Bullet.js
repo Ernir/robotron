@@ -19,8 +19,21 @@ function Bullet(descr) {
     this.setup(descr);
 
     // Make a noise when I am created (i.e. fired)
-	this.fireSound.currentTime = 0;
-    if (g_sounds) this.fireSound.play();
+	//this.fireSound.currentTime = 0;
+    if (g_sounds) {
+        if (!Player.hasMachineGun && !Player.hasShotgun) {
+            var gunSound = new Audio(g_audioUrls.shot);
+            gunSound.play();
+        }
+        if (Player.hasMachineGun) {
+            var gunSound = new Audio(g_audioUrls.machineGun);
+            gunSound.play();
+        }
+        if (Player.hasShotgun) {
+            var gunSound = new Audio(g_audioUrls.shotgunFire);
+            gunSound.play();
+        }
+    }
     
 /*
     // Diagnostics to check inheritance stuff
@@ -33,7 +46,7 @@ function Bullet(descr) {
 Bullet.prototype = new Entity();
 
 // HACKED-IN AUDIO (no preloading)
-Bullet.prototype.fireSound = new Audio(g_audioUrls.shot);
+//Bullet.prototype.fireSound = new Audio(g_audioUrls.shotgunFire);
     
 // Initial, inheritable, default values
 Bullet.prototype.rotation = 0;
