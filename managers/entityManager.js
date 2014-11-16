@@ -352,11 +352,10 @@ var entityManager = {
 
 		this._bulletDU += du;
 		
-        if (this._reload && this._bulletDU > Player.fireRate / 2) {
+        if (this._reload && this._bulletDU > Player.fireRate / 4) {
                 var gunSound = new Audio(g_audioUrls.shotgunReload);
                 gunSound.play();
                 this._reload = false;
-                console.log("ka-chink!");
         }
 
 		for (var c = 0; c < this._categories.length; ++c) {

@@ -30,8 +30,8 @@ function Bullet(descr) {
             gunSound.play();
         }
         if (Player.hasShotgun) {
-            var gunSound = new Audio(g_audioUrls.shotgunFire);
-            gunSound.play();
+            if (this.shotgunFire.currentTime > 0.5) this.shotgunFire.currentTime = 0;
+            this.shotgunFire.play();
         }
     }
     
@@ -49,6 +49,7 @@ Bullet.prototype = new Entity();
 //Bullet.prototype.fireSound = new Audio(g_audioUrls.shotgunFire);
     
 // Initial, inheritable, default values
+Bullet.prototype.shotgunFire = new Audio(g_audioUrls.shotgunFire);
 Bullet.prototype.rotation = 0;
 Bullet.prototype.bulletVel = 10;
 Bullet.prototype.velX = 1;

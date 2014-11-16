@@ -59,8 +59,8 @@ g_audioUrls = {
 	todIOF : "https://notendur.hi.is/~jiz2/TOL-S3/ProjectRobotron/IronyOfFate.mp3",
     music : "https://notendur.hi.is/~odv1/Tölvuleikjaforritun/RoboBarrier2/sounds/rafmagnad11.mp3",
     machineGun : "https://notendur.hi.is/~odv1/Tölvuleikjaforritun/Robotron/sounds/laser.wav",
-    shotgunFire : "https://notendur.hi.is/~odv1/Tölvuleikjaforritun/Robotron/sounds/shotgunFire.wav",
-    shotgunReload : "https://notendur.hi.is/~odv1/Tölvuleikjaforritun/Robotron/sounds/shotgunReload.wav"
+    shotgunFire : "https://notendur.hi.is/~odv1/Tölvuleikjaforritun/Robotron/sounds/shotgunFire.mp3",
+    shotgunReload : "https://notendur.hi.is/~odv1/Tölvuleikjaforritun/Robotron/sounds/shotgunReload.mp3"
 };
 
 /* 
