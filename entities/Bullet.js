@@ -59,6 +59,9 @@ Bullet.prototype.update = function (du) {
 	this.velX = this.bulletVel * this.dirnX;
     this.velY = this.bulletVel * this.dirnY;
 	
+    this.prevX = this.cx;
+    this.prevY = this.cy;
+
     this.cx += this.velX * du;
     this.cy += this.velY * du;
 
@@ -105,8 +108,38 @@ Bullet.prototype.render = function (ctx) {
             break;
         case Player.hasMachineGun:
             ctx.save();
+            ctx.strokeStyle = "cyan";
             ctx.fillStyle = "cyan";
-            util.fillCircle(ctx, this.cx, this.cy, this.getRadius());
+
+            var dirn = util.angleTo(this.cx, this.cy, this.prevX, this.prevY);
+            var x = this.cx + 10 * Math.cos(dirn);
+            var y = this.cy + 10 * Math.sin(dirn);
+            
+            ctx.globalAlpha = 0.4;
+            ctx.beginPath();
+            ctx.moveTo(this.cx, this.cy);
+            ctx.lineTo(x, y);
+            ctx.lineWidth = 8;
+            ctx.stroke();
+            util.fillCircle(ctx, this.cx, this.cy, 4);
+            
+            ctx.globalAlpha = 0.6;
+            ctx.beginPath();
+            ctx.moveTo(this.cx, this.cy);
+            ctx.lineTo(x, y);
+            ctx.lineWidth = 4;
+            ctx.stroke();
+            util.fillCircle(ctx, this.cx, this.cy, 2);
+            
+            ctx.strokeStyle = "white";
+            ctx.fillStyle = "white";
+            ctx.globalAlpha = 1;
+            ctx.beginPath();
+            ctx.moveTo(this.cx, this.cy);
+            ctx.lineTo(x, y);
+            ctx.lineWidth = 2;
+            ctx.stroke();
+
             ctx.restore();
             break;
         default:
