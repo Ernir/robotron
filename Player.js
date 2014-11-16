@@ -104,7 +104,7 @@ Player.prototype.render = function(ctx) {
     var moretxt = "Shield: " + Math.ceil(this.shieldTime / SECS_TO_NOMINALS);
     ctx.fillText(moretxt, g_canvas.width/2 + 80, 20);
 	
-	// Display boarder
+	// Display border
 	ctx.fillStyle = "red";
 	ctx.fillRect(0, consts.wallTop, ctx.canvas.width, consts.wallThickness);
 	ctx.fillRect(0, consts.wallTop, consts.wallLeft, g_canvas.height - consts.wallTop);
