@@ -62,20 +62,8 @@ Bullet.prototype.update = function (du) {
     spatialManager.unregister(this);
 	
 	// Handle death
-    if(this._isDeadNow) {
-        if (Player.hasMachineGun) this.spawnFragment(5,4);
-        if (Player.hasShotgun) this.spawnFragment(5,1);
-        if (!Player.hasMachineGun && !Player.hasShotgun) this.spawnFragment(5,3);
-        return entityManager.KILL_ME_NOW;
-    }
-    
     this.lifeSpan -= du;
-    if (this.lifeSpan < 0) {
-        if (Player.hasMachineGun) this.spawnFragment(5,4);
-        if (Player.hasShotgun) this.spawnFragment(5,1);
-        if (!Player.hasMachineGun && !Player.hasShotgun) this.spawnFragment(5,3);
-        return entityManager.KILL_ME_NOW;
-    }
+    if (this.lifeSpan < 0) return entityManager.KILL_ME_NOW;
 
 	// Update positions
 	this.velX = this.bulletVel * this.dirnX;
