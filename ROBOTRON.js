@@ -80,11 +80,13 @@ function updateSimulation(du) {
 
 var g_Debug = false;
 var g_canBeKilled = true;
+var g_friendlyFire = true;
 var g_sounds = true;
 var g_music = true;
 
 var KEY_SPATIAL = keyCode('X');
 var KEY_KILLABLE = keyCode('K');
+var KEY_FRIENDLYFIRE = keyCode('F');
 var KEY_RESTART = keyCode('R');
 var KEY_NEXT_LEVEL = 107; // Numpad +
 var KEY_PREV_LEVEL = 109; // Numpad -
@@ -103,6 +105,8 @@ function processDiagnostics() {
     if (eatKey(KEY_SPATIAL)) g_Debug = !g_Debug;
 
     if (eatKey(KEY_KILLABLE) && g_Debug) g_canBeKilled = !g_canBeKilled;
+	
+	if (eatKey(KEY_FRIENDLYFIRE) && g_Debug) g_friendlyFire = !g_friendlyFire;
 
     if (eatKey(KEY_RESTART)) {
         Player.resetAll();
