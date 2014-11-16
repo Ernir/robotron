@@ -71,8 +71,13 @@ Player.prototype.resetAll = function() {
 };
 
 Player.prototype.render = function(ctx) {
-    // Display the score
     ctx.save();
+	
+	// Display score bar
+	ctx.fillStyle = "black";
+	ctx.fillRect(0, 0, ctx.canvas.width, consts.wallTop);
+	
+	// Display the score
     ctx.lineWidth = 1.5;
     ctx.font = "20px Arial";
     ctx.fillStyle = "red";
@@ -91,12 +96,20 @@ Player.prototype.render = function(ctx) {
     };
 
     // Display ammo
-    // TODO: redesign the score bar
     var text = "Ammo: " + this.ammo;
     ctx.fillText(text, g_canvas.width/2 - 160, 20);
     
+	// Display shield
     var moretxt = "Shield: " + Math.ceil(this.shieldTime / SECS_TO_NOMINALS);
     ctx.fillText(moretxt, g_canvas.width/2 + 80, 20);
+	
+	// Display boarder
+	ctx.fillStyle = "red";
+	ctx.fillRect(0, consts.wallTop, ctx.canvas.width, consts.wallThickness);
+	ctx.fillRect(0, consts.wallTop, consts.wallLeft, g_canvas.height - consts.wallTop);
+	ctx.fillRect(0, consts.wallBottom, g_canvas.width, consts.wallThickness);
+	ctx.fillRect(consts.wallRight, consts.wallTop, consts.wallThickness, g_canvas.height - consts.wallTop);
+	
     ctx.restore();
 };
 
