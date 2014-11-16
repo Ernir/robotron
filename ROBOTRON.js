@@ -106,30 +106,52 @@ var KEY_SHIELD = 102; // Numpad 6
 
 function processDiagnostics() {
 
-    if (eatKey(KEY_KILLABLE) && g_Debug) g_canBeKilled = !g_canBeKilled;
+    if (eatKey(KEY_KILLABLE) && g_Debug) {
+        g_canBeKilled = !g_canBeKilled;
+        g_hasCheated = true;
+    }
 	
-	if (eatKey(KEY_FRIENDLYFIRE) && g_Debug) g_friendlyFire = !g_friendlyFire;
+	if (eatKey(KEY_FRIENDLYFIRE) && g_Debug) {
+        g_friendlyFire = !g_friendlyFire;
+        g_hasCheated = true;
+    }
 
     if (eatKey(KEY_RESTART)) {
         Player.resetAll();
         levelManager.startLevel();
-    };
+    }
 
-    if (eatKey(KEY_NEXT_LEVEL) && g_Debug) levelManager.nextLevel();
+    if (eatKey(KEY_NEXT_LEVEL) && g_Debug) {
+        levelManager.nextLevel();
+        g_hasCheated = true;
+    }
 
-    if (eatKey(KEY_PREV_LEVEL) && g_Debug) levelManager.prevLevel();
+    if (eatKey(KEY_PREV_LEVEL) && g_Debug) {
+        levelManager.prevLevel();
+        g_hasCheated = true;
+    }
 	
-    if (eatKey(KEY_EXTRA_LIFE) && g_Debug) Player.addLives();
+    if (eatKey(KEY_EXTRA_LIFE) && g_Debug) {
+        Player.addLives();
+        g_hasCheated = true;
+    }
 
-    if (eatKey(KEY_SPEED) && g_Debug) Player.addSpeed();
+    if (eatKey(KEY_SPEED) && g_Debug) {
+        Player.addSpeed();
+        g_hasCheated = true;
+    }
 
-    if (eatKey(KEY_SCORE_MP) && g_Debug) Player.addMultiplier();
+    if (eatKey(KEY_SCORE_MP) && g_Debug) {
+        Player.addMultiplier();
+        g_hasCheated = true;
+    }
 
     if (eatKey(KEY_MACHINEGUN) && g_Debug) {
         Player.hasShotgun = false;
         Player.hasMachineGun = true;
         Player.setFireRate(5);
         Player.addAmmo(100);
+        g_hasCheated = true;
     }
 
     if (eatKey(KEY_SHOTGUN) && g_Debug) {
@@ -137,11 +159,18 @@ function processDiagnostics() {
         Player.hasMachineGun = false;
         Player.setFireRate(70);
         Player.addAmmo(100);
+        g_hasCheated = true;
     }
 
-    if (eatKey(KEY_SHIELD) && g_Debug) Player.addShieldTime();
+    if (eatKey(KEY_SHIELD) && g_Debug) {
+        Player.addShieldTime();
+        g_hasCheated = true;
+    }
 
-    if (eatKey(KEY_PWRUP_RESET) && g_Debug) Player.resetAll();
+    if (eatKey(KEY_PWRUP_RESET) && g_Debug) {
+        Player.resetAll();
+        g_hasCheated = true;
+    }
 }
 
 function checkAlways() {
