@@ -258,6 +258,18 @@ var entityManager = {
             };
         }
 	},
+	
+	createScoreImg: function (descr) {
+        this._scoreImgs.push(new ScoreImg(descr));
+    },
+	
+	createPowerup: function (cx,cy) {
+        var brand = Math.floor(Math.random()*6);
+        this._drops.push(new Powerup({cx: cx, 
+                                      cy: cy, 
+                                      brand: brand
+                                      }));
+    },
 
     createGrunt: function () {
         var playerSafeDist = 120;
@@ -277,28 +289,13 @@ var entityManager = {
         this._enemies.push(new Brain(descr));
     },
 
-    fireCruiseMissile: function (cx,cy) {
-        this._bullets.push(new CruiseMissile({cx: cx, cy: cy}));
-    },
-
-    createScoreImg: function (descr) {
-        this._scoreImgs.push(new ScoreImg(descr));
-    },
-
     createElectrode: function () {
         var playerSafeDist = 120;
         var descr = this.findSpawn(playerSafeDist);
         descr.shapes = Math.floor(Math.random()*7);
         this._ignoredEnemies.push(new Electrode(descr));
     },
-
-    createPowerup: function (cx,cy) {
-        var brand = Math.floor(Math.random()*6);
-        this._drops.push(new Powerup({cx: cx, 
-                                      cy: cy, 
-                                      brand: brand
-                                      }));
-    },
+    
 	createProg: function (cx,cy) {
         this._spawnedEnemies.push(new Prog({cx: cx, cy: cy}));
     },
@@ -311,11 +308,7 @@ var entityManager = {
 
     createTank: function(cx,cy) {
         this._spawnedEnemies.push(new Tank({cx: cx, cy: cy}));
-    },
-
-    fireShell: function (cx, cy, angle) {
-        this._bullets.push(new Shell({cx: cx, cy: cy, initialAngle: angle}));
-    },
+    },    
 
     createSpheroid: function () {
         var playerSafeDist = 120;
@@ -325,6 +318,14 @@ var entityManager = {
 
     createEnforcer: function (cx, cy) {
         this._spawnedEnemies.push(new Enforcer({cx: cx, cy: cy}));
+    },
+	
+	fireCruiseMissile: function (cx,cy) {
+        this._bullets.push(new CruiseMissile({cx: cx, cy: cy}));
+    },
+	
+	fireShell: function (cx, cy, angle) {
+        this._bullets.push(new Shell({cx: cx, cy: cy, initialAngle: angle}));
     },
 
     fireSpark: function (cx, cy, angle) {
