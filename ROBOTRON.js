@@ -117,10 +117,6 @@ function processDiagnostics() {
 
     if (eatKey(KEY_PREV_LEVEL) && g_Debug) levelManager.prevLevel();
 	
-	if (eatKey(KEY_SOUND)) g_sounds = !g_sounds;
-	
-	if (eatKey(KEY_MUSIC)) g_music = !g_music;
-
     if (eatKey(KEY_EXTRA_LIFE) && g_Debug) Player.addLives();
 
     if (eatKey(KEY_SPEED) && g_Debug) Player.addSpeed();
@@ -146,6 +142,13 @@ function processDiagnostics() {
     if (eatKey(KEY_PWRUP_RESET) && g_Debug) Player.resetAll();
 }
 
+function muteAudioCheck() {
+    if (eatKey(KEY_SOUND)) g_sounds = !g_sounds;
+    
+    if (eatKey(KEY_MUSIC)) g_music = !g_music;
+    if (g_music) g_bgm.play();
+    else g_bgm.pause();
+}
 
 // =================
 // RENDER SIMULATION
