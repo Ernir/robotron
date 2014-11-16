@@ -13,9 +13,8 @@ function Protagonist(descr) {
     this.setup(descr);
 
     this.sprite = g_sprites.Protagonist[6];
-    this.startPos = {cx: this.cx, cy: this.cy};
-    // Make a noise when I am created
-    // this.exampleSound.play();
+    this.startPos = {posX: g_canvas.width / 2, posY: g_canvas.height / 2};
+    
 }
 
 Protagonist.prototype = new Entity();
@@ -49,7 +48,7 @@ Protagonist.prototype.update = function (du) {
     if (this._isDeadNow) {
         return entityManager.KILL_ME_NOW;
     }
-	
+
 	// Perform movement
     if (Player.getSpeed() > 2) Player.tickSpeedTimer(du);
     if (Player.getShieldTime() > 0) Player.tickShieldTime(du);
@@ -137,7 +136,6 @@ Protagonist.prototype.takeEnemyHit = function () {
         Player.subtractLives();
         if (g_sounds) this.loseSound.play();
         if (Player.getLives() > 0) {
-            this.setPos(g_canvas.width / 2, g_canvas.height / 2);
             Player.resetMultiplier();
     		levelManager.continueLevel();
         } else {

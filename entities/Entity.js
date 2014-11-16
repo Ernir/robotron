@@ -46,6 +46,7 @@ Entity.prototype.setup = function (descr) {
 
     // I am not dead yet!
     this._isDeadNow = false;
+    
     this.animation = 0;
 };
 
