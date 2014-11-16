@@ -32,7 +32,7 @@ Enemy.prototype.dropChance = 0.05; // All enemies have at least a 5% chance
                                    // to drop a powerup
 
 Enemy.prototype.kill = function () {
-    if (this._isDeadNow === false) {
+    if (!this._isDeadNow) {
         var result = Math.random();
         if (this.dropChance > result) {
             entityManager.createPowerup(this.cx,this.cy);
