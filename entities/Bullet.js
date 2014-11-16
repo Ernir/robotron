@@ -91,13 +91,33 @@ Bullet.prototype.getRadius = function () {
 };
 
 Bullet.prototype.render = function (ctx) {
-    ctx.save();
-    var fadeThresh = Bullet.prototype.lifeSpan / 3;
+    switch(true){
+        case Player.hasShotgun:
+            ctx.save();
+            var fadeThresh = Bullet.prototype.lifeSpan / 3;
 
-    if (this.lifeSpan < fadeThresh) {
-        ctx.globalAlpha = this.lifeSpan / fadeThresh;
+            if (this.lifeSpan < fadeThresh) {
+                ctx.globalAlpha = this.lifeSpan / fadeThresh;
+            }
+            ctx.fillStyle = "orange";
+            util.fillCircle(ctx, this.cx, this.cy, this.getRadius());
+            ctx.restore();
+            break;
+        case Player.hasMachineGun:
+            ctx.save();
+            ctx.fillStyle = "cyan";
+            util.fillCircle(ctx, this.cx, this.cy, this.getRadius());
+            ctx.restore();
+            break;
+        default:
+            ctx.save();
+            var fadeThresh = Bullet.prototype.lifeSpan / 3;
+
+            if (this.lifeSpan < fadeThresh) {
+                ctx.globalAlpha = this.lifeSpan / fadeThresh;
+            }
+            ctx.fillStyle = "lime";
+            util.fillCircle(ctx, this.cx, this.cy, this.getRadius());
+            ctx.restore();
     }
-    ctx.fillStyle = "yellow";
-    util.fillCircle(ctx, this.cx, this.cy, this.getRadius());
-    ctx.restore();
 };

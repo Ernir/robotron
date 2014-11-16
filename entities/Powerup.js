@@ -72,11 +72,13 @@ Powerup.prototype.takeProtagonistHit = function () {
     if (this.isScoreMultiplier) Player.addMultiplier();
     if (this.isMachinegun) {
         Player.hasShotgun = false;
+        Player.hasMachineGun = true;
         Player.setFireRate(5);
         Player.addAmmo(100);
     };
     if (this.isShotgun) {
         Player.hasShotgun = true;
+        Player.hasMachineGun = false;
         Player.setFireRate(70);
         Player.addAmmo(100);
     };

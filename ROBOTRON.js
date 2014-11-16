@@ -129,12 +129,14 @@ function processDiagnostics() {
 
     if (eatKey(KEY_MACHINEGUN) && g_Debug) {
         Player.hasShotgun = false;
+        Player.hasMachineGun = true;
         Player.setFireRate(5);
         Player.addAmmo(100);
     }
 
     if (eatKey(KEY_SHOTGUN) && g_Debug) {
         Player.hasShotgun = true;
+        Player.hasMachineGun = false;
         Player.setFireRate(70);
         Player.addAmmo(100);
     }
