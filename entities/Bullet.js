@@ -71,12 +71,13 @@ Bullet.prototype.update = function (du) {
     if (hitEntity) {
         // The bulletVel check is a hack to stop the shotgun bullets 
         // from killing each other on spawn
-        // TODO: find a better way to stop the bullets from killing each other
         if (!hitEntity.bulletVel) {
             var canTakeHit = hitEntity.takeBulletHit;
+			var canFriendlyHit = hitEntity.takeFriendlyHit;
             var descr = {velX : this.velX, velY : this.velY, du : du};
-            if (canTakeHit)  {
-                canTakeHit.call(hitEntity, descr);
+            if (canTakeHit || (g_friendlyFire && canFriendlyHit))  {
+                if (canTakeHit) canTakeHit.call(hitEntity, descr);
+				else canFriendlyHit.call(hitEntity);
                 return entityManager.KILL_ME_NOW;
             }
         }

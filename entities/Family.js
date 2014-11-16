@@ -126,7 +126,7 @@ Family.prototype.takeProtagonistHit = function () {
     this.kill();
 };
 
-Family.prototype.takeBulletHit = function () {
+Family.prototype.takeFriendlyHit = function () {
     this.isDying = true;
 };
 
