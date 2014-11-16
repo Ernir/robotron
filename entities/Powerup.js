@@ -18,23 +18,18 @@ function Powerup(descr) {
     switch(this.brand){
         case 0:
             this.isExtralife = true;
-			//this.sprite = g_sprites.Heart;
             break;
         case 1:
             this.isShotgun = true;
-            //this.sprite = g_sprites.Shotgun;
             break;
         case 2:
             this.isMachinegun = true;
-            //this.sprite = g_sprites.Ammo;
             break;
         case 3:
             this.isSpeedBoost = true;
-			//this.sprite = g_sprites.Wing;
             break;
         case 4:
             this.isShield = true
-            //this.sprite = g_sprites.Shield;
             break;
         case 5:
             this.isScoreMultiplier = true;
