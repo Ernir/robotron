@@ -5,6 +5,7 @@ var g_doBox = false;
 var g_undoBox = false;
 var g_doFlipFlop = false;
 var g_doRender = true;
+var g_isRenderPaused = false;
 
 var g_frameCounter = 1;
 
@@ -16,6 +17,28 @@ var TOGGLE_RENDER = 'R'.charCodeAt(0);
 
 function render(ctx) {
     
+	// Get out if skipping (e.g. due to pause-mode)
+    //
+    if (shouldSkipUpdate()) {
+		if (!g_isRenderPaused) {
+			ctx.save();
+			var str = "", hw=g_canvas.width/2 ,hh=g_canvas.height/2;
+			ctx.fillStyle ="white";
+			ctx.fillRect(0, hh/2, hw*2, hh);
+			ctx.fillStyle ="red";
+			ctx.font = "bold 60px sans-serif";
+			ctx.textAlign = "center";
+			str = "PAUSED";
+			ctx.fillText(str, hw, hh);
+			str = "Press P to resume";
+			ctx.font = "bold 20px sans-serif";
+			ctx.fillText(str,hw,hh*3/2-10); //10 is the font's halfheight
+			ctx.restore();
+			g_isRenderPaused = true;
+		}
+		return;
+	}
+	
     // Process various option toggles
     //
     if (eatKey(TOGGLE_CLEAR)) g_doClear = !g_doClear;
