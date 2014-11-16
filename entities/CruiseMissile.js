@@ -36,10 +36,18 @@ CruiseMissile.prototype.update = function (du) {
         this._isDeadNow = true;
     }
 	
-    if(this._isDeadNow) return entityManager.KILL_ME_NOW;
+    if(this._isDeadNow) {
+        this.spawnFragment(12);
+        if (g_sounds) this.bombSound.play();    
+        return entityManager.KILL_ME_NOW;
+    }
     
     this.lifeSpan -= du;
-    if (this.lifeSpan < 0) return entityManager.KILL_ME_NOW;
+    if (this.lifeSpan < 0) {
+        this.spawnFragment(12);
+        if (g_sounds) this.bombSound.play();
+        return entityManager.KILL_ME_NOW;
+    }
 	
 	// Update positions
     this.seekTarget();
@@ -53,6 +61,8 @@ CruiseMissile.prototype.update = function (du) {
         var canTakeHit = hitEntity.takeEnemyHit;
         if (canTakeHit) {
             canTakeHit.call(hitEntity);
+            this.spawnFragment(12);
+            if (g_sounds) this.bombSound.play();
             return entityManager.KILL_ME_NOW;
         }
     }
@@ -97,22 +107,13 @@ CruiseMissile.prototype.getRadius = function () {
 CruiseMissile.prototype.render = function (ctx) {
     ctx.save();
     var bombThresh = CruiseMissile.prototype.lifeSpan / 15;
-
-    if (this.lifeSpan < bombThresh) {
-		if (!this.exploded) {
-			// Play explosion sound if thresh is met and
-			// has yet exploded
-			if (g_sounds) this.bombSound.play();
-			this.exploded = true;
-		}
-        var fraction = this.lifeSpan / bombThresh;
-        var explosion = this.getRadius() + (1-fraction) * 3;
-        ctx.fillStyle = "orange";
-        util.fillCircle(ctx, this.cx, this.cy, explosion);
-    }else{
-        ctx.fillStyle = "grey";
-        util.fillCircle(ctx, this.cx, this.cy, this.getRadius());
-    }
-    entityManager.createCMTrail(this.cx, this.cy);
+    ctx.fillStyle = "grey";
+    util.fillCircle(ctx, this.cx, this.cy, this.getRadius());
+    var descr = {
+        cx: this.cx,
+        cy: this.cy,
+        color: 0
+        };
+    entityManager.createParticle(descr);
     ctx.restore();
 };

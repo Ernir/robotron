@@ -73,18 +73,6 @@ Shell.prototype.getRadius = function () {
     return 6;
 };
 
-Shell.prototype.spawnFragment = function (num) {
-    for (var i = 0; i < num; i++) {
-        var dirn = Math.random()*2*Math.PI;
-        var color = Math.floor(Math.random()*3);
-        var descr = {cx: this.cx,
-                     cy: this.cy,
-                     dirn: dirn,
-                     color: color};
-        entityManager.createParticle(descr);
-    }
-};
-
 Shell.prototype.render = function (ctx) {
     ctx.save();
     /*var fadeThresh = CruiseMissile.prototype.lifeSpan / 3;
