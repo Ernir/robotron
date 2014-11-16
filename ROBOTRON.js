@@ -58,20 +58,24 @@ function updateSimulation(du) {
 
     processDiagnostics();
 
-    if (levelManager.isChangingLevel()) {
+    if (levelManager.isInMenu()) {
+	
+		return;
+		
+	} else if (levelManager.isChangingLevel()) {
+	
         levelManager.reduceTimer(du);
+		
     } else {
+	
         if (!levelManager.isGameOver()) {
             entityManager.update(du);
         }
     }
 	
-	if (g_music) g_bgm.play();
-	else g_bgm.pause();
-	
 	if (Player.getLives() === 0) {
 		levelManager.gameOver();
-	};//TODO: Transition to main menu or game over screen
+	};
 
     if (entityManager.enemiesIsEmpty()) levelManager.nextLevel();
 }
@@ -143,9 +147,11 @@ function processDiagnostics() {
 }
 
 function muteAudioCheck() {
+
     if (eatKey(KEY_SOUND)) g_sounds = !g_sounds;
     
     if (eatKey(KEY_MUSIC)) g_music = !g_music;
+	
     if (g_music) g_bgm.play();
     else g_bgm.pause();
 }
@@ -166,7 +172,11 @@ function muteAudioCheck() {
 
 function renderSimulation(ctx) {
 
-    if (levelManager.isChangingLevel()) {
+    if (levelManager.isInMenu()) {
+	
+		levelManager.renderMenu(ctx);
+		
+    } else if (levelManager.isChangingLevel()) {
 	
         levelManager.renderLevelChanger(ctx);
 		
@@ -311,8 +321,6 @@ function preloadDone() {
     g_sprites.EnforcerSpark.push(new Sprite(g_images.EnforcerSpark, 86, 96));
 
     initializeEntities();
-    levelManager.startLevel();
-
     main.init();
 }
 
