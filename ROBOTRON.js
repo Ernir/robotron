@@ -88,7 +88,7 @@ var g_friendlyFire = true;
 var g_sounds = true;
 var g_music = true;
 
-var KEY_SPATIAL = keyCode('X');
+var KEY_DEBUG = keyCode('X');
 var KEY_KILLABLE = keyCode('K');
 var KEY_FRIENDLYFIRE = keyCode('F');
 var KEY_RESTART = keyCode('R');
@@ -105,8 +105,6 @@ var KEY_SHOTGUN = 101; // Numpad 5
 var KEY_SHIELD = 102; // Numpad 6
 
 function processDiagnostics() {
-
-    if (eatKey(KEY_SPATIAL)) g_Debug = !g_Debug;
 
     if (eatKey(KEY_KILLABLE) && g_Debug) g_canBeKilled = !g_canBeKilled;
 	
@@ -146,7 +144,9 @@ function processDiagnostics() {
     if (eatKey(KEY_PWRUP_RESET) && g_Debug) Player.resetAll();
 }
 
-function muteAudioCheck() {
+function checkAlways() {
+
+    if (eatKey(KEY_DEBUG)) g_Debug = !g_Debug;
 
     if (eatKey(KEY_SOUND)) g_sounds = !g_sounds;
     

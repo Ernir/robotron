@@ -20,7 +20,7 @@ var g_isUpdateOdd = false;
 
 function update(dt) {
     
-    muteAudioCheck();
+    checkAlways();
     // Get out if skipping (e.g. due to pause-mode)
     //
     if (shouldSkipUpdate()) return;
