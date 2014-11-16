@@ -50,7 +50,7 @@ Protagonist.prototype.update = function (du) {
     }
 
 	// Perform movement
-    if (Player.getSpeed() > 2) Player.tickSpeedTimer(du);
+    if (Player.getSpeed() > 3) Player.tickSpeedTimer(du);
     if (Player.getShieldTime() > 0) Player.tickShieldTime(du);
     var vel = this.computeMovement();
 	this.velX = vel.x;
