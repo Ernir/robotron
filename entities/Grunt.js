@@ -31,8 +31,8 @@ Grunt.prototype.maxRageReachedTime = 40 * SECS_TO_NOMINALS;
 Grunt.prototype.isDying = false;
 Grunt.prototype.isSpawning = true;
 
-Grunt.prototype.spawnTime = 1*SECS_TO_NOMINALS;
-Grunt.prototype.deathTime = 1*SECS_TO_NOMINALS;
+Grunt.prototype.spawnTime = 1 * SECS_TO_NOMINALS;
+Grunt.prototype.deathTime = 1 * SECS_TO_NOMINALS;
 Grunt.prototype.timeElapsed = 0;
 
 Grunt.prototype.update = function (du) {
@@ -46,16 +46,22 @@ Grunt.prototype.update = function (du) {
         return entityManager.KILL_ME_NOW;
     }
 
-    if (true) {
-        this.updateParticles(du);
+    if (this.isSpawning) {
+        this.timeElapsed += du;
+        if (this.timeElapsed <= this.spawnTime) {
+            this.updateParticles(du);
+        } else {
+            this.isSpawning = false;
+        }
+    } else {
+
+        this.rage(du);
+        this.seekTarget();
+
+        this.cx += this.velX * du;
+        this.cy += this.velY * du;
+        this.capPositions();
     }
-
-    this.rage(du);
-    this.seekTarget();
-
-    this.cx += this.velX * du;
-    this.cy += this.velY * du;
-    this.capPositions();
 
     spatialManager.register(this);
 };
@@ -105,7 +111,10 @@ Grunt.prototype.takeElectrodeHit = function () {
 };
 
 Grunt.prototype.render = function (ctx) {
-    this.renderParticles(ctx);
+    if (this.isSpawning || this.isDying) {
+        this.renderParticles(ctx, this.cx, this.cy);
+        return;
+    }
     var distSq = util.distSq(this.cx, this.cy, this.renderPos.cx, this.renderPos.cy);
     switch (true) {
         case distSq < util.square(this.stepsize):
@@ -133,7 +142,7 @@ Grunt.prototype.colors = [
     {color: "#00FF00", ratio: 0.05},
     {color: "white", ratio: 0.05}
 ];
-Grunt.prototype.totalParticles = 50;
+Grunt.prototype.totalParticles = 200;
 
 Grunt.prototype.makeParticles = function () {
     // TODO: Refactor this monster
@@ -156,13 +165,13 @@ Grunt.prototype.makeParticles = function () {
             var isOnXAxis = Math.random() < 0.5;
             if (isOnXAxis) {
                 xOffset = longAxisOffset;
-                xVelocity = -longSign*0.2;
+                xVelocity = -longSign * 0.2;
                 yVelocity = 0;
                 yOffset = shortAxisOffset;
             } else {
                 xOffset = shortAxisOffset;
                 xVelocity = 0;
-                yVelocity = -longSign*0.2;
+                yVelocity = -longSign * 0.2;
                 yOffset = longAxisOffset;
             }
             this.particles.push(new WarpParticle({
@@ -177,7 +186,7 @@ Grunt.prototype.makeParticles = function () {
 };
 
 Grunt.prototype.updateParticles = function (du) {
-    for(var i = 0; i < this.particles.length; i++) {
+    for (var i = 0; i < this.particles.length; i++) {
         var particle = this.particles[i];
         particle.update(du);
     }
