@@ -332,7 +332,7 @@ var entityManager = {
         this._bullets.push(new Spark({cx: cx, cy: cy, initialAngle: angle}));
     },
 
-// --------------------
+// ------------------------
 // Particle effects methods
 
     createCMTrail: function (cx, cy) {
@@ -372,8 +372,6 @@ var entityManager = {
     },
 
     render: function (ctx) {
-		
-		var debugX = 10, debugY = 100;
 
         for (var c = 0; c < this._categories.length; ++c) {
 
@@ -384,7 +382,6 @@ var entityManager = {
                 aCategory[i].render(ctx);
 
             }
-            debugY += 10;
         }
     }
 
