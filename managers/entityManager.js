@@ -35,6 +35,7 @@ var entityManager = {
 	_bullets: [],
     _scoreImgs: [],
     _drops: [],
+    _particles: [],
 	
 	_bulletDU: 0,
 
@@ -72,6 +73,7 @@ var entityManager = {
             this._spawnedEnemies,
 			this._drops,
 			this._protagonists, 
+            this._particles,
 			this._bullets, 
 			this._family, 
 			this._enemies,
@@ -136,6 +138,7 @@ var entityManager = {
         }
         this._spawnedEnemies.length = 0;
         this._scoreImgs.length = 0;
+        this._particles.length = 0;
         for (var i = 0; i < this._enemies.length; i++) {
             var unit = this._enemies[i];
             if (unit.resetRage) unit.resetRage();
@@ -326,6 +329,13 @@ var entityManager = {
 
     fireSpark: function (cx, cy, angle) {
         this._bullets.push(new Spark({cx: cx, cy: cy, initialAngle: angle}));
+    },
+
+// --------------------
+// Particle effects methods
+
+    createCMTrail: function (cx, cy) {
+        this._particles.push(new CMTrail({cx: cx, cy: cy}));
     },
 
 // --------------------

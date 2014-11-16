@@ -112,6 +112,7 @@ CruiseMissile.prototype.render = function (ctx) {
     }else{
         ctx.fillStyle = "green";
         util.fillCircle(ctx, this.cx, this.cy, this.getRadius());
+        entityManager.createCMTrail(this.cx, this.cy);
     }
     ctx.restore();
 };
