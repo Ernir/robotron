@@ -68,6 +68,7 @@ Prog.prototype.randomWalk = function () {
 
 Prog.prototype.takeBulletHit = function () {
     this.kill();
+    this.makeExplosion();
     Player.addScore(Player.scoreValues.Prog * Player.getMultiplier());
 };
 
@@ -107,3 +108,9 @@ Prog.prototype.render = function (ctx) {
             this.renderPos = {cx: this.cx, cy: this.cy};
     }
 };
+
+Prog.prototype.colors = [
+    {color: "white", ratio: 0.9},
+    {color: "red", ratio: 0.1}
+];
+Prog.prototype.totalParticles = 50;

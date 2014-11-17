@@ -11,7 +11,9 @@ function Brain(descr) {
     Enemy.call(this, descr);
 
     this.sprite = g_sprites.Brain[6];
-	if (g_sounds) this.spawnSound.play();
+    if (g_sounds) this.spawnSound.play();
+
+    this.makeWarpParticles();
 }
 
 Brain.prototype = Object.create(Enemy.prototype);
@@ -34,21 +36,25 @@ Brain.prototype.update = function (du) {
     spatialManager.unregister(this);
 
     if (!this.startPos) this.startPos = this.getPos();
-    
+
     // Handle death
     if (this._isDeadNow) {
         return entityManager.KILL_ME_NOW;
     }
-    this.seekTarget();
 
-    if(Math.random() < this.missileFireChance) {
-        entityManager.fireCruiseMissile(this.cx,this.cy);
+    if (this.isSpawning) {
+        this.warpIn(du);
+    } else {
+        this.seekTarget();
+
+        if (Math.random() < this.missileFireChance) {
+            entityManager.fireCruiseMissile(this.cx, this.cy);
+        }
+
+        this.cx += this.velX * du;
+        this.cy += this.velY * du;
+        this.capPositions();
     }
-
-    this.cx += this.velX * du;
-    this.cy += this.velY * du;
-    this.capPositions();
-
     spatialManager.register(this);
 };
 
@@ -63,7 +69,7 @@ Brain.prototype.seekTarget = function () {
     var xOffset = this.target.cx - this.cx;
     var yOffset = this.target.cy - this.cy;
 
-    if(this.bootTime < 0){
+    if (this.bootTime < 0) {
         this.velX = 0;
         if (xOffset > 0) {
             this.velX = 0.5;
@@ -88,7 +94,7 @@ Brain.prototype.seekTarget = function () {
 
 Brain.prototype.findTarget = function () {
     // Brains prefer family members.
-    this.target = entityManager.findClosestFamilyMember(this.cx,this.cy);
+    this.target = entityManager.findClosestFamilyMember(this.cx, this.cy);
     if (this.target === null || this.target === undefined) {
         this.target = entityManager.findProtagonist();
     }
@@ -96,49 +102,63 @@ Brain.prototype.findTarget = function () {
 
 Brain.prototype.takeBulletHit = function () {
     this.kill();
-	Player.addScore(Player.scoreValues.Brain * Player.getMultiplier());
+    this.makeExplosion();
+    Player.addScore(Player.scoreValues.Brain * Player.getMultiplier());
 };
 
 Brain.prototype.render = function (ctx) {
+    if (this.isSpawning) {
+        return;
+    }
+
     var distSq = util.distSq(
-                             this.cx, 
-                             this.cy, 
-                             this.renderPos.cx, 
-                             this.renderPos.cy);
+        this.cx,
+        this.cy,
+        this.renderPos.cx,
+        this.renderPos.cy);
     var PI = Math.PI;
-    if(distSq === 0){
+    if (distSq === 0) {
         var angle = 0;
-    }else{
+    } else {
         var angle = util.wrapRange(
-                                   util.angleTo(
-                                                this.renderPos.cx, 
-                                                this.renderPos.cy, 
-                                                this.cx, 
-                                                this.cy),
-                                   0,
-                                   2*PI);
+            util.angleTo(
+                this.renderPos.cx,
+                this.renderPos.cy,
+                this.cx,
+                this.cy),
+            0,
+                2 * PI);
     }
     var facing = 3; // right
-    if(angle > PI*1/4) facing = 6; //down
-    if(angle > PI*3/4) facing = 0; //left
-    if(angle > PI*5/4) facing = 9; //up
-    if(angle > PI*7/4) facing = 3; //right
+    if (angle > PI * 1 / 4) facing = 6; //down
+    if (angle > PI * 3 / 4) facing = 0; //left
+    if (angle > PI * 5 / 4) facing = 9; //up
+    if (angle > PI * 7 / 4) facing = 3; //right
 
-    switch(true) {
+    switch (true) {
         case distSq < util.square(this.stepsize):
-            g_sprites.Brain[facing+0].drawCentredAt(ctx, this.cx, this.cy, 0);
+            g_sprites.Brain[facing + 0].drawCentredAt(ctx, this.cx, this.cy, 0);
             break;
-        case distSq < util.square(this.stepsize*2):
-            g_sprites.Brain[facing+1].drawCentredAt(ctx, this.cx, this.cy, 0);
+        case distSq < util.square(this.stepsize * 2):
+            g_sprites.Brain[facing + 1].drawCentredAt(ctx, this.cx, this.cy, 0);
             break;
-        case distSq < util.square(this.stepsize*3):
-            g_sprites.Brain[facing+0].drawCentredAt(ctx, this.cx, this.cy, 0);
+        case distSq < util.square(this.stepsize * 3):
+            g_sprites.Brain[facing + 0].drawCentredAt(ctx, this.cx, this.cy, 0);
             break;
-        case distSq < util.square(this.stepsize*4):
-            g_sprites.Brain[facing+2].drawCentredAt(ctx, this.cx, this.cy, 0);
+        case distSq < util.square(this.stepsize * 4):
+            g_sprites.Brain[facing + 2].drawCentredAt(ctx, this.cx, this.cy, 0);
             break;
         default:
-            g_sprites.Brain[facing+0].drawCentredAt(ctx, this.cx, this.cy, 0);
+            g_sprites.Brain[facing + 0].drawCentredAt(ctx, this.cx, this.cy, 0);
             this.renderPos = {cx: this.cx, cy: this.cy};
     }
 };
+
+
+Brain.prototype.colors = [
+    {color: "blue", ratio: 0.70},
+    {color: "#B90CF1", ratio: 0.10},
+    {color: "#08FF03", ratio: 0.20}
+];
+Brain.prototype.spawnTime = 0.9 * SECS_TO_NOMINALS;
+Brain.prototype.totalParticles = 200;

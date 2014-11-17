@@ -90,6 +90,7 @@ Tank.prototype.randomWalk = function () {
 
 
 Tank.prototype.takeBulletHit = function () {
+    this.makeExplosion();
     this.kill();
     Player.addScore(Player.scoreValues.Tank * Player.getMultiplier());
 };
@@ -124,3 +125,10 @@ Tank.prototype.render = function (ctx) {
     }
     g_sprites.Tank[step].drawCentredAt(ctx, this.cx, this.cy, 0);
 };
+
+Tank.prototype.colors = [
+    {color: "red", ratio: 0.50},
+    {color: "#00FF00", ratio: 0.25}, // Green
+    {color: "blue", ratio: 0.25}
+];
+Tank.prototype.totalParticles = 200;

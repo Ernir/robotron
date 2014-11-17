@@ -81,6 +81,10 @@ var util = {
         return Math.floor(Math.random()*3)-1;
     },
 
+    randSign: function() {
+        return Math.random() < 0.5 ? 1 : -1;
+    },
+
 
 // MISC
 // ====
