@@ -8,6 +8,7 @@ var g_doRender = true;
 var g_isRenderPaused = false;
 
 var g_frameCounter = 1;
+var g_pauseRenderDu = 0;
 
 var TOGGLE_CLEAR = 'C'.charCodeAt(0);
 var TOGGLE_BOX = 'B'.charCodeAt(0);
@@ -17,10 +18,11 @@ var TOGGLE_RENDER = 'R'.charCodeAt(0);
 
 function render(ctx) {
     
-	// Get out if skipping (e.g. due to pause-mode)
+	// Get out if skipping (e.g. due to pause-mode) and
+	// render pause screen with flashing effect
     //
     if (g_isUpdatePaused && !g_isStepping) {
-		if (!g_isRenderPaused) {
+		if (!g_isRenderPaused && g_pauseRenderDu < 0.75 * SECS_TO_NOMINALS) {
 			ctx.save();
 			var str = "PAUSED" , hw = g_canvas.width / 2, h = g_canvas.height;
 			ctx.textAlign = "center";
@@ -34,8 +36,11 @@ function render(ctx) {
 			ctx.restore();
 			g_isRenderPaused = true;
 		}
-		return;
-		
+		if (g_pauseRenderDu < 0.75 * SECS_TO_NOMINALS) return;
+		if (g_pauseRenderDu >= 1.5 * SECS_TO_NOMINALS) {
+			g_pauseRenderDu = 0;
+			g_isRenderPaused = false;
+		}		
 	} else if (g_isStepping) {
 		g_isStepping = false;
 	}

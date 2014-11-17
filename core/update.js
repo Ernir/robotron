@@ -21,9 +21,6 @@ var g_isUpdateOdd = false;
 function update(dt) {
     
     checkAlways();
-    // Get out if skipping (e.g. due to pause-mode)
-    //
-    if (shouldSkipUpdate()) return;
 
     // Remember this for later
     //
@@ -40,6 +37,13 @@ function update(dt) {
     // giving us a conveniently scaled "du" to work with.
     //
     var du = (dt / NOMINAL_UPDATE_INTERVAL);
+	
+	// Get out if skipping (e.g. due to pause-mode)
+    //
+    if (shouldSkipUpdate()) {
+		g_pauseRenderDu += du;
+		return;
+	}
     
     updateSimulation(du);
     
