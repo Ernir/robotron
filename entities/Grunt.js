@@ -212,6 +212,8 @@ Grunt.prototype.explodeOut = function (du) {
 Grunt.prototype.expelParticles = function () {
     for (var i = 0; i < this.particles.length; i++) {
         var particle = this.particles[i];
+        particle.offX = 0;
+        particle.offY = 0;
         particle.velX = util.randRange(-2,2);
         particle.velY = util.randRange(-2,2);
     }
