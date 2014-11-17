@@ -14,9 +14,11 @@ function Spheroid(descr) {
 
     // Initializing speed
     this.baseSpeed = 3;
-    this.velX = this.baseSpeed*util.randTrinary();
-    this.velY = this.baseSpeed*util.randTrinary();
+    this.velX = this.baseSpeed * util.randTrinary();
+    this.velY = this.baseSpeed * util.randTrinary();
     this.tanksSpawned = 0;
+
+    this.makeWarpParticles();
     // TODO play spawning sound?
 }
 
@@ -42,25 +44,27 @@ Spheroid.prototype.update = function (du) {
         return entityManager.KILL_ME_NOW;
     }
 
-    // maxTanks is effectively zero-indexed
-    if(Math.random() < this.tankSpawnChance && 
-        this.tanksSpawned < this.maxTanks &&
-        this.constructionTime < 0) 
-    {
-        this.tanksSpawned++;
-        entityManager.createEnforcer(this.cx,this.cy);
-        this.constructionTime = SECS_TO_NOMINALS;
+    if (this.isSpawning) {
+        this.warpIn(du);
+    } else {
+        // maxTanks is effectively zero-indexed
+        if (Math.random() < this.tankSpawnChance &&
+            this.tanksSpawned < this.maxTanks &&
+            this.constructionTime < 0) {
+            this.tanksSpawned++;
+            entityManager.createEnforcer(this.cx, this.cy);
+            this.constructionTime = SECS_TO_NOMINALS;
+        }
+
+        this.randomWalk();
+
+        this.capPositions();
+        this.edgeBounce();
+
+        this.cx += this.velX * du;
+        this.cy += this.velY * du;
+
     }
-
-    this.randomWalk();
-
-    this.capPositions();
-    this.edgeBounce();
-
-    this.cx += this.velX * du;
-    this.cy += this.velY * du;
-
-
     spatialManager.register(this);
 
 };
@@ -88,11 +92,23 @@ Spheroid.prototype.randomWalk = function () {
 
 Spheroid.prototype.takeBulletHit = function () {
     this.kill();
+    this.makeExplosion();
     Player.addScore(Player.scoreValues.Spheroid * Player.getMultiplier());
 };
 
 Spheroid.prototype.render = function (ctx) {
+    if (this.isSpawning) {
+        return;
+    }
+
     var temp = Math.floor(8 * this.animation / SECS_TO_NOMINALS);
     if (temp > 7) temp = 7;
     g_sprites.Spheroid[temp].drawCentredAt(ctx, this.cx, this.cy, 0);
 };
+
+
+Spheroid.prototype.colors = [
+    {color: "red", ratio: 1}
+];
+Spheroid.prototype.spawnTime = 0.9 * SECS_TO_NOMINALS;
+Spheroid.prototype.totalParticles = 100;
