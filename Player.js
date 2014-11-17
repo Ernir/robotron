@@ -40,6 +40,8 @@ Player.prototype.ammo = 0;
 Player.prototype.hasShotgun = false;
 Player.prototype.hasMachineGun = false;
 Player.prototype.shieldTime = 0;
+Player.prototype.powerupTime = 1 * SECS_TO_NOMINALS;
+Player.prototype.powerupText = "";
 Player.prototype.scoreValues = {
     Electrode: 0,
     Spark: 25,
@@ -103,7 +105,7 @@ Player.prototype.render = function(ctx) {
 	// Display shield
     var moretxt = "Shield: " + Math.ceil(this.shieldTime / SECS_TO_NOMINALS);
     ctx.fillText(moretxt, g_canvas.width/2 + 80, 20);
-	
+
 	// Display border
 	ctx.fillStyle = "red";
 	ctx.fillRect(0, consts.wallTop, ctx.canvas.width, consts.wallThickness);
@@ -295,4 +297,30 @@ Player.prototype.addAmmo = function (ammo) {
 
 Player.prototype.resetAmmo = function () {
     this.ammo = 0;
+};
+
+// -------------------
+// Powerup text animation Methods
+
+Player.prototype.setPowerupText = function (str) {
+    this.powerupText = str;
+}
+
+Player.prototype.getPowerupText = function () {
+    if(this.powerupText==undefined)
+        return "";
+    return this.powerupText;
+}
+
+Player.prototype.setPowerupTime = function () {
+    this.powerupTime = 1 * SECS_TO_NOMINALS;
+};
+
+Player.prototype.getPowerupTime = function () {
+    return this.powerupTime;
+};
+
+Player.prototype.tickPowerupTime = function (du) {
+    if (this.powerupTime < 0) return;
+    this.powerupTime += -du;
 };
