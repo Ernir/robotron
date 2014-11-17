@@ -55,11 +55,15 @@ var KEY_PAUSE = 'P'.charCodeAt(0);
 var KEY_STEP  = 'O'.charCodeAt(0);
 
 var g_isUpdatePaused = false;
+var g_isStepping = false;
 
 function shouldSkipUpdate() {
     if (eatKey(KEY_PAUSE)) {
         g_isUpdatePaused = !g_isUpdatePaused;
-		if (!g_isUpdatePaused) g_isRenderPaused = false;
     }
-    return g_isUpdatePaused && !eatKey(KEY_STEP);    
+	if (eatKey(KEY_STEP)) {
+        g_isStepping = true;
+    }
+	if (!g_isUpdatePaused || g_isStepping) g_isRenderPaused = false;
+    return g_isUpdatePaused && !g_isStepping;    
 }

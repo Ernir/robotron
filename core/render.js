@@ -21,7 +21,7 @@ function render(ctx) {
     //
 
     //THIS SHOULD BE CHANGED BACK!!
-    if (shouldSkipUpdate()) {
+    if (g_isUpdatePaused && !g_isStepping) {
 		if (!g_isRenderPaused) {
 			ctx.save();
 			var str = "", hw=g_canvas.width/2 ,hh=g_canvas.height/2;
@@ -39,6 +39,8 @@ function render(ctx) {
 			g_isRenderPaused = true;
 		}
 		return;
+	} else if (g_isStepping) {
+		g_isStepping = false;
 	}
 	
     // Process various option toggles
