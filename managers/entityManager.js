@@ -352,7 +352,7 @@ var entityManager = {
 
 		this._bulletDU += du;
 		
-        if (this._reload && this._bulletDU > Player.fireRate / 4) {
+        if (g_sounds && this._reload && this._bulletDU > Player.fireRate / 4) {
                 var gunSound = new Audio(g_audioUrls.shotgunReload);
                 gunSound.play();
                 this._reload = false;
