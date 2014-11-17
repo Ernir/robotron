@@ -48,8 +48,6 @@ Grunt.prototype.update = function (du) {
 
     if (this.isSpawning) {
         this.warpIn(du);
-    } else if (this.isDying) {
-        this.explodeOut(du);
     } else {
 
         this.rage(du);
@@ -59,10 +57,8 @@ Grunt.prototype.update = function (du) {
         this.cy += this.velY * du;
         this.capPositions();
     }
+    spatialManager.register(this);
 
-    if (!this.isDying) {
-        spatialManager.register(this);
-    }
 };
 
 Grunt.prototype.seekTarget = function () {
@@ -102,7 +98,8 @@ Grunt.prototype.resetRage = function () {
 };
 
 Grunt.prototype.takeBulletHit = function () {
-    this.isDying = true;
+    this.kill();
+    this.makeExplosion();
     Player.addScore(Player.scoreValues.Grunt * Player.getMultiplier());
 };
 Grunt.prototype.takeElectrodeHit = function () {
@@ -110,8 +107,7 @@ Grunt.prototype.takeElectrodeHit = function () {
 };
 
 Grunt.prototype.render = function (ctx) {
-    if (this.isSpawning || this.isDying) {
-        this.renderParticles(ctx, this.cx, this.cy);
+    if (this.isSpawning) {
         return;
     }
     var distSq = util.distSq(this.cx, this.cy, this.renderPos.cx, this.renderPos.cy);
@@ -134,6 +130,7 @@ Grunt.prototype.render = function (ctx) {
     }
 };
 
+
 Grunt.prototype.colors = [
     {color: "red", ratio: 0.70},
     {color: "yellow", ratio: 0.15},
@@ -145,7 +142,6 @@ Grunt.prototype.totalParticles = 200;
 
 Grunt.prototype.makeParticles = function () {
     // TODO: Refactor this monster
-    this.particles = [];
 
     var spawnRange = this.getRadius() * 10;
     var inaccuracy = this.getRadius() * 0.6;
@@ -173,62 +169,59 @@ Grunt.prototype.makeParticles = function () {
                 yVelocity = -longSign * 0.2;
                 yOffset = longAxisOffset;
             }
-            this.particles.push(new WarpParticle({
+            var particle = new WarpParticle({
                 offX: xOffset,
                 offY: yOffset,
                 velX: xVelocity,
                 velY: yVelocity,
-                color: colorDefinition.color
-            }));
+                x : this.cx,
+                y: this.cy,
+                color: colorDefinition.color,
+                isExploding: false
+            });
+            entityManager.createParticle(particle);
         }
     }
 };
 
 Grunt.prototype.warpIn = function (du) {
     this.spawnTimeElapsed += du;
-    if (this.spawnTimeElapsed <= this.spawnTime) {
-        this.updateParticles(du);
-    } else {
+    if (this.spawnTimeElapsed > this.spawnTime) {
         this.isSpawning = false;
     }
 };
 
-Grunt.prototype.explodeOut = function (du) {
+Grunt.prototype.makeExplosion = function () {
 
-    if (!this.hasStartedDying) {
-        this.startDying();
-        this.expelParticles(du);
-    }
-
-    this.deathTimeElapsed += du;
-    if(this.deathTimeElapsed <= this.deathTime) {
-        this.updateParticles(du);
-    } else {
-        this.killImmediately();
-        this.isDying = false;
-    }
-};
-
-Grunt.prototype.expelParticles = function () {
-    for (var i = 0; i < this.particles.length; i++) {
-        var particle = this.particles[i];
-        particle.offX = 0;
-        particle.offY = 0;
-        particle.velX = util.randRange(-2,2);
-        particle.velY = util.randRange(-2,2);
+    for (var i = 0; i < this.colors.length; i++) {
+        var colorDefinition = this.colors[i];
+        var numberOfParticles = colorDefinition.ratio * this.totalParticles;
+        for (var j = 0; j < numberOfParticles; j++) {
+            var particle = {
+                offX: 0,
+                offY: 0,
+                velX: util.randRange(-2, 2),
+                velY: util.randRange(-2, 2),
+                x: this.cx,
+                y: this.cy,
+                color: colorDefinition.color,
+                isExploding: true
+            };
+            entityManager.createWarpParticle(particle);
+        }
     }
 };
 
-Grunt.prototype.updateParticles = function (du) {
-    for (var i = 0; i < this.particles.length; i++) {
-        var particle = this.particles[i];
-        particle.update(du,this.isDying);
-    }
-};
-
-Grunt.prototype.renderParticles = function (ctx) {
-    for (var i = 0; i < this.particles.length; i++) {
-        var particle = this.particles[i];
-        particle.render(ctx, this.cx, this.cy);
-    }
-};
+//Grunt.prototype.updateParticles = function (du) {
+//    for (var i = 0; i < this.particles.length; i++) {
+//        var particle = this.particles[i];
+//        particle.update(du);
+//    }
+//};
+//
+//Grunt.prototype.renderParticles = function (ctx) {
+//    for (var i = 0; i < this.particles.length; i++) {
+//        var particle = this.particles[i];
+//        particle.render(ctx);
+//    }
+//};

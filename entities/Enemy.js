@@ -44,25 +44,6 @@ Enemy.prototype.kill = function () {
 	if (g_sounds) this.explode.play();
 };
 
-
-// TODO: Merge this back into the real logic
-Enemy.prototype.hasStartedDying = false;
-Enemy.prototype.startDying = function() {
-    if (!this.hasStartedDying) {
-        var result = Math.random();
-        if (this.dropChance > result) {
-            entityManager.createPowerup(this.cx,this.cy);
-        }
-    }
-
-    this.hasStartedDying = true;
-	this.explode.currentTime = 0;
-	if (g_sounds) this.explode.play();
-};
-Enemy.prototype.killImmediately = function () {
-    this._isDeadNow = true;
-};
-
 Enemy.prototype.getRadius = function () {
     return (this.sprite.width / 2) * 0.9;
 };
