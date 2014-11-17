@@ -32,5 +32,6 @@ footer a, main article a {color: red;}
 }
 
 @media only screen and (max-width: 600px), (max-device-width : 400px) {
+	.wrapper {margin-top: 8rem;}
 	.navbar {height: auto;}
 }
