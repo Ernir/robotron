@@ -15,6 +15,7 @@ function Hulk(descr) {
     Enemy.call(this, descr);
 
     this.sprite = g_sprites.Hulk[3];
+    this.makeWarpParticles();
 }
 
 Hulk.prototype = Object.create(Enemy.prototype);
@@ -29,19 +30,24 @@ Hulk.prototype.update = function (du) {
     this.bootTime += -du;
 
     spatialManager.unregister(this);
-	
-	if (!this.startPos) this.startPos = this.getPos();
-	
+
+    if (!this.startPos) this.startPos = this.getPos();
+
     // Handle death
     if (this._isDeadNow) {
         return entityManager.KILL_ME_NOW;
     }
-    this.seekTarget();
 
-    // Move, unless the Hulk has been shot in the last 0.2 seconds.
-    this.timeSinceHit += du;
-    if (this.timeSinceHit > SECS_TO_NOMINALS * 0.2) {
-        this.move(this.velX, this.velY, du);
+    if (this.isSpawning) {
+        this.warpIn(du);
+    } else {
+        this.seekTarget();
+
+        // Move, unless the Hulk has been shot in the last 0.2 seconds.
+        this.timeSinceHit += du;
+        if (this.timeSinceHit > SECS_TO_NOMINALS * 0.2) {
+            this.move(this.velX, this.velY, du);
+        }
     }
 
     spatialManager.register(this);
@@ -64,23 +70,23 @@ Hulk.prototype.seekTarget = function () {
     var yOffset = this.target.cy - this.cy;
     var difficulty = Math.random();
 
-    if(this.bootTime < 0 || 
-       (util.abs(xOffset) < 10 && difficulty < this.brainpower) || 
-       (util.abs(yOffset) < 10 && difficulty < this.brainpower)
-      ){
-        
+    if (this.bootTime < 0 ||
+        (util.abs(xOffset) < 10 && difficulty < this.brainpower) ||
+        (util.abs(yOffset) < 10 && difficulty < this.brainpower)
+        ) {
+
         this.velX = 0;
         this.velY = 0;
-        if(util.abs(xOffset) > util.abs(yOffset)){
+        if (util.abs(xOffset) > util.abs(yOffset)) {
             if (xOffset > 0) {
                 this.velX = 1;
-            }else{
+            } else {
                 this.velX = -1;
             }
-        }else{
+        } else {
             if (yOffset > 0) {
                 this.velY = 1;
-            }else{
+            } else {
                 this.velY = -1;
             }
         }
@@ -103,13 +109,16 @@ Hulk.prototype.takeBulletHit = function (descr) {
     // Descr contains the speed and du of the bullet.
 
     spatialManager.unregister(this);
-    this.move(descr.velX/2, descr.velY/2, descr.du);
+    this.move(descr.velX / 2, descr.velY / 2, descr.du);
     spatialManager.register(this);
 
     this.timeSinceHit = 0;
 };
 
 Hulk.prototype.render = function (ctx) {
+    if (this.isSpawning) {
+        return;
+    }
     var distSq = util.distSq(this.cx, this.cy, this.renderPos.cx, this.renderPos.cy);
     var angle = util.angleTo(this.renderPos.cx, this.renderPos.cy, this.cx, this.cy);
     var PI = Math.PI;
@@ -121,17 +130,24 @@ Hulk.prototype.render = function (ctx) {
         case distSq < util.square(this.stepsize):
             g_sprites.Hulk[facing + 0].drawCentredAt(ctx, this.cx, this.cy, 0);
             break;
-        case distSq < util.square(this.stepsize*2):
+        case distSq < util.square(this.stepsize * 2):
             g_sprites.Hulk[facing + 1].drawCentredAt(ctx, this.cx, this.cy, 0);
             break;
-        case distSq < util.square(this.stepsize*3):
+        case distSq < util.square(this.stepsize * 3):
             g_sprites.Hulk[facing + 0].drawCentredAt(ctx, this.cx, this.cy, 0);
             break;
-        case distSq < util.square(this.stepsize*4):
+        case distSq < util.square(this.stepsize * 4):
             g_sprites.Hulk[facing + 2].drawCentredAt(ctx, this.cx, this.cy, 0);
             break;
         default:
             this.renderPos = {cx: this.cx, cy: this.cy};
-            g_sprites.Hulk[facing+0].drawCentredAt(ctx, this.cx, this.cy, 0);
+            g_sprites.Hulk[facing + 0].drawCentredAt(ctx, this.cx, this.cy, 0);
     }
 };
+
+Hulk.prototype.colors = [
+    {color: "#0EF909", ratio: 0.80},
+    {color: "red", ratio: 0.20}
+];
+Hulk.prototype.spawnTime = 0.9 * SECS_TO_NOMINALS;
+Hulk.prototype.totalParticles = 200;

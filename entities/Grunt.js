@@ -131,8 +131,6 @@ Grunt.prototype.colors = [
     {color: "#00FF00", ratio: 0.05},
     {color: "white", ratio: 0.05}
 ];
-Grunt.prototype.isSpawning = true;
 Grunt.prototype.spawnTime = 0.9 * SECS_TO_NOMINALS;
-Grunt.prototype.spawnTimeElapsed = 0;
 Grunt.prototype.totalParticles = 200;
 

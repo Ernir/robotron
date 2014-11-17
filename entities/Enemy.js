@@ -56,6 +56,11 @@ Enemy.prototype.render = function (ctx) {
 };
 
 
+
+// Shared defaults, used by enemies that warp in
+Enemy.prototype.isSpawning = true;
+Enemy.prototype.spawnTimeElapsed = 0;
+
 Enemy.prototype.makeWarpParticles = function () {
     // TODO: Refactor this monster
 
