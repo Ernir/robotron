@@ -20,7 +20,7 @@ var g_isUpdateOdd = false;
 
 function update(dt) {
     
-    checkAlways();
+    checkDebugSound();
 
     // Remember this for later
     //

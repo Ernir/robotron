@@ -98,6 +98,8 @@ var KEY_NEXT_LEVEL = 107; // Numpad +
 var KEY_PREV_LEVEL = 109; // Numpad -
 var KEY_SOUND = keyCode('N');
 var KEY_MUSIC = keyCode('M');
+var KEY_VOLUMEUP = keyCode('Y');
+var KEY_VOLUMEDOWN = keyCode('H');
 var KEY_PWRUP_RESET = 96; // Numpad 0
 var KEY_EXTRA_LIFE = 97; // Numpad 1
 var KEY_SPEED = 98; // Numpad 2
@@ -175,7 +177,7 @@ function processDiagnostics() {
     }
 }
 
-function checkAlways() {
+function checkDebugSound() {
 
     if (eatKey(KEY_DEBUG)) g_Debug = !g_Debug;
 
@@ -183,8 +185,20 @@ function checkAlways() {
     
     if (eatKey(KEY_MUSIC)) g_music = !g_music;
 	
-    if (g_music) g_bgm.play();
+	if (g_music) g_bgm.play();
     else g_bgm.pause();
+	
+	// Background music volume control
+	var prevVolume = g_bgm.volume;
+	if (eatKey(KEY_VOLUMEUP) && g_bgm.volume < 1) {
+		if (g_bgm.volume + 0.05 > 1) g_bgm.volume = 1;
+		else g_bgm.volume += 0.05;
+	}
+	if (eatKey(KEY_VOLUMEDOWN) && g_bgm.volume > 0) {
+		if (g_bgm.volume - 0.05 < 0) g_bgm.volume = 0;
+		else g_bgm.volume -= 0.05;
+	}
+	if (prevVolume !== g_bgm.volume) console.log("volume set to: " + g_bgm.volume);
 }
 
 // =================
