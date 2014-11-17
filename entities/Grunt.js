@@ -17,7 +17,7 @@ function Grunt(descr) {
 
     this.sprite = g_sprites.Grunt[0];
     this.target = entityManager.findProtagonist();
-    this.makeParticles();
+    this.makeWarpParticles();
 }
 
 Grunt.prototype = Object.create(Enemy.prototype);
@@ -27,13 +27,6 @@ Grunt.prototype.baseSpeed = 1;
 Grunt.prototype.speed = 1;
 Grunt.prototype.maxSpeed = 3;
 Grunt.prototype.maxRageReachedTime = 40 * SECS_TO_NOMINALS;
-
-Grunt.prototype.isDying = false;
-Grunt.prototype.isSpawning = true;
-Grunt.prototype.spawnTime = 1 * SECS_TO_NOMINALS;
-Grunt.prototype.deathTime = 1 * SECS_TO_NOMINALS;
-Grunt.prototype.spawnTimeElapsed = 0;
-Grunt.prototype.deathTimeElapsed = 0;
 
 Grunt.prototype.update = function (du) {
 
@@ -138,90 +131,8 @@ Grunt.prototype.colors = [
     {color: "#00FF00", ratio: 0.05},
     {color: "white", ratio: 0.05}
 ];
+Grunt.prototype.isSpawning = true;
+Grunt.prototype.spawnTime = 0.9 * SECS_TO_NOMINALS;
+Grunt.prototype.spawnTimeElapsed = 0;
 Grunt.prototype.totalParticles = 200;
 
-Grunt.prototype.makeParticles = function () {
-    // TODO: Refactor this monster
-
-    var spawnRange = this.getRadius() * 10;
-    var inaccuracy = this.getRadius() * 0.6;
-
-    for (var i = 0; i < this.colors.length; i++) {
-        var colorDefinition = this.colors[i];
-        var numberOfParticles = colorDefinition.ratio * this.totalParticles;
-        for (var j = 0; j < numberOfParticles; j++) {
-
-            var longSign = util.randSign();
-            var shortSign = util.randSign();
-            var longAxisOffset = longSign * util.randRange(0, spawnRange);
-            var shortAxisOffset = shortSign * util.randRange(0, inaccuracy);
-
-            var xOffset, yOffset, xVelocity, yVelocity;
-            var isOnXAxis = Math.random() < 0.5;
-            if (isOnXAxis) {
-                xOffset = longAxisOffset;
-                xVelocity = -longSign * 0.2;
-                yVelocity = 0;
-                yOffset = shortAxisOffset;
-            } else {
-                xOffset = shortAxisOffset;
-                xVelocity = 0;
-                yVelocity = -longSign * 0.2;
-                yOffset = longAxisOffset;
-            }
-            var particle = new WarpParticle({
-                offX: xOffset,
-                offY: yOffset,
-                velX: xVelocity,
-                velY: yVelocity,
-                x : this.cx,
-                y: this.cy,
-                color: colorDefinition.color,
-                isExploding: false
-            });
-            entityManager.createParticle(particle);
-        }
-    }
-};
-
-Grunt.prototype.warpIn = function (du) {
-    this.spawnTimeElapsed += du;
-    if (this.spawnTimeElapsed > this.spawnTime) {
-        this.isSpawning = false;
-    }
-};
-
-Grunt.prototype.makeExplosion = function () {
-
-    for (var i = 0; i < this.colors.length; i++) {
-        var colorDefinition = this.colors[i];
-        var numberOfParticles = colorDefinition.ratio * this.totalParticles;
-        for (var j = 0; j < numberOfParticles; j++) {
-            var particle = {
-                offX: 0,
-                offY: 0,
-                velX: util.randRange(-2, 2),
-                velY: util.randRange(-2, 2),
-                x: this.cx,
-                y: this.cy,
-                color: colorDefinition.color,
-                isExploding: true
-            };
-            entityManager.createWarpParticle(particle);
-        }
-    }
-};
-
-//Grunt.prototype.updateParticles = function (du) {
-//    for (var i = 0; i < this.particles.length; i++) {
-//        var particle = this.particles[i];
-//        particle.update(du);
-//    }
-//};
-//
-//Grunt.prototype.renderParticles = function (ctx) {
-//    for (var i = 0; i < this.particles.length; i++) {
-//        var particle = this.particles[i];
-//        particle.render(ctx);
-//    }
-//};
