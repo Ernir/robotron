@@ -40,7 +40,7 @@ function render(ctx) {
 		if (g_pauseRenderDu >= 1.5 * SECS_TO_NOMINALS) {
 			g_pauseRenderDu = 0;
 			g_isRenderPaused = false;
-		}		
+		}
 	} else if (g_isStepping) {
 		g_isStepping = false;
 	}
