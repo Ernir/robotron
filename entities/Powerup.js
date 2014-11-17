@@ -39,7 +39,7 @@ function Powerup(descr) {
 
 
 Powerup.prototype = new Entity();
-Powerup.prototype.strNames = ["Extra Life", "Shotgun", "Machinegun", "SpeedBoost", "Shield", "Score Multiplier"];
+Powerup.prototype.strNames = ["Extra Life", "Shotgun", "Machinegun", "Speed Boost", "Shield", "Score Multiplier"];
 Powerup.prototype.isExtralife = false;
 Powerup.prototype.isSpeedBoost = false;
 Powerup.prototype.isScoreMultiplier = false;
