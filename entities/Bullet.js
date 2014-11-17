@@ -120,7 +120,7 @@ Bullet.prototype.render = function (ctx) {
             ctx.save();
             ctx.fillStyle = "white";
             ctx.globalAlpha = 0.3;
-            util.fillCircle(ctx, this.cx, this.cy, 5);
+            util.fillCircle(ctx, this.cx, this.cy, 6);
             ctx.fillStyle = "orange";
             ctx.globalAlpha = 0.6;
             util.fillCircle(ctx, this.cx, this.cy, 4);
@@ -169,13 +169,15 @@ Bullet.prototype.render = function (ctx) {
             break;
         default:
             ctx.save();
-            var fadeThresh = Bullet.prototype.lifeSpan / 3;
-
-            if (this.lifeSpan < fadeThresh) {
-                ctx.globalAlpha = this.lifeSpan / fadeThresh;
-            }
+            ctx.fillStyle = "white";
+            ctx.globalAlpha = 0.5;
+            util.fillCircle(ctx, this.cx, this.cy, 6);
             ctx.fillStyle = "lime";
-            util.fillCircle(ctx, this.cx, this.cy, this.getRadius());
+            ctx.globalAlpha = 0.8;
+            util.fillCircle(ctx, this.cx, this.cy, 4);
+            ctx.fillStyle = "white";
+            ctx.globalAlpha = 1;
+            util.fillCircle(ctx, this.cx, this.cy, 2);
             ctx.restore();
     }
 };
