@@ -87,6 +87,7 @@ Enforcer.prototype.seekTarget = function () {
 
 Enforcer.prototype.takeBulletHit = function () {
     this.kill();
+    this.makeExplosion();
 	Player.addScore(Player.scoreValues.Enforcer * Player.getMultiplier());
 };
 
@@ -95,3 +96,12 @@ Enforcer.prototype.render = function (ctx) {
     if (temp > 5) temp = 0;
     g_sprites.Enforcer[temp].drawCentredAt(ctx, this.cx, this.cy, 0);
 };
+
+Enforcer.prototype.colors = [
+    {color: "blue", ratio: 0.50},
+    {color: "#05FF05", ratio: 0.5}, // Green
+    {color: "red", ratio: 0.10},
+    {color: "#8AA8B2", ratio: 0.35} // Grey
+
+];
+Enforcer.prototype.totalParticles = 200;
