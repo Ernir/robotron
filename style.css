@@ -31,6 +31,6 @@ footer a, main article a {color: red;}
 	.navbar ul li a {display: inline-block; float: left; background: rgba(255,255,255,0.3); padding: 0 0.25rem;}
 }
 
-@media only screen and (max-width: 530px), (max-device-width : 400px) {
+@media only screen and (max-width: 600px), (max-device-width : 400px) {
 	.navbar {height: auto;}
 }
