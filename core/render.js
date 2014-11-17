@@ -18,31 +18,12 @@ var TOGGLE_RENDER = 'R'.charCodeAt(0);
 
 function render(ctx) {
     
-	// Get out if skipping (e.g. due to pause-mode) and
-	// render pause screen with flashing effect
+	// Render pause screen with flashing effect
+	// if skipping (e.g. due to pause-mode)
     //
     if (g_isUpdatePaused && !g_isStepping) {
-		if (!g_isRenderPaused && g_pauseRenderDu < 0.75 * SECS_TO_NOMINALS) {
-			ctx.save();
-			var str = "PAUSED" , hw = g_canvas.width / 2, h = g_canvas.height;
-			ctx.textAlign = "center";
-			ctx.fillStyle ="white";
-			ctx.font = "bold 20px sans-serif";
-			ctx.fillText(str, hw, h * 38 / 40);
-			
-			str = "Press P to resume";
-			ctx.font = "bold 10px sans-serif";
-			ctx.fillText(str, hw, h * 39 / 40);
-			ctx.restore();
-			g_isRenderPaused = true;
-		}
+		renderPause(ctx);
 		if (g_pauseRenderDu < 0.75 * SECS_TO_NOMINALS) return;
-		if (g_pauseRenderDu >= 1.5 * SECS_TO_NOMINALS) {
-			g_pauseRenderDu = 0;
-			g_isRenderPaused = false;
-		}
-	} else if (g_isStepping) {
-		g_isStepping = false;
 	}
 	
     // Process various option toggles
@@ -98,4 +79,32 @@ function render(ctx) {
     if (g_undoBox) ctx.clearRect(200, 200, 50, 50);
     
     ++g_frameCounter;
+	
+	// Handle stepping and reset pause du
+	// if skipping (e.g. due to pause-mode)
+	if (g_isStepping) {
+		g_isStepping = false;
+		renderPause(ctx);
+	}
+	if (g_pauseRenderDu >= 1.5 * SECS_TO_NOMINALS) {
+		g_pauseRenderDu = 0;
+		g_isRenderPaused = false;
+	}
+}
+
+function renderPause(ctx) {
+	if (!g_isRenderPaused && g_pauseRenderDu < 0.75 * SECS_TO_NOMINALS) {
+		ctx.save();
+		var str = "PAUSED" , hw = g_canvas.width / 2, h = g_canvas.height;
+		ctx.textAlign = "center";
+		ctx.fillStyle ="white";
+		ctx.font = "bold 20px sans-serif";
+		ctx.fillText(str, hw, h * 38 / 40);
+		
+		str = "Press P to resume";
+		ctx.font = "bold 10px sans-serif";
+		ctx.fillText(str, hw, h * 39 / 40);
+		ctx.restore();
+		g_isRenderPaused = true;
+	}
 }
