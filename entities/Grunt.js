@@ -30,10 +30,10 @@ Grunt.prototype.maxRageReachedTime = 40 * SECS_TO_NOMINALS;
 
 Grunt.prototype.isDying = false;
 Grunt.prototype.isSpawning = true;
-
 Grunt.prototype.spawnTime = 1 * SECS_TO_NOMINALS;
 Grunt.prototype.deathTime = 1 * SECS_TO_NOMINALS;
-Grunt.prototype.timeElapsed = 0;
+Grunt.prototype.spawnTimeElapsed = 0;
+Grunt.prototype.deathTimeElapsed = 0;
 
 Grunt.prototype.update = function (du) {
 
@@ -47,12 +47,9 @@ Grunt.prototype.update = function (du) {
     }
 
     if (this.isSpawning) {
-        this.timeElapsed += du;
-        if (this.timeElapsed <= this.spawnTime) {
-            this.updateParticles(du);
-        } else {
-            this.isSpawning = false;
-        }
+        this.warpIn(du);
+    } else if (this.isDying) {
+        this.explodeOut(du);
     } else {
 
         this.rage(du);
@@ -63,7 +60,9 @@ Grunt.prototype.update = function (du) {
         this.capPositions();
     }
 
-    spatialManager.register(this);
+    if (!this.isDying) {
+        spatialManager.register(this);
+    }
 };
 
 Grunt.prototype.seekTarget = function () {
@@ -103,7 +102,7 @@ Grunt.prototype.resetRage = function () {
 };
 
 Grunt.prototype.takeBulletHit = function () {
-    this.kill();
+    this.isDying = true;
     Player.addScore(Player.scoreValues.Grunt * Player.getMultiplier());
 };
 Grunt.prototype.takeElectrodeHit = function () {
@@ -185,10 +184,43 @@ Grunt.prototype.makeParticles = function () {
     }
 };
 
+Grunt.prototype.warpIn = function (du) {
+    this.spawnTimeElapsed += du;
+    if (this.spawnTimeElapsed <= this.spawnTime) {
+        this.updateParticles(du);
+    } else {
+        this.isSpawning = false;
+    }
+};
+
+Grunt.prototype.explodeOut = function (du) {
+
+    if (!this.hasStartedDying) {
+        this.startDying();
+        this.expelParticles(du);
+    }
+
+    this.deathTimeElapsed += du;
+    if(this.deathTimeElapsed <= this.deathTime) {
+        this.updateParticles(du);
+    } else {
+        this.killImmediately();
+        this.isDying = false;
+    }
+};
+
+Grunt.prototype.expelParticles = function () {
+    for (var i = 0; i < this.particles.length; i++) {
+        var particle = this.particles[i];
+        particle.velX = util.randRange(-2,2);
+        particle.velY = util.randRange(-2,2);
+    }
+};
+
 Grunt.prototype.updateParticles = function (du) {
     for (var i = 0; i < this.particles.length; i++) {
         var particle = this.particles[i];
-        particle.update(du);
+        particle.update(du,this.isDying);
     }
 };
 

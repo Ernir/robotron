@@ -15,10 +15,10 @@ function WarpParticle(descr) {
 
 WarpParticle.prototype.size = 2;
 
-WarpParticle.prototype.update = function (du) {
+WarpParticle.prototype.update = function (du,isExploding) {
     var newOffX = this.offX + this.velX;
 
-    if (util.sign(newOffX) === util.sign(this.offX)){
+    if (util.sign(newOffX) === util.sign(this.offX) || isExploding){
         this.offX = newOffX;
         this.velX *= 1.1;
     } else {
@@ -27,7 +27,7 @@ WarpParticle.prototype.update = function (du) {
     }
 
     var newOffY = this.offY + this.velY;
-    if (util.sign(newOffY) === util.sign(this.offY)){
+    if (util.sign(newOffY) === util.sign(this.offY) || isExploding){
         this.offY = newOffY;
         this.velY *= 1.1;
     } else {
