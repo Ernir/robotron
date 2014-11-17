@@ -7,7 +7,7 @@ g_imgUrls = {
 	Hulk : "https://notendur.hi.is/~eth31/cgp/staticdata/sprites/Hulk.png",
 	Mom : "https://notendur.hi.is/~eth31/cgp/staticdata/sprites/Mom.png",
 	Protagonist : "https://notendur.hi.is/~eth31/cgp/staticdata/sprites/Protagonist.png",
-	Prog : "https://notendur.hi.is/~odv1/Tölvuleikjaforritun/Robotron/images/Prog.png",
+	Prog : "https://notendur.hi.is/~eth31/cgp/staticdata/sprites/NewProg.png",
 	Quark : "https://notendur.hi.is/~eth31/cgp/staticdata/sprites/Quark.png",
 	Spheroid : "https://notendur.hi.is/~eth31/cgp/staticdata/sprites/Spheroid.png",
 	Tank : "https://notendur.hi.is/~eth31/cgp/staticdata/sprites/Tank.png",
