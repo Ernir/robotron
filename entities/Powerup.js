@@ -77,7 +77,7 @@ Powerup.prototype.takeProtagonistHit = function () {
         Player.setFireRate(70);
         Player.addAmmo(100);
         var gunSound = new Audio(g_audioUrls.shotgunReload);
-        gunSound.play();
+        if (g_sounds) gunSound.play();
     };
     if (this.isShield) Player.addShieldTime();
 };
