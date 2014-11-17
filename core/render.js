@@ -19,26 +19,23 @@ function render(ctx) {
     
 	// Get out if skipping (e.g. due to pause-mode)
     //
-
-    //THIS SHOULD BE CHANGED BACK!!
     if (g_isUpdatePaused && !g_isStepping) {
 		if (!g_isRenderPaused) {
 			ctx.save();
-			var str = "", hw=g_canvas.width/2 ,hh=g_canvas.height/2;
-			ctx.fillStyle ="white";
-			ctx.fillRect(0, hh/2, hw*2, hh);
-			ctx.fillStyle ="red";
-			ctx.font = "bold 60px sans-serif";
+			var str = "PAUSED" , hw = g_canvas.width / 2, h = g_canvas.height;
 			ctx.textAlign = "center";
-			str = "PAUSED";
-			ctx.fillText(str, hw, hh);
-			str = "Press P to resume";
+			ctx.fillStyle ="white";
 			ctx.font = "bold 20px sans-serif";
-			ctx.fillText(str,hw,hh*3/2-10); //10 is the font's halfheight
+			ctx.fillText(str, hw, h * 38 / 40);
+			
+			str = "Press P to resume";
+			ctx.font = "bold 10px sans-serif";
+			ctx.fillText(str, hw, h * 39 / 40);
 			ctx.restore();
 			g_isRenderPaused = true;
 		}
 		return;
+		
 	} else if (g_isStepping) {
 		g_isStepping = false;
 	}
