@@ -171,9 +171,9 @@ var levelManager = {
 			var currentLayer = Math.floor(range * layers);
 			
 			for (var i = 1; i < currentLayer; i++) {
-				if (i % 9 < 9) ctx.fillStyle = "red";
-				if (i % 9 < 6) ctx.fillStyle = "#FF55A3";
-				if (i % 9 < 3) ctx.fillStyle = "blue";
+				if (i % consts.colors.length < i*consts.colors.length) { 
+					ctx.fillStyle = consts.colors[i%consts.colors.length];
+				}
 				ctx.fillRect(
 					halfWidth - i * layerOffsetX,
 					yMiddle - i * layerOffsetY,
@@ -188,9 +188,9 @@ var levelManager = {
 			var currentLayer = Math.ceil(range * layers);
 			
 			for (var i = 1; i < currentLayer; i++) {
-				if (i % 6 < 6) ctx.fillStyle = "red";
-				if (i % 6 < 4) ctx.fillStyle = "#FF55A3";
-				if (i % 6 < 2) ctx.fillStyle = "blue";
+				if (i % consts.colors.length < i*consts.colors.length) { 
+					ctx.fillStyle = consts.colors[i%consts.colors.length];
+				}
 				ctx.fillRect(
 					i * layerOffsetX,
 					consts.wallTop + i * layerOffsetY,

@@ -42,6 +42,7 @@ Player.prototype.hasMachineGun = false;
 Player.prototype.shieldTime = 0;
 Player.prototype.powerupTime = 1 * SECS_TO_NOMINALS;
 Player.prototype.powerupText = "";
+Player.prototype.colorCounter = 0;
 Player.prototype.scoreValues = {
     Electrode: 0,
     Spark: 25,
@@ -107,7 +108,8 @@ Player.prototype.render = function(ctx) {
     ctx.fillText(moretxt, g_canvas.width/2 + 80, 20);
 
 	// Display border
-	ctx.fillStyle = "red";
+
+	ctx.fillStyle = consts.colors[this.colorCounter%consts.colors.length];
 	ctx.fillRect(0, consts.wallTop, ctx.canvas.width, consts.wallThickness);
 	ctx.fillRect(0, consts.wallTop, consts.wallLeft, g_canvas.height - consts.wallTop);
 	ctx.fillRect(0, consts.wallBottom, g_canvas.width, consts.wallThickness);
@@ -324,3 +326,7 @@ Player.prototype.tickPowerupTime = function (du) {
     if (this.powerupTime < 0) return;
     this.powerupTime += -du;
 };
+
+Player.prototype.tickColorCounter = function (du) {
+    this.colorCounter++;
+}

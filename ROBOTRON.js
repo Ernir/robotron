@@ -58,6 +58,8 @@ function updateSimulation(du) {
 
     processDiagnostics();
 
+    Player.tickColorCounter(du);
+
     if (levelManager.isInMenu()) {
 	
 		return;
@@ -349,6 +351,7 @@ function preloadDone() {
     g_sprites.EnforcerSpark.push(new Sprite(g_images.EnforcerSpark, 58, 72));
     g_sprites.EnforcerSpark.push(new Sprite(g_images.EnforcerSpark, 86, 96));
 
+    util.makeColorArray();
     initializeEntities();
     main.init();
 }
