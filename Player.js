@@ -86,10 +86,20 @@ Player.prototype.render = function(ctx) {
     ctx.lineWidth = 1.5;
     ctx.font = "20px Arial";
     ctx.fillStyle = "red";
-    ctx.fillText(this.score, 10, 20);
+    var scoretxt = "Score: " + this.score;
+    ctx.fillText(scoretxt, 5, 20);
+
+    //display the multiplier and the level
     var disp = "X" + this.multiplier + "  Level: " + this.level;
-    ctx.fillText(disp, g_canvas.width/2 - 50, 20);
+    ctx.fillText(disp, g_canvas.width/2 - 140, 20);
     
+    // Display ammo
+    var text = "Ammo: " + this.ammo;
+    ctx.fillText(text, g_canvas.width/2, 20);
+    
+    // Display shield
+    var moretxt = "Shield: " + Math.ceil(this.shieldTime / SECS_TO_NOMINALS);
+    ctx.fillText(moretxt, g_canvas.width/2 + 130, 20);
 
     // Display remaining lives
     for (var i = 1; i < this.lives; i++) {
@@ -99,14 +109,6 @@ Player.prototype.render = function(ctx) {
                                           0
 										 );
     };
-
-    // Display ammo
-    var text = "Ammo: " + this.ammo;
-    ctx.fillText(text, g_canvas.width/2 - 160, 20);
-    
-	// Display shield
-    var moretxt = "Shield: " + Math.ceil(this.shieldTime / SECS_TO_NOMINALS);
-    ctx.fillText(moretxt, g_canvas.width/2 + 80, 20);
 
 	// Display border
 
