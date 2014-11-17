@@ -44,7 +44,7 @@ Player.prototype.powerupTime = 1 * SECS_TO_NOMINALS;
 Player.prototype.powerupText = "";
 Player.prototype.colorCounter = 0;
 Player.prototype.scoreValues = {
-    Electrode: 0,
+    Electrode: 5,
     Spark: 25,
     Shell: 50,
     CruiseMissile: 75,
@@ -55,7 +55,8 @@ Player.prototype.scoreValues = {
     Brain: 500,
     Spheroid: 1000,
     Quark: 1000,
-    Family: 1000
+    Family: 1000,
+    Powerup: 300
 };
 
 // -------------

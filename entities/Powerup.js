@@ -62,7 +62,8 @@ Powerup.prototype.update = function (du) {
 };
 
 Powerup.prototype.takeProtagonistHit = function () {
-	if (g_sounds) this.pickupSound.play();
+	Player.addScore(Player.scoreValues.Powerup * Player.getMultiplier());
+    if (g_sounds) this.pickupSound.play();
     Player.setPowerupText(this.strNames[this.brand] + "!");
     Player.setPowerupTime();
     this.kill();
