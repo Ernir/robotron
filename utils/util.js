@@ -149,6 +149,24 @@ var util = {
         ctx.fillStyle = style;
         ctx.fillRect(x, y, w, h);
         ctx.fillStyle = oldStyle;
+    },
+
+    RGB2Color: function (r,g,b) {
+        return '#' + this.byte2Hex(r) + this.byte2Hex(g) + this.byte2Hex(b);
+    },
+
+    byte2Hex: function (n) {
+        return String("0123456789ABCDEF".substr((n >> 4) & 0x0F,1)) + "0123456789ABCDEF".substr(n & 0x0F,1);
+    },
+
+    //Called when initializing the game
+    makeColorArray: function () {
+        for (var i = 0; i < 32; ++i) {
+            var r = Math.sin(0.3*i + 0) * 127 + 128;
+            var g = Math.sin(0.3*i + 2) * 127 + 128;
+            var b = Math.sin(0.3*i + 4) * 127 + 128;
+            consts.colors.push(this.RGB2Color(r,g,b));
+        }
     }
 
 };

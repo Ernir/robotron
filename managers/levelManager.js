@@ -171,9 +171,9 @@ var levelManager = {
 			var currentLayer = Math.floor(range * layers);
 			
 			for (var i = 1; i < currentLayer; i++) {
-				if (i % 9 < 9) ctx.fillStyle = "red";
-				if (i % 9 < 6) ctx.fillStyle = "#FF55A3";
-				if (i % 9 < 3) ctx.fillStyle = "blue";
+				if (i % consts.colors.length < i*consts.colors.length) { 
+					ctx.fillStyle = consts.colors[i%consts.colors.length];
+				}
 				ctx.fillRect(
 					halfWidth - i * layerOffsetX,
 					yMiddle - i * layerOffsetY,
@@ -188,9 +188,9 @@ var levelManager = {
 			var currentLayer = Math.ceil(range * layers);
 			
 			for (var i = 1; i < currentLayer; i++) {
-				if (i % 6 < 6) ctx.fillStyle = "red";
-				if (i % 6 < 4) ctx.fillStyle = "#FF55A3";
-				if (i % 6 < 2) ctx.fillStyle = "blue";
+				if (i % consts.colors.length < i*consts.colors.length) { 
+					ctx.fillStyle = consts.colors[i%consts.colors.length];
+				}
 				ctx.fillRect(
 					i * layerOffsetX,
 					consts.wallTop + i * layerOffsetY,
@@ -236,21 +236,26 @@ var levelManager = {
 	},
 	
 	renderMenu: function (ctx) {
-		ctx.save();
-		var str = "", hw=g_canvas.width/2 ,hh=g_canvas.height/2;
-		ctx.font = "bold 60px sans-serif";
-		ctx.fillStyle ="rgba(255,255,255,0.3)"; //not sure if you want this
-		ctx.fillRect(0, hh/2, hw*2, hh);
-		ctx.fillStyle ="red";
-		ctx.textAlign = "center";
-		str = "ROBOTRON";
-		ctx.fillText(str, hw, hh);
-		str = "Press R to start the game!";
-		ctx.font = "bold 20px sans-serif";
-		ctx.fillText(str,hw,hh*3/2-10); //10 is the font's halfheight
-		ctx.restore();
+		this.drawMenu("ROBOTRON");
 	},
 	
+	drawMenu: function (str, re) {
+		if(str==undefined) str="";
+		if(re!=="re") re="";
+		var str2="Press R to "+re+"start the game!";
+		var hw=g_canvas.width/2 ,hh=g_canvas.height/2;
+		ctx.save();
+			ctx.font = "bold 60px sans-serif";
+			ctx.fillStyle ="rgba(255,255,255,0.3)"; //not sure if you want this
+			ctx.fillRect(0, hh/2, hw*2, hh);
+			ctx.fillStyle ="red";
+			ctx.textAlign = "center";
+			ctx.fillText(str, hw, hh);
+			ctx.font = "bold 20px sans-serif";
+			ctx.fillText(str2,hw,hh*3/2-10); //10 is the font's halfheight
+		ctx.restore();
+	},
+
 // -----------------
 // Game Over Methods
 	
@@ -266,18 +271,6 @@ var levelManager = {
 	
 	renderGameOver: function (ctx) {
 		//TODO: Add Highscore
-		ctx.save();
-		var str = "", hw=g_canvas.width/2 ,hh=g_canvas.height/2;
-		ctx.font = "bold 60px sans-serif";
-		ctx.fillStyle ="rgba(255,255,255,0.3)"; //not sure if you want this
-		ctx.fillRect(0, hh/2, hw*2, hh);
-		ctx.fillStyle ="red";
-		ctx.textAlign = "center";
-		str = "GAME OVER";
-		ctx.fillText(str, hw, hh);
-		str = "Press R to restart";
-		ctx.font = "bold 20px sans-serif";
-		ctx.fillText(str,hw,hh*3/2-10); //10 is the font's halfheight
-		ctx.restore();
+		this.drawMenu("GAME OVER", "re");
 	}
 };

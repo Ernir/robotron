@@ -40,8 +40,11 @@ Player.prototype.ammo = 0;
 Player.prototype.hasShotgun = false;
 Player.prototype.hasMachineGun = false;
 Player.prototype.shieldTime = 0;
+Player.prototype.powerupTime = 1 * SECS_TO_NOMINALS;
+Player.prototype.powerupText = "";
+Player.prototype.colorCounter = 0;
 Player.prototype.scoreValues = {
-    Electrode: 0,
+    Electrode: 5,
     Spark: 25,
     Shell: 50,
     CruiseMissile: 75,
@@ -52,7 +55,8 @@ Player.prototype.scoreValues = {
     Brain: 500,
     Spheroid: 1000,
     Quark: 1000,
-    Family: 1000
+    Family: 1000,
+    Powerup: 300
 };
 
 // -------------
@@ -82,10 +86,20 @@ Player.prototype.render = function(ctx) {
     ctx.lineWidth = 1.5;
     ctx.font = "20px Arial";
     ctx.fillStyle = "red";
-    ctx.fillText(this.score, 10, 20);
+    var scoretxt = "Score: " + this.score;
+    ctx.fillText(scoretxt, 5, 20);
+
+    //display the multiplier and the level
     var disp = "X" + this.multiplier + "  Level: " + this.level;
-    ctx.fillText(disp, g_canvas.width/2 - 50, 20);
+    ctx.fillText(disp, g_canvas.width/2 - 140, 20);
     
+    // Display ammo
+    var text = "Ammo: " + this.ammo;
+    ctx.fillText(text, g_canvas.width/2, 20);
+    
+    // Display shield
+    var moretxt = "Shield: " + Math.ceil(this.shieldTime / SECS_TO_NOMINALS);
+    ctx.fillText(moretxt, g_canvas.width/2 + 130, 20);
 
     // Display remaining lives
     for (var i = 1; i < this.lives; i++) {
@@ -96,16 +110,9 @@ Player.prototype.render = function(ctx) {
 										 );
     };
 
-    // Display ammo
-    var text = "Ammo: " + this.ammo;
-    ctx.fillText(text, g_canvas.width/2 - 160, 20);
-    
-	// Display shield
-    var moretxt = "Shield: " + Math.ceil(this.shieldTime / SECS_TO_NOMINALS);
-    ctx.fillText(moretxt, g_canvas.width/2 + 80, 20);
-	
 	// Display border
-	ctx.fillStyle = "red";
+
+	ctx.fillStyle = consts.colors[this.colorCounter%consts.colors.length];
 	ctx.fillRect(0, consts.wallTop, ctx.canvas.width, consts.wallThickness);
 	ctx.fillRect(0, consts.wallTop, consts.wallLeft, g_canvas.height - consts.wallTop);
 	ctx.fillRect(0, consts.wallBottom, g_canvas.width, consts.wallThickness);
@@ -296,3 +303,33 @@ Player.prototype.addAmmo = function (ammo) {
 Player.prototype.resetAmmo = function () {
     this.ammo = 0;
 };
+
+// -------------------
+// Powerup text animation Methods
+
+Player.prototype.setPowerupText = function (str) {
+    this.powerupText = str;
+}
+
+Player.prototype.getPowerupText = function () {
+    if(this.powerupText==undefined)
+        return "";
+    return this.powerupText;
+}
+
+Player.prototype.setPowerupTime = function () {
+    this.powerupTime = 1 * SECS_TO_NOMINALS;
+};
+
+Player.prototype.getPowerupTime = function () {
+    return this.powerupTime;
+};
+
+Player.prototype.tickPowerupTime = function (du) {
+    if (this.powerupTime < 0) return;
+    this.powerupTime += -du;
+};
+
+Player.prototype.tickColorCounter = function (du) {
+    this.colorCounter++;
+}

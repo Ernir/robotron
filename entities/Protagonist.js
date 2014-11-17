@@ -52,6 +52,7 @@ Protagonist.prototype.update = function (du) {
 	// Perform movement
     if (Player.getSpeed() > 3) Player.tickSpeedTimer(du);
     if (Player.getShieldTime() > 0) Player.tickShieldTime(du);
+    if (Player.getPowerupTime() > 0) Player.tickPowerupTime(du);
     var vel = this.computeMovement();
 	this.velX = vel.x;
 	this.velY = vel.y;
@@ -189,6 +190,18 @@ Protagonist.prototype.render = function (ctx) {
         ctx.fillStyle = "cyan";
         if (Player.getShieldTime() < 5 * SECS_TO_NOMINALS) {ctx.fillStyle = "red";};
         util.fillCircle(ctx, this.cx, this.cy, this.getRadius()+2);
+        ctx.restore();
+    }
+
+    // Display powerup name
+    if(Player.getPowerupTime() >= 0) {
+        ctx.save();
+            var fontSize = 24;
+            ctx.textAlign = "center";
+            ctx.font = "bold " + fontSize + "px sans-serif";
+            ctx.fillStyle ="red";
+            ctx.fillText(Player.getPowerupText(), this.cx, this.cy-fontSize);
+            //ctx.fillText(Player.getPowerupText(), g_canvas.width/2, g_canvas.height/2);
         ctx.restore();
     }
 };

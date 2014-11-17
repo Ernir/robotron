@@ -29,7 +29,7 @@ function Powerup(descr) {
             this.isSpeedBoost = true;
             break;
         case 4:
-            this.isShield = true
+            this.isShield = true;
             break;
         case 5:
             this.isScoreMultiplier = true;
@@ -37,7 +37,9 @@ function Powerup(descr) {
     }
 }
 
+
 Powerup.prototype = new Entity();
+Powerup.prototype.strNames = ["Extra Life", "Shotgun", "Machinegun", "Speed Boost", "Shield", "Score Multiplier"];
 Powerup.prototype.isExtralife = false;
 Powerup.prototype.isSpeedBoost = false;
 Powerup.prototype.isScoreMultiplier = false;
@@ -51,7 +53,7 @@ Powerup.prototype.update = function (du) {
     if (this.animation > this.loop) this.animation = 0;
 
     spatialManager.unregister(this);
-    
+
     if (this._isDeadNow) {
         return entityManager.KILL_ME_NOW;
     }
@@ -60,7 +62,10 @@ Powerup.prototype.update = function (du) {
 };
 
 Powerup.prototype.takeProtagonistHit = function () {
-	if (g_sounds) this.pickupSound.play();
+	Player.addScore(Player.scoreValues.Powerup * Player.getMultiplier());
+    if (g_sounds) this.pickupSound.play();
+    Player.setPowerupText(this.strNames[this.brand] + "!");
+    Player.setPowerupTime();
     this.kill();
     if (this.isExtralife) Player.addLives();
     if (this.isSpeedBoost) Player.addSpeed();

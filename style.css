@@ -1,0 +1,36 @@
+* {margin: 0; padding: 0;}
+body {position: relative; font: 20px/2rem sans-serif; background-color: black; color: white;}
+.wrapper {max-width: 1200px; margin: 0 auto;}
+main, .instructions, .shortcuts, footer, .canvasContainer {max-width: 800px; margin: 0.5rem auto;}
+.canvasContainer {width: 100%; height: 600px; border: 1px solid red; }
+#myCanvas {cursor: none;}
+
+section, footer {border: 1px solid red;}
+article {border: 1px solid white;}
+
+section, article, .navbar {padding: 0.5rem;}
+
+section {margin: 0.5rem auto;}
+h1 {text-align: center; padding: 0.5rem 0;}
+
+li {list-style-position: inside;}
+footer article {margin: 0.5rem;}
+footer a, main article a {color: red;}
+
+.navbar { position: fixed; top: 0; left: 0; width: 12rem; height: auto; background: black; border: 1px solid red;}
+.navbar ul {border: 1px solid white;}
+.navbar ul li {list-style: none; background: rgba(255,255,255,0.3); width: 100%;}
+.navbar ul li a {display: block; color: red; text-decoration: none; text-align: center; border: solid 1px white;}
+.navbar ul li a:hover {color: white; background: red;}
+
+@media only screen and (max-width: 1240px) {
+	.wrapper {margin-top: 4rem;}
+	.navbar {width: 100%; height: 2.5rem; background: black;}
+	.navbar ul {border: none;}
+	.navbar ul li a {display: inline-block; float: left; background: rgba(255,255,255,0.3); padding: 0 0.25rem;}
+}
+
+@media only screen and (max-width: 600px), (max-device-width : 400px) {
+	.wrapper {margin-top: 8rem;}
+	.navbar {height: auto;}
+}

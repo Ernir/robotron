@@ -19,6 +19,8 @@ function render(ctx) {
     
 	// Get out if skipping (e.g. due to pause-mode)
     //
+
+    //THIS SHOULD BE CHANGED BACK!!
     if (shouldSkipUpdate()) {
 		if (!g_isRenderPaused) {
 			ctx.save();
