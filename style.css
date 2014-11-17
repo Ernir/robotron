@@ -16,7 +16,7 @@ h1 {text-align: center; padding: 0.5rem 0;}
 li {list-style-position: inside;}
 footer article {margin: 0.5rem;}
 footer li {list-style: none;}
-footer a {color: red;}
+footer a, main article a {color: red;}
 
 .navbar { position: fixed; top: 0; left: 0; width: 12rem; height: auto; background: black; border: 1px solid red;}
 .navbar ul {border: 1px solid white;}
