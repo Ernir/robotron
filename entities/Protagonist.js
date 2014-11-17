@@ -200,6 +200,7 @@ Protagonist.prototype.render = function (ctx) {
             ctx.textAlign = "center";
             ctx.font = "bold " + fontSize + "px sans-serif";
             ctx.fillStyle ="red";
+            ctx.globalAlpha = Player.getPowerupTime()/SECS_TO_NOMINALS;
             ctx.fillText(Player.getPowerupText(), this.cx, this.cy-fontSize);
             //ctx.fillText(Player.getPowerupText(), g_canvas.width/2, g_canvas.height/2);
         ctx.restore();

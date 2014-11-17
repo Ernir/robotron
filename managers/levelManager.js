@@ -263,6 +263,7 @@ var levelManager = {
 		this._isGameOver = true;
 		this._isChangingLevel = true;
 		Player.addLives();
+		this.ouputDiv();
 	},
 	
 	isGameOver: function () {
@@ -272,5 +273,9 @@ var levelManager = {
 	renderGameOver: function (ctx) {
 		//TODO: Add Highscore
 		this.drawMenu("GAME OVER", "re");
+	},
+
+	ouputDiv: function () {
+		//document.getElementById("game")
 	}
 };
