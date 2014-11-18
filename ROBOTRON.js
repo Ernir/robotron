@@ -94,19 +94,28 @@ var KEY_DEBUG = keyCode('X');
 var KEY_KILLABLE = keyCode('K');
 var KEY_FRIENDLYFIRE = keyCode('F');
 var KEY_RESTART = keyCode('R');
-var KEY_NEXT_LEVEL = 107; // Numpad +
-var KEY_PREV_LEVEL = 109; // Numpad -
+var KEY_NEXT_LEVEL = keyCode('+');
+var KEY_NEXT_LEVELN = 107; // Numpad +
+var KEY_PREV_LEVEL = keyCode('-');
+var KEY_PREV_LEVELN = 109; // Numpad -
 var KEY_SOUND = keyCode('N');
 var KEY_MUSIC = keyCode('M');
 var KEY_VOLUMEUP = keyCode('Y');
 var KEY_VOLUMEDOWN = keyCode('H');
-var KEY_PWRUP_RESET = 96; // Numpad 0
-var KEY_EXTRA_LIFE = 97; // Numpad 1
-var KEY_SPEED = 98; // Numpad 2
-var KEY_SCORE_MP = 99; // Numpad 3
-var KEY_MACHINEGUN = 100; // Numpad 4
-var KEY_SHOTGUN = 101; // Numpad 5
-var KEY_SHIELD = 102; // Numpad 6
+var KEY_PWRUP_RESET = keyCode('0');
+var KEY_PWRUP_RESETN = 96; // Numpad 0
+var KEY_EXTRA_LIFE = keyCode('1');
+var KEY_EXTRA_LIFEN = 97; // Numpad 1
+var KEY_SPEED = keyCode('2');
+var KEY_SPEEDN = 98; // Numpad 2
+var KEY_SCORE_MP = keyCode('3');
+var KEY_SCORE_MPN = 99; // Numpad 3
+var KEY_MACHINEGUN = keyCode('4');
+var KEY_MACHINEGUNN = 100; // Numpad 4
+var KEY_SHOTGUN = keyCode('5');
+var KEY_SHOTGUNN = 101; // Numpad 5
+var KEY_SHIELD = keyCode('6');
+var KEY_SHIELDN = 102; // Numpad 6
 
 function processDiagnostics() {
 
@@ -125,32 +134,32 @@ function processDiagnostics() {
         levelManager.startLevel();
     }
 
-    if (eatKey(KEY_NEXT_LEVEL) && g_Debug) {
+    if ((eatKey(KEY_NEXT_LEVEL) || eatKey(KEY_NEXT_LEVELN)) && g_Debug) {
         levelManager.nextLevel();
         g_hasCheated = true;
     }
 
-    if (eatKey(KEY_PREV_LEVEL) && g_Debug) {
+    if ((eatKey(KEY_PREV_LEVEL) || eatKey(KEY_PREV_LEVELN)) && g_Debug) {
         levelManager.prevLevel();
         g_hasCheated = true;
     }
 	
-    if (eatKey(KEY_EXTRA_LIFE) && g_Debug) {
+    if ((eatKey(KEY_EXTRA_LIFE) || eatKey(KEY_EXTRA_LIFEN)) && g_Debug) {
         Player.addLives();
         g_hasCheated = true;
     }
 
-    if (eatKey(KEY_SPEED) && g_Debug) {
+    if ((eatKey(KEY_SPEED) || eatKey(KEY_SPEEDN))&& g_Debug) {
         Player.addSpeed();
         g_hasCheated = true;
     }
 
-    if (eatKey(KEY_SCORE_MP) && g_Debug) {
+    if ((eatKey(KEY_SCORE_MP) || eatKey(KEY_SCORE_MP)) && g_Debug) {
         Player.addMultiplier();
         g_hasCheated = true;
     }
 
-    if (eatKey(KEY_MACHINEGUN) && g_Debug) {
+    if ((eatKey(KEY_MACHINEGUN) || eatKey(KEY_MACHINEGUNN)) && g_Debug) {
         Player.hasShotgun = false;
         Player.hasMachineGun = true;
         Player.setFireRate(5);
@@ -158,7 +167,7 @@ function processDiagnostics() {
         g_hasCheated = true;
     }
 
-    if (eatKey(KEY_SHOTGUN) && g_Debug) {
+    if ((eatKey(KEY_SHOTGUN) || eatKey(KEY_SHOTGUNN)) && g_Debug) {
         Player.hasShotgun = true;
         Player.hasMachineGun = false;
         Player.setFireRate(70);
@@ -166,12 +175,12 @@ function processDiagnostics() {
         g_hasCheated = true;
     }
 
-    if (eatKey(KEY_SHIELD) && g_Debug) {
+    if ((eatKey(KEY_SHIELD) || eatKey(KEY_SHIELDN)) && g_Debug) {
         Player.addShieldTime();
         g_hasCheated = true;
     }
 
-    if (eatKey(KEY_PWRUP_RESET) && g_Debug) {
+    if ((eatKey(KEY_PWRUP_RESET) || eatKey(KEY_PWRUP_RESETN)) && g_Debug) {
         Player.resetAll();
         g_hasCheated = true;
     }
