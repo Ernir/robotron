@@ -104,4 +104,3 @@ Enforcer.prototype.colors = [
     {color: "#8AA8B2", ratio: 0.35} // Grey
 
 ];
-Enforcer.prototype.totalParticles = 200;

@@ -149,4 +149,3 @@ Hulk.prototype.colors = [
     {color: "#0EF909", ratio: 0.80},
     {color: "red", ratio: 0.20}
 ];
-Hulk.prototype.totalParticles = 200;

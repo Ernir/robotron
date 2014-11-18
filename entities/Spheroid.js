@@ -110,4 +110,3 @@ Spheroid.prototype.render = function (ctx) {
 Spheroid.prototype.colors = [
     {color: "red", ratio: 1}
 ];
-Spheroid.prototype.totalParticles = 100;

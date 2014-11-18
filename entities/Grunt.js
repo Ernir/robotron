@@ -131,5 +131,4 @@ Grunt.prototype.colors = [
     {color: "#00FF00", ratio: 0.05},
     {color: "white", ratio: 0.05}
 ];
-Grunt.prototype.totalParticles = 200;
 

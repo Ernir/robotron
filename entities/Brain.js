@@ -160,4 +160,3 @@ Brain.prototype.colors = [
     {color: "#B90CF1", ratio: 0.10},
     {color: "#08FF03", ratio: 0.20}
 ];
-Brain.prototype.totalParticles = 200;

@@ -131,4 +131,3 @@ Tank.prototype.colors = [
     {color: "#00FF00", ratio: 0.25}, // Green
     {color: "blue", ratio: 0.25}
 ];
-Tank.prototype.totalParticles = 200;

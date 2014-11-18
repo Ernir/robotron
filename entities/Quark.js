@@ -111,4 +111,3 @@ Quark.prototype.colors = [
     {color: "blue", ratio: 0.5},
     {color: "#00FF09", ratio: 0.5}
 ];
-Quark.prototype.totalParticles = 100;

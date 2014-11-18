@@ -113,4 +113,3 @@ Prog.prototype.colors = [
     {color: "white", ratio: 0.9},
     {color: "red", ratio: 0.1}
 ];
-Prog.prototype.totalParticles = 50;
