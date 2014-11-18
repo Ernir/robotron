@@ -40,14 +40,14 @@ Spark.prototype.update = function (du) {
 
     // Handle death
     if (this._isDeadNow) {
-        this.spawnFragment(5, consts.colors[2]);
+        this.spawnFragment(5, "red");
         Player.addScore(Player.scoreValues.Spark * Player.getMultiplier());
         return entityManager.KILL_ME_NOW;
     }
 
     this.lifeSpan -= du;
     if (this.lifeSpan < 0) {
-        this.spawnFragment(5, consts.colors[2]);
+        this.spawnFragment(5, "red");
         return entityManager.KILL_ME_NOW;
     }
 
@@ -64,7 +64,7 @@ Spark.prototype.update = function (du) {
         var canTakeHit = hitEntity.takeEnemyHit;
         if (canTakeHit) {
             canTakeHit.call(hitEntity);
-            this.spawnFragment(5, consts.colors[2]);
+            this.spawnFragment(5, "red");
             return entityManager.KILL_ME_NOW;
         }
     }
