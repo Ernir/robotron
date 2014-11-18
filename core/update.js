@@ -68,6 +68,5 @@ function shouldSkipUpdate() {
 	if (eatKey(KEY_STEP)) {
         g_isStepping = true;
     }
-	if (!g_isUpdatePaused || g_isStepping) g_isRenderPaused = false;
     return g_isUpdatePaused && !g_isStepping;    
 }

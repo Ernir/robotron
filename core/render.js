@@ -5,7 +5,6 @@ var g_doBox = false;
 var g_undoBox = false;
 var g_doFlipFlop = false;
 var g_doRender = true;
-var g_isRenderPaused = false;
 
 var g_frameCounter = 1;
 var g_pauseRenderDu = 0;
@@ -17,14 +16,6 @@ var TOGGLE_FLIPFLOP = 'F'.charCodeAt(0);
 var TOGGLE_RENDER = 'R'.charCodeAt(0);
 
 function render(ctx) {
-    
-	// Render pause screen with flashing effect
-	// if skipping (e.g. due to pause-mode)
-    //
-    if (g_isUpdatePaused && !g_isStepping) {
-		renderPause(ctx);
-		if (g_pauseRenderDu < 0.75 * SECS_TO_NOMINALS) return;
-	}
 	
     // Process various option toggles
     //
@@ -51,6 +42,20 @@ function render(ctx) {
     // The core rendering of the actual game / simulation
     //
     if (g_doRender) renderSimulation(ctx);
+	else {
+		// Alerts if rendering is disabled
+		ctx.save();
+		var str = "RENDERING DISABLED" , hw = g_canvas.width / 2, h = g_canvas.height;
+		ctx.textAlign = "center";
+		ctx.fillStyle ="white";
+		ctx.font = "bold 40px sans-serif";
+		ctx.fillText(str, hw, h * 19 / 40);
+		
+		str = "Press R in Pause Mode to reenable rendering";
+		ctx.font = "bold 28px sans-serif";
+		ctx.fillText(str, hw, h * 21 / 40);
+		ctx.restore();
+	}
     
     
     // This flip-flip mechanism illustrates the pattern of alternation
@@ -80,20 +85,25 @@ function render(ctx) {
     
     ++g_frameCounter;
 	
-	// Handle stepping and reset pause du
+	// Render pause screen with flashing effect
+	// and handle stepping and reset pause du
 	// if skipping (e.g. due to pause-mode)
+    //
+    if (g_isUpdatePaused && !g_isStepping) {
+		renderPause(ctx);
+		if (g_pauseRenderDu < 0.75 * SECS_TO_NOMINALS) return;
+	}
 	if (g_isStepping) {
 		g_isStepping = false;
 		renderPause(ctx);
 	}
 	if (g_pauseRenderDu >= 1.5 * SECS_TO_NOMINALS) {
 		g_pauseRenderDu = 0;
-		g_isRenderPaused = false;
 	}
 }
 
 function renderPause(ctx) {
-	if (!g_isRenderPaused && g_pauseRenderDu < 0.75 * SECS_TO_NOMINALS) {
+	if (g_pauseRenderDu < 0.75 * SECS_TO_NOMINALS) {
 		ctx.save();
 		var str = "PAUSED" , hw = g_canvas.width / 2, h = g_canvas.height;
 		ctx.textAlign = "center";
@@ -105,6 +115,5 @@ function renderPause(ctx) {
 		ctx.font = "bold 10px sans-serif";
 		ctx.fillText(str, hw, h * 39 / 40);
 		ctx.restore();
-		g_isRenderPaused = true;
 	}
 }
