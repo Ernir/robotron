@@ -110,5 +110,4 @@ Spheroid.prototype.render = function (ctx) {
 Spheroid.prototype.colors = [
     {color: "red", ratio: 1}
 ];
-Spheroid.prototype.spawnTime = 0.9 * SECS_TO_NOMINALS;
 Spheroid.prototype.totalParticles = 100;

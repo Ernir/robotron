@@ -160,5 +160,4 @@ Brain.prototype.colors = [
     {color: "#B90CF1", ratio: 0.10},
     {color: "#08FF03", ratio: 0.20}
 ];
-Brain.prototype.spawnTime = 0.9 * SECS_TO_NOMINALS;
 Brain.prototype.totalParticles = 200;

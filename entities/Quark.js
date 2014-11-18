@@ -111,5 +111,4 @@ Quark.prototype.colors = [
     {color: "blue", ratio: 0.5},
     {color: "#00FF09", ratio: 0.5}
 ];
-Quark.prototype.spawnTime = 0.9 * SECS_TO_NOMINALS;
 Quark.prototype.totalParticles = 100;
