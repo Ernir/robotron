@@ -97,8 +97,10 @@ Bullet.prototype.update = function (du) {
 			var canFriendlyHit = hitEntity.takeFriendlyHit;
             var descr = {velX : this.velX, velY : this.velY, du : du};
             if (canTakeHit || (g_friendlyFire && canFriendlyHit))  {
-                if (canTakeHit) canTakeHit.call(hitEntity, descr);
-				else canFriendlyHit.call(hitEntity);
+                if (canTakeHit) {
+					canTakeHit.call(hitEntity, descr);
+					spatialManager.unregister(hitEntity);
+				} else canFriendlyHit.call(hitEntity);
                 if (Player.hasMachineGun) this.spawnFragment(5,consts.colors[4]);
                 if (Player.hasShotgun) this.spawnFragment(5,consts.colors[1]);
                 if (!Player.hasMachineGun && !Player.hasShotgun) this.spawnFragment(5,consts.colors[3]);
