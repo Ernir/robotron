@@ -28,7 +28,6 @@ function initializeEntities() {
     // TODO
 }
 var Player = new Player();
-var g_bgm = new Audio(g_audioUrls.music);
 
 // =============
 // GATHER INPUTS
@@ -198,16 +197,10 @@ function checkDebugSound() {
     else g_bgm.pause();
 	
 	// Background music volume control
-	var prevVolume = g_bgm.volume;
-	if (eatKey(KEY_VOLUMEUP) && g_bgm.volume < 1) {
-		if (g_bgm.volume + 0.05 > 1) g_bgm.volume = 1;
-		else g_bgm.volume += 0.05;
-	}
-	if (eatKey(KEY_VOLUMEDOWN) && g_bgm.volume > 0) {
-		if (g_bgm.volume - 0.05 < 0) g_bgm.volume = 0;
-		else g_bgm.volume -= 0.05;
-	}
-	if (prevVolume !== g_bgm.volume) console.log("volume set to: " + g_bgm.volume);
+	var prevVolume = g_bgm.getVolume;
+	if (eatKey(KEY_VOLUMEUP)) g_bgm.incVolume();
+	if (eatKey(KEY_VOLUMEDOWN)) g_bgm.decVolume();
+	if (prevVolume !== g_bgm.getVolume) console.log("volume set to: " + g_bgm.getVolume);
 }
 
 // =================
@@ -267,12 +260,6 @@ function preloadDone() {
     // Static images
     g_sprites.Skull = new Sprite(g_images.Skull);
     g_sprites.Extralife = new Sprite(g_images.Extralife);
-	g_sprites.Wing = new Sprite(g_images.Wing);
-	g_sprites.Shield = new Sprite(g_images.Shield);
-	g_sprites.Heart = new Sprite(g_images.Heart);
-	g_sprites.Ammo = new Sprite(g_images.Ammo);
-	g_sprites.Shotgun = new Sprite(g_images.Shotgun);
-
         
     // Spritesheets
     g_sprites.Dad = [];

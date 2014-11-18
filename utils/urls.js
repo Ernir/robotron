@@ -13,13 +13,7 @@ g_imgUrls = {
 	Tank : "https://notendur.hi.is/~eth31/cgp/staticdata/sprites/Tank.png",
 	
 	PowerUps: "https://notendur.hi.is/~odv1/Tölvuleikjaforritun/Robotron/images/PowerUps.png",
-	Shield: "https://notendur.hi.is/~jiz2/TOL-S3/ProjectRobotron/shield.png",
-	Wing: "https://notendur.hi.is/~jiz2/TOL-S3/ProjectRobotron/wing.png",
-	Ammo: "https://notendur.hi.is/~jiz2/TOL-S3/ProjectRobotron/ammo.png",
-	Heart: "https://notendur.hi.is/~jiz2/TOL-S3/ProjectRobotron/Heart.png",
-	Shotgun: "https://notendur.hi.is/~jiz2/TOL-S3/ProjectRobotron/shotgun.png",
 	
-	2084 : "https://notendur.hi.is/~eth31/cgp/staticdata/Shapes/2084.png",
 	BlackDiamond : "https://notendur.hi.is/~eth31/cgp/staticdata/Shapes/BlackDiamond.png",
 	Checkers : "https://notendur.hi.is/~eth31/cgp/staticdata/Shapes/Checkers.png",
 	Diamond : "https://notendur.hi.is/~eth31/cgp/staticdata/Shapes/Diamond.png",
@@ -31,10 +25,6 @@ g_imgUrls = {
 	Spark : "https://notendur.hi.is/~eth31/cgp/staticdata/Shapes/Spark.png",
 	Square : "https://notendur.hi.is/~eth31/cgp/staticdata/Shapes/Square.png",
 	Triangle : "https://notendur.hi.is/~eth31/cgp/staticdata/Shapes/Triangle.png",
-	
-	GreenAlphabet : "https://notendur.hi.is/~eth31/cgp/staticdata/Numbers%20and%20letters/GreenAlphabet.png",
-	RedAlphabet : "https://notendur.hi.is/~eth31/cgp/staticdata/Numbers%20and%20letters/RedAlphabet.png",
-	WhiteNumbers : "https://notendur.hi.is/~eth31/cgp/staticdata/Numbers%20and%20letters/WhiteNumbers.png",
 	HumanScore : "https://notendur.hi.is/~eth31/cgp/staticdata/Numbers%20and%20letters/HumanScore.png"
 };
 
@@ -56,11 +46,15 @@ g_audioUrls = {
 	walk : "https://notendur.hi.is/~eth31/cgp/staticdata/Sounds/walk.wav",
 	loselife : "https://notendur.hi.is/~jiz2/TOL-S3/ProjectRobotron/loselife.mp3",
 	pickitem: "https://notendur.hi.is/~jiz2/TOL-S3/ProjectRobotron/pickitem.mp3",
-	todIOF : "https://notendur.hi.is/~jiz2/TOL-S3/ProjectRobotron/IronyOfFate.mp3",
-    music : "https://notendur.hi.is/~odv1/Tölvuleikjaforritun/RoboBarrier2/sounds/rafmagnad11.mp3",
     machineGun : "https://notendur.hi.is/~odv1/Tölvuleikjaforritun/Robotron/sounds/laser.wav",
     shotgunFire : "https://notendur.hi.is/~odv1/Tölvuleikjaforritun/Robotron/sounds/shotgunFire.mp3",
     shotgunReload : "https://notendur.hi.is/~odv1/Tölvuleikjaforritun/Robotron/sounds/shotgunReload.mp3"
+};
+
+g_bgmUrls = {
+	todIOF : "https://notendur.hi.is/~jiz2/TOL-S3/ProjectRobotron/IronyOfFate.mp3",
+    music : "https://notendur.hi.is/~odv1/Tölvuleikjaforritun/RoboBarrier2/sounds/rafmagnad11.mp3",
+	instarem: "https://notendur.hi.is/~jiz2/TOL-S3/ProjectRobotron/instant-remedy.mp3"
 };
 
 /* 
