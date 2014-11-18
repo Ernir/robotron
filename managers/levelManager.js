@@ -30,6 +30,8 @@ var levelManager = {
         [3, 4, 8, 2],
         [5, 6, 10, 4]
     ],
+	
+	_levelChangingSound: new Audio(g_audioUrls.newlevel),
 
     _isChangingLevel: false,
 	_isRefreshingLevel: false,
@@ -150,8 +152,6 @@ var levelManager = {
     continueLevel: function () {
         // Reset all remaining entities in the level
         // Used when the player dies, but has extra lives remaining
-        entityManager.clearPartial();
-        entityManager.resetPos();
         this._isChangingLevel = true;
 		this._isRefreshingLevel = true; //TODO: Different animation?
     },
@@ -167,7 +167,7 @@ var levelManager = {
     },
 
     renderLevelChanger: function (ctx) {
-        // TODO: Add sound
+
         var halfWidth = g_canvas.width / 2;
         var halfHeight = (g_canvas.height - consts.wallTop) / 2;
         var yMiddle = consts.wallTop + halfHeight;
@@ -185,6 +185,8 @@ var levelManager = {
 			} else {
 				alpha = this._changingTimer / SECS_TO_NOMINALS;
 				if (alpha < 0) alpha = 0;
+				entityManager.clearPartial();
+				entityManager.resetPos();
 			}
 			ctx.globalAlpha = alpha;
 			ctx.fillStyle = "red";
@@ -259,6 +261,10 @@ var levelManager = {
 
     isChangingLevel: function () {
         return this._isChangingLevel;
+    },
+	
+	isRefreshingLevel: function () {
+        return this._isRefreshingLevel;
     },
 
 // -----------------

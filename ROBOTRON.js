@@ -231,7 +231,8 @@ function renderSimulation(ctx) {
 	
 		levelManager.renderMenu(ctx);
 		
-    } else if (levelManager.isChangingLevel()) {
+    } else if (levelManager.isChangingLevel() && 
+				!levelManager.isRefreshingLevel()) {
 	
         levelManager.renderLevelChanger(ctx);
 		
@@ -244,7 +245,9 @@ function renderSimulation(ctx) {
         entityManager.render(ctx);
         renderCrosshair(ctx);
         if (g_Debug) spatialManager.render(ctx);
-        
+		if (levelManager.isRefreshingLevel) {
+			levelManager.renderLevelChanger(ctx);
+		} 
     }
 	
     Player.render(ctx);
