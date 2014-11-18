@@ -32,6 +32,7 @@ var levelManager = {
     ],
 
     _isChangingLevel: false,
+	_isRefreshingLevel: false,
     _changingTimer: 2 * SECS_TO_NOMINALS,
 
     _onMenu: true,
@@ -151,7 +152,8 @@ var levelManager = {
         // Used when the player dies, but has extra lives remaining
         entityManager.clearPartial();
         entityManager.resetPos();
-        this._isChangingLevel = true; //TODO: Different animation?
+        this._isChangingLevel = true;
+		this._isRefreshingLevel = true; //TODO: Different animation?
     },
 
     nextLevel: function () {
@@ -175,57 +177,78 @@ var levelManager = {
 
         ctx.save();
 
-        if (this._changingTimer > SECS_TO_NOMINALS) {
+		if (this._isRefreshingLevel) {
+			
+			var alpha;
+			if (this._changingTimer > SECS_TO_NOMINALS) {
+				alpha = (2 * SECS_TO_NOMINALS - this._changingTimer) / SECS_TO_NOMINALS;
+			} else {
+				alpha = this._changingTimer / SECS_TO_NOMINALS;
+				if (alpha < 0) alpha = 0;
+			}
+			ctx.globalAlpha = alpha;
+			ctx.fillStyle = "red";
+			ctx.fillRect(
+					consts.wallLeft, 
+					consts.wallTop + consts.wallThickness,
+					consts.wallRight - consts.wallThickness,
+					consts.wallBottom - consts.wallThickness
+			);
+			
+		} else {
+		
+			if (this._changingTimer > SECS_TO_NOMINALS) {
 
-            var range = (2 * SECS_TO_NOMINALS - this._changingTimer) / SECS_TO_NOMINALS;
-            var currentLayer = Math.floor(range * layers);
+				var range = (2 * SECS_TO_NOMINALS - this._changingTimer) / SECS_TO_NOMINALS;
+				var currentLayer = Math.floor(range * layers);
 
-            for (var i = 1; i < currentLayer; i++) {
-                if (i % consts.colors.length < i * consts.colors.length) {
-                    ctx.fillStyle = consts.colors[i % consts.colors.length];
-                }
-                ctx.fillRect(
-                        halfWidth - i * layerOffsetX,
-                        yMiddle - i * layerOffsetY,
-                        i * layerOffsetX * 2,
-                        i * layerOffsetY * 2
-                );
-            }
+				for (var i = 1; i < currentLayer; i++) {
+					if (i % consts.colors.length < i * consts.colors.length) {
+						ctx.fillStyle = consts.colors[i % consts.colors.length];
+					}
+					ctx.fillRect(
+							halfWidth - i * layerOffsetX,
+							yMiddle - i * layerOffsetY,
+							i * layerOffsetX * 2,
+							i * layerOffsetY * 2
+					);
+				}
+			} else {
 
-        } else {
+				var range = this._changingTimer / SECS_TO_NOMINALS;
+				var currentLayer = Math.ceil(range * layers);
 
-            var range = this._changingTimer / SECS_TO_NOMINALS;
-            var currentLayer = Math.ceil(range * layers);
+				for (var i = 1; i < currentLayer; i++) {
+					if (i % consts.colors.length < i * consts.colors.length) {
+						ctx.fillStyle = consts.colors[i % consts.colors.length];
+					}
+					ctx.fillRect(
+							i * layerOffsetX,
+							consts.wallTop + i * layerOffsetY,
+							g_canvas.width - i * layerOffsetX * 2,
+							g_canvas.height - consts.wallTop - i * layerOffsetY * 2
+					);
+				}
 
-            for (var i = 1; i < currentLayer; i++) {
-                if (i % consts.colors.length < i * consts.colors.length) {
-                    ctx.fillStyle = consts.colors[i % consts.colors.length];
-                }
-                ctx.fillRect(
-                        i * layerOffsetX,
-                        consts.wallTop + i * layerOffsetY,
-                        g_canvas.width - i * layerOffsetX * 2,
-                        g_canvas.height - consts.wallTop - i * layerOffsetY * 2
-                );
-            }
+				range = (SECS_TO_NOMINALS - this._changingTimer) / SECS_TO_NOMINALS;
+				currentLayer = Math.ceil(range * layers);
 
-            range = (SECS_TO_NOMINALS - this._changingTimer) / SECS_TO_NOMINALS;
-            currentLayer = Math.ceil(range * layers);
-
-            ctx.fillStyle = "black";
-            ctx.fillRect(
-                    halfWidth - currentLayer * layerOffsetX,
-                    yMiddle - currentLayer * layerOffsetY,
-                    currentLayer * layerOffsetX * 2,
-                    currentLayer * layerOffsetY * 2
-            );
-        }
+				ctx.fillStyle = "black";
+				ctx.fillRect(
+						halfWidth - currentLayer * layerOffsetX,
+						yMiddle - currentLayer * layerOffsetY,
+						currentLayer * layerOffsetX * 2,
+						currentLayer * layerOffsetY * 2
+				);
+			}
+		}
 
         ctx.restore();
 
         // Reset changing timer when level changing is complete
         if (this._changingTimer < 0) {
             this._isChangingLevel = false;
+			this._isRefreshingLevel = false;
             this._changingTimer = 2 * SECS_TO_NOMINALS;
         }
     },
