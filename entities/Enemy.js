@@ -104,7 +104,7 @@ Enemy.prototype.makeWarpParticles = function () {
                 color: colorDefinition.color,
                 isExploding: false
             });
-            entityManager.createParticle(particle);
+            entityManager.createWarpParticle(particle);
         }
     }
 };
@@ -123,16 +123,14 @@ Enemy.prototype.makeExplosion = function () {
         var numberOfParticles = colorDefinition.ratio * this.totalParticles;
         for (var j = 0; j < numberOfParticles; j++) {
             var particle = {
-                offX: 0,
-                offY: 0,
-                velX: util.randRange(-2, 2),
-                velY: util.randRange(-2, 2),
-                x: this.cx,
-                y: this.cy,
+                dirn: util.randRange(0, Math.PI*2),
+                speed: util.randRange(0,4),
+                cx: this.cx,
+                cy: this.cy,
                 color: colorDefinition.color,
-                isExploding: true
+                radius: 1
             };
-            entityManager.createWarpParticle(particle);
+            entityManager.createParticle(particle);
         }
     }
 };
