@@ -23,6 +23,9 @@ function Shell(descr) {
     this.baseVel = 5;
     this.velX = this.baseVel*Math.cos(descr.initialAngle);
     this.velY = this.baseVel*Math.sin(descr.initialAngle);
+
+    this.spawnFragment(6,"grey");
+    this.spawnFragment(3,"white");
 }
 
 Shell.prototype = new Entity();
@@ -75,11 +78,6 @@ Shell.prototype.getRadius = function () {
 
 Shell.prototype.render = function (ctx) {
     ctx.save();
-    /*var fadeThresh = CruiseMissile.prototype.lifeSpan / 3;
-
-    if (this.lifeSpan < fadeThresh) {
-        ctx.globalAlpha = this.lifeSpan / fadeThresh;
-    }*/
     ctx.fillStyle = "grey";
     util.fillCircle(ctx, this.cx, this.cy, this.getRadius());
     ctx.restore();
