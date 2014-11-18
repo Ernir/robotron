@@ -20,4 +20,5 @@ function add(e) {
 		//p.appendChild(t);
 		//$("output").appendChild(p);
 	//}
+	document.getElementById("formDiv").className = "hidden";
 }
