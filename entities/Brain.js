@@ -29,6 +29,7 @@ Brain.prototype.missileFireChance = 0.005; // 0.5% chance of firing a CM per upd
 // TODO: Find a good firing interval for the missiles.
 Brain.prototype.dropChance = 0.9; // 90% chance of a random drop
 Brain.prototype.bootTime = SECS_TO_NOMINALS;
+Brain.prototype.facing = 0;
 
 Brain.prototype.update = function (du) {
     if (this.bootTime >= 0) this.bootTime += -du;
@@ -131,28 +132,28 @@ Brain.prototype.render = function (ctx) {
     }
 
     if (distSq > 0.1) {
-        var facing = 3; // right
-        if (angle > PI * 1 / 4) facing = 6; //down
-        if (angle > PI * 3 / 4) facing = 0; //left
-        if (angle > PI * 5 / 4) facing = 9; //up
-        if (angle > PI * 7 / 4) facing = 3; //right
+        this.facing = 3; // right
+        if (angle > PI * 1 / 4) this.facing = 6; //down
+        if (angle > PI * 3 / 4) this.facing = 0; //left
+        if (angle > PI * 5 / 4) this.facing = 9; //up
+        if (angle > PI * 7 / 4) this.facing = 3; //right
     }
 
     switch (true) {
         case distSq < util.square(this.stepsize):
-            g_sprites.Brain[facing + 0].drawCentredAt(ctx, this.cx, this.cy, 0);
+            g_sprites.Brain[this.facing + 0].drawCentredAt(ctx, this.cx, this.cy, 0);
             break;
         case distSq < util.square(this.stepsize * 2):
-            g_sprites.Brain[facing + 1].drawCentredAt(ctx, this.cx, this.cy, 0);
+            g_sprites.Brain[this.facing + 1].drawCentredAt(ctx, this.cx, this.cy, 0);
             break;
         case distSq < util.square(this.stepsize * 3):
-            g_sprites.Brain[facing + 0].drawCentredAt(ctx, this.cx, this.cy, 0);
+            g_sprites.Brain[this.facing + 0].drawCentredAt(ctx, this.cx, this.cy, 0);
             break;
         case distSq < util.square(this.stepsize * 4):
-            g_sprites.Brain[facing + 2].drawCentredAt(ctx, this.cx, this.cy, 0);
+            g_sprites.Brain[this.facing + 2].drawCentredAt(ctx, this.cx, this.cy, 0);
             break;
         default:
-            g_sprites.Brain[facing + 0].drawCentredAt(ctx, this.cx, this.cy, 0);
+            g_sprites.Brain[this.facing + 0].drawCentredAt(ctx, this.cx, this.cy, 0);
             this.renderPos = {cx: this.cx, cy: this.cy};
     }
 };
