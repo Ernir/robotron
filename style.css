@@ -2,8 +2,13 @@
 body {position: relative; font: 20px/2rem sans-serif; background-color: black; color: white;}
 .wrapper {max-width: 1200px; margin: 0 auto;}
 main, .instructions, .shortcuts, footer, .canvasContainer {max-width: 800px; margin: 0.5rem auto;}
-.canvasContainer {width: 100%; height: 600px; border: 1px solid red; }
-#myCanvas {cursor: none;}
+.canvasContainer {xposition: relative; width: 100%; height: 600px; border: 1px solid red;}
+#myCanvas {cursor: none; position: absolute;}
+#formDiv {position: absolute; width: 800px; height: 600px;}
+.form {width: 50%; margin: 41% auto; padding: 1rem; background: rgba(255,0,0,1);}
+input[type="text"], input[type="submit"] {display: block; margin: 0 auto; width: 50%; text-align: center;}
+input[type="text"] {width: 49%}
+.hidden {display: none;}
 
 section, footer {border: 1px solid red;}
 article {border: 1px solid white;}

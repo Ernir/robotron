@@ -239,7 +239,7 @@ function renderSimulation(ctx) {
 		levelManager.renderGameOver(ctx);
 		
     } else {
-	
+	    document.getElementById("formDiv").className = "hidden";
         entityManager.render(ctx);
         renderCrosshair(ctx);
         if (g_Debug) spatialManager.render(ctx);

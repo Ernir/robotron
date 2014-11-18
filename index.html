@@ -14,9 +14,16 @@
 			<canvas id="myCanvas" width="800" height="600">
 				Sorry, but your browser does not support the HTML5 canvas tag.
 			</canvas>
+			<div id="formDiv" class="hidden">	
+				<form class="form" id="form" autocomplete="off">
+					<input type="text" id="text" placeholder="Type your name!" autofocus>
+					<input type="submit" value="Submit highscore">
+				</form>
+			</div>
 		</div>
 
 		<main>
+			<div id="output"></div>
 			<section class="instructions">
 				<h1 id="instructions">INSTRUCTIONS</h1>
 				<article>
@@ -84,7 +91,7 @@
 						<li>X = Toggle Diagnostics mode (shows red collision circles around entities)</li>
 					</ul>
 				</article>
-				<article class="Sliders">
+				<article class="sliders">
 					<h2>Sliders</h2>
 					<ul>
 						<li>Y = Increase music volume</li>
@@ -145,7 +152,6 @@
 				<p>&copy; 2014</p>
 			</article>
 		</footer>
-
 	</div>
 
 	<script src="core/globals.js"></script>
@@ -153,6 +159,8 @@
 	<script src="utils/consts.js"></script>
 	<script src="utils/util.js"></script>
 	<script src="core/keys.js"></script>
+	<script src="core/userInput.js"></script>
+
 
 	<script src="managers/handleMouse.js"></script>
 	<script src="managers/spatialManager.js"></script>

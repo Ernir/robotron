@@ -162,8 +162,6 @@ var levelManager = {
 		var layers = halfWidth / layerOffsetX;
 		
 		ctx.save();
-
-		// TODO: Add a good color sceme
 		
 		if (this._changingTimer > SECS_TO_NOMINALS) {
 		
@@ -263,7 +261,7 @@ var levelManager = {
 		this._isGameOver = true;
 		this._isChangingLevel = true;
 		Player.addLives();
-		this.ouputDiv();
+		document.getElementById("formDiv").className = "";
 	},
 	
 	isGameOver: function () {
@@ -273,9 +271,5 @@ var levelManager = {
 	renderGameOver: function (ctx) {
 		//TODO: Add Highscore
 		this.drawMenu("GAME OVER", "re");
-	},
-
-	ouputDiv: function () {
-		//document.getElementById("game")
 	}
 };
