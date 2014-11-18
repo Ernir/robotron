@@ -62,6 +62,8 @@ var levelManager = {
 
             var L = Player.level;
             var randomlevel = [];
+			
+			if (L % 5 !== 0) this._levelChangingSound.play();
 
             switch (true) {
                 case (L + 1) % 10 === 0:
@@ -142,6 +144,7 @@ var levelManager = {
                 return a + b;
             }, 0);
         } else {
+			this._levelChangingSound.play();
             entityManager.init(this._levelSpecs[Player.level]);
             this.numberOfEntities = this._levelSpecs[Player.level].reduce(function (a, b) {
                 return a + b;
