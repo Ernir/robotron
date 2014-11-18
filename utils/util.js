@@ -135,7 +135,9 @@ var util = {
         /*ctx.save();
         for (var i = 0; i < consts.colors.length; i++) {
             ctx.fillStyle = consts.colors[i];
-            ctx.fillRect(i*25, 550, (i+1)*25, 50);
+            ctx.fillRect(i*(g_canvas.width / consts.colors.length), 550, 
+						(i+1)*(g_canvas.width / consts.colors.length), 50
+			);
         }
         ctx.restore();*/
     },
@@ -169,7 +171,7 @@ var util = {
 
     //Called when initializing the game
     makeColorArray: function () {
-        for (var i = 0; i < 32; ++i) {
+        for (var i = 0; i < 22; ++i) {
             var r = Math.sin(0.3*i + 0) * 127 + 128;
             var g = Math.sin(0.3*i + 2) * 127 + 128;
             var b = Math.sin(0.3*i + 4) * 127 + 128;
