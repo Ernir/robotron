@@ -5,6 +5,10 @@
 // Electrodes are static enemies. Touch them and die.
 // Electrodes also kill Grunts.
 
+"use strict";
+
+/* jshint browser: true, devel: true, globalstrict: true */
+
 function Electrode(descr) {
 
     // Common inherited setup logic from Entity
@@ -46,14 +50,16 @@ Electrode.prototype.takeBulletHit = function () {
 };
 
 Electrode.prototype.render = function (ctx) {
+    var temp;
     switch(true) {
         case this.animation < SECS_TO_NOMINALS/5:
-            g_sprites.Electrode[(this.shapes*3)+0].drawCentredAt(ctx, this.cx, this.cy, 0);
+            temp = 0;
             break;
         case this.animation < 2*SECS_TO_NOMINALS/3:
-            g_sprites.Electrode[(this.shapes*3)+1].drawCentredAt(ctx, this.cx, this.cy, 0);
+            temp = 1;
             break;
         default:
-            g_sprites.Electrode[(this.shapes*3)+2].drawCentredAt(ctx, this.cx, this.cy, 0);
+            temp = 2;
     }
+    g_sprites.Electrode[(this.shapes*3)+temp].drawCentredAt(ctx, this.cx, this.cy, 0);
 };

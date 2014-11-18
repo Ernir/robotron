@@ -25,6 +25,7 @@ Hulk.prototype.renderPos = {cx: this.cx, cy: this.cy};
 Hulk.prototype.stepsize = 12;
 Hulk.prototype.bootTime = 2 * SECS_TO_NOMINALS;
 Hulk.prototype.brainpower = 0.05;
+Hulk.prototype.facing = 0;
 
 Hulk.prototype.update = function (du) {
     this.bootTime += -du;
@@ -122,27 +123,32 @@ Hulk.prototype.render = function (ctx) {
     var distSq = util.distSq(this.cx, this.cy, this.renderPos.cx, this.renderPos.cy);
     var angle = util.angleTo(this.renderPos.cx, this.renderPos.cy, this.cx, this.cy);
     var PI = Math.PI;
-    var facing = 3; // up or down
-    if (angle > PI * 3 / 4 && angle < PI * 5 / 4) facing = 0; //left
-    if (angle > PI * 7 / 4 || angle < PI * 1 / 4) facing = 6; //right
+    
+    if (distSq > 0.1) {
+        this.facing = 3; // up or down
+        if (angle > PI * 3 / 4 && angle < PI * 5 / 4) this.facing = 0; //left
+        if (angle > PI * 7 / 4 || angle < PI * 1 / 4) this.facing = 6; //right
+    }
 
+    var temp;
     switch (true) {
         case distSq < util.square(this.stepsize):
-            g_sprites.Hulk[facing + 0].drawCentredAt(ctx, this.cx, this.cy, 0);
+            temp = 0;
             break;
         case distSq < util.square(this.stepsize * 2):
-            g_sprites.Hulk[facing + 1].drawCentredAt(ctx, this.cx, this.cy, 0);
+            temp = 1;
             break;
         case distSq < util.square(this.stepsize * 3):
-            g_sprites.Hulk[facing + 0].drawCentredAt(ctx, this.cx, this.cy, 0);
+            temp = 0;
             break;
         case distSq < util.square(this.stepsize * 4):
-            g_sprites.Hulk[facing + 2].drawCentredAt(ctx, this.cx, this.cy, 0);
+            temp = 2;
             break;
         default:
             this.renderPos = {cx: this.cx, cy: this.cy};
-            g_sprites.Hulk[facing + 0].drawCentredAt(ctx, this.cx, this.cy, 0);
+            temp = 0;
     }
+    g_sprites.Hulk[this.facing + temp].drawCentredAt(ctx, this.cx, this.cy, 0);
 };
 
 Hulk.prototype.colors = [

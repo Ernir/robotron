@@ -104,23 +104,26 @@ Grunt.prototype.render = function (ctx) {
         return;
     }
     var distSq = util.distSq(this.cx, this.cy, this.renderPos.cx, this.renderPos.cy);
+
+    var temp;
     switch (true) {
         case distSq < util.square(this.stepsize):
-            g_sprites.Grunt[0].drawCentredAt(ctx, this.cx, this.cy, 0);
+            temp = 0;
             break;
         case distSq < util.square(this.stepsize * 2):
-            g_sprites.Grunt[1].drawCentredAt(ctx, this.cx, this.cy, 0);
+            temp = 1;
             break;
         case distSq < util.square(this.stepsize * 3):
-            g_sprites.Grunt[0].drawCentredAt(ctx, this.cx, this.cy, 0);
+            temp = 0;
             break;
         case distSq < util.square(this.stepsize * 4):
-            g_sprites.Grunt[2].drawCentredAt(ctx, this.cx, this.cy, 0);
+            temp = 2;
             break;
         default:
+            temp = 0;
             this.renderPos = {cx: this.cx, cy: this.cy};
-            g_sprites.Grunt[0].drawCentredAt(ctx, this.cx, this.cy, 0);
     }
+    g_sprites.Grunt[temp].drawCentredAt(ctx, this.cx, this.cy, 0);
 };
 
 

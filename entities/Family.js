@@ -154,24 +154,27 @@ Family.prototype.render = function (ctx) {
             if(angle > PI*7/4) this.facing = 3; //right
         }
 
-        var P = this.person * 12;
-
+        var temp;
         switch(true) {
             case distSq<util.square(this.stepsize):
-                g_sprites.Family[P + this.facing + 0].drawCentredAt(ctx, this.cx, this.cy, 0);
+                temp = 0;
                 break;
             case distSq<util.square(this.stepsize*2):
-                g_sprites.Family[P + this.facing + 1].drawCentredAt(ctx, this.cx, this.cy, 0);
+                temp = 1;
                 break;
             case distSq<util.square(this.stepsize*3):
-                g_sprites.Family[P + this.facing + 0].drawCentredAt(ctx, this.cx, this.cy, 0);
+                temp = 0;
                 break;
             case distSq<util.square(this.stepsize*4):
-                g_sprites.Family[P + this.facing + 2].drawCentredAt(ctx, this.cx, this.cy, 0);
+                temp = 2;
                 break;
             default:
-                g_sprites.Family[P + this.facing + 0].drawCentredAt(ctx, this.cx, this.cy, 0);
+                temp = 0;
                 this.renderPos = {cx: this.cx, cy: this.cy};
         }
+
+        var P = this.person * 12;
+        
+        g_sprites.Family[P + this.facing + temp].drawCentredAt(ctx, this.cx, this.cy, 0);
     }
 };
