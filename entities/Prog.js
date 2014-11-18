@@ -5,6 +5,10 @@
 // Progs are spawned when a Brain kills a family member.
 // Progs walk around randomly, killing the protagonist if encountered.
 
+"use strict";
+
+/* jshint browser: true, devel: true, globalstrict: true */
+
 function Prog(descr) {
 
     // Common inherited setup logic from Entity
@@ -16,8 +20,9 @@ function Prog(descr) {
 
 Prog.prototype = Object.create(Enemy.prototype);
 Prog.prototype.speed = 1.5;
-Prog.prototype.renderPos = {cx: this.cx, cy: this.cy};
-Prog.prototype.stepsize = 10;
+Prog.prototype.renderPos = {cx: 0, cy: 0};
+Prog.prototype.stepsize = 15;
+Prog.prototype.facing = 0;
 
 Prog.prototype.update = function (du) {
 
@@ -84,29 +89,42 @@ Prog.prototype.render = function (ctx) {
     var distSq = util.distSq(this.cx, this.cy, this.renderPos.cx, this.renderPos.cy);
     var angle = util.angleTo(this.renderPos.cx, this.renderPos.cy, this.cx, this.cy);
     var PI = Math.PI;
-    var facing = 3; // right
-    if(angle > PI*1/4) facing = 6; //down
-    if(angle > PI*3/4) facing = 0; //left
-    if(angle > PI*5/4) facing = 9; //up
-    if(angle > PI*7/4) facing = 3; //right
+    
+    if (distSq > 0.1) {
+        this.facing = 3; // right
+        if(angle > PI*1/4) this.facing = 6; //down
+        if(angle > PI*3/4) this.facing = 0; //left
+        if(angle > PI*5/4) this.facing = 9; //up
+        if(angle > PI*7/4) this.facing = 3; //right
+    }
 
+    var temp = 0;
     switch(true) {
         case distSq<util.square(this.stepsize):
-            g_sprites.Prog[facing + 0].drawCentredAt(ctx, this.cx, this.cy, 0);
+            temp = 0;
             break;
         case distSq<util.square(this.stepsize*2):
-            g_sprites.Prog[facing + 1].drawCentredAt(ctx, this.cx, this.cy, 0);
+            temp = 1;
             break;
         case distSq<util.square(this.stepsize*3):
-            g_sprites.Prog[facing + 0].drawCentredAt(ctx, this.cx, this.cy, 0);
+            temp = 0;
             break;
         case distSq<util.square(this.stepsize*4):
-            g_sprites.Prog[facing + 2].drawCentredAt(ctx, this.cx, this.cy, 0);
+            temp = 2
             break;
         default:
-            g_sprites.Prog[facing + 0].drawCentredAt(ctx, this.cx, this.cy, 0);
-            this.renderPos = {cx: this.cx, cy: this.cy};
+            temp = 0;
+            this.renderPos = {cx: this.cx, cy: this.cy};        
     }
+
+    //This belongs in an (as yet unwritten) effects manager, instead of the entityManager
+    var descr = {cx: this.cx,
+                 cy: this.cy,
+                 image: g_sprites.Prog[this.facing + temp]
+                 };
+    entityManager.createAfterImage(descr);
+
+    g_sprites.Prog[this.facing + temp].drawCentredAt(ctx, this.cx, this.cy, 0);
 };
 
 Prog.prototype.colors = [

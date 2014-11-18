@@ -35,6 +35,7 @@ Family.prototype.lifeSpan = 1 * SECS_TO_NOMINALS;
 Family.prototype.isDying = false;
 Family.prototype.renderPos = {cx: this.cx, cy: this.cy};
 Family.prototype.willSpawnProg = false;
+Family.prototype.facing = 0;
 
 Family.prototype.update = function (du) {
 
@@ -144,29 +145,32 @@ Family.prototype.render = function (ctx) {
         var distSq = util.distSq(this.cx, this.cy, this.renderPos.cx, this.renderPos.cy);
         var angle = util.angleTo(this.renderPos.cx, this.renderPos.cy, this.cx, this.cy);
         var PI = Math.PI;
-        var facing = 3; // right
-        if(angle > PI*1/4) facing = 6; //down
-        if(angle > PI*3/4) facing = 0; //left
-        if(angle > PI*5/4) facing = 9; //up
-        if(angle > PI*7/4) facing = 3; //right
+        
+        if (distSq > 0.1) {
+            this.facing = 3; // right
+            if(angle > PI*1/4) this.facing = 6; //down
+            if(angle > PI*3/4) this.facing = 0; //left
+            if(angle > PI*5/4) this.facing = 9; //up
+            if(angle > PI*7/4) this.facing = 3; //right
+        }
 
         var P = this.person * 12;
 
         switch(true) {
             case distSq<util.square(this.stepsize):
-                g_sprites.Family[P + facing + 0].drawCentredAt(ctx, this.cx, this.cy, 0);
+                g_sprites.Family[P + this.facing + 0].drawCentredAt(ctx, this.cx, this.cy, 0);
                 break;
             case distSq<util.square(this.stepsize*2):
-                g_sprites.Family[P + facing + 1].drawCentredAt(ctx, this.cx, this.cy, 0);
+                g_sprites.Family[P + this.facing + 1].drawCentredAt(ctx, this.cx, this.cy, 0);
                 break;
             case distSq<util.square(this.stepsize*3):
-                g_sprites.Family[P + facing + 0].drawCentredAt(ctx, this.cx, this.cy, 0);
+                g_sprites.Family[P + this.facing + 0].drawCentredAt(ctx, this.cx, this.cy, 0);
                 break;
             case distSq<util.square(this.stepsize*4):
-                g_sprites.Family[P + facing + 2].drawCentredAt(ctx, this.cx, this.cy, 0);
+                g_sprites.Family[P + this.facing + 2].drawCentredAt(ctx, this.cx, this.cy, 0);
                 break;
             default:
-                g_sprites.Family[P + facing + 0].drawCentredAt(ctx, this.cx, this.cy, 0);
+                g_sprites.Family[P + this.facing + 0].drawCentredAt(ctx, this.cx, this.cy, 0);
                 this.renderPos = {cx: this.cx, cy: this.cy};
         }
     }

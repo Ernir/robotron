@@ -345,6 +345,14 @@ var entityManager = {
         this._particles.push(new Particle(descr));
     },
 
+    createWarpParticle: function (descr) {
+        this._particles.push(new WarpParticle(descr));
+    },
+
+    createAfterImage: function (descr) {
+        this._particles.push(new AfterImage(descr));
+    },
+
 // --------------------
 // Update & Render
 	
