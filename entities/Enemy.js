@@ -128,7 +128,7 @@ Enemy.prototype.makeExplosion = function () {
                 cx: this.cx,
                 cy: this.cy,
                 color: colorDefinition.color,
-                isSquare: true
+                radius: 1
             };
             entityManager.createParticle(particle);
         }
