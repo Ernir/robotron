@@ -115,6 +115,10 @@ var KEY_SHOTGUN = keyCode('5');
 var KEY_SHOTGUNN = 101; // Numpad 5
 var KEY_SHIELD = keyCode('6');
 var KEY_SHIELDN = 102; // Numpad 6
+var KEY_PREV_SONG = keyCode('8');
+var KEY_PREV_SONGN = 104; // Numpad 8
+var KEY_NEXT_SONG = keyCode('9');
+var KEY_NEXT_SONGN = 105; // Numpad 9
 
 function processDiagnostics() {
 
@@ -193,6 +197,10 @@ function checkDebugSound() {
     
     if (eatKey(KEY_MUSIC)) g_music = !g_music;
 	
+    if (eatKey(KEY_NEXT_SONG) || eatKey(KEY_NEXT_SONGN)) g_bgm.nextSong();
+
+    if (eatKey(KEY_PREV_SONG) || eatKey(KEY_PREV_SONGN)) g_bgm.prevSong();
+
 	if (g_music) g_bgm.play();
     else g_bgm.pause();
 	
