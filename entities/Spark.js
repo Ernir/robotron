@@ -10,17 +10,17 @@
 
 /* jshint browser: true, devel: true, globalstrict: true */
 
-// A generic contructor which accepts an arbitrary descriptor object
+// A contructor which accepts an arbitrary descriptor object
 function Spark(descr) {
     // Common inherited setup logic from Entity
     this.setup(descr);
 
     this.sprite = g_sprites.EnforcerSpark[0];
-	
-	// HACKED-IN AUDIO (no preloading)
-	this.fireSound = new Audio(g_audioUrls.spark);
 
-	// Make a noise when I am created (i.e. fired)
+    // HACKED-IN AUDIO (no preloading)
+    this.fireSound = new Audio(g_audioUrls.spark);
+
+    // Make a noise when I am created (i.e. fired)
     if (g_sounds) this.fireSound.play();
 
     this.baseVel = 5;
@@ -40,14 +40,14 @@ Spark.prototype.update = function (du) {
 
     // Handle death
     if (this._isDeadNow) {
-        this.spawnFragment(5,consts.colors[2]);
+        this.spawnFragment(5, consts.colors[2]);
         Player.addScore(Player.scoreValues.Spark * Player.getMultiplier());
         return entityManager.KILL_ME_NOW;
     }
 
     this.lifeSpan -= du;
     if (this.lifeSpan < 0) {
-        this.spawnFragment(5,consts.colors[2]);
+        this.spawnFragment(5, consts.colors[2]);
         return entityManager.KILL_ME_NOW;
     }
 
@@ -64,7 +64,7 @@ Spark.prototype.update = function (du) {
         var canTakeHit = hitEntity.takeEnemyHit;
         if (canTakeHit) {
             canTakeHit.call(hitEntity);
-            this.spawnFragment(5,consts.colors[2]);
+            this.spawnFragment(5, consts.colors[2]);
             return entityManager.KILL_ME_NOW;
         }
     }
@@ -81,11 +81,13 @@ Spark.prototype.edgeHug = function () {
     var r = this.getRadius();
     var baseVel = this.baseVel;
 
+    // Checking if we hit a wall
     var rightWallIntersect = cx + velX > consts.wallRight - r;
     var leftWallIntersect = cx + velX < consts.wallLeft + r;
     var topWallIntersect = cy + velY < consts.wallTop + consts.wallThickness + r;
     var bottomWallIntersect = cy + velY > consts.wallBottom - r;
 
+    // Slide if we hit a wall
     if (leftWallIntersect || rightWallIntersect) { // LR borders
         this.velX = 0;
         this.velY = util.sign(velY) * baseVel;
@@ -114,60 +116,6 @@ Spark.prototype.edgeHug = function () {
         this.velX = 0;
         this.velY = -baseVel;
     }
-
-
-//    var absVelX = util.abs(newVelX); // Only concerned with edges here
-//    var absVelY = util.abs(newVelY);
-//    if (topWallIntersect && leftWallIntersect) { // TL corner
-//        if (absVelX > absVelY) {
-//            // Travel down
-//            newVelX = 0;
-//            newVelY = baseVel;
-//        } else {
-//            // Travel right
-//            newVelX = baseVel;
-//            newVelY = 0;
-//        }
-//    }
-//
-//    if (topWallIntersect && rightWallIntersect) { // TR corner
-//        if (absVelX > absVelY) {
-//            // Travel down
-//            newVelX = 0;
-//            newVelY = baseVel;
-//        } else {
-//            // Travel left
-//            newVelX = -baseVel;
-//            newVelY = 0;
-//        }
-//    }
-//
-//    if (rightWallIntersect && bottomWallIntersect) { // BR corner
-//        if (absVelX > absVelY) {
-//            // Travel up
-//            newVelX = 0;
-//            newVelY = -baseVel;
-//        } else {
-//            // Travel left
-//            newVelX = -baseVel;
-//            newVelY = 0;
-//        }
-//    }
-//
-//    if (bottomWallIntersect && leftWallIntersect) { // BL corner
-//        if (absVelX > absVelY) {
-//            // Travel up
-//            newVelX = 0;
-//            newVelY = -baseVel;
-//        } else {
-//            // Travel right
-//            newVelX = baseVel;
-//            newVelY = 0;
-//        }
-//    }
-//
-//    this.velX = newVelX;
-//    this.velY = newVelY;
 };
 
 Spark.prototype.takeBulletHit = function () {
