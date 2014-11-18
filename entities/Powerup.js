@@ -2,7 +2,7 @@
 //POWERUP
 //=======
 
-// Powerups are rarely dropped by Brains and Tanks when they die
+// Powerups are rarely dropped by all enemies when they die, and frequently by Brains and Tanks.
 
 "use strict";
 

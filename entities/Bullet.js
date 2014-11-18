@@ -67,9 +67,9 @@ Bullet.prototype.update = function (du) {
 
     this.capPositions();
     if(this.edgeBounce()) {
-        if (Player.hasMachineGun) this.spawnFragment(5,consts.colors[4]);
-        if (Player.hasShotgun) this.spawnFragment(5,consts.colors[1]);
-        if (!Player.hasMachineGun && !Player.hasShotgun) this.spawnFragment(5,consts.colors[3]);
+        if (Player.hasMachineGun) this.spawnFragment(5,"cyan");
+        if (Player.hasShotgun) this.spawnFragment(5,"orange");
+        if (!Player.hasMachineGun && !Player.hasShotgun) this.spawnFragment(5,"lime");
         return entityManager.KILL_ME_NOW;
     }
 
@@ -102,9 +102,9 @@ Bullet.prototype.update = function (du) {
 					canTakeHit.call(hitEntity, descr);
 					spatialManager.unregister(hitEntity);
 				} else canFriendlyHit.call(hitEntity);
-                if (Player.hasMachineGun) this.spawnFragment(5,consts.colors[4]);
-                if (Player.hasShotgun) this.spawnFragment(5,consts.colors[1]);
-                if (!Player.hasMachineGun && !Player.hasShotgun) this.spawnFragment(5,consts.colors[3]);
+                if (Player.hasMachineGun) this.spawnFragment(5,"cyan");
+                if (Player.hasShotgun) this.spawnFragment(5,"orange");
+                if (!Player.hasMachineGun && !Player.hasShotgun) this.spawnFragment(5,"lime");
                 return entityManager.KILL_ME_NOW;
             }
         }
