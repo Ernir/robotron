@@ -94,7 +94,7 @@ Powerup.prototype.getRadius = function () {
 Powerup.prototype.render = function (ctx) {
     var temp = Math.floor(8* this.animation / this.loop);
     if (temp > 7) temp = 0;
-	console.time("create powerup");
+	//console.time("create powerup");
     g_sprites.PowerUps[8*this.brand+temp].drawCentredAt(ctx, this.cx, this.cy, 0);
-	console.timeEnd("create powerup");
+	//console.timeEnd("create powerup");
 };
