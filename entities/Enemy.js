@@ -61,6 +61,29 @@ Enemy.prototype.isSpawning = true;
 Enemy.prototype.spawnTime = SECS_TO_NOMINALS / 2;
 Enemy.prototype.spawnTimeElapsed = 0;
 
+Enemy.prototype.makeWarpParticles = function () {
+
+    for (var i = 0; i < this.colors.length; i++) {
+        var colorDefinition = this.colors[i];
+        var numberOfParticles = colorDefinition.ratio * this.getNumberOfParticles();
+        for (var j = 0; j < numberOfParticles; j++) {
+            var direction = util.randRange(0, Math.PI * 2);
+            var speed = util.randRange(0, 2);
+            var distance = speed * Particle.prototype.lifeSpan;
+
+            var particle = {
+                dirn: direction,
+                speed: -speed,
+                cx: this.cx + distance * Math.cos(direction),
+                cy: this.cy + distance * Math.sin(direction),
+                color: colorDefinition.color,
+                radius: 1
+            };
+            entityManager.createParticle(particle);
+        }
+    }
+};
+
 Enemy.prototype.warpIn = function (du) {
     this.spawnTimeElapsed += du;
     if (this.spawnTimeElapsed > this.spawnTime) {
