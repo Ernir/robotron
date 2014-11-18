@@ -129,11 +129,14 @@ Brain.prototype.render = function (ctx) {
             0,
                 2 * PI);
     }
-    var facing = 3; // right
-    if (angle > PI * 1 / 4) facing = 6; //down
-    if (angle > PI * 3 / 4) facing = 0; //left
-    if (angle > PI * 5 / 4) facing = 9; //up
-    if (angle > PI * 7 / 4) facing = 3; //right
+
+    if (distSq > 0.1) {
+        var facing = 3; // right
+        if (angle > PI * 1 / 4) facing = 6; //down
+        if (angle > PI * 3 / 4) facing = 0; //left
+        if (angle > PI * 5 / 4) facing = 9; //up
+        if (angle > PI * 7 / 4) facing = 3; //right
+    }
 
     switch (true) {
         case distSq < util.square(this.stepsize):
