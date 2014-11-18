@@ -107,12 +107,13 @@ Entity.prototype.edgeBounce = function () {
 };
 
 Entity.prototype.spawnFragment = function (num,specificColor) {
+    var explosionColors = ["yellow","orange","red","grey","white"];
     for (var i = 0; i < num; i++) {
         var dirn = Math.random()*2*Math.PI;
         var color;
         if (specificColor === undefined) {
-            var colorId = Math.floor(Math.random()*3);
-            color = consts.colors[colorId];
+            var colorId = Math.floor(Math.random()*5);
+            color = explosionColors[colorId];
         } else {
             color = specificColor;
         }

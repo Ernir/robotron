@@ -130,6 +130,14 @@ var util = {
         ctx.fillStyle = "black";
         ctx.fillRect(0, 0, ctx.canvas.width, ctx.canvas.height);
         ctx.fillStyle = prevfillStyle;
+        
+        //Display the color array
+        /*ctx.save();
+        for (var i = 0; i < consts.colors.length; i++) {
+            ctx.fillStyle = consts.colors[i];
+            ctx.fillRect(i*25, 550, (i+1)*25, 50);
+        }
+        ctx.restore();*/
     },
 
     strokeCircle: function (ctx, x, y, r) {
