@@ -126,6 +126,7 @@ Player.prototype.render = function(ctx) {
 
 Player.prototype.addLevel = function () {
     this.level += 1;
+    if (this.level > 255) this.level = 1;
 };
 
 Player.prototype.subtractLevel = function () {
