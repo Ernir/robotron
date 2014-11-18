@@ -41,6 +41,7 @@ Spark.prototype.update = function (du) {
     // Handle death
     if (this._isDeadNow) {
         this.spawnFragment(5,consts.colors[2]);
+        Player.addScore(Player.scoreValues.Spark * Player.getMultiplier());
         return entityManager.KILL_ME_NOW;
     }
 
@@ -171,7 +172,6 @@ Spark.prototype.edgeHug = function () {
 
 Spark.prototype.takeBulletHit = function () {
     this.kill();
-    Player.addScore(Player.scoreValues.Spark * Player.getMultiplier());
 };
 
 Spark.prototype.getRadius = function () {

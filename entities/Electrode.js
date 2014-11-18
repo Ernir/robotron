@@ -26,6 +26,7 @@ Electrode.prototype.update = function (du) {
 
     // Handle death
     if (this._isDeadNow) {
+        Player.addScore(Player.scoreValues.Electrode * Player.getMultiplier());
         return entityManager.KILL_ME_NOW;
     }
 
@@ -42,7 +43,6 @@ Electrode.prototype.update = function (du) {
 
 Electrode.prototype.takeBulletHit = function () {
     this.kill();
-	Player.addScore(Player.scoreValues.Electrode * Player.getMultiplier());
 };
 
 Electrode.prototype.render = function (ctx) {

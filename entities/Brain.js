@@ -39,6 +39,7 @@ Brain.prototype.update = function (du) {
 
     // Handle death
     if (this._isDeadNow) {
+        Player.addScore(Player.scoreValues.Brain * Player.getMultiplier());
         return entityManager.KILL_ME_NOW;
     }
 
@@ -103,7 +104,6 @@ Brain.prototype.findTarget = function () {
 Brain.prototype.takeBulletHit = function () {
     this.kill();
     this.makeExplosion();
-    Player.addScore(Player.scoreValues.Brain * Player.getMultiplier());
 };
 
 Brain.prototype.render = function (ctx) {

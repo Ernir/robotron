@@ -28,6 +28,7 @@ Prog.prototype.update = function (du) {
 
     // Handle death
     if (this._isDeadNow) {
+        Player.addScore(Player.scoreValues.Prog * Player.getMultiplier());
         return entityManager.KILL_ME_NOW;
     }
 
@@ -69,7 +70,6 @@ Prog.prototype.randomWalk = function () {
 Prog.prototype.takeBulletHit = function () {
     this.kill();
     this.makeExplosion();
-    Player.addScore(Player.scoreValues.Prog * Player.getMultiplier());
 };
 
 // Overriding from Enemy.

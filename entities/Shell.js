@@ -34,6 +34,7 @@ Shell.prototype.update = function (du) {
 	// Handle death
     if(this._isDeadNow) {
         this.spawnFragment(12);
+        Player.addScore(Player.scoreValues.Shell * Player.getMultiplier());
         return entityManager.KILL_ME_NOW;
     }
     
@@ -66,7 +67,6 @@ Shell.prototype.update = function (du) {
 
 Shell.prototype.takeBulletHit = function () {
     this.kill();
-    Player.addScore(Player.scoreValues.Shell * Player.getMultiplier());
 };
 
 Shell.prototype.getRadius = function () {

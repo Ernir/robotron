@@ -38,6 +38,7 @@ Tank.prototype.update = function (du) {
 
     // Handle death
     if (this._isDeadNow) {
+        Player.addScore(Player.scoreValues.Tank * Player.getMultiplier());
         return entityManager.KILL_ME_NOW;
     }
 
@@ -92,7 +93,6 @@ Tank.prototype.randomWalk = function () {
 Tank.prototype.takeBulletHit = function () {
     this.makeExplosion();
     this.kill();
-    Player.addScore(Player.scoreValues.Tank * Player.getMultiplier());
 };
 
 Tank.prototype.render = function (ctx) {

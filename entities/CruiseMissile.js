@@ -39,6 +39,7 @@ CruiseMissile.prototype.update = function (du) {
     if(this._isDeadNow) {
         this.spawnFragment(12);
         if (g_sounds) this.bombSound.play();    
+        Player.addScore(Player.scoreValues.CruiseMissile * Player.getMultiplier());
         return entityManager.KILL_ME_NOW;
     }
     
@@ -97,7 +98,6 @@ CruiseMissile.prototype.seekTarget = function () {
 
 CruiseMissile.prototype.takeBulletHit = function () {
     this.kill();
-    Player.addScore(Player.scoreValues.CruiseMissile * Player.getMultiplier());
 };
 
 CruiseMissile.prototype.getRadius = function () {
