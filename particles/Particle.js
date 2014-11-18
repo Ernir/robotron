@@ -1,6 +1,6 @@
-// ======
-// Cruise Missile Trails
-// ======
+// ================
+// Particle effects
+// ================
 
 
 "use strict";

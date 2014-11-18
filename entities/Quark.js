@@ -41,6 +41,7 @@ Quark.prototype.update = function (du) {
 
     // Handle death
     if (this._isDeadNow) {
+        Player.addScore(Player.scoreValues.Quark * Player.getMultiplier());
         return entityManager.KILL_ME_NOW;
     }
 
@@ -95,7 +96,6 @@ Quark.prototype.randomWalk = function () {
 Quark.prototype.takeBulletHit = function () {
     this.kill();
     this.makeExplosion();
-    Player.addScore(Player.scoreValues.Quark * Player.getMultiplier());
 };
 
 Quark.prototype.render = function (ctx) {

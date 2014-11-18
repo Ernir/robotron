@@ -36,6 +36,7 @@ Grunt.prototype.update = function (du) {
 
     // Handle death
     if (this._isDeadNow) {
+        Player.addScore(Player.scoreValues.Grunt * Player.getMultiplier());
         return entityManager.KILL_ME_NOW;
     }
 
@@ -93,7 +94,6 @@ Grunt.prototype.resetRage = function () {
 Grunt.prototype.takeBulletHit = function () {
     this.kill();
     this.makeExplosion();
-    Player.addScore(Player.scoreValues.Grunt * Player.getMultiplier());
 };
 Grunt.prototype.takeElectrodeHit = function () {
     this.takeBulletHit();

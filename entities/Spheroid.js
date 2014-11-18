@@ -41,6 +41,7 @@ Spheroid.prototype.update = function (du) {
 
     // Handle death
     if (this._isDeadNow) {
+        Player.addScore(Player.scoreValues.Spheroid * Player.getMultiplier());
         return entityManager.KILL_ME_NOW;
     }
 
@@ -93,7 +94,6 @@ Spheroid.prototype.randomWalk = function () {
 Spheroid.prototype.takeBulletHit = function () {
     this.kill();
     this.makeExplosion();
-    Player.addScore(Player.scoreValues.Spheroid * Player.getMultiplier());
 };
 
 Spheroid.prototype.render = function (ctx) {

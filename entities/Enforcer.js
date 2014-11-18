@@ -32,6 +32,7 @@ Enforcer.prototype.update = function (du) {
 
     // Handle death
     if (this._isDeadNow) {
+        Player.addScore(Player.scoreValues.Enforcer * Player.getMultiplier());
         return entityManager.KILL_ME_NOW;
     }
 
@@ -88,7 +89,6 @@ Enforcer.prototype.seekTarget = function () {
 Enforcer.prototype.takeBulletHit = function () {
     this.kill();
     this.makeExplosion();
-	Player.addScore(Player.scoreValues.Enforcer * Player.getMultiplier());
 };
 
 Enforcer.prototype.render = function (ctx) {
