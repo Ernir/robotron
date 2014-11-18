@@ -239,9 +239,11 @@ function renderSimulation(ctx) {
 		levelManager.renderGameOver(ctx);
 		
     } else {
+
         entityManager.render(ctx);
         renderCrosshair(ctx);
         if (g_Debug) spatialManager.render(ctx);
+        
     }
 	
     Player.render(ctx);

@@ -41,6 +41,7 @@ var levelManager = {
     // PUBLIC METHODS
 
     startLevel: function () {
+    	document.getElementById("formDiv").className = "hidden";
         // Create a fresh level
         entityManager.clearAll();
         spatialManager.resetAll();
