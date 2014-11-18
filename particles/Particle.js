@@ -22,16 +22,15 @@ Particle.prototype.radius = 3;
 Particle.prototype.speed = 0.5;
 Particle.prototype.velX = 0;
 Particle.prototype.velY = 0;
-Particle.prototype.colors = ["yellow","orange","red","lime","cyan"];
 
 Particle.prototype.update = function (du) {
-    
+
     this.lifeSpan -= du;
     if (this.lifeSpan < 0) return entityManager.KILL_ME_NOW;
 
     if (this.dirn) {
-        this.velX = Math.cos(this.dirn)*this.speed;
-        this.velY = Math.sin(this.dirn)*this.speed;
+        this.velX = Math.cos(this.dirn) * this.speed;
+        this.velY = Math.sin(this.dirn) * this.speed;
     }
 
     this.cx += this.velX * du;
@@ -46,7 +45,7 @@ Particle.prototype.render = function (ctx) {
         ctx.globalAlpha = this.lifeSpan / fadeThresh;
         radius = this.radius * this.lifeSpan / fadeThresh;
     }
-    ctx.fillStyle = this.colors[this.color];
+    ctx.fillStyle = this.color;
     util.fillCircle(ctx, this.cx, this.cy, radius);
     ctx.restore();
 };

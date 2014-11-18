@@ -16,5 +16,5 @@ var consts = {
 	wallLeft: 5,
 	wallRight: g_canvas.width - 5,
 
-	colors: []
+	colors: ["yellow","orange","red","lime","cyan"]
 };
