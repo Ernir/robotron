@@ -1,3 +1,65 @@
+/*
+// Use this code block if you have the image and sound folders
+g_imgUrls = {
+	Brain : "images/Brain.png",
+	Child : "images/Child.png",
+	Dad : "images/Dad.png",
+	Enforcer : "images/Enforcer.png",
+	Grunt : "images/Grunt.png",
+	Hulk : "images/Hulk.png",
+	Mom : "images/Mom.png",
+	Protagonist : "images/Protagonist.png",
+	Prog : "images/NewProg.png",
+	Quark : "images/Quark.png",
+	Spheroid : "images/Spheroid.png",
+	Tank : "images/Tank.png",
+	PowerUps: "images/PowerUps.png",
+	
+	BlackDiamond : "images/BlackDiamond.png",
+	Checkers : "images/Checkers.png",
+	Diamond : "images/Diamond.png",
+	Dizzy : "images/Dizzy.png",
+	EnforcerSpark : "images/EnforcerSpark.png",
+	Extralife : "images/extralife.png",
+	Rectangle : "images/Rectangle.png",
+	Skull : "images/Skull.png",
+	Spark : "images/Spark.png",
+	Square : "images/Square.png",
+	Triangle : "images/Triangle.png",
+	HumanScore : "images/HumanScore.png"
+};
+
+g_audioUrls = {
+	brains : "sounds/brains.wav",
+	enfspark : "sounds/enfspark.wav",
+	explode : "sounds/explode.wav",
+	explosion : "sounds/explosion.wav",
+	familypick : "sounds/familypick.wav",
+	familypickrampage : "sounds/familypickrampage.wav",
+	familydead : "sounds/familydead.wav",
+	firstlevel : "sounds/firstlevel.wav",
+	newlevel : "sounds/newlevel.wav",
+	playerdead : "sounds/playerdead.wav",
+	shot : "sounds/shot.wav",
+	shell : "sounds/shell.mp3",
+	spark : "sounds/spark.mp3",
+	startsound : "sounds/startsound.wav",
+	walk : "sounds/walk.wav",
+	loselife : "sounds/loselife.mp3",
+	pickitem: "sounds/pickitem.mp3",
+    machineGun : "sounds/laser.wav",
+    shotgunFire : "sounds/shotgunFire.mp3",
+    shotgunReload : "sounds/shotgunReload.mp3"
+};
+
+g_bgmUrls = {
+	todIOF : "sounds/IronyOfFate.mp3",
+    music : "sounds/rafmagnad11.mp3",
+	instarem: "sounds/instant-remedy.mp3"
+};
+*/
+
+// Use this code block if you DO NOT have the image and sound folders
 g_imgUrls = {
 	Brain : "https://notendur.hi.is/~eth31/cgp/staticdata/sprites/Brain.png",
 	Child : "https://notendur.hi.is/~eth31/cgp/staticdata/sprites/Child.png",
@@ -11,7 +73,6 @@ g_imgUrls = {
 	Quark : "https://notendur.hi.is/~eth31/cgp/staticdata/sprites/Quark.png",
 	Spheroid : "https://notendur.hi.is/~eth31/cgp/staticdata/sprites/Spheroid.png",
 	Tank : "https://notendur.hi.is/~eth31/cgp/staticdata/sprites/Tank.png",
-	
 	PowerUps: "https://notendur.hi.is/~odv1/Tölvuleikjaforritun/Robotron/images/PowerUps.png",
 	
 	BlackDiamond : "https://notendur.hi.is/~eth31/cgp/staticdata/Shapes/BlackDiamond.png",
@@ -56,55 +117,3 @@ g_bgmUrls = {
     music : "https://notendur.hi.is/~odv1/Tölvuleikjaforritun/RoboBarrier2/sounds/rafmagnad11.mp3",
 	instarem: "https://notendur.hi.is/~jiz2/TOL-S3/ProjectRobotron/instant-remedy.mp3"
 };
-
-/* 
-	URLs:
-	nr. 01-12 are sprites (12)
-	nr. 13-24 are shapes (12)
-	nr. 25-28 are numbers and letters (4)
-	nr. 29-40 are sounds (12)
-
-	01 = g_url_Brain
-	02 = g_url_Child
-	03 = g_url_Dad
-	04 = g_url_Enforcer
-	05 = g_url_Grunt
-	06 = g_url_Hulk
-	07 = g_url_Mom
-	08 = g_url_Player
-	09 = g_url_Prog
-	10 = g_url_Quark
-	11 = g_url_Spheroid
-	12 = g_url_Tank
-
-	13 = g_url_2084
-	14 = g_url_BlackDiamond
-	15 = g_url_Checkers
-	16 = g_url_Diamond
-	17 = g_url_Dizzy
-	18 = g_url_EnforcerSpark
-	19 = g_url_extralife
-	20 = g_url_Rectangle
-	21 = g_url_Skull
-	22 = g_url_Spark
-	23 = g_url_Square
-	24 = g_url_Triangle
-
-	25 = g_url_GreenAlphabet
-	26 = g_url_RedAlphabet
-	27 = g_url_WhiteNumbers
-	28 = g_url_HumanScore
-
-	29 = g_url_brains
-	30 = g_url_enfspark
-	31 = g_url_explode
-	32 = g_url_familypick
-	33 = g_url_familypickrampage
-	34 = g_url_familydead
-	35 = g_url_firstlevel
-	36 = g_url_newlevel
-	37 = g_url_playerdead
-	38 = g_url_shot
-	39 = g_url_startsound
-	40 = g_url_walk
-*/
