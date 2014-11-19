@@ -37,7 +37,7 @@
 			</section>
 
 			<section class="shortcuts">
-				<h1 id="shortcuts">KEYBOARD SHORTCUTS</h1>
+				<h1 id="shortcuts">CONTROLS</h1>
 				<article class="movement">
 					<h2>Movement</h2>
 					<ul>
@@ -64,6 +64,8 @@
 						<li>R = Start/Restart game</li>
 						<li>P = Pause/Resume game</li>
 						<li>O = When paused - continue 1 frame</li>
+						<li>8 = Previous song</li>
+						<li>9 = Next song</li>
 						<li>Esc = Quit</li>
 						<li>X = Toggle Diagnostics mode (shows red collision circles around entities)</li>
 					</ul>
@@ -92,7 +94,7 @@
 						<li>C = Clear the screen on/off</li>
 						<li>B = Draw a red box</li>
 						<li>U = Draw a white box</li>
-						<li>F = Toggle flipflop</li>
+						<li>F = Toggle flipflop (only when paused)</li>
 						<li>R = Toggle render (only when paused)</li>
 						<li>T = Show timer</li>
 					</ul>
