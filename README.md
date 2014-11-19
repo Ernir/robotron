@@ -10,3 +10,5 @@ This game was programmed by (in alphabetical order):
 * [Eiríkur Ernir Þorsteinsson](https://github.com/Ernir)
 * [Jianfei John Zheng](https://github.com/jiz2)
 * [Oddur Vilhjálmsson](https://github.com/OddurV)
+Instructor: 
+* Patrick Kerr

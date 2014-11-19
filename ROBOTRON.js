@@ -3,7 +3,7 @@
 // =========
 /*
 
- A sort-of-playable version of the classic arcade game.
+ A playable version of the classic arcade game.
 
 This is the final project of the course Computer game programming (Töl308G)
 at the University of Iceland in november 2014.
@@ -13,6 +13,9 @@ Bjarki Hall
 Eiríkur Ernir Þorsteinsson
 Jianfei John Zheng
 Oddur Vilhjálmsson
+
+Instructor:
+Patrick Kerr
 
  */
 
