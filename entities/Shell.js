@@ -1,6 +1,6 @@
-// ======
+// ===========
 // Tank Shells
-// ======
+// ===========
 
 // Tank shells are fired by tanks.
 // They move fast and bounce off the edges.
@@ -24,6 +24,7 @@ function Shell(descr) {
     this.velX = this.baseVel*Math.cos(descr.initialAngle);
     this.velY = this.baseVel*Math.sin(descr.initialAngle);
 
+    // Make a small cloud when fired
     this.spawnFragment(6,"grey");
     this.spawnFragment(3,"white");
 }

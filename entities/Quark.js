@@ -1,6 +1,6 @@
-// ======
+// =====
 // Quark
-// ======
+// =====
 
 // Quarks spawn Tanks.
 // Quarks fly around quickly and randomly.

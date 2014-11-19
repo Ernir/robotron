@@ -1,6 +1,6 @@
-// ======
+// ========
 // Enforcer
-// ======
+// ========
 
 // Enforcers fly towards the main character.
 // Enforcers shoot sparks.

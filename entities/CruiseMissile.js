@@ -1,6 +1,6 @@
-// ======
+// ==============
 // Cruise Missile
-// ======
+// ==============
 
 // Cruise missiles are periodically fired by Brains
 
@@ -19,8 +19,6 @@ function CruiseMissile(descr) {
 
     this.target = entityManager.findProtagonist();
 }
-
-
 
 CruiseMissile.prototype = new Entity();
 CruiseMissile.prototype.lifeSpan = 5 * SECS_TO_NOMINALS;

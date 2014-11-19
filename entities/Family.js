@@ -2,6 +2,9 @@
 // FAMILY
 // ======
 
+// The last remaining family of humans. 
+// Rescue them to get points and increase the score multiplier.
+
 "use strict";
 
 /* jshint browser: true, devel: true, globalstrict: true */
@@ -13,8 +16,6 @@ function Family(descr) {
     this.setup(descr);
 
     this.sprite = g_sprites.Dad[6];
-    // Make a noise when I am created
-    //this.exampleSound.play();
 }
 
 Family.prototype = new Entity();

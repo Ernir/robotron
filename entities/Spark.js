@@ -1,6 +1,6 @@
-// ======
+// ===============
 // Enforcer sparks
-// ======
+// ===============
 
 // Sparks are fired by tanks.
 // They move fast.

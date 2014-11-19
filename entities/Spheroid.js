@@ -1,6 +1,6 @@
-// ======
-// Quark
-// ======
+// ========
+// Spheroid
+// ========
 
 // Spheroids spawn Enforcers.
 // Spheroids (probably...) fly around quickly and randomly.

@@ -2,7 +2,8 @@
 //POWERUP
 //=======
 
-// Powerups are rarely dropped by all enemies when they die, and frequently by Brains and Tanks.
+// Powerups are rarely dropped by all enemies when they die, 
+// and frequently by Brains and Tanks.
 
 "use strict";
 
@@ -63,19 +64,27 @@ Powerup.prototype.update = function (du) {
 
 Powerup.prototype.takeProtagonistHit = function () {
 	Player.addScore(Player.scoreValues.Powerup * Player.getMultiplier());
+    
     if (g_sounds) this.pickupSound.play();
+    
     Player.setPowerupText(this.strNames[this.brand] + "!");
     Player.setPowerupTime();
+    
     this.kill();
+    
     if (this.isExtralife) Player.addLives();
+    
     if (this.isSpeedBoost) Player.addSpeed();
+    
     if (this.isScoreMultiplier) Player.addMultiplier();
+    
     if (this.isMachinegun) {
         Player.hasShotgun = false;
         Player.hasMachineGun = true;
         Player.setFireRate(5);
         Player.addAmmo(100);
     };
+    
     if (this.isShotgun) {
         Player.hasShotgun = true;
         Player.hasMachineGun = false;
@@ -84,6 +93,7 @@ Powerup.prototype.takeProtagonistHit = function () {
         var gunSound = new Audio(g_audioUrls.shotgunReload);
         if (g_sounds) gunSound.play();
     };
+    
     if (this.isShield) Player.addShieldTime();
 };
 

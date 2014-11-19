@@ -1,6 +1,6 @@
-// ======
+// =====
 // Grunt
-// ======
+// =====
 
 // Grunts are simple robotrons that walk straight towards the main character
 // Grunts rage, getting faster over time

@@ -1,6 +1,6 @@
-// ======
+// ====
 // Tank
-// ======
+// ====
 
 // Tanks are spawned by Quarks. Tanks fire rebounding tank shells.
 // Tanks roll around randomly.
@@ -87,8 +87,6 @@ Tank.prototype.randomWalk = function () {
         }
     }
 };
-
-
 
 Tank.prototype.takeBulletHit = function () {
     this.makeExplosion();

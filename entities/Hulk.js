@@ -1,6 +1,6 @@
-// ======
+// ====
 // Hulk
-// ======
+// ====
 
 // Hulks are indestructible robotrons that chase members of the last human
 // family.

@@ -1,6 +1,6 @@
-// ======
+// =====
 // Progs
-// ======
+// =====
 
 // Progs are spawned when a Brain kills a family member.
 // Progs walk around randomly, killing the protagonist if encountered.
@@ -117,7 +117,8 @@ Prog.prototype.render = function (ctx) {
             this.renderPos = {cx: this.cx, cy: this.cy};        
     }
 
-    //This belongs in an (as yet unwritten) effects manager, instead of the entityManager
+    // This belongs in an (as yet unwritten) effects manager, 
+    // instead of the entityManager
     var descr = {cx: this.cx,
                  cy: this.cy,
                  image: g_sprites.Prog[this.facing + temp]
