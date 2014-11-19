@@ -244,6 +244,7 @@ var util = {
                 randomlevel.push(Math.floor(Math.random() * 6) + L); // Grunts
                 randomlevel.push(Math.floor(Math.random() * 6) + Math.floor(L / 10)); // Hulks
                 randomlevel.push(Math.floor(Math.random() * 3)); // Spheroids
+                randomlevel.push(0); // Brains
                 randomlevel.push(Math.floor(Math.random() * 3)); // Quarks
                 break;
             default:
