@@ -28,7 +28,7 @@
 
 		// Handle song changing
 		for (var i = 0; i < this._list.length; i++) {
-			this._list[i].addEventListener("ended", g_bgm.nextSong);
+			this._list[i].addEventListener("ended", this.nextSong);
 		}
 		console.log(this._list);
 	},
@@ -66,19 +66,19 @@
 	},
 	
 	nextSong: function (evt) {
-		this.pause();
-		this.reset();
-		this._currentSong++;
-		if (this._currentSong >= this._list.length) this._currentSong = 0;
-		this.play();
+		g_bgm.pause();
+		g_bgm.reset();
+		g_bgm._currentSong++;
+		if (g_bgm._currentSong >= g_bgm._list.length) g_bgm._currentSong = 0;
+		g_bgm.play();
 	},
 	
 	prevSong: function (evt) {
-		this.pause();
-		this.reset();
-		this._currentSong--;
-		if (this._currentSong < 0) this._currentSong = this._list.length - 1;
-		this.play();
+		g_bgm.pause();
+		g_bgm.reset();
+		g_bgm._currentSong--;
+		if (g_bgm._currentSong < 0) g_bgm._currentSong = g_bgm._list.length - 1;
+		g_bgm.play();
 	}
 }
 
