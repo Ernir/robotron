@@ -177,6 +177,93 @@ var util = {
             var b = Math.sin(0.3*i + 4) * 127 + 128;
             consts.colors.push(this.RGB2Color(r,g,b));
         }
-    }
+    },
 
+
+
+// LEVEL GENERATOR
+// ===============
+    
+    generateLevel: function (L) {
+
+        var randomlevel = [];
+
+        if (L % 5 !== 0 && g_sounds) this._levelChangingSound.play();
+
+        switch (true) {
+            case (L + 1) % 10 === 0:
+                // Grunt wave
+                if (g_Debug) console.log("grunts");
+                randomlevel.push(10); // Family
+                randomlevel.push(3 + Math.floor(L / 3)); // Electrodes
+                randomlevel.push(Math.floor(Math.random() * 6) + 2 * L); // Grunts
+                randomlevel.push(Math.floor(Math.random() * 5)); // Hulks
+                break;
+            case L % 5 === 0:
+                // Brain wave (hur hur)
+                if (g_Debug) console.log("brains");
+                randomlevel.push(15); // Family
+                randomlevel.push(3 + Math.floor(L / 3)); // Electrodes
+                randomlevel.push(Math.floor(Math.random() * 5) + 4); // Grunts
+                randomlevel.push(0); // Hulks
+                randomlevel.push(0); // Spheroids
+                randomlevel.push(Math.floor(Math.random() * 7) + Math.floor(L / 5)); // Brains
+                break;
+            case (L + 3) % 5 === 0:
+                // Tank wave
+                if (g_Debug) console.log("tanks");
+                randomlevel.push(10); // Family
+                randomlevel.push(0); // Electrodes
+                randomlevel.push(0); // Grunts
+                randomlevel.push(3 + Math.floor(L / 2)); // Hulks
+                randomlevel.push(0); // Spheroids
+                randomlevel.push(0); // Brains
+                randomlevel.push(Math.floor(L / 2)); // Quarks
+                break;
+            case (L + 6) % 10 === 0:
+                // Hulk wave or Enforcer/Tank wave
+                randomlevel.push(10); // Family
+                randomlevel.push(3 + Math.floor(L / 3)); // Electrodes
+                if (Math.random() < 0.5) {
+                    if (g_Debug) console.log("enforcers/tanks");
+                    randomlevel.push(0); // Grunts
+                    randomlevel.push(0); // Hulks
+                    randomlevel.push(4 + Math.floor(L / 3)); // Spheroids
+                    randomlevel.push(0); // Brains
+                    randomlevel.push(2 + Math.floor(Math.random() * L / 4)); // Quarks
+                } else {
+                    if (g_Debug) console.log("hulks");
+                    randomlevel.push(Math.floor(Math.random() * 5) + 4); // Grunts
+                    randomlevel.push(6 + Math.floor(L / 2)); // Hulks
+                    randomlevel.push(Math.floor(Math.random() * 3)); // Spheroids
+                }
+                break;
+            case L > 27:
+                // Normal wave + a few Quarks
+                if (g_Debug) console.log("normal+");
+                randomlevel.push(10); // Family
+                randomlevel.push(3 + Math.floor(L / 3)); // Electrodes
+                randomlevel.push(Math.floor(Math.random() * 6) + L); // Grunts
+                randomlevel.push(Math.floor(Math.random() * 6) + Math.floor(L / 10)); // Hulks
+                randomlevel.push(Math.floor(Math.random() * 3)); // Spheroids
+                randomlevel.push(Math.floor(Math.random() * 3)); // Quarks
+                break;
+            default:
+                // Normal wave
+                if (g_Debug) console.log("normal");
+                randomlevel.push(10); // Family
+                randomlevel.push(3 + Math.floor(L / 3)); // Electrodes
+                randomlevel.push(Math.floor(Math.random() * 6) + L); // Grunts
+                randomlevel.push(Math.floor(Math.random() * 6) + Math.floor(L / 10)); // Hulks
+                randomlevel.push(Math.floor(Math.random() * 3)); // Spheroids
+        }
+
+        if (g_Debug) {
+            console.log("This level consists of:", randomlevel);
+            console.log("Key: [Family, Electrodes, Grunts, Hulks, Spheroids, Brains, Quarks]");
+            console.log("");
+        }
+
+        return randomlevel;
+    }
 };
