@@ -129,7 +129,7 @@ Brain.prototype.render = function (ctx) {
                 this.renderPos.cy,
                 this.cx,
                 this.cy),
-            0,
+                0,
                 2 * PI);
     }
 

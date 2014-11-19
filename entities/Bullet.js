@@ -34,20 +34,10 @@ function Bullet(descr) {
             this.shotgunFire.play();
         }
     }
-    
-/*
-    // Diagnostics to check inheritance stuff
-    this._bulletProperty = true;
-    console.dir(this);
-*/
-
 }
 
 Bullet.prototype = new Entity();
 
-// HACKED-IN AUDIO (no preloading)
-//Bullet.prototype.fireSound = new Audio(g_audioUrls.shotgunFire);
-    
 // Initial, inheritable, default values
 Bullet.prototype.shotgunFire = new Audio(g_audioUrls.shotgunFire);
 Bullet.prototype.rotation = 0;
