@@ -71,7 +71,7 @@ Protagonist.prototype.update = function (du) {
 		if (canSave) canSave.call(hitEntity);
 		else {
 			var canKillMe = hitEntity.killProtagonist;
-			if (canKillMe && g_canBeKilled) this.takeEnemyHit();
+			if (canKillMe && g_canBeKilled && !g_invincible) this.takeEnemyHit();
 		}
     }
 
@@ -134,7 +134,7 @@ Protagonist.prototype.maybeFire = function () {
 };
 
 Protagonist.prototype.takeEnemyHit = function () {
-    if(g_canBeKilled) {
+    if(g_canBeKilled && !g_invincible) {
         Player.subtractLives();
         if (g_sounds) this.loseSound.play();
         if (Player.getLives() > 0) {
@@ -147,7 +147,7 @@ Protagonist.prototype.takeEnemyHit = function () {
 };
 
 Protagonist.prototype.takeElectrodeHit = function () {
-    if(g_canBeKilled) {
+    if(g_canBeKilled && !g_invincible) {
         this.takeEnemyHit();
     }
 };
@@ -190,12 +190,13 @@ Protagonist.prototype.render = function (ctx) {
     g_sprites.Protagonist[this.facing+temp].drawCentredAt(ctx, this.cx, this.cy, 0);
 
     // Draw the shield
-    if (!g_canBeKilled) {
+    if (!g_canBeKilled || g_invincible) {
         ctx.save();
-        ctx.globalAlpha = 0.3
-        ctx.fillStyle = "cyan";
-        if (Player.getShieldTime() < 5 * SECS_TO_NOMINALS) {ctx.fillStyle = "red";};
-        util.fillCircle(ctx, this.cx, this.cy, this.getRadius()+2);
+            ctx.globalAlpha = 0.3
+            if (!g_canBeKilled) ctx.fillStyle = "cyan";
+            if (Player.getShieldTime() < 5 * SECS_TO_NOMINALS) {ctx.fillStyle = "red";};
+            if (g_invincible) ctx.fillStyle = "lime";
+            util.fillCircle(ctx, this.cx, this.cy, this.getRadius()+2);
         ctx.restore();
     }
 

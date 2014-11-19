@@ -57,7 +57,7 @@
 	<script src="entities/Spark.js"></script>
 
 	<script src="particles/Particle.js"></script>
-    <script src="particles/WarpParticle.js"></script>
+    <script src="particles/AfterImage.js"></script>
 
 	<script src="core/update.js"></script>
 	<script src="core/render.js"></script>

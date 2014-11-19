@@ -84,13 +84,14 @@ function updateSimulation(du) {
 // GAME-SPECIFIC DIAGNOSTICS
 
 var g_Debug = false;
-var g_canBeKilled = true;
+var g_canBeKilled = true; // Shield powerup effect
+var g_invincible = false; // Debug mode invulnerability
 var g_friendlyFire = true;
 var g_sounds = true;
 var g_music = true;
 
 var KEY_DEBUG = keyCode('X');
-var KEY_KILLABLE = keyCode('K');
+var KEY_INVINCIBLE = keyCode('K');
 var KEY_FRIENDLYFIRE = keyCode('F');
 var KEY_RESTART = keyCode('R');
 var KEY_NEXT_LEVEL = keyCode('+');
@@ -122,8 +123,8 @@ var KEY_NEXT_SONGN = 105; // Numpad 9
 
 function processDiagnostics() {
 
-    if (eatKey(KEY_KILLABLE) && g_Debug) {
-        g_canBeKilled = !g_canBeKilled;
+    if (eatKey(KEY_INVINCIBLE) && g_Debug) {
+        g_invincible = !g_invincible;
         g_hasCheated = true;
     }
 	

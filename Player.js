@@ -6,6 +6,9 @@
 An object which contains all the important parameters of the player such as
 the score, remaining lives and the current level number.
 
+Well, that's what it started as. Now it also contains the power up methods
+and effects, and the score values as well as rendering the scorebar...
+
 */
 
 "use strict";
@@ -111,7 +114,6 @@ Player.prototype.render = function(ctx) {
     };
 
 	// Display border
-
 	ctx.fillStyle = consts.colors[this.colorCounter%consts.colors.length];
 	ctx.fillRect(0, consts.wallTop, ctx.canvas.width, consts.wallThickness);
 	ctx.fillRect(0, consts.wallTop, consts.wallLeft, g_canvas.height - consts.wallTop);
@@ -120,6 +122,7 @@ Player.prototype.render = function(ctx) {
 	
     ctx.restore();
 };
+
 
 // ---------------------------
 // General attribute modifiers
@@ -170,6 +173,7 @@ Player.prototype.getLives = function () {
     return this.lives;
 };
 
+
 // --------------
 // Rescue Methods
 
@@ -188,6 +192,8 @@ Player.prototype.getMultiplier = function () {
 };
 
 Player.prototype.addSaveCount = function () {
+    // This function gives an extra life
+    // when you have saved 7 family members
     this.saveCount += 1;
     if (this.saveCount > 6) {
         this.addLives();
@@ -198,6 +204,7 @@ Player.prototype.addSaveCount = function () {
 Player.prototype.resetSaveCount = function () {
     this.saveCount = 0;
 };
+
 
 // ---------------
 // Speed Methods
@@ -226,6 +233,7 @@ Player.prototype.resetSpeed = function () {
 Player.prototype.resetSpeedTimer = function () {
     this.speedTimer = 10 * SECS_TO_NOMINALS;
 };
+
 
 // --------------
 // Shield Methods
@@ -266,6 +274,7 @@ Player.prototype.resetShieldTime = function () {
     this.shieldTime = 0;
 }
 
+
 // -------------------
 // Gun Methods
 
@@ -304,6 +313,7 @@ Player.prototype.addAmmo = function (ammo) {
 Player.prototype.resetAmmo = function () {
     this.ammo = 0;
 };
+
 
 // -------------------
 // Powerup text animation Methods
