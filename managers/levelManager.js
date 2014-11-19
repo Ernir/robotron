@@ -79,7 +79,7 @@ var levelManager = {
         // Reset all remaining entities in the level
         // Used when the player dies, but has extra lives remaining
         this._isChangingLevel = true;
-		this._isRefreshingLevel = true; //TODO: Different animation?
+		this._isRefreshingLevel = true;
     },
 
     nextLevel: function () {

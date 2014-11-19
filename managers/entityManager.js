@@ -112,17 +112,6 @@ var entityManager = {
         }
     },
 
-    respawnSurvivors: function () {
-        var level = [];
-        for (var c = 1; c < this._categories.length-1; ++c) {
-            level.push(this._categories[c].length);
-        }
-        console.log('new level:',level);
-        this.clearAll();
-        spatialManager.resetAll();
-        this.init(level);
-    },
-
     clearAll: function () {
         for (var c = 0; c < this._categories.length; ++c) {
             this._categories[c].length = 0;
