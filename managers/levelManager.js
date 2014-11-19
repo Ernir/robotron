@@ -220,7 +220,7 @@ var levelManager = {
         ctx.fillText(str2, hw, hh * 3 / 2 - 10); //10 is the font's halfheight
         
         // Music volume display
-        var vol = Math.round(g_bgm._volume*100);
+        var vol = Math.round(g_bgm.getVolume()*100);
         if (!g_music) vol = 0;
         var volStr = "MUSIC VOLUME: "+vol+"%";
         ctx.fillStyle = "gray";
