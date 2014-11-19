@@ -188,8 +188,6 @@ var util = {
 
         var randomlevel = [];
 
-        if (L % 5 !== 0 && g_sounds) this._levelChangingSound.play();
-
         switch (true) {
             case (L + 1) % 10 === 0:
                 // Grunt wave
