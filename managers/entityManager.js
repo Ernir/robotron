@@ -228,6 +228,8 @@ var entityManager = {
     },
 	
 	findSpawn: function (playerSafeDist) {
+        // A function to prevent the enemies from 
+        // spawning too close to the protagonist
 		for (var i = 0; i < 100; i++) {
             var x = util.randRange(0, g_canvas.width);
             var y = util.randRange(0, g_canvas.height);
