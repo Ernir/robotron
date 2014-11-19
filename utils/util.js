@@ -171,10 +171,10 @@ var util = {
 
     //Called when initializing the game
     makeColorArray: function () {
-        for (var i = 0; i < 42; ++i) {
-            var r = Math.sin(0.3*i + 0) * 127 + 128;
-            var g = Math.sin(0.3*i + 2) * 127 + 128;
-            var b = Math.sin(0.3*i + 4) * 127 + 128;
+        for (var i = 0; i < 32; ++i) {
+            var r = Math.sin(0.2*i + 0) * 127 + 128;
+            var g = Math.sin(0.2*i + 2) * 127 + 128;
+            var b = Math.sin(0.2*i + 4) * 127 + 128;
             consts.colors.push(this.RGB2Color(r,g,b));
         }
     },
