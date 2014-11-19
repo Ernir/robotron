@@ -145,6 +145,7 @@ function processDiagnostics() {
     if (eatKey(KEY_RESTART)) {
         Player.resetAll();
         levelManager.startLevel();
+        g_hasCheated = false;
     }
 
     if ((eatKey(KEY_NEXT_LEVEL) || eatKey(KEY_NEXT_LEVELN)) && g_Debug) {
@@ -332,6 +333,8 @@ function preloadDone() {
         }
     }
 
+    // Some of the sprites weren't quite as regularly spaced as the others
+    // and did not fit nicely in a for loop
     g_sprites.Electrode.push(new Sprite(g_images.Triangle, 2, 20));
     g_sprites.Electrode.push(new Sprite(g_images.Triangle, 36, 48));
     g_sprites.Electrode.push(new Sprite(g_images.Triangle, 70, 76));
