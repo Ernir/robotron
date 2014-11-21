@@ -5,7 +5,7 @@
 			<section class="highscore">
 				<h1 id="highscore">HIGHSCORE</h1>
 				<article>
-					<ol class="todos" id="todos">
+					<ol class="highscoreList">
 						<?php if(isset($highscores)): foreach ($highscores->Results() as $hs): ?>
 						<li><?php echo "Name: ".$hs->name.". Score: ".$hs->score."."?></li>
 						<?php endforeach; endif; ?>
