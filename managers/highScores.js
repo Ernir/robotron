@@ -40,9 +40,9 @@ var highScores = {
 
     add: function (data) {
         // data is an object containing a name and a score
-        console.log("data.score",data.score);
-        console.log("this._scores",this._scores);
-        console.log("this._scores[0].score",this._scores[0].score);
+        //console.log("data.score",data.score);
+        //console.log("this._scores",this._scores);
+        //console.log("this._scores[0].score",this._scores[0].score);
         for (var i = 0; i < 10; i++) {
             // Check if the score is in the top 10
             if (data.score > this._scores[i].score) {
@@ -67,8 +67,10 @@ var highScores = {
         ctx.fillStyle = "white";
         var hw = g_canvas.width / 2 , hh = g_canvas.height / 2;
         ctx.textAlign = "center";
-        var scoreStr = this._scores[0].name + "  " + this._scores[0].score;
-        ctx.fillText(scoreStr, hw, hh + 30);
+        for (var i = 0; i < 10; i++) {
+            var scoreStr = this._scores[i].name + "  " + this._scores[i].score;
+            ctx.fillText(scoreStr, hw, hh + i*20+30);            
+        };
         ctx.restore();
     }
 };
