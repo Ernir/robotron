@@ -12,7 +12,7 @@
 					<ul>
 						<li><a href="mailto:bjh27@hi.is">Bjarki Hall</a></li>
 						<li><a href="mailto:eth31@hi.is">Eiríkur Ernir Þorsteinsson</a></li>
-						<li><a href="mailto:jiz2@hi.is">Jianfei John Zheng</a></li>
+						<li><a href="mailto:jiz2@hi.is">Jianfei Zheng</a></li>
 						<li><a href="mailto:odv1@hi.is">Oddur Vilhjálmsson</a></li>
 					</ul>
 				</p>
@@ -20,6 +20,7 @@
 			</article>
 		</footer>
 	</div>
+	<!--<script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>-->
 
 	<script src="core/globals.js"></script>
 	<script src="utils/urls.js"></script>
@@ -27,7 +28,6 @@
 	<script src="utils/util.js"></script>
 	<script src="core/keys.js"></script>
 	<script src="core/userInput.js"></script>
-
 
 	<script src="managers/handleMouse.js"></script>
 	<script src="managers/spatialManager.js"></script>
@@ -57,7 +57,7 @@
 	<script src="entities/Spark.js"></script>
 
 	<script src="particles/Particle.js"></script>
-    <script src="particles/AfterImage.js"></script>
+    <script src="particles/WarpParticle.js"></script>
 
 	<script src="core/update.js"></script>
 	<script src="core/render.js"></script>
@@ -67,6 +67,5 @@
 
 	<script src="Player.js"></script>
 	<script src="ROBOTRON.js"></script>
-
 </body>
 </html>
