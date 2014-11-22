@@ -238,6 +238,7 @@ var levelManager = {
         this._isGameOver = true;
         this._isChangingLevel = true;
         Player.addLives();
+        //TODO: insert name
         highScores.add({name: "PAT", score: Player.score});
         //document.getElementById("formDiv").className = "";
     },
