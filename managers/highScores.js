@@ -21,8 +21,10 @@ var highScores = {
     
     deferredSetup: function () {
         for (var i = 0; i < 10; i++) {
-            if (this._scores[i]) {
-                this._scores[i] = window.localStorage.getItem("highscore" + i);
+            console.log('localStorage.getItem("highscore" + i).score',JSON.parse(localStorage.getItem("highscore" + i)).score)
+            if (JSON.parse(localStorage.getItem("highscore" + i)).score > 0) {
+                this._scores[i] = JSON.parse(localStorage.getItem("highscore" + i));
+                console.log("grabbed data from local storage");
             } else {
                 this._scores[i] = {name: "", score: 0};
             }
@@ -31,9 +33,11 @@ var highScores = {
     },
 
     _save: function () {
+        console.log("I'm about to save");
         for (var i = 0; i < 10; i++) {
-            window.localStorage.setItem("highscore" + i, this._scores[i]);
+            localStorage.setItem("highscore" + i, JSON.stringify(this._scores[i]));
         }
+        console.log("I have saved");
     },
 
 // PUBLIC METHODS
@@ -58,7 +62,7 @@ var highScores = {
     },
 
     reset: function () {
-        for (var i in this._scores) this._scores[i] = {};
+        for (var i in this._scores) this._scores[i] = {name: "", score: 0};
         this._save();
     },
 
