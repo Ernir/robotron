@@ -5,13 +5,8 @@ $highscore = new Highscores(new PDO('sqlite:highscores.db'));
 
 //$errors = array();
 if ($method === 'POST') {
-	echo "POSTED";
-	foreach ($_POST as $bla):
-		echo $bla;
-	endforeach;
-	if (isset($_POST['name']) && isset($_POST['score'])) {
-		echo "ISSET";
-		$highscore->Insert($_POST['name'], $_POST['score']);
+	if (isset($_GET['name']) && isset($_GET['score'])) {
+		$highscore->Insert($_GET['name'], $_GET['score']);
 
 		/*if (!$result)
 		{

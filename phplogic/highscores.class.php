@@ -18,7 +18,6 @@ class Highscores {
 	}
 
 	public function Insert($name, $score) {
-		echo "insert";
 		$name = strip_tags($name);
 		$score = strip_tags($score);
 
@@ -39,7 +38,6 @@ class Highscores {
 	}
 
 	public function Fetch() {
-		echo "fetch";
 		$query = $this->pdo->prepare("SELECT id, name, score FROM highscores");
 		$result = $query->execute();
 		
