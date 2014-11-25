@@ -1,20 +1,14 @@
 
 		<main>
-			<div id="output"></div>
+			<div id="output">
 			
-			<?php if(isset($highscores)): ?>
-			<section class="highscore">
-				<h1 id="highscore">HIGHSCORE</h1>
-				<article>
-					<ol class="highscoreList">
-						<?php foreach ($highscores->Results() as $hs): ?>
-						<li><?php echo "Name: ".$hs->name.". Score: ".$hs->score."."?></li>
-						<?php endforeach; ?>
-					</ol>
-				</article>
-			</section>
-			<?php endif; ?>
+			<?php 
+				$highscores = new Highscores(new PDO('sqlite:phplogic/highscores.db'));
+				$results = $highscores->ShowHighscores();
+			?>
 			
+			</div>
+
 			<section class="instructions">
 				<h1 id="instructions">INSTRUCTIONS</h1>
 				<article>

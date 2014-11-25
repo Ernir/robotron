@@ -8,7 +8,7 @@ main, .instructions, .shortcuts, footer, .canvasContainer {max-width: 800px; mar
 .form {width: 50%; margin: 41% auto; padding: 1rem; background: rgba(255,0,0,1);}
 input[type="text"], input[type="submit"] {display: block; margin: 0 auto; width: 50%; text-align: center;}
 input[type="text"] {width: 49%}
-.hidden {xdisplay: none;}
+.hidden {display: none;}
 
 section, footer {border: 1px solid red;}
 article {border: 1px solid white;}
