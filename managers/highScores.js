@@ -20,16 +20,19 @@ var highScores = {
 // "PRIVATE" METHODS
     
     deferredSetup: function () {
+        console.log("Trying to set up highscores!");
         for (var i = 0; i < 10; i++) {
-            console.log('localStorage.getItem("highscore" + i).score',JSON.parse(localStorage.getItem("highscore" + i)).score)
+            /*console.log('localStorage.getItem("highscore" + i).score',JSON.parse(localStorage.getItem("highscore" + i)).score)
             if (JSON.parse(localStorage.getItem("highscore" + i)).score > 0) {
                 this._scores[i] = JSON.parse(localStorage.getItem("highscore" + i));
                 console.log("grabbed data from local storage");
             } else {
                 this._scores[i] = {name: "", score: 0};
-            }
+            }*/
+            this._scores[i] = JSON.parse(localStorage.getItem("highscore" + i)) || {name: "", score: 0};
+            console.log("this._scores["+i+"]",this._scores[i]);
         }
-        console.log("I have been set up!");
+        console.log("I have set up the highscores!");
     },
 
     _save: function () {
