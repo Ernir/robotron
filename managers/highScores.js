@@ -71,13 +71,41 @@ var highScores = {
 
     render: function (ctx) {
         ctx.save();
+
+        // display scores
         ctx.fillStyle = "white";
+        ctx.font = "bold 20px sans-serif";
         var hw = g_canvas.width / 2 , hh = g_canvas.height / 2;
         ctx.textAlign = "center";
+        ctx.fillText("LOCAL", hw * 2 / 3, hh * 2 / 3);
+        ctx.fillText("SERVER", hw * 4 / 3, hh * 2 / 3);
+        ctx.font = "15px sans-serif";
+        ctx.textAlign = "left";
         for (var i = 0; i < 10; i++) {
             var scoreStr = this._scores[i].name + "  " + this._scores[i].score;
-            ctx.fillText(scoreStr, hw, hh + i*20+30);            
+            ctx.fillText(scoreStr, hw * 2 / 3 - 40, hh * 2 / 3 + (i+1)*20+30);
+            //TODO: Add the server highscore on the right side
+            ctx.fillText(scoreStr, hw * 4 / 3 - 40, hh * 2 / 3 + (i+1)*20+30);
         };
+
+        // display title
+        ctx.fillStyle = "red";
+        ctx.font = "bold 60px sans-serif";
+        ctx.textAlign = "center";
+        ctx.fillText("HIGHSCORES", hw, hh / 3);
+
+        // restart hint
+        ctx.font = "bold 20px sans-serif";
+        var str2 = "Press R to restart the game!";
+        ctx.fillText(str2, hw, hh * 14 / 8);
+
+        // Music volume display
+        var vol = Math.round(g_bgm.getVolume()*100);
+        if (!g_music) vol = 0;
+        var volStr = "MUSIC VOLUME: "+vol+"%";
+        ctx.fillStyle = "gray";
+        ctx.fillText(volStr,hw,2*hh-10);
+
         ctx.restore();
     }
 };

@@ -249,7 +249,7 @@ var levelManager = {
 
     renderGameOver: function (ctx) {
         //TODO: Add Highscore
-        this.drawMenu(ctx, "GAME OVER", "re");
+        //this.drawMenu(ctx, "GAME OVER", "re");
         highScores.render(ctx);
     }
 };
