@@ -10,19 +10,19 @@ class Highscores {
 	private $pdo;
 	private $results = array();
 
-	public function __construct($pdo) { $this->pdo = $pdo; }
-
-	public function Insert($name, $score) {
-		$name = strip_tags($name);
-		$score = strip_tags($score);
-
+	public function __construct($pdo) { 
+		$this->pdo = $pdo; 
 		$this->pdo->exec(
 			"CREATE TABLE IF NOT EXISTS highscores (
 			id INTEGER PRIMARY KEY, 
 			name TEXT, 
 			score INTEGER)"
 		);
+	}
 
+	public function Insert($name, $score) {
+		$name = strip_tags($name);
+		$score = strip_tags($score);
 		$query = $this->pdo->prepare("INSERT INTO highscores (name, score) VALUES (:name, :score)");
 		$result = $query->execute(array('name' => $name, 'score' => $score));
 	}
