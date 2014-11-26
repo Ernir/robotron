@@ -31,6 +31,9 @@ function postScore() {
 				p.appendChild(t);
 				document.getElementById("output").appendChild(p);*/
 				document.getElementById("output").innerHTML=xmlhttp.responseText;
+				for (var i = 1; i<document.getElementById("highscoreList").childNodes.length; i++) {
+					highScores.add({name: document.getElementById(i).innerHTML, score: Player.score});
+				}
 			}
 		}
 		xmlhttp.open("POST","phplogic/savescore.php?name="+name+"&score="+Player.getScore(),true);

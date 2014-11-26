@@ -50,9 +50,13 @@ class Highscores {
 			<section class="highscore">
 				<h1 id="highscore">HIGHSCORE</h1>
 				<article>
-					<ol class="highscoreList">
+					<ol id="highscoreList" class="highscoreList">
 						<?php foreach ($results as $hs): ?>
-						<li><?php echo "Name: ".$hs->name.". Score: ".$hs->score."." ?></li>
+							<li>
+								<?php echo "Name: "?>
+									<span id="<?php echo $hs->id?>"><?php echo $hs->name ?></span>
+								<?php echo ". Score: ".$hs->score."." ?>
+							</li>
 						<?php endforeach; ?>
 					</ol>
 				</article>
