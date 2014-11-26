@@ -1,6 +1,14 @@
 
 		<main>
-			<div id="output"></div>
+			<div id="output">
+			
+			<?php 
+				$highscores = new Highscores(new PDO('sqlite:phplogic/highscores.db'));
+				$results = $highscores->ShowHighscores();
+			?>
+			
+			</div>
+
 			<section class="instructions">
 				<h1 id="instructions">INSTRUCTIONS</h1>
 				<article>
@@ -36,8 +44,8 @@
 				</article>
 			</section>
 
-			<section class="shortcuts">
-				<h1 id="shortcuts">CONTROLS</h1>
+			<section class="controls">
+				<h1 id="controls">CONTROLS</h1>
 				<article class="movement">
 					<h2>Movement</h2>
 					<ul>
