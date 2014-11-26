@@ -55,6 +55,7 @@ if ($method === 'POST')
 // fetch all items, both previous and just saved
 $todos->Fetch($key);
 */
+require('phplogic/highscores.class.php');
 //include('phplogic/savescore.php');
 include('views/header.php');
 require('views/canvas.php');
