@@ -238,7 +238,7 @@ var levelManager = {
         this._isGameOver = true;
         this._isChangingLevel = true;
         Player.addLives();
-        //document.getElementById("formDiv").className = "";
+        document.getElementById("formDiv").className = "";
     },
 
     isGameOver: function () {

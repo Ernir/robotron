@@ -3,7 +3,7 @@
 			<ul class="nav">
 				<li><a href="#">Game window</a></li>
 				<li><a href="#instructions">Instructions</a></li>
-				<li><a href="#shortcuts">Keyboard shortcuts</a></li>
+				<li><a href="#controls">Controls</a></li>
 				<li><a href="#about">About the project</a></li>
 			</ul>
 		</nav>

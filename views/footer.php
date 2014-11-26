@@ -12,10 +12,11 @@
 					<ul>
 						<li><a href="mailto:bjh27@hi.is">Bjarki Hall</a></li>
 						<li><a href="mailto:eth31@hi.is">Eiríkur Ernir Þorsteinsson</a></li>
-						<li><a href="mailto:jiz2@hi.is">Jianfei Zheng</a></li>
+						<li><a href="mailto:jiz2@hi.is">Jianfei John Zheng</a></li>
 						<li><a href="mailto:odv1@hi.is">Oddur Vilhjálmsson</a></li>
 					</ul>
 				</p>
+				<p>Instructor: Patrick Kerr</p>
 				<p>&copy; 2014</p>
 			</article>
 		</footer>
@@ -29,10 +30,12 @@
 	<script src="core/keys.js"></script>
 	<script src="core/userInput.js"></script>
 
+
 	<script src="managers/handleMouse.js"></script>
 	<script src="managers/spatialManager.js"></script>
 	<script src="managers/entityManager.js"></script>
 	<script src="managers/levelManager.js"></script>
+	<script src="managers/playlist.js"></script>
 
 	<script src="core/Sprite.js"></script>
 
@@ -57,7 +60,7 @@
 	<script src="entities/Spark.js"></script>
 
 	<script src="particles/Particle.js"></script>
-    <script src="particles/WarpParticle.js"></script>
+    <script src="particles/AfterImage.js"></script>
 
 	<script src="core/update.js"></script>
 	<script src="core/render.js"></script>
@@ -67,5 +70,6 @@
 
 	<script src="Player.js"></script>
 	<script src="ROBOTRON.js"></script>
+
 </body>
 </html>
