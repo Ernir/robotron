@@ -36,6 +36,7 @@
 	<script src="managers/entityManager.js"></script>
 	<script src="managers/levelManager.js"></script>
 	<script src="managers/playlist.js"></script>
+	<script src="managers/highScores.js"></script>
 
 	<script src="core/Sprite.js"></script>
 
