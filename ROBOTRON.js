@@ -149,6 +149,7 @@ function processDiagnostics() {
         Player.resetAll();
         levelManager.startLevel();
         g_hasCheated = false;
+        highScores.renderOFF();
     }
 
     if ((eatKey(KEY_NEXT_LEVEL) || eatKey(KEY_NEXT_LEVELN)) && g_Debug) {

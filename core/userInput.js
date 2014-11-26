@@ -30,10 +30,13 @@ function postScore() {
 				var t = document.createTextNode(xmlhttp.responseText);
 				p.appendChild(t);
 				document.getElementById("output").appendChild(p);*/
+				highScores.setName(name);
+				highScores.addLocalScore({name: highScores.getName(), score: Player.score});
 				document.getElementById("output").innerHTML=xmlhttp.responseText;
 				for (var i = 1; i<document.getElementById("highscoreList").childNodes.length; i++) {
-					highScores.add({name: document.getElementById(i).innerHTML, score: Player.score});
+					highScores.addServerScore({name: document.getElementById(i).innerHTML, score: document.getElementById("score"+i).innerHTML});
 				}
+				highScores.renderON();
 			}
 		}
 		xmlhttp.open("POST","phplogic/savescore.php?name="+name+"&score="+Player.getScore(),true);

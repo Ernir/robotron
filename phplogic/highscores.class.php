@@ -55,7 +55,8 @@ class Highscores {
 							<li>
 								<?php echo "Name: "?>
 									<span id="<?php echo $hs->id?>"><?php echo $hs->name ?></span>
-								<?php echo ". Score: ".$hs->score."." ?>
+								<?php echo ". Score: "?>
+									<span id= "score"+"<?php echo $hs->id?>"><?php echo $hs->score ?></span>
 							</li>
 						<?php endforeach; ?>
 					</ol>
