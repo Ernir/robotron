@@ -2,21 +2,16 @@
 // ROBOTRON
 // =========
 /*
-
  A playable version of the classic arcade game.
-
 This is the final project of the course Computer game programming (Töl308G)
 at the University of Iceland in november 2014.
-
 This game was programmed by (in alphabetical order):
 Bjarki Hall
 Eiríkur Ernir Þorsteinsson
 Jianfei John Zheng
 Oddur Vilhjálmsson
-
 Instructor:
 Patrick Kerr
-
  */
 
 "use strict";
@@ -72,23 +67,23 @@ function updateSimulation(du) {
     Player.tickColorCounter(du);
 
     if (levelManager.isInMenu()) {
-	
-		return;
-		
-	} else if (levelManager.isChangingLevel()) {
-	
+  
+    return;
+    
+  } else if (levelManager.isChangingLevel()) {
+  
         levelManager.reduceTimer(du);
-		
+    
     } else {
-	
+  
         if (!levelManager.isGameOver()) {
             entityManager.update(du);
         }
     }
-	
-	if (Player.getLives() === 0) {
-		levelManager.gameOver();
-	};
+  
+  if (Player.getLives() === 0) {
+    levelManager.gameOver();
+  };
 
     if (entityManager.enemiesIsEmpty()) levelManager.nextLevel();
 }
@@ -139,8 +134,8 @@ function processDiagnostics() {
         g_invincible = !g_invincible;
         g_hasCheated = true;
     }
-	
-	if (eatKey(KEY_FRIENDLYFIRE) && g_Debug) {
+  
+  if (eatKey(KEY_FRIENDLYFIRE) && g_Debug) {
         g_friendlyFire = !g_friendlyFire;
         g_hasCheated = true;
     }
@@ -160,7 +155,7 @@ function processDiagnostics() {
         levelManager.prevLevel();
         g_hasCheated = true;
     }
-	
+  
     if ((eatKey(KEY_EXTRA_LIFE) || eatKey(KEY_EXTRA_LIFEN)) && g_Debug) {
         Player.addLives();
         g_hasCheated = true;
@@ -210,19 +205,19 @@ function checkDebugSound() {
     if (eatKey(KEY_SOUND)) g_sounds = !g_sounds;
     
     if (eatKey(KEY_MUSIC)) g_music = !g_music;
-	
+  
     if (eatKey(KEY_NEXT_SONG) || eatKey(KEY_NEXT_SONGN)) g_bgm.nextSong();
 
     if (eatKey(KEY_PREV_SONG) || eatKey(KEY_PREV_SONGN)) g_bgm.prevSong();
 
-	if (g_music) g_bgm.play();
+  if (g_music) g_bgm.play();
     else g_bgm.pause();
-	
-	// Background music volume control
-	var prevVolume = g_bgm.getVolume;
-	if (eatKey(KEY_VOLUMEUP)) g_bgm.incVolume();
-	if (eatKey(KEY_VOLUMEDOWN)) g_bgm.decVolume();
-	if (prevVolume !== g_bgm.getVolume) console.log("volume set to: " + g_bgm.getVolume);
+  
+  // Background music volume control
+  var prevVolume = g_bgm.getVolume;
+  if (eatKey(KEY_VOLUMEUP)) g_bgm.incVolume();
+  if (eatKey(KEY_VOLUMEDOWN)) g_bgm.decVolume();
+  if (prevVolume !== g_bgm.getVolume) console.log("volume set to: " + g_bgm.getVolume);
 }
 
 // =================
@@ -242,28 +237,28 @@ function checkDebugSound() {
 function renderSimulation(ctx) {
 
     if (levelManager.isInMenu()) {
-	
-		levelManager.renderMenu(ctx);
-		
+  
+    levelManager.renderMenu(ctx);
+    
     } else if (levelManager.isChangingLevel() && 
-				!levelManager.isRefreshingLevel()) {
-	
+        !levelManager.isRefreshingLevel()) {
+  
         levelManager.renderLevelChanger(ctx);
-		
-	} else if (levelManager.isGameOver()) {
-	
-		levelManager.renderGameOver(ctx);
-		
+    
+  } else if (levelManager.isGameOver()) {
+  
+    levelManager.renderGameOver(ctx);
+    
     } else {
 
         entityManager.render(ctx);
         renderCrosshair(ctx);
         if (g_Debug) spatialManager.render(ctx);
-		if (levelManager.isRefreshingLevel) {
-			levelManager.renderLevelChanger(ctx);
-		} 
+    if (levelManager.isRefreshingLevel) {
+      levelManager.renderLevelChanger(ctx);
+    } 
     }
-	
+  
     Player.render(ctx);
 }
 
