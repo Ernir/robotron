@@ -21,7 +21,7 @@
 			</article>
 		</footer>
 	</div>
-	<!--<script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>-->
+	<script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
 
 	<script src="core/globals.js"></script>
 	<script src="utils/urls.js"></script>

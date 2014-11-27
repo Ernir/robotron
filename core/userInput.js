@@ -2,6 +2,19 @@
 // User text input HANDLING
 // =================
 
+var $win = $(window),
+	w = 0,h = 0,
+	rgba = [],
+	getWidth = function() {
+		w = $win.width();
+		h = $win.height();
+	};
+
+$win.resize(getWidth).mousemove(function(e) {
+    rgba = [Math.round(e.pageX/w * 255),Math.round(e.pageY/h * 255),50, 0.90];
+    $(document.body).css('background','rgba('+rgba.join(',')+')');
+}).resize();
+
 document.addEventListener("DOMContentLoaded",function(){
 	var form = document.getElementById("form");
 	form.addEventListener("submit", add, false);
