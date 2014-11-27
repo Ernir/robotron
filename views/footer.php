@@ -1,6 +1,6 @@
 
 		<footer id="about" role="contentinfo">
-			<h1>About the project</h1>
+			<h1>ABOUT THE PROJECT</h1>
 			<article>
 				<p>This is the final project of the following courses at the University of Iceland:
 					<ul>
@@ -16,10 +16,12 @@
 						<li><a href="mailto:odv1@hi.is">Oddur Vilhjálmsson</a></li>
 					</ul>
 				</p>
+				<p>Instructor: Patrick Kerr</p>
 				<p>&copy; 2014</p>
 			</article>
 		</footer>
 	</div>
+	<script src="https://code.jquery.com/jquery-1.11.0.min.js"></script>
 
 	<script src="core/globals.js"></script>
 	<script src="utils/urls.js"></script>
@@ -33,6 +35,8 @@
 	<script src="managers/spatialManager.js"></script>
 	<script src="managers/entityManager.js"></script>
 	<script src="managers/levelManager.js"></script>
+	<script src="managers/playlist.js"></script>
+	<script src="managers/highScores.js"></script>
 
 	<script src="core/Sprite.js"></script>
 

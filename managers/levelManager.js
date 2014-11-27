@@ -204,10 +204,10 @@ var levelManager = {
     },
 
     renderMenu: function (ctx) {
-        this.drawMenu("ROBOTRON");
+        this.drawMenu(ctx, "ROBOTRON");
     },
 
-    drawMenu: function (str, re) {
+    drawMenu: function (ctx, str, re) {
         if (str == undefined) str = "";
         if (re !== "re") re = "";
         var str2 = "Press R to " + re + "start the game!";
@@ -238,7 +238,7 @@ var levelManager = {
         this._isGameOver = true;
         this._isChangingLevel = true;
         Player.addLives();
-        //document.getElementById("formDiv").className = "";
+        document.getElementById("formDiv").className = "";
     },
 
     isGameOver: function () {
@@ -247,6 +247,7 @@ var levelManager = {
 
     renderGameOver: function (ctx) {
         //TODO: Add Highscore
-        this.drawMenu("GAME OVER", "re");
+        //this.drawMenu(ctx, "GAME OVER", "re");
+        highScores.render(ctx);
     }
 };

@@ -91,7 +91,10 @@ Bullet.prototype.update = function (du) {
 					// Enemy takes the hit and removed from collision check
 					canTakeHit.call(hitEntity, descr);
 					spatialManager.unregister(hitEntity);
-				} else canFriendlyHit.call(hitEntity);
+				} else {
+                    canFriendlyHit.call(hitEntity);
+                    spatialManager.unregister(hitEntity);
+                }
                 if (Player.hasMachineGun) this.spawnFragment(5,"cyan");
                 if (Player.hasShotgun) this.spawnFragment(5,"orange");
                 if (!Player.hasMachineGun && !Player.hasShotgun) this.spawnFragment(5,"lime");
