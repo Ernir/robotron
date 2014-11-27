@@ -33,16 +33,17 @@ function postScore() {
 				document.getElementById("output").innerHTML=xmlhttp.responseText;
 				highScores.setName(name);
 				highScores.addLocalScore({name: highScores.getName(), score: Player.score});
-				for (var i = 1; i<document.getElementById("highscoreList").children.length; i++) {
+				highScores.resetServerScore();
+				for (var i = 1; i<=document.getElementById("highscoreList").children.length; i++) {
 					highScores.addServerScore({
 						name: document.getElementById("name_"+i).innerHTML, 
-						score: document.getElementById("score_"+i).innerHTML
+						score: parseInt(document.getElementById("score_"+i).innerHTML)
 					});
 				}
-				highScores.renderON();
 			}
 		}
 		xmlhttp.open("POST","phplogic/savescore.php?name="+name+"&score="+Player.getScore(),true);
 		xmlhttp.send();
 	}
+	highScores.renderON();
 }

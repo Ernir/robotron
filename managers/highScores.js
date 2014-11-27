@@ -56,7 +56,7 @@ var highScores = {
         //console.log("this._localScores[0].score",this._localScores[0].score);
         for (var i = 0; i < 10; i++) {
             // Check if the score is in the top 10
-            if (data.score > this._localScores[i].score) {
+            if (data.score >= this._localScores[i].score) {
                 // Add the score and shuffle the rest down
                 for (var j = 9; j > i; j--) {
                     this._localScores[j] = this._localScores[j-1];
@@ -71,7 +71,7 @@ var highScores = {
     addServerScore: function (data) {
         for (var i = 0; i < 10; i++) {
             // Check if the score is in the top 10
-            if (data.score > this._serverScores[i].score) {
+            if (data.score >= this._serverScores[i].score) {
                 // Add the score and shuffle the rest down
                 for (var j = 9; j > i; j--) {
                     this._serverScores[j] = this._serverScores[j-1];
@@ -85,6 +85,10 @@ var highScores = {
     reset: function () {
         for (var i in this._localScores) this._localScores[i] = {name: "", score: 0};
         this._save();
+    },
+
+    resetServerScore: function () {
+        for (var i in this._serverScores) this._serverScores[i] = {name: "", score: 0};
     },
 
     setName: function (Name) {
@@ -115,13 +119,20 @@ var highScores = {
             ctx.fillText("LOCAL", hw * 2 / 3, hh * 2 / 3);
             ctx.fillText("SERVER", hw * 4 / 3, hh * 2 / 3);
             ctx.font = "15px sans-serif";
-            ctx.textAlign = "left";
             for (var i = 0; i < 10; i++) {
-                var scoreStr = this._localScores[i].name + "  " + this._localScores[i].score;
-                ctx.fillText(scoreStr, hw * 2 / 3 - 40, hh * 2 / 3 + (i+1)*20+30);
-                //TODO: Add the server highscore on the right side
-                var scoreStr2 = this._serverScores[i].name + "  " + this._serverScores[i].score;
-                ctx.fillText(scoreStr2, hw * 4 / 3 - 40, hh * 2 / 3 + (i+1)*20+30);
+                ctx.textAlign = "right";
+                var nameStr = this._localScores[i].name;
+                ctx.fillText(nameStr, hw * 2 / 3 - 10, hh * 2 / 3 + (i+1)*20+30);
+                ctx.textAlign = "left";
+                var scoreStr = this._localScores[i].score;
+                ctx.fillText(scoreStr, hw * 2 / 3, hh * 2 / 3 + (i+1)*20+30);
+
+                ctx.textAlign = "right";
+                nameStr = this._serverScores[i].name;
+                ctx.fillText(nameStr, hw * 4 / 3, hh * 2 / 3 + (i+1)*20+30);
+                ctx.textAlign = "left";
+                scoreStr = this._serverScores[i].score;
+                ctx.fillText(scoreStr, hw * 4 / 3 + 10, hh * 2 / 3 + (i+1)*20+30);
             };
 
             // display title
