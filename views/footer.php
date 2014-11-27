@@ -1,6 +1,6 @@
 
 		<footer id="about" role="contentinfo">
-			<h1>About the project</h1>
+			<h1>ABOUT THE PROJECT</h1>
 			<article>
 				<p>This is the final project of the following courses at the University of Iceland:
 					<ul>
