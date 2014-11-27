@@ -54,6 +54,7 @@ var highScores = {
         //console.log("data.score",data.score);
         //console.log("this._localScores",this._localScores);
         //console.log("this._localScores[0].score",this._localScores[0].score);
+        if (g_hasCheated) return;
         for (var i = 0; i < 10; i++) {
             // Check if the score is in the top 10
             if (data.score > this._localScores[i].score) {
