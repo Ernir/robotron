@@ -41,6 +41,7 @@ function postScore() {
 						score: parseInt(liElements[i-1].children[1].innerHTML)
 					});
 				}
+				$("section").click(function() {$(this).find("article").toggle("slow", function() {});});
 			}
 		}
 		xmlhttp.open("POST","phplogic/savescore.php?name="+name+"&score="+Player.getScore(),true);
