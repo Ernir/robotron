@@ -13,7 +13,29 @@
 
 var g_mouseX = 0,
     g_mouseY = 0,
-	g_isMouseDown = false;
+	g_isMouseDown = false,
+
+	$win = $(window),
+	w = 0,h = 0,
+	rgba = [],
+	getWidth = function() {
+		w = $win.width();
+		h = $win.innerHeight();
+	};
+
+$win.resize(getWidth).mousemove(function(e) {
+    rgba = [Math.round(e.pageX/w * 255),Math.round(e.pageY/h * 255),50, 0.90];
+    if ($(".canvasContainer:hover").length > 0) {
+    	$(document.body).css('background','black');
+		$(document.body).css('transition','background 0.5s ease-out');
+	} else {
+		$(document.body).css("transition", "")
+		$(document.body).css('background','rgba('+rgba.join(',')+')');
+	}
+}).resize();
+
+$("section").click(function() {$(this).find("article").toggle("slow", function() {});});
+$("footer").click(function() {$(this).find("article").toggle("slow", function() {});});
 
 function handleMouseMove(evt) {
     

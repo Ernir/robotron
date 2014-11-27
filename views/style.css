@@ -8,7 +8,7 @@ main, .instructions, .shortcuts, footer, .canvasContainer {max-width: 800px; mar
 .form {width: 50%; margin: 41% auto; padding: 1rem; background: rgba(255,0,0,1);}
 input[type="text"], input[type="submit"] {display: block; margin: 0 auto; width: 50%; text-align: center;}
 input[type="text"] {width: 49%}
-.hidden {display: none;}
+.hidden, article {display: none;}
 
 section, footer, article, .navbar, .navbar ul, .navbar ul li, .navbar ul li a, .navbar ul li a:hover {border-radius: 15px;}
 section, footer, .navbar {border: 1px solid red;}
@@ -18,7 +18,7 @@ article {margin: 0.25rem 0;}
 section, article, .navbar {padding: 0.5rem; background: black;}
 
 section {margin: 0.5rem auto;}
-h1 {text-align: center; padding: 0.5rem 0;}
+h1, footer h1 {text-align: center; padding: 0.5rem 0; font: 3.5rem serif;}
 
 li {list-style-position: inside;}
 footer {background: black;}
