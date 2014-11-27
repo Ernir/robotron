@@ -166,7 +166,7 @@ Player.prototype.subtractLives = function () {
 };
 
 Player.prototype.resetLives = function () {
-    this.lives = 1;
+    this.lives = 5;
 };
 
 Player.prototype.getLives = function () {
