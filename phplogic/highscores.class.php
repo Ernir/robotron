@@ -30,7 +30,7 @@ class Highscores {
 		$result = $query->execute();
 		$size = $query->fetchAll(PDO::FETCH_ASSOC);
 		if (sizeof($size) > 10) {
-			$query = $this->pdo->prepare("DELETE FROM highscores WHERE score=(SELECT MIN(score) FROM highscores)");
+			$query = $this->pdo->prepare("DELETE FROM highscores WHERE id=(SELECT MAX(id) FROM highscores WHERE score=(SELECT MIN(score) FROM highscores))");
 			$query->execute();
 		}
 	}
