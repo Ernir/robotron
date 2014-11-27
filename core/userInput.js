@@ -30,11 +30,14 @@ function postScore() {
 				var t = document.createTextNode(xmlhttp.responseText);
 				p.appendChild(t);
 				document.getElementById("output").appendChild(p);*/
+				document.getElementById("output").innerHTML=xmlhttp.responseText;
 				highScores.setName(name);
 				highScores.addLocalScore({name: highScores.getName(), score: Player.score});
-				document.getElementById("output").innerHTML=xmlhttp.responseText;
-				for (var i = 1; i<document.getElementById("highscoreList").childNodes.length; i++) {
-					highScores.addServerScore({name: document.getElementById(i).innerHTML, score: document.getElementById("score"+i).innerHTML});
+				for (var i = 1; i<document.getElementById("highscoreList").children.length; i++) {
+					highScores.addServerScore({
+						name: document.getElementById("name_"+i).innerHTML, 
+						score: document.getElementById("score_"+i).innerHTML
+					});
 				}
 				highScores.renderON();
 			}

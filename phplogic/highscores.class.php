@@ -52,13 +52,23 @@ class Highscores {
 				<article>
 					<ol id="highscoreList" class="highscoreList">
 						<?php foreach ($results as $hs): ?>
+
 							<li>
 								<?php echo "Name: "?>
-									<span id="<?php echo $hs->id?>"><?php echo $hs->name ?></span>
+
+									<span id="name_<?php echo $hs->id ?>">										
+										<?php echo $hs->name ?>
+									
+									</span>
 								<?php echo ". Score: "?>
-									<span id= "score"+"<?php echo $hs->id?>"><?php echo $hs->score ?></span>
+
+									<span id="score_<?php echo $hs->id ?>">
+										<?php echo $hs->score ?>
+
+									</span>
 							</li>
 						<?php endforeach; ?>
+
 					</ol>
 				</article>
 			</section>
