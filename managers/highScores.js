@@ -33,6 +33,7 @@ var highScores = {
                 this._localScores[i] = {name: "", score: 0};
             }*/
             this._localScores[i] = JSON.parse(localStorage.getItem("highscore" + i)) || {name: "", score: 0};
+            this._serverScores[i] = {name: "", score: 0};
             console.log("this._localScores["+i+"]",this._localScores[i]);
         }
         console.log("I have set up the highscores!");
