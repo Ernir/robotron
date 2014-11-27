@@ -112,6 +112,7 @@ var highScores = {
             for (var i = 0; i < 10; i++) {
                 ctx.textAlign = "right";
                 var nameStr = this._localScores[i].name;
+                if (nameStr === "") break;
                 ctx.fillText(nameStr, hw * 2 / 3 - 10, hh * 2 / 3 + (i+1)*20+30);
                 ctx.textAlign = "left";
                 var scoreStr = this._localScores[i].score;
@@ -121,6 +122,7 @@ var highScores = {
             //for (var i = 0; i < document.getElementById("highscoreList").children.length; i++) {
                 ctx.textAlign = "right";
                 nameStr = this._serverScores[i].name;
+                if (nameStr === "") break;
                 ctx.fillText(nameStr, hw * 4 / 3, hh * 2 / 3 + (i+1)*20+30);
                 ctx.textAlign = "left";
                 scoreStr = this._serverScores[i].score;
