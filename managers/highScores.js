@@ -56,7 +56,7 @@ var highScores = {
         //console.log("this._localScores[0].score",this._localScores[0].score);
         for (var i = 0; i < 10; i++) {
             // Check if the score is in the top 10
-            if (data.score >= this._localScores[i].score) {
+            if (data.score > this._localScores[i].score) {
                 // Add the score and shuffle the rest down
                 for (var j = 9; j > i; j--) {
                     this._localScores[j] = this._localScores[j-1];
@@ -69,17 +69,7 @@ var highScores = {
     },
 
     addServerScore: function (data) {
-        for (var i = 0; i < 10; i++) {
-            // Check if the score is in the top 10
-            if (data.score >= this._serverScores[i].score) {
-                // Add the score and shuffle the rest down
-                for (var j = 9; j > i; j--) {
-                    this._serverScores[j] = this._serverScores[j-1];
-                }
-                this._serverScores[i] = data;
-                break;
-            }
-        }
+        this._serverScores.push(data);
     },
 
     reset: function () {
@@ -88,7 +78,7 @@ var highScores = {
     },
 
     resetServerScore: function () {
-        for (var i in this._serverScores) this._serverScores[i] = {name: "", score: 0};
+        this._serverScores = [];
     },
 
     setName: function (Name) {
@@ -126,7 +116,8 @@ var highScores = {
                 ctx.textAlign = "left";
                 var scoreStr = this._localScores[i].score;
                 ctx.fillText(scoreStr, hw * 2 / 3, hh * 2 / 3 + (i+1)*20+30);
-
+            };
+            for (var i = 0; i < document.getElementById("highscoreList").children.length; i++) {
                 ctx.textAlign = "right";
                 nameStr = this._serverScores[i].name;
                 ctx.fillText(nameStr, hw * 4 / 3, hh * 2 / 3 + (i+1)*20+30);

@@ -34,10 +34,12 @@ function postScore() {
 				highScores.setName(name);
 				highScores.addLocalScore({name: highScores.getName(), score: Player.score});
 				highScores.resetServerScore();
-				for (var i = 1; i<=document.getElementById("highscoreList").children.length; i++) {
+				var liElements = document.getElementById("highscoreList").children;
+				console.log(liElements.length);
+				for (var i = 1; i <= liElements.length; i++) {
 					highScores.addServerScore({
-						name: document.getElementById("name_"+i).innerHTML, 
-						score: parseInt(document.getElementById("score_"+i).innerHTML)
+						name: liElements[i-1].children[0].innerHTML,
+						score: parseInt(liElements[i-1].children[1].innerHTML)
 					});
 				}
 			}

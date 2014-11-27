@@ -10,7 +10,7 @@ class Highscores {
 	private $pdo;
 	private $results = array();
 
-	public function __construct($pdo) { 
+	public function __construct($pdo) {
 		$this->pdo = $pdo; 
 		$this->pdo->exec(
 			"CREATE TABLE IF NOT EXISTS highscores (
@@ -25,11 +25,12 @@ class Highscores {
 		$score = strip_tags($score);
 		$query = $this->pdo->prepare("INSERT INTO highscores (name, score) VALUES (:name, :score)");
 		$result = $query->execute(array('name' => $name, 'score' => $score));
-		
-		$query = $this->pdo->prepare("SELECT COUNT(*) FROM highscores");
-		$size = $query->execute();
-		if ($size > 10) {
-			$query = $this->pdo->prepare("DELETE FROM highscores WHERE score = (SELECT MIN(score) FROM highscores)");
+
+		$query = $this->pdo->prepare("SELECT id, name, score FROM highscores");
+		$result = $query->execute();
+		$size = $query->fetchAll(PDO::FETCH_ASSOC);
+		if (sizeof($size) > 10) {
+			$query = $this->pdo->prepare("DELETE FROM highscores WHERE score=(SELECT MIN(score) FROM highscores)");
 			$query->execute();
 		}
 	}
@@ -58,17 +59,10 @@ class Highscores {
 				<h1 id="highscore">HIGHSCORE</h1>
 				<article>
 					<ol id="highscoreList" class="highscoreList">
-						<?php foreach ($results as $hs): ?>
+						<?php $i = 1; foreach ($results as $hs): ?>
 
-							<li>
-								<?php echo "Name: "?>
-
-									<span id="name_<?php echo $hs->id ?>"><?php echo $hs->name ?></span>
-								<?php echo ". Score: "?>
-
-									<span id="score_<?php echo $hs->id ?>"><?php echo $hs->score ?></span>
-							</li>
-						<?php endforeach; ?>
+							<li>Name: <span><?php echo $hs->name ?></span>. Score: <span><?php echo $hs->score ?></span></li>
+						<?php $i++; endforeach; ?>
 
 					</ol>
 				</article>
