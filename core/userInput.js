@@ -44,8 +44,10 @@ function postScore() {
 				$("section").click(function() {$(this).find("article").toggle("slow", function() {});});
 			}
 		}
-		xmlhttp.open("POST","phplogic/savescore.php?name="+name+"&score="+Player.getScore(),true);
-		xmlhttp.send();
+		if (!g_hasCheated) {
+			xmlhttp.open("POST","phplogic/savescore.php?name="+name+"&score="+Player.getScore(),true);
+			xmlhttp.send();
+		}
 	}
 	highScores.renderON();
 }
