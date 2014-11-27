@@ -216,6 +216,14 @@ var levelManager = {
         ctx.font = "bold 60px sans-serif";
         ctx.fillStyle = "rgba(255,255,255,0.3)"; //not sure if you want this
         ctx.fillRect(0, hh / 2, hw * 2, hh);
+        ctx.strokeStyle="white";
+        ctx.lineWidth=3;
+        ctx.beginPath();
+        ctx.moveTo(0, hh / 2);
+        ctx.lineTo(hw * 2, hh / 2);
+        ctx.moveTo(0, hh*1.5);
+        ctx.lineTo(hw * 2, hh*1.5);
+        ctx.stroke();
         ctx.fillStyle = "red";
         ctx.textAlign = "center";
         ctx.fillText(str, hw, hh);
