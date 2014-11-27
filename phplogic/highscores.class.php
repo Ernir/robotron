@@ -25,6 +25,13 @@ class Highscores {
 		$score = strip_tags($score);
 		$query = $this->pdo->prepare("INSERT INTO highscores (name, score) VALUES (:name, :score)");
 		$result = $query->execute(array('name' => $name, 'score' => $score));
+		
+		$query = $this->pdo->prepare("SELECT COUNT(*) FROM highscores");
+		$size = $query->execute();
+		if ($size > 10) {
+			$query = $this->pdo->prepare("DELETE FROM highscores WHERE score = (SELECT MIN(score) FROM highscores)");
+			$query->execute();
+		}
 	}
 
 	public function ShowHighscores() {
