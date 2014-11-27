@@ -4,8 +4,14 @@
 			<article>
 				<p>This is the final project of the following courses at the University of Iceland:
 					<ul>
-						<li>Computer game programming (Töl308G)</li>
-						<li>Web programming (Töl306G)</li>
+						<li>
+							Computer game programming (Töl308G)
+							<ul><li>Instructor: <a href="mailto:pk@hi.is">Patrick Kerr</a></li></ul>
+						</li>
+						<li>
+							Web programming (Töl306G)
+							<ul><li>Instructor: <a href="mailto:osk1@hi.is">Ólafur Sverrir Kjartansson</a></li></ul>
+						</li>
 					</ul>
 				<p>
 				<p>Participants (in alphabetical order): 
@@ -16,8 +22,7 @@
 						<li><a href="mailto:odv1@hi.is">Oddur Vilhjálmsson</a></li>
 					</ul>
 				</p>
-				<p>Instructor: Patrick Kerr</p>
-				<p>&copy; 2014</p>
+				<p>&copy; 2014 - All rights reserved</p>
 			</article>
 		</footer>
 	</div>
@@ -61,7 +66,7 @@
 	<script src="entities/Spark.js"></script>
 
 	<script src="particles/Particle.js"></script>
-    <script src="particles/AfterImage.js"></script>
+	<script src="particles/AfterImage.js"></script>
 
 	<script src="core/update.js"></script>
 	<script src="core/render.js"></script>
