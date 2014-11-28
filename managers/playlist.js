@@ -24,7 +24,7 @@
 	init: function () {
 		this._list.push(new Audio(g_bgmUrls.music));
 		this._list.push(new Audio(g_bgmUrls.instarem));
-		this._list.push(new Audio(g_bgmUrls.todIOF));
+		this._list.push(new Audio(g_bgmUrls.CrazyComets));
 
 		// Handle song changing
 		for (var i = 0; i < this._list.length; i++) {
