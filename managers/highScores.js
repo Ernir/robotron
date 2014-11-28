@@ -23,37 +23,23 @@ var highScores = {
 // "PRIVATE" METHODS
     
     deferredSetup: function () {
-        console.log("Trying to set up highscores!");
         for (var i = 0; i < 10; i++) {
-            /*console.log('localStorage.getItem("highscore" + i).score',JSON.parse(localStorage.getItem("highscore" + i)).score)
-            if (JSON.parse(localStorage.getItem("highscore" + i)).score > 0) {
-                this._localScores[i] = JSON.parse(localStorage.getItem("highscore" + i));
-                console.log("grabbed data from local storage");
-            } else {
-                this._localScores[i] = {name: "", score: 0};
-            }*/
             this._localScores[i] = JSON.parse(localStorage.getItem("highscore" + i)) || {name: "", score: 0};
             this._serverScores[i] = {name: "", score: 0};
-            console.log("this._localScores["+i+"]",this._localScores[i]);
         }
-        console.log("I have set up the highscores!");
     },
 
     _save: function () {
-        console.log("I'm about to save");
         for (var i = 0; i < 10; i++) {
             localStorage.setItem("highscore" + i, JSON.stringify(this._localScores[i]));
         }
-        console.log("I have saved");
+        console.log("Score saved");
     },
 
 // PUBLIC METHODS
 
     addLocalScore: function (data) {
         // data is an object containing a name and a score
-        //console.log("data.score",data.score);
-        //console.log("this._localScores",this._localScores);
-        //console.log("this._localScores[0].score",this._localScores[0].score);
         if (g_hasCheated) return;
         for (var i = 0; i < 10; i++) {
             // Check if the score is in the top 10

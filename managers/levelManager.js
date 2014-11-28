@@ -214,7 +214,7 @@ var levelManager = {
         var hw = g_canvas.width / 2 , hh = g_canvas.height / 2;
         ctx.save();
         ctx.font = "bold 60px sans-serif";
-        ctx.fillStyle = "rgba(255,255,255,0.3)"; //not sure if you want this
+        ctx.fillStyle = "rgba(255,255,255,0.3)";
         ctx.fillRect(0, hh / 2, hw * 2, hh);
         ctx.strokeStyle="white";
         ctx.lineWidth=3;
@@ -254,8 +254,6 @@ var levelManager = {
     },
 
     renderGameOver: function (ctx) {
-        //TODO: Add Highscore
-        //this.drawMenu(ctx, "GAME OVER", "re");
         highScores.render(ctx);
     }
 };
