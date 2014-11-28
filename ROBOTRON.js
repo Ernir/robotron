@@ -333,7 +333,7 @@ function preloadDone() {
     for (var i = 0; i < 6; i++) {
         g_sprites.Enforcer.push(new Sprite(g_images.Enforcer, i*29, (i+1)*29));
         for (var j = 0; j < 8; j++) {
-            g_sprites.PowerUps.push(new Sprite(g_images.PowerUps, j*2473/6, (j+1)*2473/6, i*412.25, (i+1)*412.25, 0.1));
+            g_sprites.PowerUps.push(new Sprite(g_images.PowerUps, j*247/6, (j+1)*247/6, i*330/8, (i+1)*330/8));
         }
     }
 
