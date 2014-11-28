@@ -19,23 +19,33 @@ var g_mouseX = 0,
 	w = 0,h = 0,
 	rgba = [],
 	getWidth = function() {
-		w = $win.width();
+		w = $win.innerWidth();
 		h = $win.innerHeight();
 	};
 
 $win.resize(getWidth).mousemove(function(e) {
-    rgba = [Math.round(e.pageX/w * 255),Math.round(e.pageY/h * 255),50, 0.90];
+    rgba = [Math.round(e.pageX/w * 255),Math.round((h-e.pageY)/h * 255),50, 0.90];
     if ($(".canvasContainer:hover").length > 0) {
     	$(document.body).css('background','black');
 		$(document.body).css('transition','background 0.5s ease-out');
 	} else {
-		$(document.body).css("transition", "")
+		$(document.body).css("transition", "");
 		$(document.body).css('background','rgba('+rgba.join(',')+')');
 	}
 }).resize();
-
-$("section").click(function() {$(this).find("article").toggle("slow", function() {});});
-$("footer").click(function() {$(this).find("article").toggle("slow", function() {});});
+/* trying to make the canvas resizable, doesn't seem to be working well
+$(document.body).resize(function(){
+	console.log(window.innerWidth);
+	if (g_canvas.width  > window.innerWidth) g_canvas.width  = window.innerWidth;
+	if (g_canvas.height > window.innerHeight) g_canvas.height = window.innerHeight;
+}).resize();
+*/
+if($("#highscoreList").length!==0) $("li#navHS").removeClass("hidden");
+$("h2").click(function() {$(this).parent().find("article").toggle("slow");});
+$('a[href="#highscore"]').click(function() {$(".highscore article").toggle("slow");});
+$('a[href="#instructions"]').click(function() {$(".instructions article").toggle("slow");});
+$('a[href="#controls"]').click(function() {$(".controls article").toggle("slow");});
+$('a[href="#about"]').click(function() {$("#about article").toggle("slow");});
 
 function handleMouseMove(evt) {
     

@@ -1,19 +1,19 @@
 
 		<footer id="about" role="contentinfo">
-			<h1>ABOUT THE PROJECT</h1>
+			<h2>ABOUT THE PROJECT</h2>
 			<article>
 				<p>This is the final project of the following courses at the University of Iceland:
 					<ul>
 						<li>
-							Computer game programming (Töl308G)
-							<ul><li>Instructor: <a href="mailto:pk@hi.is">Patrick Kerr</a></li></ul>
+							Computer game programming (Töl308G)<br>
+							<span class="instructor">Instructor: <span class="iName">Patrick Kerr</span></span>
 						</li>
 						<li>
-							Web programming (Töl306G)
-							<ul><li>Instructor: <a href="mailto:osk1@hi.is">Ólafur Sverrir Kjartansson</a></li></ul>
+							Web programming (Töl306G)<br>
+							<span class="instructor">Instructor: <span class="iName">Ólafur Sverrir Kjartansson</span></span>
 						</li>
 					</ul>
-				<p>
+				</p>
 				<p>Participants (in alphabetical order): 
 					<ul>
 						<li><a href="mailto:bjh27@hi.is">Bjarki Hall</a></li>

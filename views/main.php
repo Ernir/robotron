@@ -10,9 +10,9 @@
 			</div>
 
 			<section class="instructions">
-				<h1 id="instructions">INSTRUCTIONS</h1>
+				<h2 id="instructions">INSTRUCTIONS</h2>
 				<article>
-					<h2>Story</h2>
+					<h3>Story</h3>
 					<p>
 						Inspired by his never ending quest for progress, in 2084 man perfects <br>
 						the Robotrons: a robot species so advanced that man is inferior to his <br>
@@ -26,7 +26,7 @@
 				</article>
 
 				<article>
-					<h2>Gameplay summary</h2>
+					<h3>Gameplay summary</h3>
 					<ul>
 						<li>You control the player with two joysticks. One directs the movement while the other indicates which direction to fire in.</li>
 						<li>You must eliminate every robot (except Hulks) in the wave to advance to the next round.</li>
@@ -45,9 +45,9 @@
 			</section>
 
 			<section class="controls">
-				<h1 id="controls">CONTROLS</h1>
+				<h2 id="controls">CONTROLS</h2>
 				<article class="movement">
-					<h2>Movement</h2>
+					<h3>Movement</h3>
 					<ul>
 						<li>W = move up</li>
 						<li>A = move left</li>
@@ -57,7 +57,7 @@
 				</article>
 
 				<article class="firing">
-					<h2>Fire weapon</h2>
+					<h3>Fire weapon</h3>
 					<ul>
 						<li>Arrow keys = fire in the arrow's direction</li>
 						<li>Mouse movement = aim</li>
@@ -65,7 +65,7 @@
 					</ul>
 				</article>
 				<article class="toggles">
-					<h2>Toggles</h2>
+					<h3>Toggles</h3>
 					<ul>
 						<li>M = Music on/off</li>
 						<li>N = Sound effects on/off</li>
@@ -79,14 +79,14 @@
 					</ul>
 				</article>
 				<article class="sliders">
-					<h2>Sliders</h2>
+					<h3>Sliders</h3>
 					<ul>
 						<li>Y = Increase music volume</li>
 						<li>H = Decrease music volume</li>
 					</ul>
 				</article>
 				<article class="diagnostics">
-					<h2>Diagnostics mode</h2>
+					<h3>Diagnostics mode</h3>
 					<ul>
 						<li>+ = Next level</li>
 						<li>- = Previous level</li>

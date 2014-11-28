@@ -26,22 +26,19 @@ function postScore() {
 		}
 		xmlhttp.onreadystatechange=function() {
 			if (xmlhttp.readyState==4 && xmlhttp.status==200) {
-				/*var p = document.createElement("p");
-				var t = document.createTextNode(xmlhttp.responseText);
-				p.appendChild(t);
-				document.getElementById("output").appendChild(p);*/
+				if($("#highscoreList").length===0) $("li#navHS").removeClass("hidden");
 				document.getElementById("output").innerHTML=xmlhttp.responseText;
 				highScores.setName(name);
 				highScores.addLocalScore({name: highScores.getName(), score: Player.score});
 				highScores.resetServerScore();
-				var liElements = $("#highscoreList").find('li');
-				for (var i = 1; i <= liElements.length; i++) {
+				var li = $("#highscoreList").find('li');
+				for (var i = 1; i <= li.length; i++) {
 					highScores.addServerScore({
-						name: liElements[i-1].children[0].innerHTML,
-						score: parseInt(liElements[i-1].children[1].innerHTML)
+						name: li[i-1].children[0].innerHTML,
+						score: parseInt(li[i-1].children[1].innerHTML)
 					});
 				}
-				$("section").click(function() {$(this).find("article").toggle("slow", function() {});});
+				$("#highscore").click(function() {$(this).parent().find("article").toggle("slow");});
 			}
 		}
 		if (!g_hasCheated) {

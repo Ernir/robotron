@@ -2,12 +2,14 @@
 body {position: relative; font: 20px/2rem sans-serif; background-color: black; color: white;}
 .wrapper {max-width: 1200px; margin: 0 auto;}
 main, .instructions, .shortcuts, footer, .canvasContainer {max-width: 800px; margin: 0.5rem auto;}
-.canvasContainer {width: 100%; height: 600px; border: 1px solid red;}
-#myCanvas {cursor: none; position: absolute;}
-#formDiv {position: absolute; width: 800px; height: 600px;}
-.form {width: 50%; margin: 41% auto; padding: 1rem; background: rgba(255,0,0,1);}
-input[type="text"], input[type="submit"] {display: block; margin: 0 auto; width: 50%; text-align: center;}
-input[type="text"] {width: 49%}
+
+.canvasContainer {width: 100%; border: 1px solid red;}
+.canvasContainer, #myCanvas, #formDiv {height: 600px;}
+#myCanvas, #formDiv {position: absolute; width: 800px;}
+#myCanvas {cursor: none;}
+
+.form {box-sizing: border-box; width: 50%; margin: 30% auto; padding: 2rem; background: rgba(255,0,0,1); border: 1px solid green;}
+input[type="text"], input[type="submit"] {box-sizing: border-box; display: block; margin: 0 auto; width: 50%; text-align: center;}
 .hidden, article {display: none;}
 
 section, footer, article, .navbar, .navbar ul, .navbar ul li, .navbar ul li a, .navbar ul li a:hover {border-radius: 15px;}
@@ -18,23 +20,28 @@ article {margin: 0.25rem 0;}
 section, article, .navbar {padding: 0.5rem; background: black;}
 
 section {margin: 0.5rem auto;}
-h1, footer h1 {text-align: center; padding: 0.5rem 0; font: 3.5rem serif;}
+h2, footer h2 {text-align: center; padding: 0.5rem 0; font: 3.5rem sans-serif; color: red;}
 
 li {list-style-position: inside;}
 footer {background: black;}
 footer article {margin: 0.5rem;}
-footer a, main article a {color: red;}
+footer a, main article a {color: red; text-decoration: none;}
+footer .instructor {margin-left: 1rem;}
+footer .iName {position: relative; -webkit-animation: iAnim 2s infinite; animation: iAnim 2s infinite;}
+@-webkit-keyframes iAnim {0% {color:white; left:0;} 50% {color:red; left:20rem;} 100% {color:white; left:0;}}
+@keyframes iAnim {0% {color:white; left:0;} 50% {color:red; left:20rem;} 100% {color:white; left:0;}}
 
 .navbar { position: fixed; top: 0.5rem; left: 0.5rem; width: 12rem; height: auto;}
-.navbar ul li {list-style: none; background: rgba(255,255,255,0.3); width: 100%;}
+.navbar ul li {list-style: none; background: #2b0628; width: 100%;}
 .navbar ul li a {display: block; color: red; text-decoration: none; text-align: center;}
 .navbar ul li a:hover {color: white; background: red;}
 
-@media only screen and (max-width: 1240px) {
+@media only screen and (max-width: 1266px) {
 	.wrapper {margin-top: 4rem;}
-	.navbar {width: 100%; height: 2.5rem; background: black;}
+	.navbar {top: 0; left: 0; width: 100%; height: 2.5rem; background: black;}
 	.navbar ul {border: none;}
-	.navbar ul li a {display: inline-block; float: left; background: rgba(255,255,255,0.3); padding: 0 0.25rem;}
+	.navbar ul li a {display: inline-block; float: left; background: #2b0628; padding: 0 0.25rem;}
+	footer .iName {animation: none; -webkit-animation: none;}
 }
 
 @media only screen and (max-width: 600px), (max-device-width : 400px) {

@@ -56,7 +56,7 @@ class Highscores {
 		if(isset($results)): ?>
 			
 			<section class="highscore">
-				<h1 id="highscore">HIGHSCORE</h1>
+				<h2 id="highscore">HIGHSCORE</h2>
 				<article>
 					<ol id="highscoreList" class="highscoreList">
 						<?php $i = 1; foreach ($results as $hs): ?>
