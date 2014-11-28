@@ -56,7 +56,7 @@ g_bgmUrls = {
 	CrazyComets : "sounds/CrazyComets.mp3",
     music : "sounds/rafmagnad11.mp3",
 	instarem: "sounds/instant-remedy.mp3",
-	labrat : "/sounds/JazzJackrabbit2LaboratoryLevel.mp3"
+	labrat : "sounds/JazzJackrabbit2LaboratoryLevel.mp3"
 };
 */
 
