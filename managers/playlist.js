@@ -25,6 +25,7 @@
 		this._list.push(new Audio(g_bgmUrls.music));
 		this._list.push(new Audio(g_bgmUrls.instarem));
 		this._list.push(new Audio(g_bgmUrls.CrazyComets));
+		this._list.push(new Audio(g_bgmUrls.labrat));
 
 		// Handle song changing
 		for (var i = 0; i < this._list.length; i++) {

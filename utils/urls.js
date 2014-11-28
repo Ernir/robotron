@@ -55,7 +55,8 @@ g_audioUrls = {
 g_bgmUrls = {
 	CrazyComets : "sounds/CrazyComets.mp3",
     music : "sounds/rafmagnad11.mp3",
-	instarem: "sounds/instant-remedy.mp3"
+	instarem: "sounds/instant-remedy.mp3",
+	labrat : "/sounds/JazzJackrabbit2LaboratoryLevel.mp3"
 };
 */
 
@@ -115,5 +116,6 @@ g_audioUrls = {
 g_bgmUrls = {
 	CrazyComets : "https://notendur.hi.is/~odv1/Robotron/sounds/CrazyComets.mp3",
     music : "https://notendur.hi.is/~odv1/Robotron/sounds/rafmagnad11.mp3",
-	instarem: "https://notendur.hi.is/~jiz2/TOL-S3/ProjectRobotron/instant-remedy.mp3"
+	instarem : "https://notendur.hi.is/~jiz2/TOL-S3/ProjectRobotron/instant-remedy.mp3",
+	labrat : "https://notendur.hi.is/~odv1/Robotron/sounds/JazzJackrabbit2LaboratoryLevel.mp3"
 };
