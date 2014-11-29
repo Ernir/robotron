@@ -39,9 +39,9 @@ nav ul li a:hover {color: white; background: red;}
 footer {background: black;}
 footer article {margin: 0.5rem;}
 footer .instructor {margin-left: 1rem;}
-footer .iName {position: relative; -webkit-animation: iAnim 2s infinite; animation: iAnim 2s infinite;}
+footer .iName {position: relative; -webkit-animation: iAnim 2s 2s 2;}/* animation: iAnim 2s 2s 2;}*/
 @-webkit-keyframes iAnim {0% {color:white; left:0;} 50% {color:red; left:5rem;} 100% {color:white; left:0;}}
-@keyframes iAnim {0% {color:white; left:0;} 50% {color:red; left:5rem;} 100% {color:white; left:0;}}
+/*@keyframes iAnim {0% {color:white; left:0;} 50% {color:red; left:5rem;} 100% {color:white; left:0;}}*/
 
 /*Media queries*/
 @media only screen and (max-width: 1236px) {
