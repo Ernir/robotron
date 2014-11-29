@@ -21,29 +21,57 @@ class Highscores {
 	}
 
 	public function Insert($name, $score) {
+		//Prevent injection.
 		$name = strip_tags($name);
 		$score = strip_tags($score);
-		$query = $this->pdo->prepare("INSERT INTO highscores (name, score) VALUES (:name, :score)");
+
+		//Insert values
+		$query = $this->pdo->prepare(
+			"INSERT INTO highscores (name, score) 
+			VALUES (:name, :score)"
+		);
 		$result = $query->execute(array('name' => $name, 'score' => $score));
 
-		$query = $this->pdo->prepare("SELECT id, name, score FROM highscores");
+		//If the table has more than 10 rows, delete the one with the lowest score
+		$query = $this->pdo->prepare(
+			"SELECT id, name, score 
+			FROM highscores"
+		);
 		$result = $query->execute();
-		$size = $query->fetchAll(PDO::FETCH_ASSOC);
-		if (sizeof($size) > 10) {
-			$query = $this->pdo->prepare("DELETE FROM highscores WHERE id=(SELECT MAX(id) FROM highscores WHERE score=(SELECT MIN(score) FROM highscores))");
+		$data = $query->fetchAll(PDO::FETCH_ASSOC);
+		if (sizeof($data) > 10) {
+			$query = $this->pdo->prepare(
+				"DELETE FROM highscores 
+				WHERE id=(
+					SELECT MAX(id) 
+					FROM highscores 
+					WHERE score=(
+						SELECT MIN(score) 
+						FROM highscores
+					)
+				)"
+			);
 			$query->execute();
 		}
 	}
 
 	public function ShowHighscores() {
-		$query = $this->pdo->prepare("SELECT id, name, score FROM highscores ORDER BY score DESC LIMIT 10");
+		//Fetch the data in right order
+		$query = $this->pdo->prepare(
+			"SELECT id, name, score 
+			FROM highscores 
+			ORDER BY score 
+			DESC LIMIT 10"
+		);
 		$result = $query->execute();
-		if (!$result) { return array(); }
+
+		//Return if it is failing
+		if (!$result) {return;}
 		$data = $query->fetchAll(PDO::FETCH_ASSOC);
-		if (!$data) { return array(); }
+		if (!$data) {return;}
 
+		//Put the data in the result array as induvidual highscores.
 		$results = array();
-
 		foreach ($data as $row) {
 			$hs = new Highscore();
 			$hs->id = $row['id'];
@@ -53,6 +81,7 @@ class Highscores {
 			$results[] = $hs;
 		}
 
+		//Output it to the output div.
 		if(isset($results)): ?>
 			
 			<section class="highscore">
@@ -69,11 +98,5 @@ class Highscores {
 			</section>
 
 		<?php endif;
-
-		$this->results = $results;
-		return $results;
 	}
-
-	public function Total() { return sizeof($this->results); }
-	public function Results() { return $this->results; }
 }

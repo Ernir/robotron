@@ -39,18 +39,24 @@ nav ul li a:hover {color: white; background: red;}
 footer {background: black;}
 footer article {margin: 0.5rem;}
 footer .instructor {margin-left: 1rem;}
-footer .iName {position: relative; -webkit-animation: iAnim 2s 2s 2; animation: iAnim 2s 2s 2;}
-@-webkit-keyframes iAnim {0% {color:white; left:0;} 50% {color:red; left:5rem;} 100% {color:white; left:0;}}
-@keyframes iAnim {0% {color:white; left:0;} 50% {color:red; left:5rem;} 100% {color:white; left:0;}}
+footer .iName {position: relative; -webkit-animation: iAnim 4s infinite; animation: iAnim 4s infinite;}
+/*Using the CSS3 animations (and prefix) for showing off, thanks for the semester! :)*/
+@-webkit-keyframes iAnim {0% {color:white; left:0;} 25% {color:red; left:2rem;} 50% {color:white; left:0;}}
+@keyframes iAnim {0% {color:white; left:0;} 25% {color:red; left:2rem;} 50% {color:white; left:0;}}
 
 /*Media queries*/
 @media only screen and (max-width: 1236px) {
-	.wrapper {padding-top: 2.5rem;} /*Push the sites content down.*/
+	.wrapper {padding-top: 2.5rem;} /*Push the site's content down.*/
 	nav {top: 0; left: 0; width: 100%; background: black;}
 	nav ul {border: none; overflow: none;}
 	nav ul li {display: inline;}
 	nav ul li a {display: inline-block; overflow: hidden; float: left; width: 20%; background: #2b0628; padding: 0 0.25rem;}
-	footer .iName {animation: none; x-webkit-animation: none;}
+}
+
+@media only screen and (max-width: 450px) {
+	footer .iName {position: relative; -webkit-animation: noAnim 2s infinite; animation: noAnim 2s infinite; color: red;}
+	@-webkit-keyframes noAnim {0% {} 100% {}}
+	@keyframes noAnim {0% {} 100% {}}
 }
 
 @media only screen and (max-width: 600px), (max-device-width : 400px) {

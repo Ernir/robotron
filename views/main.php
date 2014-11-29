@@ -1,10 +1,9 @@
 
 		<main>
 			<div id="output">
-			
 			<?php 
 				$highscores = new Highscores(new PDO('sqlite:phplogic/highscores.db'));
-				$results = $highscores->ShowHighscores();
+				$highscores->ShowHighscores();
 			?>
 			
 			</div>

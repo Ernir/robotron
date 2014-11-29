@@ -7,7 +7,7 @@ $results = array();
 if ($method === 'POST') {
 	if (isset($_GET['name']) && isset($_GET['score'])) {
 		$highscores->Insert($_GET['name'], $_GET['score']);
-		$results = $highscores->ShowHighScores();
+		$highscores->ShowHighScores();
 	}
 }
 ?>
