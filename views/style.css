@@ -1,50 +1,59 @@
-* {margin: 0; padding: 0;}
-body {position: relative; font: 20px/2rem sans-serif; background-color: black; color: white;}
-.wrapper {max-width: 1200px; margin: 0 auto;}
-main, .instructions, .shortcuts, footer, .canvasContainer {max-width: 800px; margin: 0.5rem auto;}
+* {margin: 0; padding: 0; box-sizing: border-box;} /*Paul Irish maelir med thvi ad hafa BS-BB a universal selector*/
+body {position: relative; font: 20px/2rem sans-serif; background: black; color: white;} /*Vid notum rem sem maelieiningu*/
+.wrapper {max-width: 1200px; margin: 0 auto;} /*Hamarksstaerd vefsidu: 1200px, midjujafnad*/
 
-.canvasContainer {width: 100%; border: 1px solid red;}
-.canvasContainer, #myCanvas, #formDiv {height: 600px;}
-#myCanvas, #formDiv {position: absolute; width: 800px;}
+/*Centering*/
+.wrapper, main, .instructions, .shortcuts, footer, .canvasContainer {margin: 0.5rem auto;}
+
+/*Borders*/
+section, footer, article, nav, nav ul, nav ul li, nav ul li a, nav ul li a:hover {border-radius: 15px;}
+#myCanvas, #formDiv, section, footer, nav {border: 1px solid red;}
+article, nav ul li a {border: 1px solid white;}
+
+/*Sizing and canvas (max and default width: 800px height: 600px)*/
+main, .instructions, .shortcuts, footer, .canvasContainer, #myCanvas, #formDiv {max-width: 800px;}
+.canvasContainer {height: 600px;}
+#myCanvas, #formDiv {position: absolute; width: 100%; max-height: 600px; height: 100%;}
 #myCanvas {cursor: none;}
 
-.form {box-sizing: border-box; width: 50%; margin: 30% auto; padding: 2rem; background: rgba(255,0,0,1); border: 1px solid green;}
-input[type="text"], input[type="submit"] {box-sizing: border-box; display: block; margin: 0 auto; width: 50%; text-align: center;}
+/*Heading sizes, links and lists*/
+h2, footer h2 {text-align: center; padding: 0.5rem 0; font: 3.5rem sans-serif; color: red;}
+a {color: red; text-decoration: none;}
+li {list-style-position: inside;}
+
+/*Form and input*/
+.form {position: absolute; top:50%; right: 0; left: 0; width: 50%; margin: 0 auto; padding: 2rem; background: red;}
+input[type="text"], input[type="submit"] {display: block; margin: 0 auto; width: 50%; text-align: center;}
 .hidden, article {display: none;}
 
-section, footer, article, .navbar, .navbar ul, .navbar ul li, .navbar ul li a, .navbar ul li a:hover {border-radius: 15px;}
-section, footer, .navbar {border: 1px solid red;}
-article, .navbar ul li a {border: 1px solid white;}
+/*Sections, articles, nav and footer*/
+section, article, nav {padding: 0.5rem; background: black;}
+section {margin: 0.5rem auto;}
 article {margin: 0.25rem 0;}
 
-section, article, .navbar {padding: 0.5rem; background: black;}
+nav {position: fixed; top: 0.5rem; left: 0.5rem; width: 12rem; height: auto;}
+nav ul li {list-style: none; background: #2b0628; width: 100%;}
+nav ul li a {display: block; text-align: center;}
+nav ul li a:hover {color: white; background: red;}
 
-section {margin: 0.5rem auto;}
-h2, footer h2 {text-align: center; padding: 0.5rem 0; font: 3.5rem sans-serif; color: red;}
-
-li {list-style-position: inside;}
 footer {background: black;}
 footer article {margin: 0.5rem;}
-footer a, main article a {color: red; text-decoration: none;}
 footer .instructor {margin-left: 1rem;}
 footer .iName {position: relative; -webkit-animation: iAnim 2s infinite; animation: iAnim 2s infinite;}
-@-webkit-keyframes iAnim {0% {color:white; left:0;} 50% {color:red; left:20rem;} 100% {color:white; left:0;}}
-@keyframes iAnim {0% {color:white; left:0;} 50% {color:red; left:20rem;} 100% {color:white; left:0;}}
+@-webkit-keyframes iAnim {0% {color:white; left:0;} 50% {color:red; left:5rem;} 100% {color:white; left:0;}}
+@keyframes iAnim {0% {color:white; left:0;} 50% {color:red; left:5rem;} 100% {color:white; left:0;}}
 
-.navbar { position: fixed; top: 0.5rem; left: 0.5rem; width: 12rem; height: auto;}
-.navbar ul li {list-style: none; background: #2b0628; width: 100%;}
-.navbar ul li a {display: block; color: red; text-decoration: none; text-align: center;}
-.navbar ul li a:hover {color: white; background: red;}
-
-@media only screen and (max-width: 1266px) {
-	.wrapper {margin-top: 4rem;}
-	.navbar {top: 0; left: 0; width: 100%; height: 2.5rem; background: black;}
-	.navbar ul {border: none;}
-	.navbar ul li a {display: inline-block; float: left; background: #2b0628; padding: 0 0.25rem;}
-	footer .iName {animation: none; -webkit-animation: none;}
+/*Media queries*/
+@media only screen and (max-width: 1236px) {
+	.wrapper {padding-top: 2.5rem;} /*Push the sites content down.*/
+	nav {top: 0; left: 0; width: 100%; background: black;}
+	nav ul {border: none; overflow: none;}
+	nav ul li {display: inline;}
+	nav ul li a {display: inline-block; float: left; width: 20%; background: #2b0628; padding: 0 0.25rem;}
+	footer .iName {animation: none; x-webkit-animation: none;}
 }
 
 @media only screen and (max-width: 600px), (max-device-width : 400px) {
-	.wrapper {margin-top: 8rem;}
-	.navbar {height: auto;}
+	h2, footer h2 {font-size: 2.5rem;} /*Making headers smaller to prevent overflow*/
+	input[type="text"], input[type="submit"] {width: 100%;}
 }

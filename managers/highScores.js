@@ -131,6 +131,8 @@ var highScores = {
             ctx.fillText(volStr,hw,2*hh-10);
 
             ctx.restore();
+        } else {
+            levelManager.drawMenu(ctx, "GAME OVER", "re");
         }
     }
 };

@@ -212,9 +212,11 @@ var levelManager = {
         if (re !== "re") re = "";
         var str2 = "Press R to " + re + "start the game!";
         var hw = g_canvas.width / 2 , hh = g_canvas.height / 2;
+        
         ctx.save();
         ctx.fillStyle = "#2b0628";
         ctx.fillRect(0, hh / 2, hw * 2, hh);
+        
         ctx.strokeStyle="white";
         ctx.lineWidth=3;
         ctx.beginPath();
@@ -223,10 +225,13 @@ var levelManager = {
         ctx.moveTo(0, hh*1.5);
         ctx.lineTo(hw * 2, hh*1.5);
         ctx.stroke();
+        
         ctx.fillStyle = "red";
         ctx.textAlign = "center";
+        
         ctx.font = "bold 60px sans-serif";
         ctx.fillText(str, hw, hh);
+        
         ctx.font = "bold 20px sans-serif";
         ctx.fillText(str2, hw, hh * 3 / 2 - 10); //10 is the font's halfheight
         
@@ -236,6 +241,7 @@ var levelManager = {
         var volStr = "MUSIC VOLUME: "+vol+"%";
         ctx.fillStyle = "gray";
         ctx.fillText(volStr,hw,2*hh-10);
+        
         ctx.restore();
     },
 
@@ -246,7 +252,7 @@ var levelManager = {
         this._isGameOver = true;
         this._isChangingLevel = true;
         Player.addLives();
-        document.getElementById("formDiv").className = "";
+        $("#formDiv").removeClass("hidden");
     },
 
     isGameOver: function () {

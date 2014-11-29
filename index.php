@@ -6,5 +6,5 @@ require('phplogic/highscores.class.php');
 include('views/header.php');
 require('views/canvas.php');
 include('views/main.php');
-include('views/navbar.php');
+include('views/navigation.php');
 include('views/footer.php');

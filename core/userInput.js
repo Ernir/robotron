@@ -10,7 +10,7 @@ document.addEventListener("DOMContentLoaded",function(){
 function add(e) {
 	e.preventDefault();
 	postScore();
-	document.getElementById("formDiv").className = "hidden";
+	$("#formDiv").addClass("hidden");
 }
 
 function postScore() {

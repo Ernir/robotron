@@ -23,6 +23,7 @@ var g_mouseX = 0,
 		h = $win.innerHeight();
 	};
 
+//Background color listens to mouse position
 $win.resize(getWidth).mousemove(function(e) {
     rgba = [Math.round(e.pageX/w * 255),Math.round((h-e.pageY)/h * 255),50, 0.90];
     if ($(".canvasContainer:hover").length > 0) {
@@ -33,13 +34,8 @@ $win.resize(getWidth).mousemove(function(e) {
 		$(document.body).css('background','rgba('+rgba.join(',')+')');
 	}
 }).resize();
-/* trying to make the canvas resizable, doesn't seem to be working well
-$(document.body).resize(function(){
-	console.log(window.innerWidth);
-	if (g_canvas.width  > window.innerWidth) g_canvas.width  = window.innerWidth;
-	if (g_canvas.height > window.innerHeight) g_canvas.height = window.innerHeight;
-}).resize();
-*/
+
+//Navigation menu interavtivity
 if($("#highscoreList").length!==0) $("li#navHS").removeClass("hidden");
 $("h2").click(function() {$(this).parent().find("article").toggle("slow");});
 $('a[href="#highscore"]').click(function() {$(".highscore article").toggle("slow");});
