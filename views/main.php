@@ -2,6 +2,7 @@
 		<main>
 			<div id="output">
 			<?php 
+				//When the site loads for the first time.
 				$highscores = new Highscores(new PDO('sqlite:phplogic/highscores.db'));
 				$highscores->ShowHighscores();
 			?>
