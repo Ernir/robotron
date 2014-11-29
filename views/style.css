@@ -49,11 +49,11 @@ footer .iName {position: relative; -webkit-animation: iAnim 2s 2s 2; animation: 
 	nav {top: 0; left: 0; width: 100%; background: black;}
 	nav ul {border: none; overflow: none;}
 	nav ul li {display: inline;}
-	nav ul li a {display: inline-block; float: left; width: 20%; background: #2b0628; padding: 0 0.25rem;}
+	nav ul li a {display: inline-block; overflow: hidden; float: left; width: 20%; background: #2b0628; padding: 0 0.25rem;}
 	footer .iName {animation: none; x-webkit-animation: none;}
 }
 
 @media only screen and (max-width: 600px), (max-device-width : 400px) {
-	h2, footer h2 {font-size: 2.5rem;} /*Making headers smaller to prevent overflow*/
+	h2, footer h2 {font-size: 2rem;} /*Making headers smaller to prevent overflow*/
 	input[type="text"], input[type="submit"] {width: 100%;}
 }
