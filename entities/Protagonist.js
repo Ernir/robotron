@@ -106,7 +106,10 @@ Protagonist.prototype.computeMovement = function () {
 	}
 	
 	// Walk makes a sound if moved
-	if (g_sounds && hasMoved) this.walkSound.play()
+	if (g_sounds && hasMoved) {
+        this.walkSound.volume = 0.3;
+        this.walkSound.play()
+    }
     
     return {x: velX, y: velY};
 };

@@ -13,7 +13,10 @@ function Brain(descr) {
     Enemy.call(this, descr);
 
     this.sprite = g_sprites.Brain[6];
-    if (g_sounds) this.spawnSound.play();
+    if (g_sounds) {
+        this.spawnSound.volume = 0.5;
+        this.spawnSound.play();
+    }
 
     this.makeWarpParticles();
 }

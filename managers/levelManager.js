@@ -57,7 +57,10 @@ var levelManager = {
 
         var randomLevelRequired = Player.level >= this._levelSpecs.length;
         var L = Player.level;
-        if (L % 5 !== 0 && g_sounds) this._levelChangingSound.play();
+        if (L % 5 !== 0 && g_sounds) {
+            this._levelChangingSound.volume = 0.25;
+            this._levelChangingSound.play();
+        }
 
         // A hack to remove the lag from the first power up
         //if (L === 1) entityManager.createPowerup(0,0);

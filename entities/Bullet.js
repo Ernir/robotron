@@ -23,10 +23,12 @@ function Bullet(descr) {
     if (g_sounds) {
         if (!Player.hasMachineGun && !Player.hasShotgun) {
             var gunSound = new Audio(g_audioUrls.shot);
+            gunSound.volume = 0.6;
             gunSound.play();
         }
         if (Player.hasMachineGun) {
             var gunSound = new Audio(g_audioUrls.machineGun);
+            gunSound.volume = 0.8;
             gunSound.play();
         }
         if (Player.hasShotgun) {

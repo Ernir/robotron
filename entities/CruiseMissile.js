@@ -16,6 +16,7 @@ function CruiseMissile(descr) {
 	
 	// HACKED-IN AUDIO (no preloading)
 	this.bombSound = new Audio(g_audioUrls.explosion);
+    this.bombSound.volume = 0.5;
 
     this.target = entityManager.findProtagonist();
 }

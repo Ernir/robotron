@@ -41,7 +41,10 @@ Enemy.prototype.kill = function () {
 
     this._isDeadNow = true;
     this.explode.currentTime = 0;
-    if (g_sounds) this.explode.play();
+    if (g_sounds) {
+        this.explode.volume = 0.3;
+        this.explode.play();
+    }
 };
 
 Enemy.prototype.getRadius = function () {

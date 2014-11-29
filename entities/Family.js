@@ -53,7 +53,10 @@ Family.prototype.update = function (du) {
 			this.deadSound.currentTime = 0;
 			this.died = true;
 		}
-		if (g_sounds) this.deadSound.play();
+		if (g_sounds) {
+            this.deadSound.volume = 0.3;
+            this.deadSound.play();
+        }
         this.lifeSpan += -du;
         if (this.lifeSpan <= 0) {
             if(this.willSpawnProg){
@@ -124,7 +127,10 @@ Family.prototype.takeProtagonistHit = function () {
     Player.addMultiplier();
     Player.addSaveCount();
 	this.savedSound.currentTime = 0;
-	if (g_sounds) this.savedSound.play();
+	if (g_sounds) {
+        this.savedSound.volume = 0.4;
+        this.savedSound.play();
+    }
     this.kill();
 };
 
