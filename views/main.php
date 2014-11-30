@@ -14,7 +14,7 @@
 				<article>
 					<h3>Story</h3>
 					<figure class="figureSide">
-						<img src="images/Robotron_2084_player.png" alt="The Robotron player">
+						<img src="http://cdn.wikimg.net/strategywiki/images/c/cb/Robotron_2084_player.png" alt="The Robotron player">
 						<figcaption>
 							<p>The Player</p>
 							<p>Downloaded from: </p>
@@ -36,7 +36,7 @@
 				<article>
 					<h3>Gameplay summary</h3>
 					<figure class="figureTop">
-						<img src="images/Robotron_2084_cpanel.png" alt="The Robotron controller">
+						<img src="http://cdn.wikimg.net/strategywiki/images/8/8f/Robotron_2084_cpanel.png" alt="The Robotron controller">
 						<figcaption>
 							<p>The original controller</p>
 							<p>Downloaded from: </p>
@@ -45,11 +45,11 @@
 					</figure>
 					<ul>
 						<li>You control the player with two joysticks. One directs the movement while the other indicates which direction to fire in.</li>
-						<li>You must eliminate every robot (except Hulks) in the wave to advance to the next round.</li>
+						<li>You must eliminate every robot (except for the indestructible Hulks) in the wave to advance to the next round.</li>
 						<li>You must avoid touching any robot or bullets or you will lose a life.</li>
 						<li>Gather up members of the "last" family for bonus points.</li>
 						<li>Some robots will spawn other robots if you do not destroy them quickly enough.</li>
-						<li>On Brain waves, gather as many family members before Brain robots turn them into mindless Prog zombies.</li>
+						<li>On Brain waves, gather as many family members as you can before Brain robots turn them into mindless Prog zombies.</li>
 						<li>Enemies can drop various powerups which can enhance your gameplay.</li>
 						<li>
 							<a href= "http://strategywiki.org/wiki/Robotron:_2084/How_to_play">
