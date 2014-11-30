@@ -7,13 +7,15 @@ body {position: relative; font: 20px/2rem sans-serif; background: black; color: 
 
 /*Borders*/
 h2, section, footer, article, nav, nav ul, nav ul li, nav ul li a, nav ul li a:hover {border-radius: 15px;}
+section, footer, nav {box-shadow: 0.1rem 0.1rem 0.5rem 0.25rem rgba(162,0,0,0.7);}
+.canvasContainer, .form {box-shadow: 0rem 0rem 2.5rem 1.5rem rgba(162,0,0,0.7);}
 
 th:first-child {border-top-left-radius: 15px;}
 th:last-child {border-top-right-radius: 15px;}
 tr:last-child td:first-child {border-bottom-left-radius: 15px;}
 tr:last-child td:last-child {border-bottom-right-radius: 15px;}
 
-#myCanvas, #formDiv, section, footer, nav {border: 1px solid red;}
+#myCanvas, .form, section, footer, nav {border: 1px solid red;}
 th, td, article, nav ul li a {border: 1px solid white;}
 
 /*Sizing and canvas (max and default width: 800px height: 600px)*/
@@ -23,14 +25,14 @@ main, .instructions, .shortcuts, #footerDiv, .canvasContainer, #myCanvas, #formD
 #myCanvas {cursor: none;}
 
 /*Heading sizes, links and lists*/
-h2 {text-align: center; padding: 0.5rem 0; font: 3.5rem sans-serif; color: red;}
-h2:hover, article a:hover {color: #ff2828;background: #101010;}
+h2 {text-align: center; padding: 0.5rem 0; font: 3.5rem sans-serif; color: red; text-shadow: 0.1rem 0.1rem #ffffff;}
+h2:hover, article a:hover {color: #ff2828; background: #101010; text-shadow: 0.1rem 0.1rem #a20000;}
 .instructions h3, .highscore h3 {text-align: center;}
 a {color: red; text-decoration: none;}
 li {list-style-position: inside;}
 
 /*Form and input*/
-.form {position: absolute; top:50%; right: 0; left: 0; width: 50%; margin: 0 auto; padding: 2rem; background: red;}
+.form {position: absolute; top:52%; right: 0; left: 0; width: 50%; margin: 0 auto; padding: 2rem; background: #2b0628;}
 input[type="text"], input[type="submit"] {display: block; margin: 0 auto; width: 50%; text-align: center;}
 .hidden, article {display: none;}
 
