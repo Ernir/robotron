@@ -35,6 +35,8 @@ $win.resize(getWidth).mousemove(function(e) {
 	}
 }).resize();
 
+$win.resize(function() {$(".canvasContainer").height($(".canvasContainer").width()*0.75);});
+
 //Navigation menu interavtivity
 if($("#highscoreTable").length!==0) $("li#navHS").removeClass("hidden");
 $("h2").click(function() {$(this).parent().find("article").toggle("slow");});
