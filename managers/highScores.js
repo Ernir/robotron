@@ -107,7 +107,7 @@ var highScores = {
                 ctx.fillText(scoreStr, hw * 2 / 3, hh * 2 / 3 + (i+1)*20+30);
              }
              // server scores
-            for (var i = 0; i < $("#highscoreList").find('li').length; i++) {   
+            for (var i = 0; i < $("#highscoreList tbody").find("tr").length; i++) {   
                 ctx.textAlign = "right";
                 nameStr = this._serverScores[i].name;
                 ctx.fillText(nameStr, hw * 4 / 3, hh * 2 / 3 + (i+1)*20+30);

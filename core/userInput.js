@@ -31,11 +31,12 @@ function postScore() {
 				highScores.setName(name);
 				highScores.addLocalScore({name: highScores.getName(), score: Player.score});
 				highScores.resetServerScore();
-				var li = $("#highscoreList").find('li');
-				for (var i = 1; i <= li.length; i++) {
+				var tr = $("#highscoreList tbody").find("tr");
+				for (var i = 1; i <= tr.length; i++) {
+					console.log(tr[i-1].children[1].innerHTML);
 					highScores.addServerScore({
-						name: li[i-1].children[0].innerHTML,
-						score: parseInt(li[i-1].children[1].innerHTML)
+						name: tr[i-1].children[1].innerHTML,
+						score: parseInt(tr[i-1].children[2].innerHTML)
 					});
 				}
 				$("#highscore").click(function() {$(this).parent().find("article").toggle("slow");});

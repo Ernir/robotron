@@ -3,21 +3,29 @@ body {position: relative; font: 20px/2rem sans-serif; background: black; color: 
 .wrapper {max-width: 1200px; margin: 0 auto;} /*Hamarksstaerd vefsidu: 1200px, midjujafnad*/
 
 /*Centering*/
-.wrapper, main, .instructions, .shortcuts, footer, .canvasContainer {margin: 0.5rem auto;}
+.wrapper, main, .instructions, .shortcuts, #footerDiv, .canvasContainer {margin: 0.5rem auto;}
 
 /*Borders*/
-section, footer, article, nav, nav ul, nav ul li, nav ul li a, nav ul li a:hover {border-radius: 15px;}
+h2, section, footer, article, nav, nav ul, nav ul li, nav ul li a, nav ul li a:hover {border-radius: 15px;}
+
+th:first-child {border-top-left-radius: 15px;}
+th:last-child {border-top-right-radius: 15px;}
+tr:last-child td:first-child {border-bottom-left-radius: 15px;}
+tr:last-child td:last-child {border-bottom-right-radius: 15px;}
+
 #myCanvas, #formDiv, section, footer, nav {border: 1px solid red;}
-article, nav ul li a {border: 1px solid white;}
+th, td, article, nav ul li a {border: 1px solid white;}
 
 /*Sizing and canvas (max and default width: 800px height: 600px)*/
-main, .instructions, .shortcuts, footer, .canvasContainer, #myCanvas, #formDiv {max-width: 800px;}
+main, .instructions, .shortcuts, #footerDiv, .canvasContainer, #myCanvas, #formDiv {max-width: 800px;}
 .canvasContainer {height: 600px;}
 #myCanvas, #formDiv {position: absolute; width: 100%; max-height: 600px; height: 100%;}
 #myCanvas {cursor: none;}
 
 /*Heading sizes, links and lists*/
-h2, footer h2 {text-align: center; padding: 0.5rem 0; font: 3.5rem sans-serif; color: red;}
+h2 {text-align: center; padding: 0.5rem 0; font: 3.5rem sans-serif; color: red;}
+h2:hover {background: #101010;}
+.instructions h3, .highscore h3 {text-align: center;}
 a {color: red; text-decoration: none;}
 li {list-style-position: inside;}
 
@@ -26,21 +34,29 @@ li {list-style-position: inside;}
 input[type="text"], input[type="submit"] {display: block; margin: 0 auto; width: 50%; text-align: center;}
 .hidden, article {display: none;}
 
+/*Tables*/
+table {width: 100%; border-spacing: 0px; border-collapse: separate;}
+th {color: red;}
+tr {text-align: center;}
+tbody tr:nth-child(odd) td {background-color: #a20000;}
+th, tbody tr:nth-child(even) td {background: #2b0628;}
+
+td {width: 45%;} /*2*45%+10%=100%*/
+td:first-child {width: 10%;}
+
 /*Sections, articles, nav and footer*/
-section, article, nav {padding: 0.5rem; background: black;}
+section, article, nav, footer {padding: 0.5rem; background: black;}
 section {margin: 0.5rem auto;}
 article {margin: 0.25rem 0;}
 
 nav {position: fixed; top: 0.5rem; left: 0.5rem; width: 12rem; height: auto;}
 nav ul li {list-style: none; background: #2b0628; width: 100%;}
 nav ul li a {display: block; text-align: center;}
-nav ul li a:hover {color: white; background: red;}
+nav ul li a:hover {color: white; background: #a20000;}
 
-footer {background: black;}
-footer article {margin: 0.5rem;}
-footer .instructor {margin-left: 1rem;}
-footer .iName {position: relative; -webkit-animation: iAnim 4s infinite; animation: iAnim 4s infinite;}
-/*Using the CSS3 animations (and prefix) for showing off, thanks for the semester! :)*/
+/*Using the CSS3 animations and keyframes (and -webkit-prefix for Chrome) for showing off, thanks for the semester! :)*/
+.instructor {margin-left: 1rem;}
+.iName {position: relative; -webkit-animation: iAnim 4s infinite; animation: iAnim 4s infinite;}
 @-webkit-keyframes iAnim {0% {color:white; left:0;} 25% {color:red; left:2rem;} 50% {color:white; left:0;}}
 @keyframes iAnim {0% {color:white; left:0;} 25% {color:red; left:2rem;} 50% {color:white; left:0;}}
 
@@ -48,18 +64,17 @@ footer .iName {position: relative; -webkit-animation: iAnim 4s infinite; animati
 @media only screen and (max-width: 1236px) {
 	.wrapper {padding-top: 2.5rem;} /*Push the site's content down.*/
 	nav {top: 0; left: 0; width: 100%; background: black;}
-	nav ul {border: none; overflow: none;}
+	nav ul {border: none;}
 	nav ul li {display: inline;}
 	nav ul li a {display: inline-block; overflow: hidden; float: left; width: 20%; background: #2b0628; padding: 0 0.25rem;}
 }
 
 @media only screen and (max-width: 450px) {
-	footer .iName {position: relative; -webkit-animation: noAnim 2s infinite; animation: noAnim 2s infinite; color: red;}
-	@-webkit-keyframes noAnim {0% {} 100% {}}
-	@keyframes noAnim {0% {} 100% {}}
+	/*Disabling the animation by making one which has no effect*/
+	.iName {position: relative; -webkit-animation: noAnim 2s infinite; animation: noAnim; color: red;}
 }
 
 @media only screen and (max-width: 600px), (max-device-width : 400px) {
-	h2, footer h2 {font-size: 2rem;} /*Making headers smaller to prevent overflow*/
+	h2 {font-size: 2rem;} /*Making headers smaller to prevent overflow*/
 	input[type="text"], input[type="submit"] {width: 100%;}
 }

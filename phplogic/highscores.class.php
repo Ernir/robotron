@@ -87,13 +87,24 @@ class Highscores {
 			<section class="highscore">
 				<h2 id="highscore">HIGHSCORE</h2>
 				<article>
-					<ol id="highscoreList" class="highscoreList">
+					<h3>Top 10 highscores</h3>
+					<table id="highscoreList" class="highscoreList">
+						<caption class="hidden">Highscore table</caption>
+						<thead>
+							<tr>
+								<th scope="col">Rank</th>
+								<th scope="col">Name</th>
+								<th scope="col">Score</th>
+							</tr>
+						</thead>
+						<tbody>
 						<?php $i = 1; foreach ($results as $hs): ?>
 
-							<li>Name: <span><?php echo $hs->name ?></span>. Score: <span><?php echo $hs->score ?></span></li>
+							<tr><td><?php echo $i; ?></td><td><?php echo $hs->name ?></td><td><?php echo $hs->score ?></td></tr>
 						<?php $i++; endforeach; ?>
 
-					</ol>
+						</tbody>
+					</table>
 				</article>
 			</section>
 

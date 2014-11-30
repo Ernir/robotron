@@ -1,30 +1,32 @@
-
-		<footer id="about" role="contentinfo">
-			<h2>ABOUT</h2>
-			<article>
-				<p>This is the final project of the following courses at the University of Iceland:
-					<ul>
-						<li>
-							Computer game programming (Töl308G)<br>
-							<span class="instructor">Instructor: <span class="iName">Patrick Kerr</span></span>
-						</li>
-						<li>
-							Web programming (Töl306G)<br>
-							<span class="instructor">Instructor: <span class="iName">Ólafur Sverrir Kjartansson</span></span>
-						</li>
-					</ul>
-				</p>
-				<p>Participants (in alphabetical order): 
-					<ul>
-						<li><a href="mailto:bjh27@hi.is">Bjarki Hall</a></li>
-						<li><a href="mailto:eth31@hi.is">Eiríkur Ernir Þorsteinsson</a></li>
-						<li><a href="mailto:jiz2@hi.is">Jianfei John Zheng</a></li>
-						<li><a href="mailto:odv1@hi.is">Oddur Vilhjálmsson</a></li>
-					</ul>
-				</p>
-				<p>&copy; 2014 - All rights reserved</p>
-			</article>
-		</footer>
+		
+		<!--We place a div around the footer to mimic the main element which is now missing-->
+		<div id="footerDiv">
+			<footer id="about" role="contentinfo">
+				<h2>ABOUT</h2>
+				<article>
+					<h3>About the project</h3>
+					<p>This is the final project of the following courses at the University of Iceland:<p>
+						<ul>
+							<li>
+								Computer game programming (Töl308G)<br>
+								<span class="instructor">Instructor: <span class="iName">Patrick Kerr</span></span>
+							</li>
+							<li>
+								Web programming (Töl306G)<br>
+								<span class="instructor">Instructor: <span class="iName">Ólafur Sverrir Kjartansson</span></span>
+							</li>
+						</ul>
+					<p>Participants (in alphabetical order): </p>
+						<ul>
+							<li><a href="mailto:bjh27@hi.is">Bjarki Hall</a></li>
+							<li><a href="mailto:eth31@hi.is">Eiríkur Ernir Þorsteinsson</a></li>
+							<li><a href="mailto:jiz2@hi.is">Jianfei John Zheng</a></li>
+							<li><a href="mailto:odv1@hi.is">Oddur Vilhjálmsson</a></li>
+						</ul>
+					<p>&copy; 2014 - All rights reserved</p>
+				</article>
+			</footer>
+		</div>
 	</div>
 	<script src="https://code.jquery.com/jquery-1.11.0.min.js"></script>
 
