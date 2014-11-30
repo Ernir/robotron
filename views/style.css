@@ -82,13 +82,14 @@ nav ul li a:hover {color: white; background: #a20000;}
 	.figureSide {width: auto; float: none; padding: 0; border-bottom: solid white 1px;}
 }
 
-@media only screen and (max-width: 450px) {
-	.figureTop img {width: 100%;} 
-	/*Disabling the animation by making one which has no effect*/
-	.iName {position: relative; -webkit-animation: noAnim 2s infinite; animation: noAnim; color: red;}
-}
-
-@media only screen and (max-width: 600px), (max-device-width : 400px) {
+@media only screen and (max-width: 600px) {
 	h2 {font-size: 2rem;} /*Making headers smaller to prevent overflow*/
 	input[type="text"], input[type="submit"] {width: 100%;}
+	nav ul li a {font-size: 1rem; font-weight: bold;}
+}
+
+@media only screen and (max-width: 450px), (max-device-width : 400px) {
+	.figureTop img {width: 100%;}
+	/*Disabling the animation by making one which has no effect*/
+	.iName {position: relative; -webkit-animation: noAnim 2s infinite; animation: noAnim; color: red;}
 }
