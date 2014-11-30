@@ -13,20 +13,36 @@
 				<h2 id="instructions">INSTRUCTIONS</h2>
 				<article>
 					<h3>Story</h3>
+					<figure class="figureSide">
+						<img src="http://cdn.wikimg.net/strategywiki/images/c/cb/Robotron_2084_player.png" alt="The Robotron player">
+						<figcaption>
+							<p>The Player</p>
+							<p>Downloaded from: </p>
+							<a href="http://strategywiki.org/wiki/Robotron:_2084/How_to_play/">StrategyWiki</a>
+						</figcaption>
+					</figure>
 					<p>
-						Inspired by his never ending quest for progress, in 2084 man perfects <br>
-						the Robotrons: a robot species so advanced that man is inferior to his <br>
-						own creation. Guided by their infallible logic, the Robotrons conclude: <br>
+						Inspired by his never ending quest for progress, in 2084 man perfects 
+						the Robotrons: a robot species so advanced that man is inferior to his 
+						own creation. Guided by their infallible logic, the Robotrons conclude: 
 						The human race is inefficient, and therefore must be destroyed.<br>
 						<br>
-						You are the last hope of mankind. Due to a genetic engineering error, <br>
-						you possess superhuman powers. Your mission is to stop the Robotrons, <br>
-						and save the last human family: Mommy, Daddy, and Mikey.<br>
+						You are the last hope of mankind. Due to a genetic engineering error, 
+						you possess superhuman powers. Your mission is to stop the Robotrons, 
+						and save the last human family: Mommy, Daddy, and Mikey.
 					</p>
 				</article>
 
 				<article>
 					<h3>Gameplay summary</h3>
+					<figure class="figureTop">
+						<img src="http://cdn.wikimg.net/strategywiki/images/8/8f/Robotron_2084_cpanel.png" alt="The Robotron controller">
+						<figcaption>
+							<p>The original controller</p>
+							<p>Downloaded from: </p>
+							<a href="http://strategywiki.org/wiki/Robotron:_2084/How_to_play/">StrategyWiki</a>
+						</figcaption>
+					</figure>
 					<ul>
 						<li>You control the player with two joysticks. One directs the movement while the other indicates which direction to fire in.</li>
 						<li>You must eliminate every robot (except Hulks) in the wave to advance to the next round.</li>
