@@ -20,9 +20,20 @@ th, td, article, nav ul li a {border: 1px solid white;}
 
 /*Sizing and canvas (max and default width: 800px height: 600px)*/
 main, .instructions, .shortcuts, #footerDiv, .canvasContainer, #myCanvas, #formDiv {max-width: 800px;}
-.canvasContainer {position: relative; height: 600px;}
+.canvasContainer {height: 600px;}
 #myCanvas, #formDiv {position: absolute; width: 100%; max-height: 600px; height: 100%;}
 #myCanvas {cursor: none;}
+
+/*Form and input*/
+.form {position: absolute; top:52%; right: 0; left: 0; width: 50%; margin: 0 auto; padding: 2rem; background: #2b0628;}
+input[type="text"], input[type="submit"] {display: block; margin: 0 auto; width: 50%; text-align: center;}
+.hidden, article {display: none;}
+
+/*Resizable canvas: Commented out because it was offsetting the mouse coords
+.canvasContainer {position: relative;}
+#formDiv {padding: 39%;}
+.form {position: absolute; right: 0; left: 0; width: 50%; margin: 0 auto; padding: 18%; background: #2b0628;}
+*/
 
 /*Heading sizes, links and lists*/
 h2 {text-align: center; padding: 0.5rem 0; font: 3.5rem sans-serif; color: red; text-shadow: 0.1rem 0.1rem #ffffff;}
@@ -30,12 +41,6 @@ h2:hover, article a:hover {color: #ff2828; background: #101010; text-shadow: 0.1
 .instructions h3, .highscore h3 {text-align: center;}
 a {color: red; text-decoration: none;}
 li {list-style-position: inside;}
-
-/*Form and input*/
-#formDiv {padding: 39%;}
-.form {position: absolute; right: 0; left: 0; width: 50%; margin: 0 auto; padding: 18%; background: #2b0628;}
-input[type="text"], input[type="submit"] {display: block; margin: 0 auto; width: 50%; text-align: center;}
-.hidden, article {display: none;}
 
 /*Tables*/
 table {width: 100%; border-spacing: 0px; border-collapse: separate;}
