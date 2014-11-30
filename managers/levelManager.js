@@ -58,7 +58,7 @@ var levelManager = {
         var randomLevelRequired = Player.level >= this._levelSpecs.length;
         var L = Player.level;
         if (L % 5 !== 0 && g_sounds) {
-            this._levelChangingSound.volume = 0.15;
+            this._levelChangingSound.volume = 0.2;
             this._levelChangingSound.play();
         }
 
