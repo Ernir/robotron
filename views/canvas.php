@@ -9,7 +9,7 @@
 				<form class="form" id="form" autocomplete="off">
 					<label>
 						<span class="hidden">Name:</span><!--Label for accessing purposes-->
-						<input type="text" id="text" name="name" placeholder="Type your name!" maxlength="10" autofocus>
+						<input type="text" id="text" name="name" placeholder="Type your name!" maxlength="15" autofocus>
 					</label>
 					<input type="submit" value="Submit highscore">
 				</form>
