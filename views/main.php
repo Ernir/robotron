@@ -37,7 +37,7 @@
 						<li>Enemies can drop various powerups which can enhance your gameplay.</li>
 						<li>
 							<a href= "http://strategywiki.org/wiki/Robotron:_2084/How_to_play">
-								For more info about how the enemies and the scoring system works, click here.
+								More info about how the enemies and the scoring system works.
 							</a>
 						</li>
 					</ul>

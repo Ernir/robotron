@@ -6,23 +6,23 @@
 				<article>
 					<h3>About the project</h3>
 					<p>This is the final project of the following courses at the University of Iceland:<p>
-						<ul>
-							<li>
-								Computer game programming (Töl308G)<br>
-								<span class="instructor">Instructor: <span class="iName">Patrick Kerr</span></span>
-							</li>
-							<li>
-								Web programming (Töl306G)<br>
-								<span class="instructor">Instructor: <span class="iName">Ólafur Sverrir Kjartansson</span></span>
-							</li>
-						</ul>
+					<ul>
+						<li>
+							Computer game programming (Töl308G)<br>
+							<span class="instructor">Instructor: <span class="iName">Patrick Kerr</span></span>
+						</li>
+						<li>
+							Web programming (Töl306G)<br>
+							<span class="instructor">Instructor: <span class="iName">Ólafur Sverrir Kjartansson</span></span>
+						</li>
+					</ul>
 					<p>Participants (in alphabetical order): </p>
-						<ul>
-							<li><a href="mailto:bjh27@hi.is">Bjarki Hall</a></li>
-							<li><a href="mailto:eth31@hi.is">Eiríkur Ernir Þorsteinsson</a></li>
-							<li><a href="mailto:jiz2@hi.is">Jianfei John Zheng</a></li>
-							<li><a href="mailto:odv1@hi.is">Oddur Vilhjálmsson</a></li>
-						</ul>
+					<ul>
+						<li><a href="mailto:bjh27@hi.is">Bjarki Hall</a></li>
+						<li><a href="mailto:eth31@hi.is">Eiríkur Ernir Þorsteinsson</a></li>
+						<li><a href="mailto:jiz2@hi.is">Jianfei John Zheng</a></li>
+						<li><a href="mailto:odv1@hi.is">Oddur Vilhjálmsson</a></li>
+					</ul>
 					<p>&copy; 2014 - All rights reserved</p>
 				</article>
 			</footer>

@@ -24,7 +24,7 @@ main, .instructions, .shortcuts, #footerDiv, .canvasContainer, #myCanvas, #formD
 
 /*Heading sizes, links and lists*/
 h2 {text-align: center; padding: 0.5rem 0; font: 3.5rem sans-serif; color: red;}
-h2:hover {background: #101010;}
+h2:hover, article a:hover {color: #ff2828;background: #101010;}
 .instructions h3, .highscore h3 {text-align: center;}
 a {color: red; text-decoration: none;}
 li {list-style-position: inside;}
@@ -40,8 +40,8 @@ th {color: red;}
 tr {text-align: center;}
 tbody tr:nth-child(odd) td {background-color: #a20000;}
 th, tbody tr:nth-child(even) td {background: #2b0628;}
-
-td {width: 45%;} /*2*45%+10%=100%*/
+/*(2x45%)+10%=100% width*/
+td {width: 45%;}
 td:first-child {width: 10%;}
 
 /*Sections, articles, nav and footer*/

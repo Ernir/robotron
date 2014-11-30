@@ -26,12 +26,12 @@ function postScore() {
 		}
 		xmlhttp.onreadystatechange=function() {
 			if (xmlhttp.readyState==4 && xmlhttp.status==200) {
-				if($("#highscoreList").length===0) $("li#navHS").removeClass("hidden");
+				if($("#highscoreTable").length===0) $("li#navHS").removeClass("hidden");
 				document.getElementById("output").innerHTML=xmlhttp.responseText;
 				highScores.setName(name);
 				highScores.addLocalScore({name: highScores.getName(), score: Player.score});
 				highScores.resetServerScore();
-				var tr = $("#highscoreList tbody").find("tr");
+				var tr = $("#highscoreTable tbody").find("tr");
 				for (var i = 1; i <= tr.length; i++) {
 					console.log(tr[i-1].children[1].innerHTML);
 					highScores.addServerScore({

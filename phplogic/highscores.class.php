@@ -88,7 +88,7 @@ class Highscores {
 				<h2 id="highscore">HIGHSCORE</h2>
 				<article>
 					<h3>Top 10 highscores</h3>
-					<table id="highscoreList" class="highscoreList">
+					<table id="highscoreTable" class="highscoreTable">
 						<caption class="hidden">Highscore table</caption>
 						<thead>
 							<tr>

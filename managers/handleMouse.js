@@ -36,7 +36,7 @@ $win.resize(getWidth).mousemove(function(e) {
 }).resize();
 
 //Navigation menu interavtivity
-if($("#highscoreList").length!==0) $("li#navHS").removeClass("hidden");
+if($("#highscoreTable").length!==0) $("li#navHS").removeClass("hidden");
 $("h2").click(function() {$(this).parent().find("article").toggle("slow");});
 $('a[href="#highscore"]').click(function() {$(".highscore article").toggle("slow");});
 $('a[href="#instructions"]').click(function() {$(".instructions article").toggle("slow");});
