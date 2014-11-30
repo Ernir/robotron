@@ -8,7 +8,6 @@ class Highscore {
 
 class Highscores {
 	private $pdo;
-	private $results = array();
 
 	public function __construct($pdo) {
 		$this->pdo = $pdo; 
@@ -31,6 +30,7 @@ class Highscores {
 			VALUES (:name, :score)"
 		);
 		$result = $query->execute(array('name' => $name, 'score' => $score));
+		if (!$result) {return false;}
 
 		//If the table has more than 10 rows, delete the one with the lowest score
 		$query = $this->pdo->prepare(
@@ -39,7 +39,7 @@ class Highscores {
 		);
 		$result = $query->execute();
 		$data = $query->fetchAll(PDO::FETCH_ASSOC);
-		if (sizeof($data) > 10) {
+		if (isset($data) && sizeof($data) > 10 && $result) {
 			$query = $this->pdo->prepare(
 				"DELETE FROM highscores 
 				WHERE id=(
@@ -51,8 +51,9 @@ class Highscores {
 					)
 				)"
 			);
-			$query->execute();
+			$result = $query->execute();
 		}
+		return $result;
 	}
 
 	public function ShowHighscores() {
@@ -64,8 +65,6 @@ class Highscores {
 			DESC LIMIT 10"
 		);
 		$result = $query->execute();
-
-		//Return if it is failing
 		if (!$result) {return;}
 		$data = $query->fetchAll(PDO::FETCH_ASSOC);
 		if (!$data) {return;}

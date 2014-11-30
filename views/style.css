@@ -1,4 +1,4 @@
-* {margin: 0; padding: 0; box-sizing: border-box;} /*Paul Irish maelir med thvi ad hafa BS-BB a universal selector*/
+* {margin: 0; padding: 0; box-sizing: border-box;}
 body {position: relative; font: 20px/2rem sans-serif; background: black; color: white;} /*Vid notum rem sem maelieiningu*/
 .wrapper {max-width: 1200px; margin: 0 auto;} /*Hamarksstaerd vefsidu: 1200px, midjujafnad*/
 
@@ -40,7 +40,6 @@ th {color: red;}
 tr {text-align: center;}
 tbody tr:nth-child(odd) td {background-color: #a20000;}
 th, tbody tr:nth-child(even) td {background: #2b0628;}
-/*(2x45%)+10%=100% width*/
 td {width: 45%;}
 td:first-child {width: 10%;}
 
@@ -81,6 +80,7 @@ nav ul li a:hover {color: white; background: #a20000;}
 }
 
 @media only screen and (max-width: 450px) {
+	.figureTop img {width: 100%;} 
 	/*Disabling the animation by making one which has no effect*/
 	.iName {position: relative; -webkit-animation: noAnim 2s infinite; animation: noAnim; color: red;}
 }
