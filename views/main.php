@@ -45,11 +45,11 @@
 					</figure>
 					<ul>
 						<li>You control the player with two joysticks. One directs the movement while the other indicates which direction to fire in.</li>
-						<li>You must eliminate every robot (except Hulks) in the wave to advance to the next round.</li>
+						<li>You must eliminate every robot (except for the indestructible Hulks) in the wave to advance to the next round.</li>
 						<li>You must avoid touching any robot or bullets or you will lose a life.</li>
 						<li>Gather up members of the "last" family for bonus points.</li>
 						<li>Some robots will spawn other robots if you do not destroy them quickly enough.</li>
-						<li>On Brain waves, gather as many family members before Brain robots turn them into mindless Prog zombies.</li>
+						<li>On Brain waves, gather as many family members as you can before Brain robots turn them into mindless Prog zombies.</li>
 						<li>Enemies can drop various powerups which can enhance your gameplay.</li>
 						<li>
 							<a href= "http://strategywiki.org/wiki/Robotron:_2084/How_to_play">
