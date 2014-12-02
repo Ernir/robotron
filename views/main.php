@@ -14,11 +14,11 @@
 				<article>
 					<h3>Story</h3>
 					<figure class="figureSide">
-						<img src="http://cdn.wikimg.net/strategywiki/images/c/cb/Robotron_2084_player.png" alt="The Robotron player">
+						<img src="images/Robotron_2084_player.png" alt="The Robotron player">
 						<figcaption>
 							<p>The Player</p>
 							<p>Downloaded from: </p>
-							<a href="http://strategywiki.org/wiki/Robotron:_2084/How_to_play/">StrategyWiki</a>
+							<a href="https://strategywiki.org/wiki/Robotron:_2084/How_to_play/">StrategyWiki</a>
 						</figcaption>
 					</figure>
 					<p>
@@ -36,11 +36,11 @@
 				<article>
 					<h3>Gameplay summary</h3>
 					<figure class="figureTop">
-						<img src="http://cdn.wikimg.net/strategywiki/images/8/8f/Robotron_2084_cpanel.png" alt="The Robotron controller">
+						<img src="images/Robotron_2084_cpanel.png" alt="The Robotron controller">
 						<figcaption>
 							<p>The original controller</p>
 							<p>Downloaded from: </p>
-							<a href="http://strategywiki.org/wiki/Robotron:_2084/How_to_play/">StrategyWiki</a>
+							<a href="https://strategywiki.org/wiki/Robotron:_2084/How_to_play/">StrategyWiki</a>
 						</figcaption>
 					</figure>
 					<ul>
@@ -52,7 +52,7 @@
 						<li>On Brain waves, gather as many family members as you can before Brain robots turn them into mindless Prog zombies.</li>
 						<li>Enemies can drop various powerups which can enhance your gameplay.</li>
 						<li>
-							<a href= "http://strategywiki.org/wiki/Robotron:_2084/How_to_play">
+							<a href= "https://strategywiki.org/wiki/Robotron:_2084/How_to_play">
 								More info about how the enemies and the scoring system works.
 							</a>
 						</li>
