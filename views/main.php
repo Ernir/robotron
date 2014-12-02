@@ -18,7 +18,7 @@
 						<figcaption>
 							<p>The Player</p>
 							<p>Downloaded from: </p>
-							<a href="https://strategywiki.org/wiki/Robotron:_2084/How_to_play/">StrategyWiki</a>
+							<a href="http://strategywiki.org/wiki/Robotron:_2084/How_to_play/">StrategyWiki</a>
 						</figcaption>
 					</figure>
 					<p>
@@ -40,7 +40,7 @@
 						<figcaption>
 							<p>The original controller</p>
 							<p>Downloaded from: </p>
-							<a href="https://strategywiki.org/wiki/Robotron:_2084/How_to_play/">StrategyWiki</a>
+							<a href="http://strategywiki.org/wiki/Robotron:_2084/How_to_play/">StrategyWiki</a>
 						</figcaption>
 					</figure>
 					<ul>
@@ -52,7 +52,7 @@
 						<li>On Brain waves, gather as many family members as you can before Brain robots turn them into mindless Prog zombies.</li>
 						<li>Enemies can drop various powerups which can enhance your gameplay.</li>
 						<li>
-							<a href= "https://strategywiki.org/wiki/Robotron:_2084/How_to_play">
+							<a href= "http://strategywiki.org/wiki/Robotron:_2084/How_to_play">
 								More info about how the enemies and the scoring system works.
 							</a>
 						</li>
